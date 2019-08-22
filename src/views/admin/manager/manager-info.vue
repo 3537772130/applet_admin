@@ -254,7 +254,6 @@
             return item.areaName === city
           })
           this.$global.selectRegionList(this, obj.id, '3')
-          this.selectCounty()
         }
       },
       selectCounty() {
