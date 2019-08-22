@@ -198,7 +198,7 @@
     },
     created() {
       this.$axios({
-        url: '/api/manager/checkLogin',
+        url: '/api/manage/checkLogin',
         method: 'post'
       }).then(res => {
         // console.info('后台返回的数据', res.data)

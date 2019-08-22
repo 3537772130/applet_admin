@@ -2,85 +2,89 @@
   .el-form-item__label {
     width: 100px;
   }
-
-  .role-input {
-    width: 290px;
-  }
 </style>
 <template>
   <div>
     <el-main v-loading="loading" element-loading-text="加载中" style="background-color: #FFFFFF;padding: 20px;">
-      <el-form :rules="managerRules" :inline="true" :model="managerFrom" ref="managerFrom" class="demo-form-inline">
-        <el-form-item label="用户账号" prop="userName" v-if="showUserName">
-          <el-input v-model="managerFrom.userName" placeholder="请输入账号" class="role-input"></el-input>
+      <el-form :rules="managerRules" :inline="true" :model="managerForm" ref="managerForm" class="demo-form-inline">
+        <el-form-item label="用户账号" prop="userName" v-if="showUserName === ''">
+          <el-input v-model="managerForm.userName" placeholder="请输入账号" class="manager-input"></el-input>
         </el-form-item>
-        <el-form-item label="用户账号" v-if="!showUserName">
-          <div class="role-input" style="text-align: left;">{{managerFrom.userName}}</div>
+        <el-form-item label="用户账号" v-if="showUserName != ''">
+          <div class="manager-input" style="text-align: left;">{{showUserName}}</div>
         </el-form-item>
-        <el-form-item label="用户角色" prop="roleId">
-          <el-select v-model="managerFrom.roleId" placeholder="选择角色" class="role-input" @change="changeRole">
-            <el-option label="请选择" value=''></el-option>
-            <el-option v-for="role in roleList" :key="role" :label="role.name" :value="role.id"></el-option>
-          </el-select>
+        <el-form-item label=" " prop="">
+          <div class="manager-input"></div>
         </el-form-item>
         <el-form-item label="用户昵称" prop="nickName">
-          <el-input v-model="managerFrom.nickName" placeholder="请输入账号" class="role-input"></el-input>
+          <el-input v-model="managerForm.nickName" placeholder="请输入昵称" class="manager-input"></el-input>
+        </el-form-item>
+        <el-form-item label="用户角色" prop="roleId">
+          <el-select v-model="managerForm.roleId" placeholder="选择角色" class="manager-input" @change="changeRole">
+            <el-option label="请选择" value=''></el-option>
+            <el-option v-for="(role, index) in roleList" :key="index" :label="role.name" :value="role.id"></el-option>
+          </el-select>
         </el-form-item>
         <el-form-item label="用户密码" prop="password">
-          <el-input type="password" v-model="managerFrom.password" placeholder="输入密码" class="role-input"></el-input>
+          <el-input type="password" v-model="managerForm.password" placeholder="请输入密码" class="manager-input"></el-input>
         </el-form-item>
         <el-form-item label="确认密码" prop="confirmPassword">
-          <el-input type="password" v-model="managerFrom.confirmPassword" placeholder="输入确认密码"
-                    class="role-input"></el-input>
+          <el-input type="password" v-model="managerForm.confirmPassword" placeholder="请输入确认密码"
+                    class="manager-input"></el-input>
         </el-form-item>
         <el-form-item label="手机号码" prop="mobile">
-          <el-input type="number" v-model="managerFrom.mobile" placeholder="输入手机号码" class="role-input"></el-input>
+          <el-input type="number" v-model="managerForm.mobile" placeholder="输入手机号码" class="manager-input"></el-input>
         </el-form-item>
         <el-form-item label="用户邮箱" prop="email">
-          <el-input v-model="managerFrom.email" placeholder="输入邮箱" class="role-input"></el-input>
+          <el-input v-model="managerForm.email" placeholder="输入邮箱" class="manager-input"></el-input>
         </el-form-item>
         <el-form-item label="QQ账号" prop="qqAccount">
-          <el-input type="number" v-model="managerFrom.qqAccount" placeholder="输入QQ账号" class="role-input"></el-input>
+          <el-input type="number" v-model="managerForm.qqAccount" placeholder="输入QQ账号" class="manager-input"></el-input>
         </el-form-item>
         <el-form-item label="微信账号" prop="weChatAccount">
-          <el-input v-model="managerFrom.weChatAccount" placeholder="输入微信账号" class="role-input"></el-input>
+          <el-input v-model="managerForm.weChatAccount" placeholder="输入微信账号" class="manager-input"></el-input>
         </el-form-item>
         <el-form-item label="省份" prop="province">
-          <el-select v-model="managerFrom.province" placeholder="选择省份" class="role-input" @change="selectProvince">
+          <el-select v-model="managerForm.province" placeholder="选择省份" class="manager-input" @change="selectProvince">
             <el-option label="请选择" value=''></el-option>
-            <el-option v-for="prov in provList" :key="prov" :label="prov.areaName" :value="prov.areaName"></el-option>
+            <el-option v-for="(prov, index) in provList" :key="index" :label="prov.areaName"
+                       :value="prov.areaName"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="城市" prop="city">
-          <el-select v-model="managerFrom.city" placeholder="选择城市" class="role-input" @change="selectCity">
+          <el-select v-model="managerForm.city" placeholder="选择城市" class="manager-input" @change="selectCity">
             <el-option label="请选择" value=''></el-option>
-            <el-option v-for="city in cityList" :key="city" :label="city.areaName" :value="city.areaName"></el-option>
+            <el-option v-for="(city, index) in cityList" :key="index" :label="city.areaName"
+                       :value="city.areaName"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="区/县" prop="county">
-          <el-select v-model="managerFrom.county" placeholder="选择区/县" class="role-input">
+          <el-select v-model="managerForm.county" placeholder="选择区/县" class="manager-input" @change="selectCounty">
             <el-option label="请选择" value=''></el-option>
-            <el-option v-for="county in countyList" :key="county" :label="county.areaName"
+            <el-option v-for="(county, index) in countyList" :key="index" :label="county.areaName"
                        :value="county.areaName"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="上级" prop="parentId" v-if="showParent">
-          <el-select v-model="managerFrom.parentId" placeholder="选择上级" class="role-input">
+          <el-select v-model="managerForm.parentId" placeholder="选择上级" class="manager-input">
             <el-option label="请选择" value=''></el-option>
             <el-option label="角色1" value="1"></el-option>
             <el-option label="角色2" value="2"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="状态" prop="status">
-          <el-select v-model="managerFrom.status" placeholder="选择状态" class="role-input">
+          <el-select v-model="managerForm.status" placeholder="选择状态" class="manager-input">
             <el-option label="正常" value="1"></el-option>
             <el-option label="禁用" value="0"></el-option>
           </el-select>
         </el-form-item>
-
-        <el-form-item>
-          <el-button type="primary" @click="onSubmit('managerFrom')">提交</el-button>
+        <el-form-item label=" " prop="" v-if="showParent">
+          <div class="manager-input"></div>
         </el-form-item>
+
+        <div style="text-align: center;margin: 20px 0px;">
+          <el-button type="primary" @click="onSubmit('managerForm')" class="manager-input">提交</el-button>
+        </div>
       </el-form>
     </el-main>
   </div>
@@ -90,10 +94,10 @@
 
   export default {
     name: 'manager-info',
-    data () {
+    data() {
       return {
         loading: false,
-        showUserName: true,
+        showUserName: '',
         showInfo: false,
         showParent: false,
         showTitle: '',
@@ -101,7 +105,7 @@
         provList: [],
         cityList: [],
         countyList: [],
-        managerFrom: {
+        managerForm: {
           id: '',
           userName: '',
           roleId: '',
@@ -166,50 +170,54 @@
         }
       }
     },
-    created () {
+    created() {
       this.selectManagerRoleList()
       this.$global.selectRegionList(this, '', '1')
       let managerId = this.$cookies.get('managerId')
       this.setManagerId(managerId)
     },
-    mounted () {
+    mounted() {
     },
     methods: {
-      setManagerId (managerId) {
+      setManagerId(managerId) {
         if (managerId && managerId != '0') {
-          this.managerFrom.id = managerId
-          this.showUserName = false
+          this.managerForm.id = managerId
           this.loading = true
           this.$axios({
-            url: '/api/manager/getManagerInfo',
+            url: '/api/manage/getManagerInfo',
             method: 'post',
             data: {id: managerId}
           }).then(res => {
             console.info('后台返回的数据', res.data)
             if (res.data.code === '1') {
               res.data.data.confirmPassword = null
-              this.managerFrom = res.data.data
-              this.managerFrom.status = this.managerFrom.status ? '1' : '0'
-              delete this.managerFrom.createDate
+              this.managerForm = res.data.data.manager
+              this.cityList = res.data.data.cityList
+              this.countyList = res.data.data.countyList
+              this.managerForm.status = this.managerForm.status ? '1' : '0'
+              this.showUserName = this.managerForm.userName
+              delete this.managerForm.createDate
+              delete this.managerForm.userName
             } else if (res.data.code === '-1') {
               this.$message.error(res.data.data)
             }
             this.$cookies.remove('managerId')
             this.$global.exitLoad(this, null, res.data)
-            this.selectProvince()
-            this.selectCity()
-            this.$refs['managerFrom'].clearValidate('userName','password','confirmPassword')
           }).catch(error => {
             console.info('错误信息', error)
             this.$global.exitLoad(this, null, '')
           })
         } else {
-          this.managerFrom = {password: '', confirmPassword: '', status: '1'}
+          this.showUserName = ''
+          this.cityList = []
+          this.countyList = []
+          this.managerForm = {password: '', confirmPassword: '', status: '1'}
         }
+        this.$refs['managerForm'].resetFields()
       },
-      selectManagerRoleList () {
+      selectManagerRoleList() {
         this.$axios({
-          url: '/api/manager/selectManagerRoleList',
+          url: '/api/manage/selectManagerRoleList',
           method: 'post',
         }).then(res => {
           console.info('后台返回的数据', res.data)
@@ -224,10 +232,11 @@
           this.$global.exitLoad(this, null, '')
         })
       },
-      selectProvince () {
-        let province = this.managerFrom.province
-        this.managerFrom.city = ''
-        this.managerFrom.county = ''
+      selectProvince() {
+        let province = this.managerForm.province
+        this.managerForm.city = ''
+        this.managerForm.county = ''
+        this.cityList = []
         this.countyList = []
         if (province != '') {
           let obj = this.provList.find((item) => {
@@ -236,44 +245,49 @@
           this.$global.selectRegionList(this, obj.id, '2')
         }
       },
-      selectCity () {
-        let city = this.managerFrom.city
-        this.managerFrom.county = ''
+      selectCity() {
+        let city = this.managerForm.city
+        this.countyList = []
+        this.managerForm.county = ''
         if (city != '') {
           let obj = this.cityList.find((item) => {
             return item.areaName === city
           })
           this.$global.selectRegionList(this, obj.id, '3')
+          this.selectCounty()
         }
       },
-      getManagerId () {
-        return this.managerFrom.id
+      selectCounty() {
+        this.managerForm.status === '1' ? this.managerForm.status = '0' : this.managerForm.status = '1'
+        this.managerForm.status === '1' ? this.managerForm.status = '0' : this.managerForm.status = '1'
       },
-      getPassword () {
-        return this.managerFrom.password
+      getManagerId() {
+        return this.managerForm.id
       },
-      getRoleId () {
-        return this.managerFrom.roleId
+      getPassword() {
+        return this.managerForm.password
       },
-      changeRole () {
-        if (this.managerFrom.roleId === 4) {
+      getRoleId() {
+        return this.managerForm.roleId
+      },
+      changeRole() {
+        if (this.managerForm.roleId === 4) {
           this.showParent = true
         } else {
           this.showParent = false
         }
       },
-      onSubmit (formName) {
+      onSubmit(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
             let loading = Loading.service({fullscreen: true, text: '正在提交'})
-            if (this.managerFrom.roleId != 4){
-              delete this.managerFrom.parentId
-              delete this.managerFrom.userName
+            if (this.managerForm.roleId != 4) {
+              delete this.managerForm.parentId
             }
             this.$axios({
-              url: '/api/manager/UpdateManagerInfo',
+              url: '/api/manage/UpdateManagerInfo',
               method: 'post',
-              data: this.managerFrom
+              data: this.managerForm
             }).then(res => {
               console.info('后台返回的数据', res.data)
               let that = this

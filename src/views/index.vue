@@ -110,7 +110,7 @@
           if (valid) {
             let loading = Loading.service({fullscreen: true, text: '正在登录'})
             this.$axios({
-              url: '/api/manager/doLogin',
+              url: '/api/manage/doLogin',
               method: 'post',
               data: this.ruleForm
             }).then(res => {

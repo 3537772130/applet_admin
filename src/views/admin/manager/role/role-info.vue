@@ -3,7 +3,7 @@
     width: 100px;
   }
   .role-input{
-    width: 290px;
+    width: 190px;
   }
 </style>
 <template>
@@ -71,7 +71,7 @@
           this.roleFrom.id = roleId
           this.loading = true
           this.$axios({
-            url: '/api/manager/getManagerRole',
+            url: '/api/manage/getManagerRole',
             method: 'post',
             data: {id: roleId}
           }).then(res => {
@@ -85,6 +85,7 @@
             }
             this.$cookies.remove('roleId')
             this.$global.exitLoad(this, null, res.data)
+            this.$refs['roleForm'].resetFields()
           }).catch(error => {
             console.info('错误信息', error)
             this.$global.exitLoad(this, null, '')
@@ -98,7 +99,7 @@
           if (valid) {
             let loading = Loading.service({fullscreen: true, text: '正在提交'})
             this.$axios({
-              url: '/api/manager/updateManagerRole',
+              url: '/api/manage/updateManagerRole',
               method: 'post',
               data: this.roleFrom
             }).then(res => {

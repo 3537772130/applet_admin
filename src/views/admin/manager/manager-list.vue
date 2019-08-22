@@ -2,8 +2,11 @@
   .el-form-item__label{
     width: 70px;
   }
-  .el-select{
+  .manager-input {
     width: 190px;
+  }
+  .manager-dialog .el-dialog{
+    width: 750px;
   }
 </style>
 <template>
@@ -12,56 +15,56 @@
       <div>
         <el-form :inline="true" :model="info" class="demo-form-inline" style="text-align: left;">
           <el-form-item label="账号">
-            <el-input v-model="info.userName" placeholder="请输入账号"></el-input>
+            <el-input v-model="info.userName" placeholder="请输入账号" class="manager-input"></el-input>
           </el-form-item>
           <el-form-item label="角色">
-            <el-select v-model="info.roleId" placeholder="选择角色">
+            <el-select v-model="info.roleId" placeholder="选择角色" class="manager-input">
               <el-option label="全部" value=''></el-option>
-              <el-option v-for="role in roleList" :key="role" :label="role.name" :value="role.id"></el-option>
+              <el-option v-for="(role, index) in roleList" :key="index" :label="role.name" :value="role.id"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item label="邮箱">
-            <el-input v-model="info.email" placeholder="输入邮箱"></el-input>
+            <el-input v-model="info.email" placeholder="输入邮箱" class="manager-input"></el-input>
           </el-form-item>
           <el-form-item label="手机号码">
-            <el-input v-model="info.mobile" placeholder="输入手机号码"></el-input>
+            <el-input v-model="info.mobile" placeholder="输入手机号码" class="manager-input"></el-input>
           </el-form-item>
           <el-form-item label="QQ账号">
-            <el-input v-model="info.qqAccount" placeholder="输入QQ账号"></el-input>
+            <el-input v-model="info.qqAccount" placeholder="输入QQ账号" class="manager-input"></el-input>
           </el-form-item>
           <el-form-item label="微信账号">
-            <el-input v-model="info.weChatAccount" placeholder="输入微信账号"></el-input>
+            <el-input v-model="info.weChatAccount" placeholder="输入微信账号" class="manager-input"></el-input>
           </el-form-item>
           <el-form-item label="省份">
-            <el-select v-model="info.province" placeholder="选择省份" @change="selectProvince">
+            <el-select v-model="info.province" placeholder="选择省份" class="manager-input" @change="selectProvince">
               <el-option label="全部" value=''></el-option>
-              <el-option v-for="prov in provList" :key="prov" :label="prov.areaName" :value="prov.areaName"></el-option>
+              <el-option v-for="(prov, index) in provList" :key="index" :label="prov.areaName" :value="prov.areaName"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item label="城市">
-            <el-select v-model="info.city" placeholder="选择城市" @change="selectCity">
+            <el-select v-model="info.city" placeholder="选择城市" class="manager-input" @change="selectCity">
               <el-option label="全部" value=''></el-option>
-              <el-option v-for="city in cityList" :key="city" :label="city.areaName" :value="city.areaName"></el-option>
+              <el-option v-for="(city, index) in cityList" :key="index" :label="city.areaName" :value="city.areaName"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item label="区/县">
-            <el-select v-model="info.county" placeholder="选择区/县">
+            <el-select v-model="info.county" placeholder="选择区/县" class="manager-input">
               <el-option label="全部" value=''></el-option>
-              <el-option v-for="county in countyList" :key="county" :label="county.areaName" :value="county.areaName"></el-option>
+              <el-option v-for="(county, index) in countyList" :key="index" :label="county.areaName" :value="county.areaName"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item label="状态">
-            <el-select v-model="info.status" placeholder="选择状态">
+            <el-select v-model="info.status" placeholder="选择状态" class="manager-input">
               <el-option label="全部" value=''></el-option>
               <el-option label="正常" value="1"></el-option>
               <el-option label="禁用" value="0"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item label="上级账号">
-            <el-input v-model="info.parentUserName" placeholder="输入上级账号"></el-input>
+            <el-input v-model="info.parentUserName" placeholder="输入上级账号" class="manager-input"></el-input>
           </el-form-item>
           <el-form-item label="上级名称">
-            <el-input v-model="info.parentNickName" placeholder="输入上级名称"></el-input>
+            <el-input v-model="info.parentNickName" placeholder="输入上级名称" class="manager-input"></el-input>
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="selectList">查询</el-button>
@@ -98,7 +101,7 @@
           </el-table-column>
           <el-table-column align="center" fixed="right" label="操作" width="80">
             <template slot-scope="scope">
-              <el-button type="primary" plain size="mini" @click="updateInfo(scope.row.id)">修改</el-button>
+              <el-button type="primary" plain size="mini" @click="updateInfo(scope.row.id, scope.row.userName)">修改</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -113,8 +116,8 @@
         </div>
       </div>
 
-      <el-dialog :title="showTitle" :visible.sync="showInfo">
-        <div style="width: 450px;height: 70%;overflow-x: hidden;overflow-y: auto;">
+      <el-dialog :title="showTitle" :visible.sync="showInfo" class="manager-dialog">
+        <div style="overflow-x: hidden;overflow-y: auto;">
           <managerInfo ref="managerInfo" v-on:setManagerId="setManagerId"></managerInfo>
         </div>
       </el-dialog>
@@ -174,7 +177,7 @@
       },
       selectManagerRoleList(){
         this.$axios({
-          url: '/api/manager/selectManagerRoleList',
+          url: '/api/manage/selectManagerRoleList',
           method: 'post',
         }).then(res => {
           console.info('后台返回的数据', res.data)
@@ -193,6 +196,7 @@
         let province = this.info.province
         this.info.city = ''
         this.info.county = ''
+        this.cityList = []
         this.countyList = []
         if (province != ''){
           let obj = this.provList.find((item)=> {
@@ -203,6 +207,7 @@
       },
       selectCity() {
         let city = this.info.city
+        this.countyList = []
         this.info.county = ''
         if (city != ''){
           let obj = this.cityList.find((item)=> {
@@ -214,7 +219,7 @@
       onSubmit() {
         this.loading = true
         this.$axios({
-          url: '/api/manager/selectManagerInfoToPage',
+          url: '/api/manage/selectManagerInfoToPage',
           method: 'post',
           data: this.info
         }).then(res => {

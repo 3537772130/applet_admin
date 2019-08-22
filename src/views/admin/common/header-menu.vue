@@ -87,7 +87,7 @@
         }).then(() => {
           let loading = Loading.service({fullscreen: true, text: '正在注销'})
           this.$axios({
-            url: '/api/manager/exitLogin',
+            url: '/api/manage/exitLogin',
             method: 'post'
           }).then(res => {
             console.info('后台返回的数据', res.data)

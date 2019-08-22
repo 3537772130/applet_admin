@@ -5,6 +5,9 @@
   .el-select{
     width: 190px;
   }
+  .role-dialog .el-dialog{
+    width: 500px;
+  }
 </style>
 <template>
   <el-container>
@@ -61,7 +64,7 @@
         </div>
       </div>
 
-      <el-dialog :title="showTitle" :visible.sync="showInfo">
+      <el-dialog :title="showTitle" :visible.sync="showInfo" class="role-dialog">
         <roleInfo ref="roleInfo" v-on:setRoleId="setRoleId"></roleInfo>
       </el-dialog>
     </el-main>
@@ -105,7 +108,7 @@
       onSubmit() {
         this.loading = true
         this.$axios({
-          url: '/api/manager/selectManagerRoleToPage',
+          url: '/api/manage/selectManagerRoleToPage',
           method: 'post',
           data: this.info
         }).then(res => {

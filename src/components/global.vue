@@ -49,9 +49,9 @@
       /**
        * 校验账号
        */
-      userNameValidator:(rule, value, callback) => {
+      userNameValidator: (rule, value, callback) => {
         that.$axios({
-          url: '/api/manager/checkUserNameRegistered',
+          url: '/api/manage/checkUserNameRegistered',
           method: 'post',
           data: {userName: value}
         }).then(res => {
@@ -94,22 +94,22 @@
       managerPasswordValidator: (rule, value, callback) => {
         let managerId = that.getManagerId()
         if (managerId && managerId != '') {
-          try{
-            if (value.length < 1){
+          try {
+            if (value.length < 1) {
               callback()
-            } else if (value.length >= 6 && value.length <= 20){
+            } else if (value.length >= 6 && value.length <= 20) {
               callback()
-            } else if (value.length > 20 || (value.length < 6 && value.length > 0)){
+            } else if (value.length > 20 || (value.length < 6 && value.length > 0)) {
               callback(new Error('密码长度为6-20个字符'))
             } else {
               callback(new Error('请输入密码'))
             }
-          }catch (e) {
+          } catch (e) {
             callback()
           }
-        } else if (value.length >= 6 && value.length <= 20){
-            callback()
-        } else if (value.length > 20 || (value.length < 6 && value.length > 0)){
+        } else if (value.length >= 6 && value.length <= 20) {
+          callback()
+        } else if (value.length > 20 || (value.length < 6 && value.length > 0)) {
           callback(new Error('密码长度为6-20个字符'))
         } else {
           callback(new Error('请输入密码'))
@@ -122,34 +122,34 @@
         let managerId = that.getManagerId()
         let password = that.getPassword()
         if (managerId && managerId != '') {
-          try{
-            if (password.length > 0){
-              try{
-                if (value.length < 1){
+          try {
+            if (password.length > 0) {
+              try {
+                if (value.length < 1) {
                   callback()
-                } else if (value.length >= 6 && value.length <= 20){
+                } else if (value.length >= 6 && value.length <= 20) {
                   callback()
-                } else if (value.length > 20 || (value.length < 6 && value.length > 0)){
+                } else if (value.length > 20 || (value.length < 6 && value.length > 0)) {
                   callback(new Error('确认密码长度为6-20个字符'))
                 } else {
                   callback(new Error('请输入确认密码'))
                 }
-              }catch (e) {
+              } catch (e) {
                 callback(new Error('请输入确认密码'))
               }
             } else {
               callback()
             }
-          }catch (e) {
+          } catch (e) {
             callback()
           }
-        } else if (value.length >= 6 && value.length <= 20){
+        } else if (value.length >= 6 && value.length <= 20) {
           if (value === password) {
             callback()
           } else {
             callback(new Error('两次输入密码不一致'))
           }
-        } else if (value.length > 20 || (value.length < 6 && value.length > 0)){
+        } else if (value.length > 20 || (value.length < 6 && value.length > 0)) {
           callback(new Error('确认密码长度为6-20个字符'))
         } else {
           callback(new Error('请输入确认密码'))
@@ -160,7 +160,7 @@
        */
       managerParentIdValidator: (rule, value, callback) => {
         if (that.getRoleId() === '3') {
-          if (value){
+          if (value) {
             callback()
           } else {
             callback(new Error('请选择上级'))
@@ -208,6 +208,7 @@
         that.cityList = res.data.data
       } else {
         that.countyList = res.data.data
+        that.loading = false
       }
     }).catch(error => {
       console.info('错误信息', error)
