@@ -85,7 +85,6 @@
             }
             this.$cookies.remove('roleId')
             this.$global.exitLoad(this, null, res.data)
-            this.$refs['roleForm'].resetFields()
           }).catch(error => {
             console.info('错误信息', error)
             this.$global.exitLoad(this, null, '')
@@ -93,6 +92,7 @@
         } else {
           this.roleFrom = {status: '1'}
         }
+        this.$refs['roleForm'].resetFields()
       },
       onSubmit (formName) {
         this.$refs[formName].validate((valid) => {

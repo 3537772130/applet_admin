@@ -23,4 +23,16 @@ export default {
     margin: 0px;
     padding: 0px;
   }
+
+/* 谷歌 */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+/* 火狐 */
+input{
+  -moz-appearance:textfield;
+}
 </style>

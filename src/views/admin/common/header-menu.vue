@@ -1,4 +1,7 @@
 <style type="text/css">
+  .el-menu--horizontal>.el-submenu{
+    float: right;
+  }
 </style>
 <template>
   <div>

@@ -68,8 +68,7 @@
         <el-form-item label="上级" prop="parentId" v-if="showParent">
           <el-select v-model="managerForm.parentId" placeholder="选择上级" class="manager-input">
             <el-option label="请选择" value=''></el-option>
-            <el-option label="角色1" value="1"></el-option>
-            <el-option label="角色2" value="2"></el-option>
+            <el-option v-for="(parent, index) in parentList" :key="index" :label="parent.nickName + ' ' + parent.userName" :value="parent.id"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="状态" prop="status">
@@ -105,6 +104,7 @@
         provList: [],
         cityList: [],
         countyList: [],
+        parentList: [],
         managerForm: {
           id: '',
           userName: '',
@@ -194,10 +194,12 @@
               this.managerForm = res.data.data.manager
               this.cityList = res.data.data.cityList
               this.countyList = res.data.data.countyList
+              this.parentList = res.data.data.parentList
               this.managerForm.status = this.managerForm.status ? '1' : '0'
               this.showUserName = this.managerForm.userName
               delete this.managerForm.createDate
               delete this.managerForm.userName
+              this.changeRole()
             } else if (res.data.code === '-1') {
               this.$message.error(res.data.data)
             }

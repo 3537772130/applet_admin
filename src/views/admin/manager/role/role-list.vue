@@ -6,7 +6,7 @@
     width: 190px;
   }
   .role-dialog .el-dialog{
-    width: 500px;
+    width: 450px;
   }
 </style>
 <template>

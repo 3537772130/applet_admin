@@ -1,11 +1,13 @@
 <style type="text/css">
-  .el-form-item__label{
+  .el-form-item__label {
     width: 70px;
   }
+
   .manager-input {
     width: 190px;
   }
-  .manager-dialog .el-dialog{
+
+  .manager-dialog .el-dialog {
     width: 750px;
   }
 </style>
@@ -27,10 +29,10 @@
             <el-input v-model="info.email" placeholder="输入邮箱" class="manager-input"></el-input>
           </el-form-item>
           <el-form-item label="手机号码">
-            <el-input v-model="info.mobile" placeholder="输入手机号码" class="manager-input"></el-input>
+            <el-input type="number" v-model="info.mobile" placeholder="输入手机号码" class="manager-input"></el-input>
           </el-form-item>
           <el-form-item label="QQ账号">
-            <el-input v-model="info.qqAccount" placeholder="输入QQ账号" class="manager-input"></el-input>
+            <el-input type="number" v-model="info.qqAccount" placeholder="输入QQ账号" class="manager-input"></el-input>
           </el-form-item>
           <el-form-item label="微信账号">
             <el-input v-model="info.weChatAccount" placeholder="输入微信账号" class="manager-input"></el-input>
@@ -38,19 +40,22 @@
           <el-form-item label="省份">
             <el-select v-model="info.province" placeholder="选择省份" class="manager-input" @change="selectProvince">
               <el-option label="全部" value=''></el-option>
-              <el-option v-for="(prov, index) in provList" :key="index" :label="prov.areaName" :value="prov.areaName"></el-option>
+              <el-option v-for="(prov, index) in provList" :key="index" :label="prov.areaName"
+                         :value="prov.areaName"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item label="城市">
             <el-select v-model="info.city" placeholder="选择城市" class="manager-input" @change="selectCity">
               <el-option label="全部" value=''></el-option>
-              <el-option v-for="(city, index) in cityList" :key="index" :label="city.areaName" :value="city.areaName"></el-option>
+              <el-option v-for="(city, index) in cityList" :key="index" :label="city.areaName"
+                         :value="city.areaName"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item label="区/县">
             <el-select v-model="info.county" placeholder="选择区/县" class="manager-input">
               <el-option label="全部" value=''></el-option>
-              <el-option v-for="(county, index) in countyList" :key="index" :label="county.areaName" :value="county.areaName"></el-option>
+              <el-option v-for="(county, index) in countyList" :key="index" :label="county.areaName"
+                         :value="county.areaName"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item label="状态">
@@ -80,28 +85,42 @@
       </div>
       <div>
         <el-table :data="tableData" stripe style="width: 100%">
-          <el-table-column align="center" fixed="left" type="index" :index="indexMethod" label="序号" width="50"></el-table-column>
-          <el-table-column align="center" fixed="left" prop="userName" label="账号" width="120"></el-table-column>
+          <el-table-column align="center" fixed="left" type="index" :index="indexMethod" label="序号"
+                           width="50"></el-table-column>
+          <el-table-column align="center" fixed="left" prop="userName" label="账号"></el-table-column>
           <el-table-column align="center" prop="nickName" label="昵称" width="80"></el-table-column>
           <el-table-column align="center" prop="roleName" label="角色名称" width="80"></el-table-column>
-          <el-table-column align="center" prop="email" label="邮箱" width="150"></el-table-column>
+          <el-table-column align="center" prop="email" label="邮箱" :show-overflow-tooltip="true"
+                           width="150"></el-table-column>
           <el-table-column align="center" prop="mobile" label="手机号码" width="100"></el-table-column>
-          <el-table-column align="center" prop="qqAccount" label="QQ账号" :show-overflow-tooltip="true" width="100"></el-table-column>
-          <el-table-column align="center" prop="weChatAccount" label="微信账号" width="120"></el-table-column>
-          <el-table-column align="center" prop="province" label="省份" width="100"></el-table-column>
-          <el-table-column align="center" prop="city" label="城市" width="100"></el-table-column>
-          <el-table-column align="center" prop="county" label="区/县" width="100"></el-table-column>
-          <el-table-column align="center" prop="parentUserName" label="上级账号" width="120"></el-table-column>
-          <el-table-column align="center" prop="parentNickName" label="上级名称" width="80"></el-table-column>
+          <el-table-column align="center" prop="qqAccount" label="QQ账号" :show-overflow-tooltip="true"
+                           width="100"></el-table-column>
+          <el-table-column align="center" prop="weChatAccount" label="微信账号" :show-overflow-tooltip="true"
+                           width="120"></el-table-column>
+          <el-table-column align="center" prop="province" label="省份" :show-overflow-tooltip="true"
+                           width="100"></el-table-column>
+          <el-table-column align="center" prop="city" label="城市" :show-overflow-tooltip="true"
+                           width="100"></el-table-column>
+          <el-table-column align="center" prop="county" label="区/县" :show-overflow-tooltip="true"
+                           width="100"></el-table-column>
+          <el-table-column align="center" prop="parentUserName" label="上级(账号/名称)" width="160">
+            <template slot-scope="scope">
+              <span v-if="scope.row.parentId != null">
+                {{scope.row.parentUserName + '(' + scope.row.parentNickName + ')'}}
+              </span>
+            </template>
+          </el-table-column>
+          <!--          <el-table-column align="center" prop="parentNickName" label="上级名称" width="80"></el-table-column>-->
           <el-table-column align="center" prop="createDate" label="创建日期" width="90"></el-table-column>
           <el-table-column align="center" prop="status" :show-overflow-tooltip="true" label="状态" width="50">
             <template slot-scope="scope">
               {{scope.row.status ? '正常':'禁用'}}
             </template>
           </el-table-column>
-          <el-table-column align="center" fixed="right" label="操作" width="80">
+          <el-table-column align="center" fixed="right" label="操作">
             <template slot-scope="scope">
-              <el-button type="primary" plain size="mini" @click="updateInfo(scope.row.id, scope.row.userName)">修改</el-button>
+              <el-button type="primary" plain size="mini" @click="updateInfo(scope.row.id, scope.row.userName)">修改
+              </el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -175,7 +194,7 @@
         let count = (parseInt(this.info.page) - 1) * parseInt(this.info.pageSize)
         return count + (parseInt(index) + 1)
       },
-      selectManagerRoleList(){
+      selectManagerRoleList() {
         this.$axios({
           url: '/api/manage/selectManagerRoleList',
           method: 'post',
@@ -198,8 +217,8 @@
         this.info.county = ''
         this.cityList = []
         this.countyList = []
-        if (province != ''){
-          let obj = this.provList.find((item)=> {
+        if (province != '') {
+          let obj = this.provList.find((item) => {
             return item.areaName === province;
           })
           this.$global.selectRegionList(this, obj.id, '2')
@@ -209,8 +228,8 @@
         let city = this.info.city
         this.countyList = []
         this.info.county = ''
-        if (city != ''){
-          let obj = this.cityList.find((item)=> {
+        if (city != '') {
+          let obj = this.cityList.find((item) => {
             return item.areaName === city;
           })
           this.$global.selectRegionList(this, obj.id, '3')
@@ -245,23 +264,23 @@
         this.info.page = val
         this.onSubmit()
       },
-      updateInfo(managerId, userName){
+      updateInfo(managerId, userName) {
         this.showInfo = true
         this.managerId = managerId
-        if (userName && userName != '0'){
+        if (userName && userName != '0') {
           this.showTitle = userName
         } else {
           this.showTitle = '添加管理员账号'
         }
-        try{
+        try {
           this.$refs.managerInfo.setManagerId(managerId)
         } catch (e) {
           this.$cookies.set("managerId", managerId)
         }
+      },
+      setManagerId() {
+        this.selectList()
       }
-    },
-    setManagerId(){
-      this.selectList()
     }
   }
 </script>
