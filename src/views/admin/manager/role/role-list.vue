@@ -64,7 +64,7 @@
         </div>
       </div>
 
-      <el-dialog :title="showTitle" :visible.sync="showInfo" class="role-dialog">
+      <el-dialog :title="showTitle" :visible.sync="showInfo" class="role-dialog" :modal-append-to-body="false" :close-on-click-modal="false" :destroy-on-close="true">
         <roleInfo ref="roleInfo" v-on:setRoleId="setRoleId"></roleInfo>
       </el-dialog>
     </el-main>

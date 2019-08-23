@@ -89,10 +89,8 @@
             console.info('错误信息', error)
             this.$global.exitLoad(this, null, '')
           })
-        } else {
-          this.roleFrom = {status: '1'}
         }
-        this.$refs['roleForm'].resetFields()
+        // this.$refs['roleForm'].resetFields()
       },
       onSubmit (formName) {
         this.$refs[formName].validate((valid) => {

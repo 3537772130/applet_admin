@@ -44,26 +44,8 @@
         <el-form-item label="微信账号" prop="weChatAccount">
           <el-input v-model="managerForm.weChatAccount" placeholder="输入微信账号" class="manager-input"></el-input>
         </el-form-item>
-        <el-form-item label="省份" prop="province">
-          <el-select v-model="managerForm.province" placeholder="选择省份" class="manager-input" @change="selectProvince">
-            <el-option label="请选择" value=''></el-option>
-            <el-option v-for="(prov, index) in provList" :key="index" :label="prov.areaName"
-                       :value="prov.areaName"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="城市" prop="city">
-          <el-select v-model="managerForm.city" placeholder="选择城市" class="manager-input" @change="selectCity">
-            <el-option label="请选择" value=''></el-option>
-            <el-option v-for="(city, index) in cityList" :key="index" :label="city.areaName"
-                       :value="city.areaName"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="区/县" prop="county">
-          <el-select v-model="managerForm.county" placeholder="选择区/县" class="manager-input" @change="selectCounty">
-            <el-option label="请选择" value=''></el-option>
-            <el-option v-for="(county, index) in countyList" :key="index" :label="county.areaName"
-                       :value="county.areaName"></el-option>
-          </el-select>
+        <el-form-item label="所属区域" prop="county">
+          <el-cascader v-model="region" :options="regions" placeholder="请选择所属区域" @change="handleChange" style="width: 495px;"></el-cascader>
         </el-form-item>
         <el-form-item label="上级" prop="parentId" v-if="showParent">
           <el-select v-model="managerForm.parentId" placeholder="选择上级" class="manager-input">
@@ -77,7 +59,7 @@
             <el-option label="禁用" value="0"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label=" " prop="" v-if="showParent">
+        <el-form-item label=" " prop="" v-if="!showParent">
           <div class="manager-input"></div>
         </el-form-item>
 
@@ -105,6 +87,8 @@
         cityList: [],
         countyList: [],
         parentList: [],
+        region: [],
+        regions: [],
         managerForm: {
           id: '',
           userName: '',
@@ -155,24 +139,16 @@
           weChatAccount: [
             {type: 'string', max: 50, message: '微信账号长度不能超过50个字符', trigger: 'blur'}
           ],
-          province: [
-            {required: true, message: '请选择省份', trigger: 'blur'}
-          ],
-          city: [
-            {required: true, message: '请选择城市', trigger: 'blur'}
-          ],
           county: [
-            {required: true, message: '请选择区县', trigger: 'blur'}
+            {required: true, message: '请选择所属地域', trigger: 'blur'}
           ],
           parentId: [
-            {validator: this.$global.validate(this).managerParentIdValidator, trigger: 'blur'}
+            {required: true, message: '请选择上级', trigger: 'blur'}
           ]
         }
       }
     },
     created() {
-      this.selectManagerRoleList()
-      this.$global.selectRegionList(this, '', '1')
       let managerId = this.$cookies.get('managerId')
       this.setManagerId(managerId)
     },
@@ -180,8 +156,7 @@
     },
     methods: {
       setManagerId(managerId) {
-        if (managerId && managerId != '0') {
-          this.managerForm.id = managerId
+        if (managerId){
           this.loading = true
           this.$axios({
             url: '/api/manage/getManagerInfo',
@@ -189,87 +164,32 @@
             data: {id: managerId}
           }).then(res => {
             console.info('后台返回的数据', res.data)
+            this.parentList = res.data.data.parentList
+            this.roleList = res.data.data.roleList
+            this.regions = JSON.parse(res.data.data.regions)
             if (res.data.code === '1') {
-              res.data.data.confirmPassword = null
               this.managerForm = res.data.data.manager
-              this.cityList = res.data.data.cityList
-              this.countyList = res.data.data.countyList
-              this.parentList = res.data.data.parentList
+              this.region = [this.managerForm.province, this.managerForm.city, this.managerForm.county]
               this.managerForm.status = this.managerForm.status ? '1' : '0'
               this.showUserName = this.managerForm.userName
               delete this.managerForm.createDate
               delete this.managerForm.userName
               this.changeRole()
-            } else if (res.data.code === '-1') {
-              this.$message.error(res.data.data)
             }
             this.$cookies.remove('managerId')
-            this.$global.exitLoad(this, null, res.data)
+            this.loading = false
+            // this.$global.selectRegionJson(this)
           }).catch(error => {
             console.info('错误信息', error)
             this.$global.exitLoad(this, null, '')
           })
-        } else {
-          this.showUserName = ''
-          this.cityList = []
-          this.countyList = []
-          this.managerForm = {password: '', confirmPassword: '', status: '1'}
         }
-        this.$refs['managerForm'].resetFields()
-      },
-      selectManagerRoleList() {
-        this.$axios({
-          url: '/api/manage/selectManagerRoleList',
-          method: 'post',
-        }).then(res => {
-          console.info('后台返回的数据', res.data)
-          if (res.data.code === '1') {
-            this.roleList = res.data.data
-          } else if (res.data.code === '-1') {
-            this.$message.error(res.data.data)
-          }
-          this.$global.exitLoad(this, null, res.data)
-        }).catch(error => {
-          console.info('错误信息', error)
-          this.$global.exitLoad(this, null, '')
-        })
-      },
-      selectProvince() {
-        let province = this.managerForm.province
-        this.managerForm.city = ''
-        this.managerForm.county = ''
-        this.cityList = []
-        this.countyList = []
-        if (province != '') {
-          let obj = this.provList.find((item) => {
-            return item.areaName === province
-          })
-          this.$global.selectRegionList(this, obj.id, '2')
-        }
-      },
-      selectCity() {
-        let city = this.managerForm.city
-        this.countyList = []
-        this.managerForm.county = ''
-        if (city != '') {
-          let obj = this.cityList.find((item) => {
-            return item.areaName === city
-          })
-          this.$global.selectRegionList(this, obj.id, '3')
-        }
-      },
-      selectCounty() {
-        this.managerForm.status === '1' ? this.managerForm.status = '0' : this.managerForm.status = '1'
-        this.managerForm.status === '1' ? this.managerForm.status = '0' : this.managerForm.status = '1'
       },
       getManagerId() {
         return this.managerForm.id
       },
       getPassword() {
         return this.managerForm.password
-      },
-      getRoleId() {
-        return this.managerForm.roleId
       },
       changeRole() {
         if (this.managerForm.roleId === 4) {
@@ -278,13 +198,19 @@
           this.showParent = false
         }
       },
+      handleChange(res){
+        this.managerForm.province = res[0]
+        this.managerForm.city = res[1]
+        this.managerForm.county = res[2]
+      },
       onSubmit(formName) {
+        if (this.managerForm.roleId != 4) {
+          delete this.managerForm.parentId
+          this.$refs[formName].clearValidate("parentId")
+        }
         this.$refs[formName].validate((valid) => {
           if (valid) {
             let loading = Loading.service({fullscreen: true, text: '正在提交'})
-            if (this.managerForm.roleId != 4) {
-              delete this.managerForm.parentId
-            }
             this.$axios({
               url: '/api/manage/UpdateManagerInfo',
               method: 'post',

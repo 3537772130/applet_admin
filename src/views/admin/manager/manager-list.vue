@@ -15,64 +15,67 @@
   <el-container>
     <el-main v-loading="loading" element-loading-text="加载中" style="background-color: #FFFFFF;padding: 20px;">
       <div>
-        <el-form :inline="true" :model="info" class="demo-form-inline" style="text-align: left;">
-          <el-form-item label="账号">
+        <el-form :inline="true" :model="info" ref="queryManagerForm" class="demo-form-inline" style="text-align: left;">
+          <el-form-item label="账号" prop="userName">
             <el-input v-model="info.userName" placeholder="请输入账号" class="manager-input"></el-input>
           </el-form-item>
-          <el-form-item label="角色">
+          <el-form-item label="角色" prop="roleId">
             <el-select v-model="info.roleId" placeholder="选择角色" class="manager-input">
               <el-option label="全部" value=''></el-option>
               <el-option v-for="(role, index) in roleList" :key="index" :label="role.name" :value="role.id"></el-option>
             </el-select>
           </el-form-item>
-          <el-form-item label="邮箱">
+          <el-form-item label="邮箱" prop="email">
             <el-input v-model="info.email" placeholder="输入邮箱" class="manager-input"></el-input>
           </el-form-item>
-          <el-form-item label="手机号码">
+          <el-form-item label="手机号码" prop="mobile">
             <el-input type="number" v-model="info.mobile" placeholder="输入手机号码" class="manager-input"></el-input>
           </el-form-item>
-          <el-form-item label="QQ账号">
+          <el-form-item label="QQ账号" prop="qqAccount">
             <el-input type="number" v-model="info.qqAccount" placeholder="输入QQ账号" class="manager-input"></el-input>
           </el-form-item>
-          <el-form-item label="微信账号">
+          <el-form-item label="微信账号" prop="weChatAccount">
             <el-input v-model="info.weChatAccount" placeholder="输入微信账号" class="manager-input"></el-input>
           </el-form-item>
-          <el-form-item label="省份">
+          <el-form-item label="省份" prop="province">
             <el-select v-model="info.province" placeholder="选择省份" class="manager-input" @change="selectProvince">
               <el-option label="全部" value=''></el-option>
               <el-option v-for="(prov, index) in provList" :key="index" :label="prov.areaName"
                          :value="prov.areaName"></el-option>
             </el-select>
           </el-form-item>
-          <el-form-item label="城市">
+          <el-form-item label="城市" prop="city">
             <el-select v-model="info.city" placeholder="选择城市" class="manager-input" @change="selectCity">
               <el-option label="全部" value=''></el-option>
               <el-option v-for="(city, index) in cityList" :key="index" :label="city.areaName"
                          :value="city.areaName"></el-option>
             </el-select>
           </el-form-item>
-          <el-form-item label="区/县">
+          <el-form-item label="区/县" prop="county">
             <el-select v-model="info.county" placeholder="选择区/县" class="manager-input">
               <el-option label="全部" value=''></el-option>
               <el-option v-for="(county, index) in countyList" :key="index" :label="county.areaName"
                          :value="county.areaName"></el-option>
             </el-select>
           </el-form-item>
-          <el-form-item label="状态">
+          <el-form-item label="状态" prop="status">
             <el-select v-model="info.status" placeholder="选择状态" class="manager-input">
               <el-option label="全部" value=''></el-option>
               <el-option label="正常" value="1"></el-option>
               <el-option label="禁用" value="0"></el-option>
             </el-select>
           </el-form-item>
-          <el-form-item label="上级账号">
+          <el-form-item label="上级账号" prop="parentUserName">
             <el-input v-model="info.parentUserName" placeholder="输入上级账号" class="manager-input"></el-input>
           </el-form-item>
-          <el-form-item label="上级名称">
+          <el-form-item label="上级名称" prop="parentNickName">
             <el-input v-model="info.parentNickName" placeholder="输入上级名称" class="manager-input"></el-input>
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="selectList">查询</el-button>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="warning" @click="resetForm('queryManagerForm')">重置</el-button>
           </el-form-item>
           <el-form-item>
             <el-button type="success" @click="updateInfo('0','')">添加</el-button>
@@ -110,7 +113,6 @@
               </span>
             </template>
           </el-table-column>
-          <!--          <el-table-column align="center" prop="parentNickName" label="上级名称" width="80"></el-table-column>-->
           <el-table-column align="center" prop="createDate" label="创建日期" width="90"></el-table-column>
           <el-table-column align="center" prop="status" :show-overflow-tooltip="true" label="状态" width="50">
             <template slot-scope="scope">
@@ -135,7 +137,7 @@
         </div>
       </div>
 
-      <el-dialog :title="showTitle" :visible.sync="showInfo" class="manager-dialog">
+      <el-dialog :title="showTitle" :visible.sync="showInfo" class="manager-dialog" :modal-append-to-body="false" :close-on-click-modal="false" :destroy-on-close="true">
         <div style="overflow-x: hidden;overflow-y: auto;">
           <managerInfo ref="managerInfo" v-on:setManagerId="setManagerId"></managerInfo>
         </div>
@@ -263,6 +265,9 @@
       handleCurrentChange(val) {
         this.info.page = val
         this.onSubmit()
+      },
+      resetForm(formName) {
+        this.$refs[formName].resetFields();
       },
       updateInfo(managerId, userName) {
         this.showInfo = true

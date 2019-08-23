@@ -155,20 +155,6 @@
           callback(new Error('请输入确认密码'))
         }
       },
-      /**
-       * 管理员上级校验
-       */
-      managerParentIdValidator: (rule, value, callback) => {
-        if (that.getRoleId() === '3') {
-          if (value) {
-            callback()
-          } else {
-            callback(new Error('请选择上级'))
-          }
-        } else {
-          callback()
-        }
-      },
     }
   }
 
@@ -177,12 +163,13 @@
    * @param that
    */
   let selectRegionJson = function (that) {
+    that.regions = []
     that.$axios({
       url: '/api/selectRegionJson',
       method: 'post'
     }).then(res => {
-      // console.info('后台返回的数据', res.data)
-      that.options = JSON.parse(res.data.data)
+      that.regions = JSON.parse(res.data.data)
+      that.loading = false
     }).catch(error => {
       console.info('错误信息', error)
       return null
