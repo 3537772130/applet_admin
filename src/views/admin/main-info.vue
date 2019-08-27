@@ -134,7 +134,7 @@
         menuList: [
           {
             index: 'm-1',
-            title: '菜单一',
+            title: '后台人员管理',
             icon: 'el-icon-platform-eleme',
             items: [
               {
@@ -144,37 +144,21 @@
               {
                 index: '1-2',
                 title: '管理员列表'
-              },
-              {
-                index: '1-3',
-                title: '导航1-3'
-              },
-              {
-                index: '1-4',
-                title: '导航1-4'
               }
             ]
           },
           {
             index: 'm-2',
-            title: '菜单二',
+            title: '小程序管理',
             icon: 'el-icon-menu',
             items: [
               {
                 index: '2-1',
-                title: '导航2-1'
+                title: '小程序列表'
               },
               {
                 index: '2-2',
-                title: '导航2-2'
-              },
-              {
-                index: '2-3',
-                title: '导航2-3'
-              },
-              {
-                index: '2-4',
-                title: '导航2-4'
+                title: '小程序审核列表'
               }
             ]
           },

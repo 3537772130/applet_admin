@@ -39,18 +39,28 @@
       <div v-if="item.name === '1-2'" class="tab-div-content-page">
         <ManagerList></ManagerList>
       </div>
+      <div v-if="item.name === '2-1'" class="tab-div-content-page">
+        <AppletList></AppletList>
+      </div>
+      <div v-if="item.name === '2-2'" class="tab-div-content-page">
+        <AppletAuditList></AppletAuditList>
+      </div>
     </el-tab-pane>
   </el-tabs>
 </template>
 <script>
   import RoleList from '@/views/admin/manager/role/role-list.vue'
   import ManagerList from '@/views/admin/manager/manager-list.vue'
+  import AppletList from '@/views/admin/applet/applet-list.vue'
+  import AppletAuditList from '@/views/admin/applet/applet-audit-list.vue'
 
   export default {
     name: 'tabs-content',
     components: {
       'RoleList': RoleList,
-      'ManagerList': ManagerList
+      'ManagerList': ManagerList,
+      'AppletList': AppletList,
+      'AppletAuditList': AppletAuditList
     },
     data() {
       return {
@@ -64,7 +74,7 @@
       }
     },
     created() {
-
+      this.$cookies.set("tabPaneHeight", this.tabPaneHeight)
     },
     method() {
 

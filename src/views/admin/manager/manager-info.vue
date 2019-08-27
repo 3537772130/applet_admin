@@ -5,7 +5,7 @@
 </style>
 <template>
   <div>
-    <el-main v-loading="loading" element-loading-text="加载中" style="background-color: #FFFFFF;padding: 20px;">
+    <el-main v-loading="loading" element-loading-text="加载中" style="background-color: #FFFFFF;">
       <el-form :rules="managerRules" :inline="true" :model="managerForm" ref="managerForm" class="demo-form-inline">
         <el-form-item label="用户账号" prop="userName" v-if="showUserName === ''">
           <el-input v-model="managerForm.userName" placeholder="请输入账号" class="manager-input"></el-input>
