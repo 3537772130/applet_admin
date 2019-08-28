@@ -1,7 +1,4 @@
 <style type="text/css">
-  .el-form-item__label {
-    width: 100px;
-  }
 </style>
 <template>
   <div>
@@ -45,7 +42,7 @@
           <el-input v-model="managerForm.weChatAccount" placeholder="输入微信账号" class="manager-input"></el-input>
         </el-form-item>
         <el-form-item label="所属区域" prop="county">
-          <el-cascader v-model="region" :options="regions" placeholder="请选择所属区域" @change="handleChange" style="width: 495px;"></el-cascader>
+          <el-cascader v-model="region" :options="regions" placeholder="请选择所属区域" @change="handleChange" style="width: 475px;"></el-cascader>
         </el-form-item>
         <el-form-item label="上级" prop="parentId" v-if="showParent">
           <el-select v-model="managerForm.parentId" placeholder="选择上级" class="manager-input">
@@ -217,12 +214,12 @@
               data: this.managerForm
             }).then(res => {
               console.info('后台返回的数据', res.data)
-              let that = this
-              res.data.code === '1' ? this.$message.success({
-                message: res.data.data, duration: 1000, onClose: function () {
-                  that.$emit('setManagerId')
-                }
-              }) : this.$message.error(res.data.data)
+              if ( res.data.code === '1'){
+                this.$emit('setManagerId')
+                this.$message.success(res.data.data)
+              } else {
+                this.$message.error(res.data.data)
+              }
               this.$global.exitLoad(this, loading, res.data)
             }).catch(error => {
               console.info('错误信息', error)

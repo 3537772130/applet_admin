@@ -159,6 +159,16 @@
   }
 
   /**
+   * 动态设置查询页表单高度
+   **/
+  let setTableHeight = function (that, formId) {
+    let tabPaneHeight = that.$cookies.get('tabPaneHeight')
+    let height = document.getElementById(formId).offsetHeight
+    that.tableHeight = tabPaneHeight - height - 70
+  }
+
+
+  /**
    * 查询地域信息 json
    * @param that
    */
@@ -207,6 +217,7 @@
     checkLogin,
     exitLoad,
     validate,
+    setTableHeight,
     selectRegionJson,
     selectRegionList
   }

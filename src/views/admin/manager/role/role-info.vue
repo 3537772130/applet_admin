@@ -1,14 +1,11 @@
 <style type="text/css">
-  .el-form-item__label{
-    width: 100px;
-  }
   .role-input{
-    width: 190px;
+    width: 290px;
   }
 </style>
 <template>
   <div>
-    <el-main v-loading="loading" element-loading-text="加载中" style="background-color: #FFFFFF;padding: 20px;">
+    <el-main v-loading="loading" element-loading-text="加载中" style="background-color: #FFFFFF;">
       <el-form :rules="roleRules" :inline="true" :model="roleFrom" ref="roleFrom" class="demo-form-inline">
         <el-form-item label="角色名称" prop="roleName">
           <el-input v-model="roleFrom.roleName" maxlength="20" placeholder="请输入角色名称" class="role-input"></el-input>
@@ -24,8 +21,8 @@
           </el-select>
         </el-form-item>
         <br>
-        <el-form-item>
-          <el-button type="primary" @click="onSubmit('roleFrom')">提交</el-button>
+        <el-form-item label=" ">
+          <el-button type="primary" @click="onSubmit('roleFrom')" class="role-input">提交</el-button>
         </el-form-item>
       </el-form>
     </el-main>

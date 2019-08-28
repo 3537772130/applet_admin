@@ -1,42 +1,34 @@
 <style type="text/css">
-  .el-form-item__label {
-    width: 70px;
-  }
-
-  .manager-input {
-    width: 190px;
-  }
-
-  .manager-dialog .el-dialog {
-    width: 750px;
-  }
-
-  .el-table .has-gutter{
-
+  .applet-audit-timeline{
+    text-align: left;
   }
 </style>
 <template>
   <el-container>
     <el-main v-loading="loading" element-loading-text="加载中" style="background-color: #FFFFFF;">
-      <el-table :data="tableData" :height="450" stripe style="width: 100%">
-        <el-table-column align="center" prop="auditTime" label="审核时间" width="140"></el-table-column>
-        <el-table-column align="center" prop="auditResult" label="审核结果" width="90">
-          <template slot-scope="scope">
-            <el-link type="success" :underline="false" v-if="scope.row.auditResult == -1">审核未通过</el-link>
-            <el-link type="warning" :underline="false" v-if="scope.row.auditResult == 0">待审核</el-link>
-            <el-link type="danger"  :underline="false" v-if="scope.row.auditResult == 1">初审通过</el-link>
-            <el-link type="primary" :underline="false" v-if="scope.row.auditResult == 2">终审通过</el-link>
-          </template>
-        </el-table-column>
-        <el-table-column align="center" prop="auditRemark" label="备注" :show-overflow-tooltip="true"></el-table-column>
-        <el-table-column align="center" prop="parentUserName" label="审核人(账号/名称)" width="160">
-          <template slot-scope="scope">
-              <span v-if="scope.row.auditorId != null">
-                {{scope.row.auditorUserName + '(' + scope.row.auditorNickName + ')'}}
-              </span>
-          </template>
-        </el-table-column>
-      </el-table>
+      <div style="height: 500px;overflow-y: auto; padding: 0px 20px;">
+        <el-timeline class="applet-audit-timeline">
+          <el-timeline-item v-for="(record, index) in recordList" :key="index" :timestamp="record.auditTime"
+                            placement="top">
+            <el-card>
+              <div>
+                <span>审核结果：</span>
+                <el-link type="danger" :underline="false" v-if="record.auditResult == -1">审核驳回</el-link>
+                <el-link type="warning" :underline="false" v-if="record.auditResult == 0">待审核</el-link>
+                <el-link type="primary" :underline="false" v-if="record.auditResult == 1">初审通过</el-link>
+                <el-link type="success" :underline="false" v-if="record.auditResult == 2">终审通过</el-link>
+              </div>
+              <div style="margin-top: 10px;">
+                <span>备注说明：</span>{{record.auditRemark}}
+              </div>
+              <div style="margin-top: 10px;">
+                <span>审&nbsp;&nbsp;核&nbsp;&nbsp;员：</span>
+                <span v-if="record.auditorId != null">{{record.auditorNickName}} ({{record.auditorUserName}})</span>
+              </div>
+            </el-card>
+          </el-timeline-item>
+        </el-timeline>
+      </div>
     </el-main>
   </el-container>
 </template>
@@ -47,7 +39,7 @@
     data() {
       return {
         loading: false,
-        tableData: []
+        recordList: []
       }
     },
     created() {
@@ -56,7 +48,7 @@
     mounted() {
     },
     methods: {
-      setAppletId(appletId){
+      setAppletId(appletId) {
         this.onSubmit(appletId)
       },
       onSubmit(id) {
@@ -68,7 +60,7 @@
         }).then(res => {
           console.info('后台返回的数据', res.data)
           if (res.data.code === '1') {
-            this.tableData = res.data.data
+            this.recordList = res.data.data
           } else if (res.data.code === "-1") {
             this.$message.error(res.data.data)
           }

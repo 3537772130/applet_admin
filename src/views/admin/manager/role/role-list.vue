@@ -1,70 +1,68 @@
 <style type="text/css">
-  .el-form-item__label{
-    width: 70px;
+  role-form {
+    text-align: left;
   }
-  .el-select{
+
+  .el-select {
     width: 190px;
   }
-  .role-dialog .el-dialog{
+
+  .role-dialog .el-dialog {
     width: 450px;
   }
 </style>
 <template>
   <el-container>
-    <el-main v-loading="loading" element-loading-text="加载中" style="background-color: #FFFFFF;padding: 20px;">
-      <div>
-        <el-form :inline="true" :model="info" class="demo-form-inline" style="text-align: left;">
-          <el-form-item label="账号">
-            <el-input v-model="info.roleName" placeholder="请输入角色名称"></el-input>
-          </el-form-item>
-          <el-form-item label="状态">
-            <el-select v-model="info.status" placeholder="选择状态" style="width: 200px;">
-              <el-option label="全部" value=''></el-option>
-              <el-option label="正常" value="1"></el-option>
-              <el-option label="禁用" value="0"></el-option>
-            </el-select>
-          </el-form-item>
-          <el-form-item>
-            <el-button type="primary" @click="selectRoleList">查询</el-button>
-          </el-form-item>
-          <el-form-item>
-            <el-button type="success" @click="updateInfo('0')">添加</el-button>
-          </el-form-item>
-          <div style="display: none;">
-            <el-input v-model="info.page" type="hidden"></el-input>
-            <el-input v-model="info.pageSize" type="hidden"></el-input>
-          </div>
-        </el-form>
-      </div>
-      <div>
-        <el-table :data="tableData" stripe style="width: 100%">
-          <el-table-column align="center" type="index" :index="indexMethod" label="序号" width="80"></el-table-column>
-          <el-table-column align="center" prop="roleName" label="角色名称" width="100"></el-table-column>
-          <el-table-column align="center" prop="describeStr" label="描述"></el-table-column>
-          <el-table-column align="center" prop="updateDate" label="更新日期" width="180"></el-table-column>
-          <el-table-column align="center" prop="status" label="状态" width="180">
-            <template slot-scope="scope">
-              {{scope.row.status ? '正常':'禁用'}}
-            </template>
-          </el-table-column>
-          <el-table-column align="center" label="操作" width="80">
-            <template slot-scope="scope">
-              <el-button type="primary" plain size="mini" @click="updateInfo(scope.row.id)">修改</el-button>
-            </template>
-          </el-table-column>
-        </el-table>
-        <div style="text-align: right;">
-          <el-pagination
-            @current-change="handleCurrentChange"
-            :current-page.sync="info.page"
-            :page-size="info.pageSize"
-            layout="total, prev, pager, next, jumper"
-            :total="total">
-          </el-pagination>
+    <el-main v-loading="loading" element-loading-text="加载中" style="background-color: #FFFFFF;padding-top: 20px;">
+      <el-form id="role-form" :inline="true" :model="info" class="demo-form-inline role-form" style="text-align: left;">
+        <el-form-item label="账号">
+          <el-input v-model="info.roleName" placeholder="请输入角色名称"></el-input>
+        </el-form-item>
+        <el-form-item label="状态">
+          <el-select v-model="info.status" placeholder="选择状态" style="width: 200px;">
+            <el-option label="全部" value=''></el-option>
+            <el-option label="正常" value="1"></el-option>
+            <el-option label="禁用" value="0"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="selectRoleList">查询</el-button>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="success" @click="updateInfo('0')">添加</el-button>
+        </el-form-item>
+        <div style="display: none;">
+          <el-input v-model="info.page" type="hidden"></el-input>
+          <el-input v-model="info.pageSize" type="hidden"></el-input>
         </div>
+      </el-form>
+      <el-table :data="tableData" :height="tableHeight" stripe style="width: 100%">
+        <el-table-column align="center" type="index" :index="indexMethod" label="序号" width="80"></el-table-column>
+        <el-table-column align="center" prop="roleName" label="角色名称" width="100"></el-table-column>
+        <el-table-column align="center" prop="describeStr" label="描述"></el-table-column>
+        <el-table-column align="center" prop="updateDate" label="更新日期" width="180"></el-table-column>
+        <el-table-column align="center" prop="status" label="状态" width="180">
+          <template slot-scope="scope">
+            {{scope.row.status ? '正常':'禁用'}}
+          </template>
+        </el-table-column>
+        <el-table-column align="center" label="操作" width="80">
+          <template slot-scope="scope">
+            <el-button type="primary" plain size="mini" @click="updateInfo(scope.row.id)">修改</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+      <div style="text-align: right;height: 35px;padding-top: 10px;padding-right: 30px;">
+        <el-pagination
+          @current-change="handleCurrentChange"
+          :current-page.sync="info.page"
+          :page-size="info.pageSize"
+          layout="total, prev, pager, next, jumper"
+          :total="total">
+        </el-pagination>
       </div>
-
-      <el-dialog :title="showTitle" :visible.sync="showInfo" class="role-dialog" :modal-append-to-body="false" :close-on-click-modal="false" :destroy-on-close="true">
+      <el-dialog :title="showTitle" :visible.sync="showInfo" class="role-dialog" :modal-append-to-body="false"
+                 :close-on-click-modal="false" :destroy-on-close="true">
         <roleInfo ref="roleInfo" v-on:setRoleId="setRoleId"></roleInfo>
       </el-dialog>
     </el-main>
@@ -81,6 +79,7 @@
     data() {
       return {
         loading: false,
+        tableHeight: 50,
         showInfo: false,
         showTitle: '',
         roleId: '',
@@ -108,11 +107,12 @@
       onSubmit() {
         this.loading = true
         this.$axios({
-          url: '/api/manage/selectManagerRoleToPage',
+          url: '/api/manage/queryManagerRoleToPage',
           method: 'post',
           data: this.info
         }).then(res => {
           console.info('后台返回的数据', res.data)
+          this.$global.setTableHeight(this, 'role-form')
           if (res.data.code === '1') {
             this.tableData = res.data.data.dataSource
             this.total = res.data.data.totalCount
@@ -134,21 +134,21 @@
         this.info.page = val
         this.onSubmit()
       },
-      updateInfo(roleId){
+      updateInfo(roleId) {
         this.showInfo = true
         this.roleId = roleId
-        if (roleId && roleId != '0'){
+        if (roleId && roleId != '0') {
           this.showTitle = '修改角色信息'
         } else {
           this.showTitle = '添加角色信息'
         }
-        try{
+        try {
           this.$refs.roleInfo.setRoleId(roleId)
         } catch (e) {
           this.$cookies.set('roleId', roleId)
         }
       },
-      setRoleId(id){
+      setRoleId(id) {
         this.selectRoleList()
       }
     }

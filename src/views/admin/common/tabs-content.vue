@@ -43,7 +43,10 @@
         <AppletList></AppletList>
       </div>
       <div v-if="item.name === '2-2'" class="tab-div-content-page">
-        <AppletAuditList></AppletAuditList>
+        <AppletAuditFirstList></AppletAuditFirstList>
+      </div>
+      <div v-if="item.name === '2-3'" class="tab-div-content-page">
+        <AppletAuditLastList></AppletAuditLastList>
       </div>
     </el-tab-pane>
   </el-tabs>
@@ -52,7 +55,8 @@
   import RoleList from '@/views/admin/manager/role/role-list.vue'
   import ManagerList from '@/views/admin/manager/manager-list.vue'
   import AppletList from '@/views/admin/applet/applet-list.vue'
-  import AppletAuditList from '@/views/admin/applet/applet-audit-list.vue'
+  import AppletAuditFirstList from '@/views/admin/applet/applet-audit-first-list.vue'
+  import AppletAuditLastList from '@/views/admin/applet/applet-audit-last-list.vue'
 
   export default {
     name: 'tabs-content',
@@ -60,13 +64,14 @@
       'RoleList': RoleList,
       'ManagerList': ManagerList,
       'AppletList': AppletList,
-      'AppletAuditList': AppletAuditList
+      'AppletAuditFirstList': AppletAuditFirstList,
+      'AppletAuditLastList': AppletAuditLastList
     },
     data() {
       return {
         tabHeight: `${document.documentElement.clientHeight - 85}`,
         tabPaneHeight: `${document.documentElement.clientHeight - 125}`,
-        mainShow: 'block',
+        // mainShow: 'block',
         editableTabsValue: '2',
         editableTabs: [],
         tabIndex: 0,
@@ -122,11 +127,11 @@
         }
         this.editableTabsValue = activeName
         this.editableTabs = tabs.filter(tab => tab.name !== targetName)
-        if (tabs.length === 1) {
-          this.mainShow = 'block'
-        }
+        // if (tabs.length === 1) {
+        //   this.mainShow = 'block'
+        // }
         // 更新main-info菜单选中目标
-        this.parentMenuIndex = tabs.length === 1 ? '0' : this.editableTabsValue
+        this.parentMenuIndex = tabs.length === 1 ? 'm-1' : this.editableTabsValue
         this.setActiveIndex()
       },
       updateInfo() {
