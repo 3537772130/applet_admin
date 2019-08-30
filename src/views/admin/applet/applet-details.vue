@@ -102,7 +102,7 @@
         <el-form :model="auditForm" ref="auditForm" :rules="auditRules" :inline="true"
                  style="text-align: left; padding-top: 30px;" class="applet-details-form">
           <el-form-item label="审核结果" prop="result">
-            <el-select v-model="auditForm.result" placeholder="请选择审核结果" class="applet-details-input">
+            <el-select v-model="auditForm.result" placeholder="请选择审核结果" class="applet-details-input" @change="changeResult">
               <el-option label="请选择" value=''></el-option>
               <el-option label="驳回" value="-1"></el-option>
               <el-option label="通过" value="1"></el-option>
@@ -180,6 +180,11 @@
           console.info('错误信息', error)
           this.$global.exitLoad(this, null, '')
         })
+      },
+      changeResult(){
+        if (this.auditForm.result == 1){
+          this.auditForm.remark = '审核通过，信息确认'
+        }
       },
       onSubmit(formName) {
         this.$refs[formName].validate((valid) => {

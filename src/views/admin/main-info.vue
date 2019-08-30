@@ -212,7 +212,11 @@
     methods: {
       updateInfo(index) {
         if (index) {
-          this.activeIndex = index
+          if (index === '0'){
+            this.activeIndex = this.activeIndex === '0' ? '':'0';
+          } else {
+            this.activeIndex = index
+          }
         } else {
           this.$refs.headerMenu.updateInfo()
         }

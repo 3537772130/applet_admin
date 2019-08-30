@@ -87,8 +87,8 @@
       <el-table :data="tableData" :height="tableHeight" stripe style="width: 100%">
         <el-table-column align="center" fixed="left" type="index" :index="indexMethod" label="序号"
                          width="50"></el-table-column>
-        <el-table-column align="center" fixed="left" prop="userName" label="账号"></el-table-column>
-        <el-table-column align="center" prop="nickName" label="昵称" width="80"></el-table-column>
+        <el-table-column align="center" fixed="left" prop="userName" label="账号" width="160"></el-table-column>
+        <el-table-column align="center" prop="nickName" label="昵称" width="120"></el-table-column>
         <el-table-column align="center" prop="roleName" label="角色名称" width="80"></el-table-column>
         <el-table-column align="center" prop="email" label="邮箱" :show-overflow-tooltip="true"
                          width="150"></el-table-column>

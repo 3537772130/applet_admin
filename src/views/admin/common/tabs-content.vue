@@ -99,8 +99,7 @@
         if (ifBe) {
           this.editableTabs.push({
             title: title,
-            name: menuIndex,
-            content: 'New Tab ' + title
+            name: menuIndex
           })
         }
         this.editableTabsValue = menuIndex
@@ -131,7 +130,7 @@
         //   this.mainShow = 'block'
         // }
         // 更新main-info菜单选中目标
-        this.parentMenuIndex = tabs.length === 1 ? 'm-1' : this.editableTabsValue
+        this.parentMenuIndex = tabs.length === 1 ? '0' : this.editableTabsValue
         this.setActiveIndex()
       },
       updateInfo() {

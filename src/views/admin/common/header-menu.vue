@@ -24,7 +24,7 @@
         </template>
         <el-menu-item disabled>{{info.nickName}}</el-menu-item>
         <el-menu-item index="1-1">{{info.userName + '(' + info.roleName + ')'}}</el-menu-item>
-        <el-menu-item index="1-2" @click.native="exitLogin()">注销登录</el-menu-item>
+        <el-menu-item index="1-2">注销登录</el-menu-item>
       </el-submenu>
     </el-menu>
   </div>
