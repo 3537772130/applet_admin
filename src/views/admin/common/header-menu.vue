@@ -15,8 +15,18 @@
       @select="handleSelect"
       background-color="#545c64"
       text-color="#fff"
-      active-text-color="#409EFF" :style="menuWidth">
-      <el-submenu index="1" v-if="loginStatus" @click.native="handleSelect('5-1','5')">
+      active-text-color="#409EFF" style="display: inline-block;border-bottom: none;margin-right: 30px;width: 450px;position: absolute;top: 0px;left: 200px;">
+      <el-menu-item v-for="(item, index) in firstList" :key="index" :index="index">{{item.title}}</el-menu-item>
+    </el-menu>
+    <el-menu
+      :default-active="activeIndex"
+      class="el-menu-demo"
+      mode="horizontal"
+      @select="handleSelect"
+      background-color="#545c64"
+      text-color="#fff"
+      active-text-color="#409EFF" style="display: inline-block;border-bottom: none;margin-right: 30px;width: 100px;">
+      <el-submenu index="-1" @click.native="handleSelect('5-1','5')">
         <template slot="title">
           <el-avatar :size="50" :src="info.avatarUrl" @error="errorHandler">
             <img :src="info.avatarUrl"/>
@@ -37,22 +47,23 @@
     name: 'header-menu',
     data() {
       return {
-        ifLogo: true,
-        activeIndex: '1',
-        loginStatus: false,
-        menuWidth: {'display': 'inline-block', 'border-bottom': 'none', 'width': '500px', 'margin-right': '30px'},
-        info: this.$cookies.get('manager_info')
+        activeIndex: 0,
+        info: this.$cookies.get('manager_info'),
+        firstList: [],
       }
     },
     created() {
-      this.checkLogin()
     },
     methods: {
+      loadFirstMenu(list) {
+        this.firstList = list
+      },
       errorHandler() {
         return true
       },
       handleSelect(key, keyPath) {
         console.log(key, keyPath)
+        this.$emit("upActiveIndex", key)
         switch (key) {
           case "1-2":
             this.exitLogin()
@@ -60,23 +71,6 @@
           case "6":
             this.$router.push({path: '/echarts'})
             break
-        }
-      },
-      checkLogin() {
-        this.loginStatus = this.$global.checkLogin(this)
-        if (!this.loginStatus) {
-          this.menuWidth = {
-            'display': 'inline-block',
-            'border-bottom': 'none',
-            'width': '450px',
-            'margin-right': '30px'
-          }
-        }
-      },
-      setMenuIndex(index) {
-        this.activeIndex = index
-        if (index === '5-1') {
-          this.ifLogo = false
         }
       },
       updateInfo() {

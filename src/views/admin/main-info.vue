@@ -49,7 +49,7 @@
   }
 
   .el-submenu__title, .el-menu-item, .el-submenu__title i {
-    color: #1E90FF;
+    color: #FFFFFF;
   }
 
   .el-menu-item-group__title {
@@ -98,17 +98,17 @@
         background-color="#545c64"
         text-color="#fff"
         active-text-color="#409EFF" style="position: relative;top: -140px;">
-        <el-submenu v-for="menu in menuList" :key="menu.index" :index="menu.index">
+        <el-submenu v-for="menu in secondList" :key="menu.index" :index="menu.index">
           <template slot="title"><i :class="menu.icon"></i>{{menu.title}}</template>
           <el-menu-item-group>
-            <el-menu-item v-for="item in menu.items" :key="item.index" :index="item.index">{{item.title}}</el-menu-item>
+            <el-menu-item v-for="item in menu.items" :key="item.index" :index="item.logo">{{item.title}}</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
       </el-menu>
     </el-aside>
     <el-container>
       <el-header style="background-color: #545c64;text-align: right;">
-        <headerMenu ref="headerMenu" v-on:setActiveIndex="updateInfo"></headerMenu>
+        <headerMenu ref="headerMenu" v-on:upActiveIndex="upActiveIndex"></headerMenu>
       </el-header>
       <el-main style="background-color: #DCDFE6;">
         <tabsContent ref="tabsContent" v-on:updateInfo="updateInfo"></tabsContent>
@@ -117,6 +117,7 @@
   </el-container>
 </template>
 <script type="text/javascript">
+  import {Loading} from 'element-ui'
   import headerMenu from '@/views/admin/common/header-menu.vue'
   import tabsContent from '@/views/admin/common/tabs-content.vue'
 
@@ -130,66 +131,9 @@
       return {
         bodyHeight: `${document.documentElement.clientHeight}` + 'px',
         info: this.$cookies.get('manager_info'),
-        activeIndex: '',
-        menuList: [
-          {
-            index: 'm-1',
-            title: '后台人员管理',
-            icon: 'el-icon-platform-eleme',
-            items: [
-              {
-                index: '1-1',
-                title: '角色列表'
-              },
-              {
-                index: '1-2',
-                title: '管理员列表'
-              }
-            ]
-          },
-          {
-            index: 'm-2',
-            title: '小程序管理',
-            icon: 'el-icon-menu',
-            items: [
-              {
-                index: '2-1',
-                title: '小程序列表'
-              },
-              {
-                index: '2-2',
-                title: '小程序初审列表'
-              },
-              {
-                index: '2-3',
-                title: '小程序终审列表'
-              }
-            ]
-          },
-          {
-            index: 'm-3',
-            title: '菜单三',
-            icon: 'el-icon-setting',
-            items: [
-              {
-                index: '3-1',
-                title: '导航3-1'
-              },
-              {
-                index: '3-2',
-                title: '导航3-2'
-              },
-              {
-                index: '3-3',
-                title: '导航3-3'
-              },
-              {
-                index: '3-4',
-                title: '导航3-4'
-              }
-            ]
-          }
-        ]
+        activeIndex: '0',
+        menuList: [],
+        secondList: []
       }
     },
     created() {
@@ -198,7 +142,11 @@
         method: 'post'
       }).then(res => {
         // console.info('后台返回的数据', res.data)
-        if (res.data.code != '1') {
+        if (res.data.code === '1') {
+          this.menuList = res.data.data
+          this.$refs.headerMenu.loadFirstMenu(res.data.data)
+          this.secondList = res.data.data[0].items
+        } else {
           this.$cookies.remove("manager_info")
           this.$router.push({path: '/'})
         }
@@ -207,7 +155,7 @@
       })
     },
     mounted() {
-      this.$refs.headerMenu.setMenuIndex("1")
+
     },
     methods: {
       updateInfo(index) {
@@ -222,14 +170,14 @@
         }
       },
       handleSelect(key, keyPath) {
-        // console.log(key, keyPath)
+        console.log(key, keyPath)
         let keyTitle = ''
-        let list = this.menuList
+        let list = this.secondList
         for (let i = 0; i < list.length; i++) {
           let items = list[i].items
           for (let k = 0; k < items.length; k++) {
             let item = items[k]
-            if (item.index === key) {
+            if (item.logo === key) {
               keyTitle = item.title
               break
             }
@@ -242,6 +190,9 @@
       },
       handleClose(key, keyPath) {
         // console.log("关闭：", key, keyPath)
+      },
+      upActiveIndex(index) {
+        this.secondList = this.menuList[index].items
       }
     }
   }

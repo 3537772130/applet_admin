@@ -33,20 +33,23 @@
     <el-tab-pane class="tab-div-content" v-for="item in editableTabs" :key="item.name"
                  :label="item.title" :name="item.name" :style="{'height': tabPaneHeight + 'px','overflow-y': 'scroll'}"
                  closable>
-      <div v-if="item.name === '1-1'" class="tab-div-content-page">
+      <div v-if="item.name === 'queryManagerRoleToPage'" class="tab-div-content-page">
         <RoleList></RoleList>
       </div>
-      <div v-if="item.name === '1-2'" class="tab-div-content-page">
+      <div v-if="item.name === 'queryManagerInfoToPage'" class="tab-div-content-page">
         <ManagerList></ManagerList>
       </div>
-      <div v-if="item.name === '2-1'" class="tab-div-content-page">
+      <div v-if="item.name === 'queryAppletToPage'" class="tab-div-content-page">
         <AppletList></AppletList>
       </div>
-      <div v-if="item.name === '2-2'" class="tab-div-content-page">
+      <div v-if="item.name === 'queryAppletAuditToFirstTrial'" class="tab-div-content-page">
         <AppletAuditFirstList></AppletAuditFirstList>
       </div>
-      <div v-if="item.name === '2-3'" class="tab-div-content-page">
+      <div v-if="item.name === 'queryAppletAuditToLastTrial'" class="tab-div-content-page">
         <AppletAuditLastList></AppletAuditLastList>
+      </div>
+      <div v-if="item.name === 'loadMenuList'" class="tab-div-content-page">
+        <MenuList></MenuList>
       </div>
     </el-tab-pane>
   </el-tabs>
@@ -57,6 +60,7 @@
   import AppletList from '@/views/admin/applet/applet-list.vue'
   import AppletAuditFirstList from '@/views/admin/applet/applet-audit-first-list.vue'
   import AppletAuditLastList from '@/views/admin/applet/applet-audit-last-list.vue'
+  import MenuList from '@/views/admin/menu/menu-list.vue'
 
   export default {
     name: 'tabs-content',
@@ -65,7 +69,8 @@
       'ManagerList': ManagerList,
       'AppletList': AppletList,
       'AppletAuditFirstList': AppletAuditFirstList,
-      'AppletAuditLastList': AppletAuditLastList
+      'AppletAuditLastList': AppletAuditLastList,
+      'MenuList': MenuList
     },
     data() {
       return {

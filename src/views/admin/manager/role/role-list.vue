@@ -3,7 +3,7 @@
     text-align: left;
   }
 
-  .el-select {
+  .role-form .el-select {
     width: 190px;
   }
 

@@ -151,7 +151,7 @@
     },
     data() {
       return {
-        loading: true,
+        loading: false,
         tableHeight: 50,
         showInfo: false,
         showTitle: '',
