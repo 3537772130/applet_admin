@@ -1,4 +1,23 @@
 <script type='text/javascript'>
+  let firstList = []
+  let menuList = []
+
+  let setFirstList = function(list){
+    firstList = list
+  }
+
+  let getFirstList = function(){
+    return firstList
+  }
+
+  let setMenuList = function(list){
+    menuList = list
+  }
+
+  let getMenuList = function(){
+    return menuList
+  }
+
   /**
    * 判断登录是否失效
    * @param that
@@ -214,6 +233,10 @@
   }
 
   export default {
+    setFirstList,
+    getFirstList,
+    setMenuList,
+    getMenuList,
     checkLogin,
     exitLoad,
     validate,
