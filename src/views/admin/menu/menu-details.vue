@@ -97,7 +97,7 @@
           ],
           menuIndex: [
             {required: true, message: '请输入菜单序号', trigger: 'blur'},
-            {type: 'number', min: 1, max: 99, message: '菜单序号为1-99的数字', trigger: 'blur'}
+            {type: 'number', min: 1, max: 999, message: '菜单序号为1-999的数字', trigger: 'blur'}
           ]
         }
       }
@@ -112,7 +112,7 @@
     },
     methods: {
       loadMenuInfo(id, parentId){
-        if (parentId){
+        if (parentId != null && parentId >= 0){
           this.loading = true
           this.$axios({
             url: '/api/manage/menu/loadMenuDetails',

@@ -54,6 +54,8 @@
           that.$router.push({path: '/'})
         }
       })
+    } else if (data.code === '-2'){
+      that.$message.error('没有访问权限！')
     } else {
       let managerInfo = that.$cookies.get('manager_info')
       that.$cookies.set('manager_info', managerInfo, 3600)
