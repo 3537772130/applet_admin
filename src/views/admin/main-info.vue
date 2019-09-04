@@ -137,6 +137,7 @@
       }
     },
     created() {
+      let loading = Loading.service({fullscreen: true, text: '正在加载'})
       this.$axios({
         url: '/api/manage/checkLogin',
         method: 'post'
@@ -150,8 +151,10 @@
           this.$cookies.remove("manager_info")
           this.$router.push({path: '/'})
         }
+        this.$global.exitLoad(this, loading, res.data)
       }).catch(error => {
         console.info('错误信息', error)
+        this.$global.exitLoad(this, loading, '')
       })
     },
     mounted() {

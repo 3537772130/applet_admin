@@ -10,6 +10,10 @@
   .role-dialog .el-dialog {
     width: 450px;
   }
+
+  .role-auth-dialog .el-dialog {
+    width: 1000px;
+  }
 </style>
 <template>
   <el-container>
@@ -46,9 +50,10 @@
             {{scope.row.status ? '正常':'禁用'}}
           </template>
         </el-table-column>
-        <el-table-column align="center" label="操作" width="80">
+        <el-table-column align="center" label="操作" width="180">
           <template slot-scope="scope">
-            <el-button type="primary" plain size="mini" @click="updateInfo(scope.row.id)">修改</el-button>
+            <el-button type="primary" plain size="mini" @click="updateAuth(scope.row.id, scope.row.roleName)">设置权限</el-button>
+            <el-button type="warning" plain size="mini" @click="updateInfo(scope.row.id)">修改</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -65,16 +70,22 @@
                  :close-on-click-modal="false" :destroy-on-close="true">
         <roleInfo ref="roleInfo" v-on:setRoleId="setRoleId"></roleInfo>
       </el-dialog>
+      <el-dialog :title="showName" :visible.sync="showAuth" class="role-auth-dialog" :modal-append-to-body="false"
+                 :close-on-click-modal="false" :destroy-on-close="true">
+        <roleAuth ref="roleAuth" v-on:loadMenuList="loadMenuList"></roleAuth>
+      </el-dialog>
     </el-main>
   </el-container>
 </template>
 <script type="text/javascript">
   import roleInfo from '@/views/admin/manager/role/role-info.vue'
+  import roleAuth from '@/views/admin/manager/role/role-auth.vue'
 
   export default {
     name: 'role-list',
     components: {
-      'roleInfo': roleInfo
+      'roleInfo': roleInfo,
+      'roleAuth': roleAuth
     },
     data() {
       return {
@@ -82,6 +93,8 @@
         tableHeight: 50,
         showInfo: false,
         showTitle: '',
+        showAuth: false,
+        showName: '',
         roleId: '',
         currentPage: 1,
         total: 0,
@@ -127,7 +140,6 @@
       },
       selectRoleList() {
         this.info.page = 1
-        this.showInfo = false
         this.onSubmit()
       },
       handleCurrentChange(val) {
@@ -148,8 +160,21 @@
           this.$cookies.set('roleId', roleId)
         }
       },
-      setRoleId(id) {
+      updateAuth(id, name){
+        try {
+          this.$refs.roleAuth.loadMenuList(id)
+        } catch (e) {
+          this.$cookies.set('roleAuthId', id)
+        }
+        this.showAuth = true
+        this.showName = name
+      },
+      setRoleId() {
+        this.showInfo = false
         this.selectRoleList()
+      },
+      loadMenuList(){
+        this.showAuth = false
       }
     }
   }

@@ -47,31 +47,26 @@
       <el-table :data="tableData" :height="tableHeight" stripe style="width: 100%">
         <el-table-column align="center" type="index" :index="indexMethod" label="序号" width="50"></el-table-column>
         <el-table-column align="center" prop="appletCode" label="编码" width="185"></el-table-column>
-        <el-table-column align="center" prop="appletName" label="名称" width="160"
+        <el-table-column align="center" prop="appletName" label="名称" width="220"
                          :show-overflow-tooltip="true"></el-table-column>
-        <el-table-column align="center" prop="mobile" label="用户(账号/名称)" width="160" :show-overflow-tooltip="true">
+        <el-table-column align="center" prop="mobile" label="用户(账号/名称)" width="180" :show-overflow-tooltip="true">
           <template slot-scope="scope">
             <span>{{scope.row.mobile + '(' + scope.row.nickName + ')'}}</span>
           </template>
         </el-table-column>
-        <el-table-column align="center" prop="ifRetail" label="营业类型" width="80">
+        <el-table-column align="center" prop="ifRetail" label="营业类型" width="100">
           <template slot-scope="scope">
             <span v-if="scope.row.ifRetail">批发</span>
             <span v-if="!scope.row.ifRetail">零售</span>
           </template>
         </el-table-column>
         <el-table-column align="center" prop="province" label="省份" :show-overflow-tooltip="true"
-                         width="100"></el-table-column>
+                         width="120"></el-table-column>
         <el-table-column align="center" prop="city" label="城市" :show-overflow-tooltip="true"
-                         width="100"></el-table-column>
+                         width="120"></el-table-column>
         <el-table-column align="center" prop="county" label="区/县" :show-overflow-tooltip="true"
-                         width="100"></el-table-column>
-        <el-table-column align="center" prop="parentUserName" label="推荐人(账号/名称)" width="160">
-          <template slot-scope="scope">
-            <span v-if="scope.row.recommenderId != null">{{scope.row.recommenderAccount + '(' + scope.row.recommenderName + ')'}}</span>
-          </template>
-        </el-table-column>
-        <el-table-column align="center" prop="updateTime" label="更新日期" width="140"></el-table-column>
+                         width="120"></el-table-column>
+        <el-table-column align="center" prop="updateTime" label="更新日期" width="160"></el-table-column>
         <el-table-column align="center" prop="auditResult" label="审核状态" width="100" :show-overflow-tooltip="true">
           <template slot-scope="scope">
             <el-tooltip class="item" effect="dark" content="点击查看审核记录" placement="top">

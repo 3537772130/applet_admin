@@ -90,13 +90,6 @@
             </el-form-item>
           </el-form>
         </el-tab-pane>
-        <el-tab-pane label="推荐信息" name="recommend" style="height: 400px;">
-          <el-form style="text-align: left; padding-top: 30px;">
-            <el-form-item label="推荐人" class="form-info-div">
-              <span>{{info.recommenderAccount}}({{info.recommenderName}})</span>
-            </el-form-item>
-          </el-form>
-        </el-tab-pane>
       </el-tabs>
       <div  v-if="auditResult == 1">
         <el-form :model="auditForm" ref="auditForm" :rules="auditRules" :inline="true"

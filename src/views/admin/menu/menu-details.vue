@@ -53,7 +53,7 @@
                     resize="none" rows="5" placeholder="请输入菜单路径" class="menu-input"></el-input>
         </el-form-item>
         <el-form-item label="菜单序号" prop="menuIndex">
-          <el-input v-model="menuForm.menuIndex" type="number" placeholder="请输入菜单序号" class="menu-input"></el-input>
+          <el-input v-model.number="menuForm.menuIndex" type="number" placeholder="请输入菜单序号" class="menu-input"></el-input>
         </el-form-item>
         <el-form-item label="菜单状态" prop="status">
           <el-select v-model="menuForm.status" placeholder="请选择菜单状态" class="menu-input">
@@ -97,7 +97,7 @@
           ],
           menuIndex: [
             {required: true, message: '请输入菜单序号', trigger: 'blur'},
-            {type: 'number', min: 1, max: 2, message: '菜单序号为1-99的数字', trigger: 'blur'}
+            {type: 'number', min: 1, max: 99, message: '菜单序号为1-99的数字', trigger: 'blur'}
           ]
         }
       }

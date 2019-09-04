@@ -20,6 +20,20 @@
         <el-form-item label="用户手机" prop="mobile">
           <el-input type="number" v-model="info.mobile" placeholder="输入用户手机号码" class="applet-input"></el-input>
         </el-form-item>
+        <el-form-item label="营业类型" prop="ifRetail">
+          <el-select v-model="info.ifRetail" placeholder="选择营业类型" class="applet-input">
+            <el-option label="全部" value=''></el-option>
+            <el-option label="批发" value="1"></el-option>
+            <el-option label="零售" value="0"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="营业状态" prop="ifSelling">
+          <el-select v-model="info.ifSelling" placeholder="选择营业状态" class="applet-input">
+            <el-option label="全部" value=''></el-option>
+            <el-option label="正在营业" value="1"></el-option>
+            <el-option label="暂停营业" value="0"></el-option>
+          </el-select>
+        </el-form-item>
         <el-form-item label="省份" prop="province">
           <el-select v-model="info.province" placeholder="选择省份" class="applet-input" @change="selectProvince">
             <el-option label="全部" value=''></el-option>
@@ -41,25 +55,6 @@
                        :value="county.areaName"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="推荐人" prop="recommenderAccount">
-          <el-select v-model="info.recommenderAccount" placeholder="选择推荐人" class="applet-input">
-            <el-option label="全部" value=''></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="营业类型" prop="ifRetail">
-          <el-select v-model="info.ifRetail" placeholder="选择营业类型" class="applet-input">
-            <el-option label="全部" value=''></el-option>
-            <el-option label="批发" value="1"></el-option>
-            <el-option label="零售" value="0"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="营业状态" prop="ifSelling">
-          <el-select v-model="info.ifSelling" placeholder="选择营业状态" class="applet-input">
-            <el-option label="全部" value=''></el-option>
-            <el-option label="正在营业" value="1"></el-option>
-            <el-option label="暂停营业" value="0"></el-option>
-          </el-select>
-        </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="selectList">查询</el-button>
         </el-form-item>
@@ -74,39 +69,34 @@
       <el-table :data="tableData" :height="tableHeight" stripe style="width: 100%">
         <el-table-column align="center" fixed="left" type="index" :index="indexMethod" label="序号"
                          width="50"></el-table-column>
-        <el-table-column align="center" fixed="left" prop="appletCode" label="编码" width="165"
+        <el-table-column align="center" fixed="left" prop="appletCode" label="编码" width="185"
                          :show-overflow-tooltip="true"></el-table-column>
-        <el-table-column align="center" prop="appletName" label="名称" width="160"
+        <el-table-column align="center" prop="appletName" label="名称" width="220"
                          :show-overflow-tooltip="true"></el-table-column>
-        <el-table-column align="center" prop="mobile" label="用户(账号/名称)" width="160" :show-overflow-tooltip="true">
+        <el-table-column align="center" prop="mobile" label="用户(账号/名称)" width="180" :show-overflow-tooltip="true">
           <template slot-scope="scope">
             <span>{{scope.row.mobile + '(' + scope.row.nickName + ')'}}</span>
           </template>
         </el-table-column>
-        <el-table-column align="center" prop="ifRetail" label="营业类型" width="80">
+        <el-table-column align="center" prop="ifRetail" label="营业类型" width="100">
           <template slot-scope="scope">
             <span v-if="scope.row.ifRetail">批发</span>
             <span v-if="!scope.row.ifRetail">零售</span>
           </template>
         </el-table-column>
-        <el-table-column align="center" prop="ifSelling" label="营业状态" width="80">
+        <el-table-column align="center" prop="ifSelling" label="营业状态" width="100">
           <template slot-scope="scope">
-            <span v-if="scope.row.ifSelling" style="color: #67C23A;">正在营业</span>
-            <span v-if="!scope.row.ifSelling" style="color: #E6A23C;">暂停营业</span>
+            <el-link type="success" :underline="false" v-if="scope.row.ifSelling">正在营业</el-link>
+            <el-link type="warning" :underline="false" v-if="!scope.row.ifSelling">暂停营业</el-link>
           </template>
         </el-table-column>
         <el-table-column align="center" prop="province" label="省份" :show-overflow-tooltip="true"
-                         width="100"></el-table-column>
+                         width="120"></el-table-column>
         <el-table-column align="center" prop="city" label="城市" :show-overflow-tooltip="true"
-                         width="100"></el-table-column>
+                         width="120"></el-table-column>
         <el-table-column align="center" prop="county" label="区/县" :show-overflow-tooltip="true"
-                         width="100"></el-table-column>
-        <el-table-column align="center" prop="parentUserName" label="推荐人(账号/名称)" width="160">
-          <template slot-scope="scope">
-            <span v-if="scope.row.recommenderId != null">{{scope.row.recommenderAccount + '(' + scope.row.recommenderName + ')'}}</span>
-          </template>
-        </el-table-column>
-        <el-table-column align="center" prop="updateTime" label="更新日期" width="90"></el-table-column>
+                         width="120"></el-table-column>
+        <el-table-column align="center" prop="updateTime" label="更新日期" width="100"></el-table-column>
         <el-table-column align="center" fixed="right" label="操作">
           <template slot-scope="scope">
             <el-button type="primary" plain size="mini" @click="loadDetails(scope.row.id, scope.row.appletName)">详情
