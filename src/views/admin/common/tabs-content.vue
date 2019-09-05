@@ -26,10 +26,11 @@
   }
 </style>
 <template>
-  <el-tabs v-model="editableTabsValue" type="border-card" @tab-click="clickTab" @tab-remove="removeTab" :style="{height: tabHeight + 'px'}">
-<!--    <el-tab-pane label="管理主页" name="0" :style="{height: tabPaneHeight + 'px',display: mainShow}">-->
-<!--      <div>123</div>-->
-<!--    </el-tab-pane>-->
+  <el-tabs v-model="editableTabsValue" type="border-card" @tab-click="clickTab" @tab-remove="removeTab"
+           :style="{height: tabHeight + 'px'}">
+    <!--    <el-tab-pane label="管理主页" name="0" :style="{height: tabPaneHeight + 'px',display: mainShow}">-->
+    <!--      <div>123</div>-->
+    <!--    </el-tab-pane>-->
     <el-tab-pane class="tab-div-content" v-for="item in editableTabs" :key="item.name"
                  :label="item.title" :name="item.name" :style="{'height': tabPaneHeight + 'px','overflow-y': 'scroll'}"
                  closable>
@@ -51,6 +52,13 @@
       <div v-if="item.name === 'loadMenuList'" class="tab-div-content-page">
         <MenuList></MenuList>
       </div>
+
+      <div v-if="item.name === 'queryUserToPage'" class="tab-div-content-page">
+        <UserList></UserList>
+      </div>
+      <div v-if="item.name === 'queryMerchantToPage'" class="tab-div-content-page">
+        <MerchantList></MerchantList>
+      </div>
     </el-tab-pane>
   </el-tabs>
 </template>
@@ -61,6 +69,8 @@
   import AppletAuditFirstList from '@/views/admin/applet/applet-audit-first-list.vue'
   import AppletAuditLastList from '@/views/admin/applet/applet-audit-last-list.vue'
   import MenuList from '@/views/admin/menu/menu-list.vue'
+  import UserList from '@/views/admin/user/user-list.vue'
+  import MerchantList from '@/views/admin/user/merchant-list.vue'
 
   export default {
     name: 'tabs-content',
@@ -70,7 +80,9 @@
       'AppletList': AppletList,
       'AppletAuditFirstList': AppletAuditFirstList,
       'AppletAuditLastList': AppletAuditLastList,
-      'MenuList': MenuList
+      'MenuList': MenuList,
+      'UserList': UserList,
+      'MerchantList': MerchantList
     },
     data() {
       return {

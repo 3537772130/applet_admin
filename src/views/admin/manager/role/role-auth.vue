@@ -77,7 +77,7 @@
         </div>
       </div>
       <div style="height: 40px;line-height: 40px;text-align: center;margin: 20px 0px;">
-        <el-button type="primary" size="mini" style="width: 290px;" @click="onSubmit()">提交</el-button>
+        <el-button type="primary" size="mini" style="width: 290px;" @click="onSubmit()">提&nbsp;&nbsp;&nbsp;&nbsp;交</el-button>
       </div>
     </el-main>
   </el-container>

@@ -1,22 +1,4 @@
 <script type='text/javascript'>
-  let firstList = []
-  let menuList = []
-
-  let setFirstList = function(list){
-    firstList = list
-  }
-
-  let getFirstList = function(){
-    return firstList
-  }
-
-  let setMenuList = function(list){
-    menuList = list
-  }
-
-  let getMenuList = function(){
-    return menuList
-  }
 
   /**
    * 判断登录是否失效
@@ -24,7 +6,8 @@
    * @returns {boolean}
    */
   let checkLogin = function (that) {
-    if (that.$cookies.get('manager_info') === '' || that.$cookies.get('manager_info') === null) {
+    let userInfo = that.$cookies.get('user_info')
+    if (userInfo === 'null' || userInfo === null) {
       return false
     }
     return true
@@ -235,10 +218,6 @@
   }
 
   export default {
-    setFirstList,
-    getFirstList,
-    setMenuList,
-    getMenuList,
     checkLogin,
     exitLoad,
     validate,

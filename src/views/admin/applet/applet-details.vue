@@ -53,7 +53,7 @@
             </el-form-item>
           </el-form>
           <div class="demo-image__preview applet-details-logo">
-            <el-image :src="'api\\' + info.appletLogo" :preview-src-list="logoList"></el-image>
+            <el-image :src="'api\\' + info.appletLogo" :preview-src-list="imgList"></el-image>
             <div style="color: #D9D9D9;font-size: 14px;">点击图片查看大图</div>
           </div>
         </el-tab-pane>
@@ -70,7 +70,7 @@
             </el-form-item>
           </el-form>
           <div class="demo-image__preview applet-details-logo">
-            <el-image :src="'api\\' + info.licenseSrc" :preview-src-list="licenseList"></el-image>
+            <el-image :src="'api\\' + info.licenseSrc" :preview-src-list="imgList"></el-image>
             <div style="color: #D9D9D9;font-size: 14px;">点击图片查看大图</div>
           </div>
         </el-tab-pane>
@@ -125,8 +125,7 @@
         loading: false,
         editableTabsValue: 'basics',
         info: {},
-        logoList: [],
-        licenseList: [],
+        imgList: [],
         auditResult: this.$cookies.get('auditResult'),
         auditForm: {
           appletId: '',
@@ -160,8 +159,8 @@
           console.info('后台返回的数据', res.data)
           if (res.data.code === '1') {
             this.info = res.data.data
-            this.logoList.push('api\\' + this.info.appletLogo)
-            this.licenseList.push('api\\' + this.info.licenseSrc)
+            this.imgList.push('api\\' + this.info.appletLogo)
+            this.imgList.push('api\\' + this.info.licenseSrc)
             this.auditForm.appletId = this.info.id
           } else if (res.data.code === "-1") {
             this.$message.error(res.data.data)

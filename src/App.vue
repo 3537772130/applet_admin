@@ -51,6 +51,6 @@
   }
 
   .el-dialog > .el-dialog__body {
-    padding: 0px 20px;
+    padding: 0px 20px 20px 20px;
   }
 </style>

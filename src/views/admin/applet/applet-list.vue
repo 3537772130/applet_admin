@@ -15,41 +15,41 @@
           <el-input v-model="info.appletCode" placeholder="请输入小程序编码" class="applet-input"></el-input>
         </el-form-item>
         <el-form-item label="名称" prop="appletName">
-          <el-input v-model="info.appletName" placeholder="输入小程序名称" class="applet-input"></el-input>
+          <el-input v-model="info.appletName" placeholder="请输入小程序名称" class="applet-input"></el-input>
         </el-form-item>
         <el-form-item label="用户手机" prop="mobile">
-          <el-input type="number" v-model="info.mobile" placeholder="输入用户手机号码" class="applet-input"></el-input>
+          <el-input type="number" v-model="info.mobile" placeholder="请输入用户手机号码" class="applet-input"></el-input>
         </el-form-item>
         <el-form-item label="营业类型" prop="ifRetail">
-          <el-select v-model="info.ifRetail" placeholder="选择营业类型" class="applet-input">
+          <el-select v-model="info.ifRetail" placeholder="请选择营业类型" class="applet-input">
             <el-option label="全部" value=''></el-option>
             <el-option label="批发" value="1"></el-option>
             <el-option label="零售" value="0"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="营业状态" prop="ifSelling">
-          <el-select v-model="info.ifSelling" placeholder="选择营业状态" class="applet-input">
+          <el-select v-model="info.ifSelling" placeholder="请选择营业状态" class="applet-input">
             <el-option label="全部" value=''></el-option>
             <el-option label="正在营业" value="1"></el-option>
             <el-option label="暂停营业" value="0"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="省份" prop="province">
-          <el-select v-model="info.province" placeholder="选择省份" class="applet-input" @change="selectProvince">
+          <el-select v-model="info.province" placeholder="请选择省份" class="applet-input" @change="selectProvince">
             <el-option label="全部" value=''></el-option>
             <el-option v-for="(prov, index) in provList" :key="index" :label="prov.areaName"
                        :value="prov.areaName"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="城市" prop="city">
-          <el-select v-model="info.city" placeholder="选择城市" class="applet-input" @change="selectCity">
+          <el-select v-model="info.city" placeholder="请选择城市" class="applet-input" @change="selectCity">
             <el-option label="全部" value=''></el-option>
             <el-option v-for="(city, index) in cityList" :key="index" :label="city.areaName"
                        :value="city.areaName"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="区/县" prop="county">
-          <el-select v-model="info.county" placeholder="选择区/县" class="applet-input">
+          <el-select v-model="info.county" placeholder="请选择区/县" class="applet-input">
             <el-option label="全部" value=''></el-option>
             <el-option v-for="(county, index) in countyList" :key="index" :label="county.areaName"
                        :value="county.areaName"></el-option>
