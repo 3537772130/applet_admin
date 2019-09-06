@@ -37,7 +37,7 @@
       <div v-if="item.name === 'queryManagerRoleToPage'" class="tab-div-content-page">
         <RoleList></RoleList>
       </div>
-      <div v-if="item.name === 'queryManagerInfoToPage'" class="tab-div-content-page">
+      <div v-if="item.name === 'queryManagerToPage'" class="tab-div-content-page">
         <ManagerList></ManagerList>
       </div>
       <div v-if="item.name === 'queryAppletToPage'" class="tab-div-content-page">

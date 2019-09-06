@@ -52,17 +52,17 @@
     <el-main :style="contentStyle">
       <div class="login-div">
         <div class="form-div">
-          <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="80px" class="login-form">
+          <el-form :model="loginForm" :rules="rules" ref="loginForm" label-width="80px" class="login-form">
             <el-form-item prop="userName">
               <el-input class="input-div" placeholder="请输入账户名" prefix-icon="el-icon-user"
-                        v-model="ruleForm.userName"></el-input>
+                        v-model="loginForm.userName"></el-input>
             </el-form-item>
             <el-form-item prop="password">
               <el-input type="password" class="input-div" placeholder="请输入密码" prefix-icon="el-icon-lock"
-                        v-model="ruleForm.password" show-password></el-input>
+                        v-model="loginForm.password" show-password></el-input>
             </el-form-item>
             <el-form-item>
-              <el-button type="primary" @click="onSubmit('ruleForm')" style="letter-spacing: 5px;">立即登录</el-button>
+              <el-button type="primary" @click="onSubmit()" @keyup.enter="onSubmit()" style="letter-spacing: 5px;">立即登录</el-button>
             </el-form-item>
           </el-form>
         </div>
@@ -84,7 +84,7 @@
           'background-repeat': 'no-repeat',
           'background-size': 'cover',
         },
-        ruleForm: {
+        loginForm: {
           userName: 'admin',
           password: '123456'
         },
@@ -106,18 +106,18 @@
     },
     methods: {
       onSubmit(name) {
-        this.$refs[name].validate((valid) => {
+        this.$refs['loginForm'].validate((valid) => {
           if (valid) {
             let loading = Loading.service({fullscreen: true, text: '正在登录'})
             this.$axios({
               url: '/api/manage/doLogin',
               method: 'post',
-              data: this.ruleForm
+              data: this.loginForm
             }).then(res => {
               console.info('后台返回的数据', res.data)
               if (res.data.code === '1') {
                 let info = res.data.data
-                if (info.avatarUrl === null || info.avatarUrl === ''){
+                if (info.avatarUrl === null || info.avatarUrl === 'null'){
                   info.avatarUrl = '/static/images/default-avatar.jpeg'
                 }
                 this.$cookies.set('manager_info', info, 3600)

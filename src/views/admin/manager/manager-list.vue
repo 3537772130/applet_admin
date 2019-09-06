@@ -195,7 +195,7 @@
       loadManagerList() {
         this.loading = true
         this.$axios({
-          url: '/api/manage/loadManagerList',
+          url: '/api/manage/manager/loadManagerList',
           method: 'post',
         }).then(res => {
           console.info('后台返回的数据', res.data)
@@ -238,7 +238,7 @@
       onSubmit() {
         this.loading = true
         this.$axios({
-          url: '/api/manage/queryManagerInfoToPage',
+          url: '/api/manage/manager/queryManagerToPage',
           method: 'post',
           data: this.info
         }).then(res => {

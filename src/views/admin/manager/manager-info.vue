@@ -156,7 +156,7 @@
         if (managerId){
           this.loading = true
           this.$axios({
-            url: '/api/manage/getManagerInfo',
+            url: '/api/manage/manager/getManagerInfo',
             method: 'post',
             data: {id: managerId}
           }).then(res => {
@@ -209,7 +209,7 @@
           if (valid) {
             let loading = Loading.service({fullscreen: true, text: '正在提交'})
             this.$axios({
-              url: '/api/manage/UpdateManagerInfo',
+              url: '/api/manage/manager/UpdateManagerInfo',
               method: 'post',
               data: this.managerForm
             }).then(res => {

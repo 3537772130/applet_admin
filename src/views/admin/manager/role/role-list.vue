@@ -120,7 +120,7 @@
       onSubmit() {
         this.loading = true
         this.$axios({
-          url: '/api/manage/queryManagerRoleToPage',
+          url: '/api/manage/manager/queryManagerRoleToPage',
           method: 'post',
           data: this.info
         }).then(res => {

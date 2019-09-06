@@ -65,7 +65,7 @@
           this.roleForm.id = roleId
           this.loading = true
           this.$axios({
-            url: '/api/manage/getManagerRole',
+            url: '/api/manage/manager/getManagerRole',
             method: 'post',
             data: {id: roleId}
           }).then(res => {
@@ -90,7 +90,7 @@
           if (valid) {
             let loading = Loading.service({fullscreen: true, text: '正在提交'})
             this.$axios({
-              url: '/api/manage/updateManagerRole',
+              url: '/api/manage/manager/updateManagerRole',
               method: 'post',
               data: this.roleForm
             }).then(res => {
