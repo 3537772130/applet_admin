@@ -47,7 +47,8 @@
         <el-table-column align="center" prop="updateDate" label="更新日期" width="180"></el-table-column>
         <el-table-column align="center" prop="status" label="状态" width="180">
           <template slot-scope="scope">
-            {{scope.row.status ? '正常':'禁用'}}
+            <el-link type="success" :underline="false" v-if="scope.row.status">正常</el-link>
+            <el-link type="danger" :underline="false" v-if="!scope.row.status">禁用</el-link>
           </template>
         </el-table-column>
         <el-table-column align="center" label="操作" width="180">

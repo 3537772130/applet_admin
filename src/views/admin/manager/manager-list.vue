@@ -113,7 +113,8 @@
         <el-table-column align="center" prop="createDate" label="创建日期" width="90"></el-table-column>
         <el-table-column align="center" prop="status" :show-overflow-tooltip="true" label="状态" width="50">
           <template slot-scope="scope">
-            {{scope.row.status ? '正常':'禁用'}}
+            <el-link type="success" :underline="false" v-if="scope.row.status">正常</el-link>
+            <el-link type="danger" :underline="false" v-if="!scope.row.status">禁用</el-link>
           </template>
         </el-table-column>
         <el-table-column align="center" fixed="right" label="操作">

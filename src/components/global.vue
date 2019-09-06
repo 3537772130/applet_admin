@@ -28,17 +28,16 @@
     }
     if (data === '') {
       that.$message.error('当前访问人数过多，请稍后再试')
-    } else if (data.code === '0') {
+    } else if (data.code === '0' || data.code === '-2') {
+      let msg = data.code === '0' ? '登录过期，请重新登录':'没有访问权限！'
       that.$message({
-        message: '登录过期，请重新登录',
+        message: msg,
         type: 'error',
         onClose: function () {
           that.$cookies.remove('manager_info')
           that.$router.push({path: '/'})
         }
       })
-    } else if (data.code === '-2'){
-      that.$message.error('没有访问权限！')
     } else {
       let managerInfo = that.$cookies.get('manager_info')
       that.$cookies.set('manager_info', managerInfo, 3600)

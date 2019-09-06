@@ -9,7 +9,7 @@
   }
 
   .menu-tree-title {
-    width: 1200px;
+    width: 1300px;
     text-align: left;
     flex: none;
   }
@@ -21,7 +21,7 @@
   }
 
   .menu-tree {
-    width: 1200px;
+    width: 1300px;
   }
 
   .menu-tree .el-tree-node__content{
@@ -52,6 +52,7 @@
             <td style="width: 400px;">菜单路径</td>
             <td style="width: 100px;">菜单等级</td>
             <td style="width: 100px;">菜单序号</td>
+            <td style="width: 100px;">菜单状态</td>
             <td style="width: 210px;">操作</td>
           </tr>
         </table>
@@ -76,6 +77,12 @@
                 '二级':data.level === 3 ? '三级':'' }}
               </span>
               <span style="width: 100px; text-align: center;">{{ data.index }}</span>
+              <span style="width: 100px; text-align: center;">
+                <div v-if="data.id != 0">
+                  <el-link type="success" :underline="false" v-if="data.status">正常</el-link>
+                  <el-link type="danger" :underline="false" v-if="!data.status">禁用</el-link>
+                </div>
+              </span>
               <span style="width: 210px; text-align: center;">
                 <el-button type="primary" plain @click="update('0', data.id)" v-if="data.level != 3">添加子级</el-button>
                 <el-button type="warning" plain @click="update(data.id, data.parentId)" v-if="data.level != 0">修改</el-button>
