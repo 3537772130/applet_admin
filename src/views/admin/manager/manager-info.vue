@@ -174,8 +174,7 @@
               this.changeRole()
             }
             this.$cookies.remove('managerId')
-            this.loading = false
-            // this.$global.selectRegionJson(this)
+            this.$global.exitLoad(this, null, res.data)
           }).catch(error => {
             console.info('错误信息', error)
             this.$global.exitLoad(this, null, '')
@@ -209,7 +208,7 @@
           if (valid) {
             let loading = Loading.service({fullscreen: true, text: '正在提交'})
             this.$axios({
-              url: '/api/manage/manager/UpdateManagerInfo',
+              url: '/api/manage/manager/updateManagerInfo',
               method: 'post',
               data: this.managerForm
             }).then(res => {

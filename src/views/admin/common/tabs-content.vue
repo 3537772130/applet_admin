@@ -40,6 +40,9 @@
       <div v-if="item.name === 'queryManagerToPage'" class="tab-div-content-page">
         <ManagerList></ManagerList>
       </div>
+      <div v-if="item.name === 'loadManagerInfo'" class="tab-div-content-page">
+        <ManagerDetails ref="ManagerDetails" v-on:updateInfo="updateInfo"></ManagerDetails>
+      </div>
       <div v-if="item.name === 'queryAppletToPage'" class="tab-div-content-page">
         <AppletList></AppletList>
       </div>
@@ -65,6 +68,7 @@
 <script>
   import RoleList from '@/views/admin/manager/role/role-list.vue'
   import ManagerList from '@/views/admin/manager/manager-list.vue'
+  import ManagerDetails from '@/views/admin/manager/manager-details.vue'
   import AppletList from '@/views/admin/applet/applet-list.vue'
   import AppletAuditFirstList from '@/views/admin/applet/applet-audit-first-list.vue'
   import AppletAuditLastList from '@/views/admin/applet/applet-audit-last-list.vue'
@@ -77,6 +81,7 @@
     components: {
       'RoleList': RoleList,
       'ManagerList': ManagerList,
+      'ManagerDetails': ManagerDetails,
       'AppletList': AppletList,
       'AppletAuditFirstList': AppletAuditFirstList,
       'AppletAuditLastList': AppletAuditLastList,
