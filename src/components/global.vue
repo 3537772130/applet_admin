@@ -216,12 +216,41 @@
     })
   }
 
+  let baseToGet = function (obj) {
+    let str = JSON.stringify(obj)
+    let dataStr = ''
+    for (let i = 0;i < str.length;i++){
+      switch (str[i]) {
+        case '{':
+          dataStr += ''
+          break
+        case '}':
+          dataStr += ''
+          break
+        case '\"':
+          dataStr += ''
+          break
+        case ':':
+          dataStr += '='
+          break
+        case ',':
+          dataStr += '&'
+          break
+        default:
+          dataStr += str[i]
+          break
+      }
+    }
+    return dataStr
+  }
+
   export default {
     checkLogin,
     exitLoad,
     validate,
     setTableHeight,
     selectRegionJson,
-    selectRegionList
+    selectRegionList,
+    baseToGet
   }
 </script>

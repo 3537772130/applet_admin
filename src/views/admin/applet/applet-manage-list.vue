@@ -68,6 +68,9 @@
         <el-form-item>
           <el-button type="warning" @click="resetForm('queryAppletForm')">重置</el-button>
         </el-form-item>
+        <el-form-item>
+          <el-button type="success" @click="exportExcel()">导出</el-button>
+        </el-form-item>
         <div style="display: none;">
           <el-input v-model="info.page" type="hidden"></el-input>
           <el-input v-model="info.pageSize" type="hidden"></el-input>
@@ -287,6 +290,9 @@
             this.$global.exitLoad(this, loading, res.data)
           })
         })
+      },
+      exportExcel(){
+        window.open('http://localhost:8080/api/manage/excel/exportAppletList?' + this.$global.baseToGet(this.info))
       }
     }
   }
