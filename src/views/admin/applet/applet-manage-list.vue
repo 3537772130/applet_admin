@@ -114,6 +114,10 @@
           <template slot-scope="scope">
             <el-button type="primary" plain size="mini" @click="loadDetails(scope.row.id, scope.row.appletName)">详情
             </el-button>
+            <el-button type="danger" plain size="mini" @click="updateStatus(scope.row.id, scope.row.appletName, -1)"
+                       v-if="scope.row.status == 1">禁用</el-button>
+            <el-button type="success" plain size="mini" @click="updateStatus(scope.row.id, scope.row.appletName, 1)"
+                       v-if="scope.row.status == -1">启用</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -136,10 +140,11 @@
   </el-container>
 </template>
 <script type="text/javascript">
+  import {Loading} from 'element-ui'
   import appletDetails from '@/views/admin/applet/applet-details.vue'
 
   export default {
-    name: 'applet-list',
+    name: 'applet-manage-list',
     components: {
       'appletDetails': appletDetails
     },
@@ -209,7 +214,7 @@
       onSubmit() {
         this.loading = true
         this.$axios({
-          url: '/api/manage/applet/queryAppletToPage',
+          url: '/api/manage/applet/queryAppletManageToPage',
           method: 'post',
           data: this.info
         }).then(res => {
@@ -251,6 +256,37 @@
       },
       setAppletId() {
         this.selectList()
+      },
+      updateStatus(id, name, status){
+        let content = ''
+        let lod = ''
+        if (status === 1){
+          content = '确定启用小程序吗？'
+          lod = '启用'
+        } else {
+          content = '确定禁用小程序吗？'
+          lod = '禁用'
+        }
+        this.$confirm(content, name, {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          let loading = Loading.service({fullscreen: true, text: '正在' + lod})
+          this.$axios({
+            url: '/api/manage/applet/updateAppletStatus',
+            method: 'post',
+            data: {id: id,status: status}
+          }).then(res => {
+            if (res.data.code === '1') {
+              this.onSubmit()
+              this.$message.success(lod + '成功')
+            } else {
+              this.$message.error(lod + '失败')
+            }
+            this.$global.exitLoad(this, loading, res.data)
+          })
+        })
       }
     }
   }

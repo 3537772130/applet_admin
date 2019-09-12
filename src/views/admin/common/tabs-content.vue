@@ -46,6 +46,9 @@
       <div v-if="item.name === 'queryAppletToPage'" class="tab-div-content-page">
         <AppletList></AppletList>
       </div>
+      <div v-if="item.name === 'queryAppletManageToPage'" class="tab-div-content-page">
+        <AppletManageList></AppletManageList>
+      </div>
       <div v-if="item.name === 'queryAppletAuditToFirstTrial'" class="tab-div-content-page">
         <AppletAuditFirstList></AppletAuditFirstList>
       </div>
@@ -70,6 +73,7 @@
   import ManagerList from '@/views/admin/manager/manager-list.vue'
   import ManagerDetails from '@/views/admin/manager/manager-details.vue'
   import AppletList from '@/views/admin/applet/applet-list.vue'
+  import AppletManageList from '@/views/admin/applet/applet-manage-list.vue'
   import AppletAuditFirstList from '@/views/admin/applet/applet-audit-first-list.vue'
   import AppletAuditLastList from '@/views/admin/applet/applet-audit-last-list.vue'
   import MenuList from '@/views/admin/menu/menu-list.vue'
@@ -83,6 +87,7 @@
       'ManagerList': ManagerList,
       'ManagerDetails': ManagerDetails,
       'AppletList': AppletList,
+      'AppletManageList': AppletManageList,
       'AppletAuditFirstList': AppletAuditFirstList,
       'AppletAuditLastList': AppletAuditLastList,
       'MenuList': MenuList,

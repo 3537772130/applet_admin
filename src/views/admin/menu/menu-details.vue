@@ -63,7 +63,7 @@
         </el-form-item>
         <br>
         <el-form-item label=" ">
-          <el-button type="primary" @click="onSubmit('menuForm')" class="menu-input">提交</el-button>
+          <el-button type="primary" @click="onSubmit('menuForm')" class="menu-input" style="text-align: center;">提交</el-button>
         </el-form-item>
       </el-form>
     </el-main>
