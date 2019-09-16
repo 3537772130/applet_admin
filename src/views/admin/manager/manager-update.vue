@@ -250,7 +250,7 @@
                   type: 'success',
                   onClose: function () {
                     that.$axios({
-                      url: '/api/exitLogin',
+                      url: '/api/manage/exitLogin',
                       method: 'post'
                     }).then(re => {
                       if (re.data.code === '1') {
