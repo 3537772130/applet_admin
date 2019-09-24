@@ -7,7 +7,13 @@
   <div>
     <el-main v-loading="loading" element-loading-text="加载中" style="background-color: #FFFFFF;">
       <el-form :rules="fileRules" :inline="true" :model="fileForm" ref="fileForm" class="demo-form-inline">
-        <el-form-item label="文件版本" prop="fileName">
+        <el-form-item label="服务类型" prop="typeId">
+          <el-select v-model="fileForm.typeId" placeholder="请选择服务类型" class="applet-file-input">
+            <el-option label="请选择" value=""></el-option>
+            <el-option v-for="(item, index) in typeList" :key="index" :label="item.typeName" :value="item.id"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="文件版本" prop="versionNumber">
           <el-input v-model="fileForm.versionNumber" maxlength="15" placeholder="请输入文件版本"
                     class="applet-file-input"></el-input>
         </el-form-item>
@@ -19,7 +25,7 @@
         </el-form-item>
         <br>
         <el-form-item label=" ">
-          <el-button file="primary" @click="onSubmit()" class="applet-file-input">提交</el-button>
+          <el-button type="primary" @click="onSubmit()" class="applet-file-input">提交</el-button>
         </el-form-item>
       </el-form>
     </el-main>
@@ -30,32 +36,35 @@
 
   export default {
     name: 'applet-file',
-    data() {
+    data () {
       return {
         loading: false,
+        typeList: [],
         fileForm: {
-          id: '',
-          fileName: '',
+          typeId: '',
+          versionNumber: '',
           fileStatus: '1'
         },
         fileRules: {
-          roleName: [
-            {required: true, message: '请输入类型名称', trigger: 'blur'},
-            {file: 'string', min: 1, max: 15, message: '类型名称长度为1-15个字符', trigger: 'blur'}
+          typeId: [
+            {required: true, message: '请输入文件版本', trigger: 'blur'}
+          ],
+          versionNumber: [
+            {required: true, message: '请输入文件版本', trigger: 'blur'},
+            {file: 'string', min: 1, max: 20, message: '文件版本长度为1-20个字符', trigger: 'blur'}
           ]
         }
       }
     },
-    created() {
+    created () {
       let fileId = this.$cookies.get('applet_file_id')
-      this.loadAppletType(fileId)
+      this.loadAppletFile(fileId)
     },
-    mounted() {
+    mounted () {
     },
     methods: {
-      loadAppletType(fileId) {
+      loadAppletFile (fileId) {
         if (fileId) {
-          this.fileForm.id = fileId
           this.loading = true
           this.$axios({
             url: '/api/manage/applet/loadAppletFile',
@@ -63,13 +72,12 @@
             data: {id: fileId}
           }).then(res => {
             if (res.data.code === '1') {
-              this.fileForm = res.data.data
+              this.fileForm = res.data.data.info
               this.fileForm.fileStatus = this.fileForm.fileStatus ? '1' : '0'
               delete this.fileForm.updateTime
               delete this.fileForm.filePath
-            } else if (res.data.code === "-1") {
-              this.$message.error(res.data.data)
             }
+            this.typeList = res.data.data.typeList
             this.$cookies.remove('applet_file_id')
             fileId = null
             this.$global.exitLoad(this, null, res.data)
@@ -79,12 +87,12 @@
           })
         }
       },
-      onSubmit() {
+      onSubmit () {
         this.$refs['fileForm'].validate((valid) => {
           if (valid) {
             let loading = Loading.service({fullscreen: true, text: '正在提交'})
             this.$axios({
-              url: '/api/manage/applet/updateAppletType',
+              url: '/api/manage/applet/updateAppletFile',
               method: 'post',
               data: this.fileForm
             }).then(res => {

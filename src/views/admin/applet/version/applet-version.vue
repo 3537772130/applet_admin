@@ -1,33 +1,31 @@
 <style version="text/css">
   .applet-version-input {
     width: 290px;
+    text-align: left;
   }
 </style>
 <template>
   <div>
     <el-main v-loading="loading" element-loading-text="加载中" style="background-color: #FFFFFF;">
       <el-form :rules="versionRules" :inline="true" :model="versionForm" ref="versionForm" class="demo-form-inline">
-        <el-form-item label="程序编码" prop="appletCode">
-          <el-input v-model="versionForm.appletCode" maxlength="15" placeholder="输入程序编码"
-                    class="applet-version-input"></el-input>
+        <el-form-item label="程序编码">
+          <div class="applet-version-input">{{info.appletCode}}</div>
         </el-form-item>
-        <el-form-item label="程序名称" prop="appletName">
-          <el-input v-model="versionForm.appletName" maxlength="15" placeholder="输入程序名称"
-                    class="applet-version-input"></el-input>
+        <el-form-item label="程序名称">
+          <div class="applet-version-input">{{info.appletName}}</div>
         </el-form-item>
-        <el-form-item label="类型状态" prop="versionStatus">
-          <el-select v-model="versionForm.versionStatus" placeholder="选择类型状态" class="applet-version-input">
-            <el-option label="正常" value="1"></el-option>
-            <el-option label="禁用" value="0"></el-option>
+        <el-form-item label="服务类型">
+          <div class="applet-version-input">{{info.typeName}}</div>
+        </el-form-item>
+        <el-form-item label="文件版本" prop="fileId">
+          <el-select v-model="versionForm.fileId" placeholder="选择文件版本" class="applet-version-input">
+            <el-option label="请选择" value=""></el-option>
+            <el-option v-for="(item, index) in fileList" :key="index" :label="item.versionNumber" :value="item.id"></el-option>
           </el-select>
-        </el-form-item>
-        <el-form-item label="文件版本" prop="versionName">
-          <el-input v-model="versionForm.versionName" maxlength="15" placeholder="输入文件版本"
-                    class="applet-version-input"></el-input>
         </el-form-item>
         <br>
         <el-form-item label=" ">
-          <el-button version="primary" @click="onSubmit()" class="applet-version-input">提交</el-button>
+          <el-button type="primary" @click="onSubmit()" class="applet-version-input" style="text-align: center;">提交</el-button>
         </el-form-item>
       </el-form>
     </el-main>
@@ -41,41 +39,40 @@
     data() {
       return {
         loading: false,
+        fileList: [],
+        info: {},
         versionForm: {
           id: '',
-          versionName: '',
-          versionStatus: '1'
+          fileId: ''
         },
         versionRules: {
-          roleName: [
-            {required: true, message: '请输入文件版本', trigger: 'blur'},
-            {version: 'string', min: 1, max: 15, message: '文件版本长度为1-15个字符', trigger: 'blur'}
+          fileId: [
+            {required: true, message: '请选择文件版本', trigger: 'blur'}
           ]
         }
       }
     },
     created() {
       let versionId = this.$cookies.get('applet_version_id')
-      this.loadAppletType(versionId)
+      this.loadAppletVersion(versionId)
     },
     mounted() {
     },
     methods: {
-      loadAppletType(versionId) {
+      loadAppletVersion(versionId) {
         if (versionId) {
-          this.versionForm.id = versionId
           this.loading = true
           this.$axios({
-            url: '/api/manage/applet/loadAppletType',
+            url: '/api/manage/applet/loadAppletVersion',
             method: 'post',
             data: {id: versionId}
           }).then(res => {
+            this.fileList = res.data.data.list
             if (res.data.code === '1') {
-              this.versionForm = res.data.data
-              this.versionForm.versionStatus = this.versionForm.versionStatus ? '1' : '0'
-              delete this.versionForm.updateTime
-            } else if (res.data.code === "-1") {
-              this.$message.error(res.data.data)
+              this.info = res.data.data.info
+              this.versionForm.id = this.info.id
+              this.versionForm.fileId = this.info.fileId
+              this.versionForm.versionId = this.info.versionId
             }
             this.$cookies.remove('applet_version_id')
             versionId = null
@@ -91,7 +88,7 @@
           if (valid) {
             let loading = Loading.service({fullscreen: true, text: '正在提交'})
             this.$axios({
-              url: '/api/manage/applet/updateAppletType',
+              url: '/api/manage/applet/updateAppletVersion',
               method: 'post',
               data: this.versionForm
             }).then(res => {

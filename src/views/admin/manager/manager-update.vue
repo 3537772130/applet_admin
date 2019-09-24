@@ -275,7 +275,7 @@
         })
       },
       handleAvatarSuccess(res, file) {
-        if (res.data === '1') {
+        if (res.code === '1') {
           this.info = this.$cookies.get('manager_info')
           this.info.avatarUrl = URL.createObjectURL(file.raw)
           this.$cookies.set('manager_info', this.info)
