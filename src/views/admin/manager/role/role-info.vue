@@ -45,10 +45,10 @@
         roleRules: {
           roleName: [
             {required: true, message: '请输入角色名称', trigger: 'blur'},
-            {type: 'string', min: 1, max: 20, message: '账号长度为1-20个字符', trigger: 'blur'}
+            {type: 'string', min: 1, max: 20, message: '角色名称长度为1-20个字符', trigger: 'blur'}
           ],
           describeStr: [
-            {type: 'string', max: 150, message: '账号长度不能超过150个字符', trigger: 'blur'}
+            {type: 'string', max: 150, message: '角色描述长度不能超过150个字符', trigger: 'blur'}
           ]
         }
       }

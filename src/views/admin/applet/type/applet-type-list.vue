@@ -1,36 +1,32 @@
 <style type="text/css">
-  role-form {
+  applet-type-form {
     text-align: left;
   }
 
-  .role-form .el-select {
+  .applet-type-form .el-select {
     width: 190px;
   }
 
-  .role-dialog .el-dialog {
+  .applet-type-dialog .el-dialog {
     width: 450px;
-  }
-
-  .role-auth-dialog .el-dialog {
-    width: 1000px;
   }
 </style>
 <template>
   <el-container>
     <el-main v-loading="loading" element-loading-text="加载中" style="background-color: #FFFFFF;padding-top: 20px;">
-      <el-form id="role-form" :inline="true" :model="info" class="demo-form-inline role-form" style="text-align: left;">
-        <el-form-item label="角色名称">
-          <el-input v-model="info.roleName" placeholder="请输入角色名称"></el-input>
+      <el-form id="applet-type-form" :inline="true" :model="info" class="demo-form-inline applet-type-form" style="text-align: left;">
+        <el-form-item label="类型名称">
+          <el-input v-model="info.typeName" placeholder="请输入类型名称"></el-input>
         </el-form-item>
-        <el-form-item label="角色状态">
-          <el-select v-model="info.status" placeholder="选择状态" style="width: 200px;">
+        <el-form-item label="类型状态">
+          <el-select v-model="info.typeStatus" placeholder="选择类型状态" style="width: 200px;">
             <el-option label="全部" value=''></el-option>
             <el-option label="正常" value="1"></el-option>
             <el-option label="禁用" value="0"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="selectRoleList">查询</el-button>
+          <el-button type="primary" @click="selectList">查询</el-button>
         </el-form-item>
         <el-form-item>
           <el-button type="success" @click="updateInfo('0')">添加</el-button>
@@ -42,18 +38,16 @@
       </el-form>
       <el-table :data="tableData" :height="tableHeight" stripe style="width: 100%">
         <el-table-column align="center" type="index" :index="indexMethod" label="序号" width="80"></el-table-column>
-        <el-table-column align="center" prop="roleName" label="角色名称" width="100"></el-table-column>
-        <el-table-column align="center" prop="describeStr" label="描述"></el-table-column>
-        <el-table-column align="center" prop="updateDate" label="更新日期" width="180"></el-table-column>
-        <el-table-column align="center" prop="status" label="状态" width="180">
+        <el-table-column align="center" prop="typeName" label="类型名称" width="220"></el-table-column>
+        <el-table-column align="center" prop="updateTime" label="更新日期" width="180"></el-table-column>
+        <el-table-column align="center" prop="typeStatus" label="类型状态" width="180">
           <template slot-scope="scope">
-            <el-link type="success" :underline="false" v-if="scope.row.status">正常</el-link>
-            <el-link type="danger" :underline="false" v-if="!scope.row.status">禁用</el-link>
+            <el-link type="success" :underline="false" v-if="scope.row.typeStatus">正常</el-link>
+            <el-link type="danger" :underline="false" v-if="!scope.row.typeStatus">禁用</el-link>
           </template>
         </el-table-column>
-        <el-table-column align="center" label="操作" width="180">
+        <el-table-column align="center" label="操作">
           <template slot-scope="scope">
-            <el-button type="primary" plain size="mini" @click="updateAuth(scope.row.id, scope.row.roleName)">设置权限</el-button>
             <el-button type="warning" plain size="mini" @click="updateInfo(scope.row.id)">修改</el-button>
           </template>
         </el-table-column>
@@ -67,26 +61,20 @@
           :total="total">
         </el-pagination>
       </div>
-      <el-dialog :title="showTitle" :visible.sync="showInfo" class="role-dialog" :modal-append-to-body="false"
+      <el-dialog :title="showTitle" :visible.sync="showInfo" class="applet-type-dialog" :modal-append-to-body="false"
                  :close-on-click-modal="false" :destroy-on-close="true">
-        <roleInfo ref="roleInfo" v-on:setRoleId="setRoleId"></roleInfo>
-      </el-dialog>
-      <el-dialog :title="showName" :visible.sync="showAuth" class="role-auth-dialog" :modal-append-to-body="false"
-                 :close-on-click-modal="false" :destroy-on-close="true">
-        <roleAuth ref="roleAuth" v-on:loadMenuList="loadMenuList"></roleAuth>
+        <AppletType ref="AppletType" v-on:refreshSet="refreshSet"></AppletType>
       </el-dialog>
     </el-main>
   </el-container>
 </template>
 <script type="text/javascript">
-  import roleInfo from '@/views/admin/manager/role/role-info.vue'
-  import roleAuth from '@/views/admin/manager/role/role-auth.vue'
+  import AppletType from '@/views/admin/applet/type/applet-type.vue'
 
   export default {
-    name: 'role-list',
+    name: 'applet-type-list',
     components: {
-      'roleInfo': roleInfo,
-      'roleAuth': roleAuth
+      'AppletType': AppletType
     },
     data() {
       return {
@@ -94,14 +82,11 @@
         tableHeight: 50,
         showInfo: false,
         showTitle: '',
-        showAuth: false,
-        showName: '',
-        roleId: '',
         currentPage: 1,
         total: 0,
         info: {
-          roleName: '',
-          status: '',
+          typeName: '',
+          typeStatus: '',
           page: 1,
           pageSize: 15
         },
@@ -121,12 +106,12 @@
       onSubmit() {
         this.loading = true
         this.$axios({
-          url: '/api/manage/manager/queryManagerRoleToPage',
+          url: '/api/manage/applet/queryAppletTypePage',
           method: 'post',
           data: this.info
         }).then(res => {
           console.info('后台返回的数据', res.data)
-          this.$global.setTableHeight(this, 'role-form')
+          this.$global.setTableHeight(this, 'applet-type-form')
           if (res.data.code === '1') {
             this.tableData = res.data.data.dataSource
             this.total = res.data.data.totalCount
@@ -139,7 +124,7 @@
           this.$global.exitLoad(this, null, '')
         })
       },
-      selectRoleList() {
+      selectList() {
         this.info.page = 1
         this.onSubmit()
       },
@@ -147,35 +132,22 @@
         this.info.page = val
         this.onSubmit()
       },
-      updateInfo(roleId) {
+      updateInfo(typeId) {
         this.showInfo = true
-        this.roleId = roleId
-        if (roleId && roleId != '0') {
-          this.showTitle = '修改角色信息'
+        if (typeId && typeId != '0') {
+          this.showTitle = '修改小程序服务类型信息'
         } else {
-          this.showTitle = '添加角色信息'
+          this.showTitle = '添加小程序服务类型信息'
         }
         try {
-          this.$refs.roleInfo.setRoleId(roleId)
+          this.$refs.AppletType.loadAppletType(typeId)
         } catch (e) {
-          this.$cookies.set('roleId', roleId)
+          this.$cookies.set('applet_type_id', typeId)
         }
       },
-      updateAuth(id, name){
-        try {
-          this.$refs.roleAuth.loadMenuList(id)
-        } catch (e) {
-          this.$cookies.set('roleAuthId', id)
-        }
-        this.showAuth = true
-        this.showName = name
-      },
-      setRoleId() {
+      refreshSet() {
         this.showInfo = false
-        this.selectRoleList()
-      },
-      loadMenuList(){
-        this.showAuth = false
+        this.selectList()
       }
     }
   }

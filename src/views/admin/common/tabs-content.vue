@@ -55,10 +55,18 @@
       <div v-if="item.name === 'queryAppletAuditToLastTrial'" class="tab-div-content-page">
         <AppletAuditLastList></AppletAuditLastList>
       </div>
+      <div v-if="item.name === 'queryAppletTypePage'" class="tab-div-content-page">
+        <AppletTypeList></AppletTypeList>
+      </div>
+      <div v-if="item.name === 'queryAppletFilePage'" class="tab-div-content-page">
+        <AppletFileList></AppletFileList>
+      </div>
+      <div v-if="item.name === 'queryAppletVersionPage'" class="tab-div-content-page">
+        <AppletVersionList></AppletVersionList>
+      </div>
       <div v-if="item.name === 'loadMenuList'" class="tab-div-content-page">
         <MenuList></MenuList>
       </div>
-
       <div v-if="item.name === 'queryUserToPage'" class="tab-div-content-page">
         <UserList></UserList>
       </div>
@@ -76,6 +84,9 @@
   import AppletManageList from '@/views/admin/applet/applet-manage-list.vue'
   import AppletAuditFirstList from '@/views/admin/applet/applet-audit-first-list.vue'
   import AppletAuditLastList from '@/views/admin/applet/applet-audit-last-list.vue'
+  import AppletTypeList from '@/views/admin/applet/type/applet-type-list.vue'
+  import AppletFileList from '@/views/admin/applet/file/applet-file-list.vue'
+  import AppletVersionList from '@/views/admin/applet/version/applet-version-list.vue'
   import MenuList from '@/views/admin/menu/menu-list.vue'
   import UserList from '@/views/admin/user/user-list.vue'
   import MerchantList from '@/views/admin/user/merchant-list.vue'
@@ -90,6 +101,9 @@
       'AppletManageList': AppletManageList,
       'AppletAuditFirstList': AppletAuditFirstList,
       'AppletAuditLastList': AppletAuditLastList,
+      'AppletTypeList': AppletTypeList,
+      'AppletFileList': AppletFileList,
+      'AppletVersionList': AppletVersionList,
       'MenuList': MenuList,
       'UserList': UserList,
       'MerchantList': MerchantList

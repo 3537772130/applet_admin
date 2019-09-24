@@ -94,6 +94,8 @@
             <span>{{scope.row.province + ',' + scope.row.city + ',' + scope.row.county}}</span>
           </template>
         </el-table-column>
+        <el-table-column align="center" prop="typeName" label="服务类型" :show-overflow-tooltip="true"
+                         width="120"></el-table-column>
         <el-table-column align="center" prop="ifRetail" label="营业类型" width="100">
           <template slot-scope="scope">
             <span v-if="scope.row.ifRetail">批发</span>

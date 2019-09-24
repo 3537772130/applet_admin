@@ -1,13 +1,26 @@
 <style type="text/css">
   .applet-details-tabs {
-    height: 320px;
+    height: 300px;
   }
 
   .applet-details-tabs .el-form-item__label {
     width: 100px;
   }
 
-  .applet-details-form .el-form-item__label {
+  .applet-details-form {
+    height: 255px;
+    text-align: left;
+    padding-top: 30px;
+  }
+
+  .applet-details-form .el-form-item {
+    margin-bottom: 0px;
+  }
+  .applet-details-form .el-form-item .el-form-item__content{
+    font-weight: bold;
+  }
+
+  .applet-audit-form .el-form-item__label {
     width: 100px;
   }
 
@@ -34,8 +47,8 @@
   <el-container>
     <el-main v-loading="loading" element-loading-text="加载中" style="background-color: #FFFFFF;">
       <el-tabs v-model="editableTabsValue" type="border-card" class="applet-details-tabs">
-        <el-tab-pane label="基础信息" name="basics" style="height: 400px;">
-          <el-form style=" height: 235px; text-align: left; padding-top: 30px;">
+        <el-tab-pane label="基础信息" name="basics" style="height: 420px;">
+          <el-form class="applet-details-form">
             <el-form-item label="编码" class="form-info-div">
               <span>{{info.appletCode}}</span>
             </el-form-item>
@@ -48,6 +61,9 @@
             <el-form-item label="联系电话" class="form-info-div">
               <span>{{info.telephone}}</span>
             </el-form-item>
+            <el-form-item label="服务类型" class="form-info-div">
+              <span>{{info.typeName}}</span>
+            </el-form-item>
             <el-form-item label="营业类型" class="form-info-div">
               <span>{{info.ifRetail ? '批发':'零售'}}</span>
             </el-form-item>
@@ -58,7 +74,7 @@
           </div>
         </el-tab-pane>
         <el-tab-pane label="营业信息" name="business" style="height: 400px;">
-          <el-form style="text-align: left; padding-top: 30px;">
+          <el-form class="applet-details-form">
             <el-form-item label="执照代码" class="form-info-div">
               <span>{{info.licenseCode}}</span>
             </el-form-item>
@@ -75,7 +91,7 @@
           </div>
         </el-tab-pane>
         <el-tab-pane label="管理信息" name="manage" style="height: 400px;">
-          <el-form style="text-align: left; padding-top: 30px;">
+          <el-form class="applet-details-form">
             <el-form-item label="管理账号" class="form-info-div">
               <span>{{info.managerAccount}}</span>
             </el-form-item>
@@ -91,11 +107,12 @@
           </el-form>
         </el-tab-pane>
       </el-tabs>
-      <div  v-if="auditResult == 1">
+      <div v-if="auditResult == 1">
         <el-form :model="auditForm" ref="auditForm" :rules="auditRules" :inline="true"
-                 style="text-align: left; padding-top: 30px;" class="applet-details-form">
+                 style="text-align: left; padding-top: 30px;" class="applet-audit-form">
           <el-form-item label="审核结果" prop="result">
-            <el-select v-model="auditForm.result" placeholder="请选择审核结果" class="applet-details-input" @change="changeResult">
+            <el-select v-model="auditForm.result" placeholder="请选择审核结果" class="applet-details-input"
+                       @change="changeResult">
               <el-option label="请选择" value=''></el-option>
               <el-option label="驳回" value="-1"></el-option>
               <el-option label="通过" value="1"></el-option>
@@ -173,8 +190,8 @@
           this.$global.exitLoad(this, null, '')
         })
       },
-      changeResult(){
-        if (this.auditForm.result == 1){
+      changeResult() {
+        if (this.auditForm.result == 1) {
           this.auditForm.remark = '审核通过，信息确认'
         }
       },
