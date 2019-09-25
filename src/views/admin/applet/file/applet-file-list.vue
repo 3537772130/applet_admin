@@ -11,21 +11,35 @@
     width: 450px;
   }
 
-  .applet-file-upload>div{
+  .applet-file-dialog .el-dialog > .el-dialog__body {
+    padding: 0px 0px;
+  }
+
+  .applet-file-page-dialog .el-dialog {
+    width: 980px;
+  }
+
+  .applet-file-page-dialog .el-dialog > .el-dialog__body {
+    padding: 0px 0px;
+  }
+
+  .applet-file-upload > div {
     display: inline-block;
   }
 </style>
 <template>
   <el-container>
     <el-main v-loading="loading" element-loading-text="加载中" style="background-color: #FFFFFF;padding-top: 20px;">
-      <el-form id="applet-file-form" :inline="true" :model="info" class="demo-form-inline applet-file-form" style="text-align: left;">
+      <el-form id="applet-file-form" :inline="true" :model="info" class="demo-form-inline applet-file-form"
+               style="text-align: left;">
         <el-form-item label="文件版本">
           <el-input v-model="info.versionNumber" placeholder="请输入文件版本"></el-input>
         </el-form-item>
         <el-form-item label="服务类型">
           <el-select v-model="info.typeId" placeholder="选择服务类型" style="width: 200px;">
             <el-option label="全部" value=""></el-option>
-            <el-option v-for="(item, index) in typeList" :key="index" :label="item.typeName" :value="item.id"></el-option>
+            <el-option v-for="(item, index) in typeList" :key="index" :label="item.typeName"
+                       :value="item.id"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="文件状态">
@@ -48,8 +62,10 @@
       </el-form>
       <el-table :data="tableData" :height="tableHeight" stripe style="width: 100%">
         <el-table-column align="center" type="index" :index="indexMethod" label="序号" width="80"></el-table-column>
-        <el-table-column align="center" prop="typeName" label="服务类型" width="120" :show-overflow-tooltip="true"></el-table-column>
-        <el-table-column align="center" prop="filePath" label="文件路径" width="220" :show-overflow-tooltip="true"></el-table-column>
+        <el-table-column align="center" prop="typeName" label="服务类型" width="120"
+                         :show-overflow-tooltip="true"></el-table-column>
+        <el-table-column align="center" prop="filePath" label="文件路径" width="220"
+                         :show-overflow-tooltip="true"></el-table-column>
         <el-table-column align="center" prop="versionNumber" label="文件版本" width="140"></el-table-column>
         <el-table-column align="center" prop="updateTime" label="更新日期" width="140"></el-table-column>
         <el-table-column align="center" prop="fileStatus" label="文件状态" width="80">
@@ -68,10 +84,12 @@
                 :headers="myHeader"
                 :show-file-list="false"
                 :on-success="handleFileSuccess"
-                :on-error="handleFileError"
                 :before-upload="beforeAvatarUpload">
                 <el-button type="primary" plain size="mini">上传</el-button>
               </el-upload>
+              <el-button type="success" plain size="mini"
+                         @click="fileSet(scope.row.id, scope.row.typeName, scope.row.versionNumber)">设置页面
+              </el-button>
             </div>
           </template>
         </el-table-column>
@@ -89,17 +107,24 @@
                  :close-on-click-modal="false" :destroy-on-close="true">
         <AppletFile ref="AppletFile" v-on:refreshSet="refreshSet"></AppletFile>
       </el-dialog>
+      <el-dialog :title="pageTitle" :visible.sync="showPage" class="applet-file-page-dialog"
+                 :modal-append-to-body="false"
+                 :close-on-click-modal="false" :destroy-on-close="true">
+        <AppletPageList ref="AppletPageList"></AppletPageList>
+      </el-dialog>
     </el-main>
   </el-container>
 </template>
 <script type="text/javascript">
   import {Loading} from 'element-ui'
   import AppletFile from '@/views/admin/applet/file/applet-file.vue'
+  import AppletPageList from '@/views/admin/applet/file/page/applet-page-list.vue'
 
   export default {
     name: 'applet-file-list',
     components: {
-      'AppletFile': AppletFile
+      'AppletFile': AppletFile,
+      'AppletPageList': AppletPageList
     },
     data() {
       return {
@@ -107,6 +132,8 @@
         tableHeight: 50,
         showInfo: false,
         showTitle: '',
+        showPage: false,
+        pageTitle: '',
         currentPage: 1,
         total: 0,
         info: {
@@ -129,7 +156,7 @@
     mounted() {
     },
     methods: {
-      loadAppletFile(){
+      loadAppletFile() {
         this.loading = true
         this.$axios({
           url: '/api/manage/applet/loadAppletFilePage',
@@ -189,6 +216,15 @@
         this.$cookies.set('applet_file_id', fileId)
         try {
           this.$refs.AppletFile.loadAppletFile(fileId)
+        } catch (e) {
+        }
+      },
+      fileSet(fileId, typeName, versionNumber) {
+        this.showPage = true
+        this.pageTitle = typeName + ' - ' + versionNumber
+        this.$cookies.set('applet_file_id', fileId)
+        try {
+          this.$refs.AppletPageList.loadAppletPage(fileId)
         } catch (e) {
         }
       },

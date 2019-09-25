@@ -165,9 +165,24 @@
    * 动态设置查询页表单高度
    **/
   let setTableHeight = function (that, formId) {
-    let tabPaneHeight = that.$cookies.get('tabPaneHeight')
-    let height = document.getElementById(formId).offsetHeight
-    that.tableHeight = tabPaneHeight - height - 70
+    try {
+      let tabPaneHeight = that.$cookies.get('tabPaneHeight')
+      let height = document.getElementById(formId).offsetHeight
+      that.tableHeight = tabPaneHeight - height - 70
+    } catch (e) {
+    }
+  }
+
+  /**
+   * 设置一级dialog表格高度
+   **/
+  let setAppendTableHeight = function (that, formId) {
+    try {
+      let tabPaneHeight = that.$cookies.get('tabPaneHeight')
+      let height = document.getElementById(formId).offsetHeight
+      that.tableHeight = tabPaneHeight - height - 250
+    } catch (e) {
+    }
   }
 
 
@@ -249,6 +264,7 @@
     exitLoad,
     validate,
     setTableHeight,
+    setAppendTableHeight,
     selectRegionJson,
     selectRegionList,
     baseToGet
