@@ -11,6 +11,18 @@
     width: 450px;
   }
 
+  .applet-file-dialog .el-dialog > .el-dialog__body {
+    padding: 0px 0px;
+  }
+
+  .applet-file-page-dialog .el-dialog {
+    width: 980px;
+  }
+
+  .applet-file-page-dialog .el-dialog > .el-dialog__body {
+    padding: 0px 0px;
+  }
+
   .applet-file-upload > div {
     display: inline-block;
   }
@@ -75,6 +87,9 @@
                 :before-upload="beforeAvatarUpload">
                 <el-button type="primary" plain size="mini">上传</el-button>
               </el-upload>
+              <el-button type="success" plain size="mini"
+                         @click="fileSet(scope.row.id, scope.row.typeName, scope.row.versionNumber)">设置页面
+              </el-button>
             </div>
           </template>
         </el-table-column>
@@ -92,24 +107,33 @@
                  :close-on-click-modal="false" :destroy-on-close="true">
         <AppletFile ref="AppletFile" v-on:refreshSet="refreshSet"></AppletFile>
       </el-dialog>
+      <el-dialog :title="pageTitle" :visible.sync="showPage" class="applet-file-page-dialog"
+                 :modal-append-to-body="false"
+                 :close-on-click-modal="false" :destroy-on-close="true">
+        <AppletPageList ref="AppletPageList"></AppletPageList>
+      </el-dialog>
     </el-main>
   </el-container>
 </template>
 <script type="text/javascript">
   import {Loading} from 'element-ui'
   import AppletFile from '@/views/admin/applet/file/applet-file.vue'
+  import AppletPageList from '@/views/admin/applet/file/page/applet-page-list.vue'
 
   export default {
     name: 'applet-file-list',
     components: {
-      'AppletFile': AppletFile
+      'AppletFile': AppletFile,
+      'AppletPageList': AppletPageList
     },
-    data () {
+    data() {
       return {
         loading: false,
         tableHeight: 50,
         showInfo: false,
         showTitle: '',
+        showPage: false,
+        pageTitle: '',
         currentPage: 1,
         total: 0,
         info: {
@@ -126,13 +150,13 @@
         }
       }
     },
-    created () {
+    created() {
       this.loadAppletFile()
     },
-    mounted () {
+    mounted() {
     },
     methods: {
-      loadAppletFile () {
+      loadAppletFile() {
         this.loading = true
         this.$axios({
           url: '/api/manage/applet/loadAppletFilePage',
@@ -149,11 +173,11 @@
           this.$global.exitLoad(this, null, '')
         })
       },
-      indexMethod (index) {
+      indexMethod(index) {
         let count = (parseInt(this.info.page) - 1) * parseInt(this.info.pageSize)
         return count + (parseInt(index) + 1)
       },
-      onSubmit () {
+      onSubmit() {
         this.loading = true
         this.$axios({
           url: '/api/manage/applet/queryAppletFilePage',
@@ -165,7 +189,7 @@
           if (res.data.code === '1') {
             this.tableData = res.data.data.dataSource
             this.total = res.data.data.totalCount
-          } else if (res.data.code === '-1') {
+          } else if (res.data.code === "-1") {
             this.$message.error(res.data.data)
           }
           this.$global.exitLoad(this, null, res.data)
@@ -174,15 +198,15 @@
           this.$global.exitLoad(this, null, '')
         })
       },
-      selectList () {
+      selectList() {
         this.info.page = 1
         this.onSubmit()
       },
-      handleCurrentChange (val) {
+      handleCurrentChange(val) {
         this.info.page = val
         this.onSubmit()
       },
-      updateInfo (fileId) {
+      updateInfo(fileId) {
         this.showInfo = true
         if (fileId && fileId != '0') {
           this.showTitle = '修改小程序文件信息'
@@ -195,11 +219,20 @@
         } catch (e) {
         }
       },
-      refreshSet () {
+      fileSet(fileId, typeName, versionNumber) {
+        this.showPage = true
+        this.pageTitle = typeName + ' - ' + versionNumber
+        this.$cookies.set('applet_file_id', fileId)
+        try {
+          this.$refs.AppletPageList.loadAppletPage(fileId)
+        } catch (e) {
+        }
+      },
+      refreshSet() {
         this.showInfo = false
         this.selectList()
       },
-      handleFileSuccess (res, file) {
+      handleFileSuccess(res, file) {
         if (res.code === '1') {
           this.$message.success('上传成功')
           this.onSubmit()
@@ -209,15 +242,15 @@
         let loading = Loading.service({fullscreen: true, text: '正在上传'})
         this.$global.exitLoad(this, loading, {'code': res.data})
       },
-      beforeAvatarUpload (file) {
+      beforeAvatarUpload(file) {
         let loading = Loading.service({fullscreen: true, text: '正在上传'})
         const isJPG = 'application/x-zip-compressed,application/x-7z-compressed,application/x-gzip'.indexOf(file.type) >= 0
-        const isLt2M = file.size / 1024 / 1024 < 50
+        const isLt2M = file.size / 1024 / 1024 < 2
         if (!isJPG) {
           this.$message.error('上传压缩文件格式错误!')
         }
         if (!isLt2M) {
-          this.$message.error('上传头像图片大小不能超过50MB!')
+          this.$message.error('上传头像图片大小不能超过 2MB!')
         }
         if (!isJPG || !isLt2M) {
           loading.close()
