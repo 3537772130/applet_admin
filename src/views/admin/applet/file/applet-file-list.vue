@@ -11,21 +11,23 @@
     width: 450px;
   }
 
-  .applet-file-upload>div{
+  .applet-file-upload > div {
     display: inline-block;
   }
 </style>
 <template>
   <el-container>
     <el-main v-loading="loading" element-loading-text="加载中" style="background-color: #FFFFFF;padding-top: 20px;">
-      <el-form id="applet-file-form" :inline="true" :model="info" class="demo-form-inline applet-file-form" style="text-align: left;">
+      <el-form id="applet-file-form" :inline="true" :model="info" class="demo-form-inline applet-file-form"
+               style="text-align: left;">
         <el-form-item label="文件版本">
           <el-input v-model="info.versionNumber" placeholder="请输入文件版本"></el-input>
         </el-form-item>
         <el-form-item label="服务类型">
           <el-select v-model="info.typeId" placeholder="选择服务类型" style="width: 200px;">
             <el-option label="全部" value=""></el-option>
-            <el-option v-for="(item, index) in typeList" :key="index" :label="item.typeName" :value="item.id"></el-option>
+            <el-option v-for="(item, index) in typeList" :key="index" :label="item.typeName"
+                       :value="item.id"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="文件状态">
@@ -48,8 +50,10 @@
       </el-form>
       <el-table :data="tableData" :height="tableHeight" stripe style="width: 100%">
         <el-table-column align="center" type="index" :index="indexMethod" label="序号" width="80"></el-table-column>
-        <el-table-column align="center" prop="typeName" label="服务类型" width="120" :show-overflow-tooltip="true"></el-table-column>
-        <el-table-column align="center" prop="filePath" label="文件路径" width="220" :show-overflow-tooltip="true"></el-table-column>
+        <el-table-column align="center" prop="typeName" label="服务类型" width="120"
+                         :show-overflow-tooltip="true"></el-table-column>
+        <el-table-column align="center" prop="filePath" label="文件路径" width="220"
+                         :show-overflow-tooltip="true"></el-table-column>
         <el-table-column align="center" prop="versionNumber" label="文件版本" width="140"></el-table-column>
         <el-table-column align="center" prop="updateTime" label="更新日期" width="140"></el-table-column>
         <el-table-column align="center" prop="fileStatus" label="文件状态" width="80">
@@ -68,7 +72,6 @@
                 :headers="myHeader"
                 :show-file-list="false"
                 :on-success="handleFileSuccess"
-                :on-error="handleFileError"
                 :before-upload="beforeAvatarUpload">
                 <el-button type="primary" plain size="mini">上传</el-button>
               </el-upload>
@@ -101,7 +104,7 @@
     components: {
       'AppletFile': AppletFile
     },
-    data() {
+    data () {
       return {
         loading: false,
         tableHeight: 50,
@@ -123,13 +126,13 @@
         }
       }
     },
-    created() {
+    created () {
       this.loadAppletFile()
     },
-    mounted() {
+    mounted () {
     },
     methods: {
-      loadAppletFile(){
+      loadAppletFile () {
         this.loading = true
         this.$axios({
           url: '/api/manage/applet/loadAppletFilePage',
@@ -146,11 +149,11 @@
           this.$global.exitLoad(this, null, '')
         })
       },
-      indexMethod(index) {
+      indexMethod (index) {
         let count = (parseInt(this.info.page) - 1) * parseInt(this.info.pageSize)
         return count + (parseInt(index) + 1)
       },
-      onSubmit() {
+      onSubmit () {
         this.loading = true
         this.$axios({
           url: '/api/manage/applet/queryAppletFilePage',
@@ -162,7 +165,7 @@
           if (res.data.code === '1') {
             this.tableData = res.data.data.dataSource
             this.total = res.data.data.totalCount
-          } else if (res.data.code === "-1") {
+          } else if (res.data.code === '-1') {
             this.$message.error(res.data.data)
           }
           this.$global.exitLoad(this, null, res.data)
@@ -171,15 +174,15 @@
           this.$global.exitLoad(this, null, '')
         })
       },
-      selectList() {
+      selectList () {
         this.info.page = 1
         this.onSubmit()
       },
-      handleCurrentChange(val) {
+      handleCurrentChange (val) {
         this.info.page = val
         this.onSubmit()
       },
-      updateInfo(fileId) {
+      updateInfo (fileId) {
         this.showInfo = true
         if (fileId && fileId != '0') {
           this.showTitle = '修改小程序文件信息'
@@ -192,11 +195,11 @@
         } catch (e) {
         }
       },
-      refreshSet() {
+      refreshSet () {
         this.showInfo = false
         this.selectList()
       },
-      handleFileSuccess(res, file) {
+      handleFileSuccess (res, file) {
         if (res.code === '1') {
           this.$message.success('上传成功')
           this.onSubmit()
@@ -206,15 +209,15 @@
         let loading = Loading.service({fullscreen: true, text: '正在上传'})
         this.$global.exitLoad(this, loading, {'code': res.data})
       },
-      beforeAvatarUpload(file) {
+      beforeAvatarUpload (file) {
         let loading = Loading.service({fullscreen: true, text: '正在上传'})
         const isJPG = 'application/x-zip-compressed,application/x-7z-compressed,application/x-gzip'.indexOf(file.type) >= 0
-        const isLt2M = file.size / 1024 / 1024 < 2
+        const isLt2M = file.size / 1024 / 1024 < 50
         if (!isJPG) {
           this.$message.error('上传压缩文件格式错误!')
         }
         if (!isLt2M) {
-          this.$message.error('上传头像图片大小不能超过 2MB!')
+          this.$message.error('上传头像图片大小不能超过50MB!')
         }
         if (!isJPG || !isLt2M) {
           loading.close()
