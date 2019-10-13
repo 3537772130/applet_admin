@@ -72,7 +72,7 @@
         let fileId = this.$cookies.get('page_file_id')
         this.pageForm.fileId = fileId
         if (pageId) {
-          this.loading = true
+          let loading = Loading.service({fullscreen: true, text: '正在提交'})
           this.$axios({
             url: '/api/manage/applet/page/loadAppletPage',
             method: 'post',
@@ -86,10 +86,10 @@
             }
             this.$cookies.remove('applet_page_id')
             pageId = null
-            this.$global.exitLoad(this, null, res.data)
+            this.$global.exitLoad(this, loading, res.data)
           }).catch(error => {
             console.info('错误信息', error)
-            this.$global.exitLoad(this, null, '')
+            this.$global.exitLoad(this, loading, '')
           })
         }
       },

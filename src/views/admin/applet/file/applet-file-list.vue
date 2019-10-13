@@ -108,7 +108,7 @@
         <AppletFile ref="AppletFile" v-on:refreshSet="refreshSet"></AppletFile>
       </el-dialog>
       <el-dialog :title="pageTitle" :visible.sync="showPage" class="applet-file-page-dialog"
-                 :modal-append-to-body="false"
+                 :before-close="handleClose" :modal-append-to-body="false"
                  :close-on-click-modal="false" :destroy-on-close="true">
         <AppletPageList ref="AppletPageList"></AppletPageList>
       </el-dialog>
@@ -227,6 +227,13 @@
           this.$refs.AppletPageList.loadAppletPage(fileId)
         } catch (e) {
         }
+      },
+      handleClose(){
+        try {
+          this.$refs.AppletPageList.loadAppletPage(null)
+        } catch (e) {
+        }
+        this.showPage = false
       },
       refreshSet() {
         this.showInfo = false

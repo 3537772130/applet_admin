@@ -214,7 +214,7 @@
         this.onSubmit()
       },
       resetForm(formName) {
-        this.$refs[formName].resetFields();
+        this.$refs[formName].resetFields()
       },
       loadAuditRecord(appletId, appletName) {
         this.showRecord = true

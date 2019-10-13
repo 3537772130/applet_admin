@@ -72,8 +72,6 @@
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="selectList">查询</el-button>
-        </el-form-item>
-        <el-form-item>
           <el-button type="warning" @click="resetForm('appletAuditLastForm')">重置</el-button>
         </el-form-item>
         <div style="display: none;">
@@ -258,7 +256,7 @@
         this.onSubmit()
       },
       resetForm(formName) {
-        this.$refs[formName].resetFields();
+        this.$refs[formName].resetFields()
       },
       loadAuditRecord(appletId, appletName) {
         this.showRecord = true

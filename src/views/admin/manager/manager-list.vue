@@ -266,7 +266,7 @@
         this.onSubmit()
       },
       resetForm(formName) {
-        this.$refs[formName].resetFields();
+        this.$refs[formName].resetFields()
       },
       updateInfo(managerId, userName) {
         this.showInfo = true

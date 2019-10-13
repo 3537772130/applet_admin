@@ -1,5 +1,5 @@
 <style type="text/css">
-  applet-element-form {
+  .applet-element-form {
     text-align: left;
   }
 
@@ -18,7 +18,8 @@
 <template>
   <el-container>
     <el-main v-loading="loading" element-loading-text="加载中" style="background-color: #FFFFFF;padding-top: 20px;">
-      <el-form id="applet-element-form" :inline="true" :model="info" class="demo-form-inline applet-element-form" style="text-align: left;">
+      <el-form id="applet-element-form" :inline="true" :model="info" class="demo-form-inline applet-element-form"
+               style="text-align: left;">
         <el-form-item label="元素标识">
           <el-input v-model="info.elementLogo" placeholder="请输入元素标识"></el-input>
         </el-form-item>
@@ -26,8 +27,14 @@
           <el-input v-model="info.elementName" placeholder="请输入元素名称"></el-input>
         </el-form-item>
         <br>
+        <el-form-item label="元素类型">
+          <el-select v-model="info.typeId" placeholder="选择元素类型">
+            <el-option label="全部" value=""></el-option>
+            <el-option v-for="(item, index) in typeList" :key="index" :label="item.typeName" :value="item.id"></el-option>
+          </el-select>
+        </el-form-item>
         <el-form-item label="元素状态">
-          <el-select v-model="info.elementStatus" placeholder="选择元素状态" style="width: 200px;">
+          <el-select v-model="info.elementStatus" placeholder="选择元素状态">
             <el-option label="全部" value=""></el-option>
             <el-option label="正常" value="1"></el-option>
             <el-option label="禁用" value="0"></el-option>
@@ -46,15 +53,12 @@
       </el-form>
       <el-table :data="tableData" :height="tableHeight" stripe style="width: 100%">
         <el-table-column align="center" type="index" :index="indexMethod" label="序号" width="80"></el-table-column>
-        <el-table-column align="center" prop="elementIcon" label="元素图标" width="120">
-          <template slot-scope="scope">
-            <el-image :src="'api\\' + scope.row.elementIcon + timestamp"
-                      style="width: 30px; height: 30px;"></el-image>
-          </template>
-        </el-table-column>
-        <el-table-column align="center" prop="elementLogo" label="元素标识" width="100" :show-overflow-tooltip="true"></el-table-column>
-        <el-table-column align="center" prop="elementName" label="元素名称" width="100" :show-overflow-tooltip="true"></el-table-column>
-        <el-table-column align="center" prop="elementJson" label="元素默认内容" width="180" :show-overflow-tooltip="true"></el-table-column>
+        <el-table-column align="center" prop="elementLogo" label="元素标识" width="100"
+                         :show-overflow-tooltip="true"></el-table-column>
+        <el-table-column align="center" prop="elementName" label="元素名称" width="100"
+                         :show-overflow-tooltip="true"></el-table-column>
+        <el-table-column align="center" prop="typeName" label="元素类型" width="100"
+                         :show-overflow-tooltip="true"></el-table-column>
         <el-table-column align="center" prop="updateTime" label="更新日期" width="140"></el-table-column>
         <el-table-column align="center" prop="elementStatus" label="元素状态" width="80">
           <template slot-scope="scope">
@@ -78,7 +82,7 @@
         </el-pagination>
       </div>
       <el-dialog :title="showTitle" :visible.sync="showInfo" class="applet-element-dialog" :modal-append-to-body="false"
-                 :close-on-click-modal="false" :destroy-on-close="true">
+                 :close-on-click-modal="false" :destroy-on-close="true" :append-to-body="true">
         <AppletElement ref="AppletElement" v-on:refreshSet="refreshSet"></AppletElement>
       </el-dialog>
     </el-main>
@@ -93,7 +97,7 @@
     components: {
       'AppletElement': AppletElement
     },
-    data() {
+    data () {
       return {
         loading: false,
         tableHeight: 50,
@@ -106,35 +110,47 @@
           typeId: '',
           elementStatus: '',
           page: 1,
-          pageSize: 15
+          pageSize: 10
         },
         tableData: [],
-        timestamp: ''
+        typeList: []
       }
     },
-    created() {
+    created () {
       let pageId = this.$cookies.get('applet_page_id')
       this.loadAppletElementPage(pageId)
     },
-    mounted() {
+    mounted () {
     },
     methods: {
-      loadAppletElementPage(pageId){
-        if (pageId){
+      loadAppletElementPage (pageId) {
+        if (pageId) {
           this.$cookies.set('element_page_id', pageId)
-          this.info.pageId = this.$cookies.get('element_page_id')
-          this.onSubmit()
           pageId = null
+          this.info.pageId = this.$cookies.get('element_page_id')
+          this.loading = true
+          this.$axios({
+            url: '/api/manage/applet/page/loadAppletPageElementPage',
+            method: 'post',
+            data: {pageId: this.info.pageId}
+          }).then(res => {
+            this.typeList = res.data.data
+            this.onSubmit()
+            this.$global.exitLoad(this, null, res.data)
+          }).catch(error => {
+            console.info('错误信息', error)
+            this.$global.exitLoad(this, null, '')
+          })
         }
       },
-      indexMethod(index) {
+      indexMethod (index) {
         let count = (parseInt(this.info.page) - 1) * parseInt(this.info.pageSize)
         return count + (parseInt(index) + 1)
       },
-      onSubmit() {
+      onSubmit () {
         this.loading = true
         this.$axios({
-          url: '/api/manage/applet/page/queryAppletPageElementDefaultPage',
+          url: '/api/manage/applet/page/queryAppletPageElementPage',
           method: 'post',
           data: this.info
         }).then(res => {
@@ -143,7 +159,7 @@
           if (res.data.code === '1') {
             this.tableData = res.data.data.dataSource
             this.total = res.data.data.totalCount
-          } else if (res.data.code === "-1") {
+          } else if (res.data.code === '-1') {
             this.$message.error(res.data.data)
           }
           this.timestamp = '?' + Date.parse(new Date())
@@ -153,32 +169,32 @@
           this.$global.exitLoad(this, null, '')
         })
       },
-      selectList() {
+      selectList () {
         this.info.page = 1
         this.onSubmit()
       },
-      handleCurrentChange(val) {
+      handleCurrentChange (val) {
         this.info.page = val
         this.onSubmit()
       },
-      updateInfo(elementId) {
+      updateInfo (elementId) {
         this.showInfo = true
         if (elementId && elementId != '0') {
-          this.showTitle = '修改小程序元素信息'
+          this.showTitle = '修改元素信息'
         } else {
-          this.showTitle = '添加小程序元素信息'
+          this.showTitle = '添加元素信息'
         }
         this.$cookies.set('applet_element_id', elementId)
         try {
-          this.$refs.AppletElement.loadAppletelement(elementId)
+          this.$refs.AppletElement.loadAppletElement(elementId)
         } catch (e) {
         }
       },
-      refreshSet() {
+      refreshSet () {
         this.showInfo = false
         this.selectList()
       },
-      handleFileSuccess(res, element) {
+      handleFileSuccess (res, element) {
         if (res.code === '1') {
           this.$message.success('上传成功')
           this.onSubmit()
@@ -188,7 +204,7 @@
         let loading = Loading.service({fullscreen: true, text: '正在上传'})
         this.$global.exitLoad(this, loading, {'code': res.data})
       },
-      beforeAvatarUpload(element) {
+      beforeAvatarUpload (element) {
         let loading = Loading.service({fullscreen: true, text: '正在上传'})
         const isJPG = 'application/x-zip-compressed,application/x-7z-compressed,application/x-gzip'.indexOf(element.type) >= 0
         const isLt2M = element.size / 1024 / 1024 < 2

@@ -175,7 +175,7 @@
       resetForm() {
         this.info.startDate = ''
         this.info.endDate = ''
-        this.$refs['queryUserForm'].resetFields();
+        this.$refs['queryUserForm'].resetFields()
       },
       setStatus(appletId, appletName) {
 
