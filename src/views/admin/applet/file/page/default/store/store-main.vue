@@ -25,18 +25,27 @@
             <el-image src="/static/images/icon/shopping.png" class="img-title-image"></el-image>
             <span class="img-title-text">拼团更实惠<span> | <span>团购促销，多买多降</span></span></span>
           </div>
-          <div class="">
-            <el-carousel :interval="3000" arrow="never" height="200px">
+          <div class="img-carousel">
+            <el-carousel :interval="3000" arrow="never" height="220px" indicator-position="none">
               <el-carousel-item>
-                <img src="/static/images/carousel/zhao-shang.png" style="width: 100%;height: 200px;">
+                <img src="/static/images/carousel/zhao-shang.png" style="width: 100%;height: 220px;">
               </el-carousel-item>
               <el-carousel-item>
-                <img src="/static/images/carousel/zhe-shang.png" style="width: 100%;height: 200px;">
+                <img src="/static/images/carousel/zhe-shang.png" style="width: 100%;height: 220px;">
               </el-carousel-item>
               <el-carousel-item>
-                <img src="/static/images/carousel/zhong-guo.png" style="width: 100%;height: 200px;">
+                <img src="/static/images/carousel/zhong-guo.png" style="width: 100%;height: 220px;">
               </el-carousel-item>
             </el-carousel>
+          </div>
+          <div class="img-ordinary">
+            <el-image src="/static/images/carousel/zhong-guo.png" style="width: 100%;height: 140px;"></el-image>
+          </div>
+          <div class="text-move">
+            <div class="text-content"
+                 style="transition: transform 13542ms linear 0ms;transform: translateX(-541.68px);transform-origin: 50% 50% 0px;">
+              轰烈流沙枕上白发,杯中酒比划,年少风雅鲜衣怒马,也不过一刹那,难免疏漏儿时檐下,莫测变化,隔却山海,转身时从容煎茶。
+            </div>
           </div>
         </div>
       </div>
@@ -53,7 +62,8 @@
         contentHeight: `${document.documentElement.scrollHeight - 150}`,
         loading: false,
         list: [],
-        contentList: []
+        contentList: [],
+        trans: 0
       }
     },
     created () {
