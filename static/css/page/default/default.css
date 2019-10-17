@@ -49,7 +49,7 @@
   width: 375px;
   height: 667px;
   background-color: #d9d9d9;
-  border: 1px red solid;
+  /*border: 1px red solid;*/
   white-space:nowrap;
   overflow:hidden;
   position: relative;

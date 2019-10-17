@@ -6,24 +6,24 @@ import router from './router'
 
 import ElementUi from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-import axios from 'axios'
+import Axios from 'axios'
 import VueAxios from 'vue-axios'
 import VueCookies from 'vue-cookies'
 import VueJsDialog from 'vuejs-dialog'
-import global from '@/components/global'
+import Global from '@/components/global'
 
 Vue.use(ElementUi, {size: 'small', zIndex: 3000})
-Vue.use(VueAxios, axios)
+Vue.use(VueAxios, Axios)
 Vue.use(VueCookies)
 Vue.use(VueJsDialog)
 
 Vue.config.productionTip = false
-Vue.prototype.$axios = axios
+Vue.prototype.$axios = Axios
 Vue.prototype.$cookies = VueCookies
-Vue.prototype.$global = global
+Vue.prototype.$global = Global
 
 // 添加请求拦截器
-axios.interceptors.request.use(function (config) {
+Axios.interceptors.request.use(function (config) {
   // 在发送请求之前,格式化参数，增加token
   let data = config.data
   let params = new URLSearchParams()
