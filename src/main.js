@@ -11,6 +11,10 @@ import VueAxios from 'vue-axios'
 import VueCookies from 'vue-cookies'
 import VueJsDialog from 'vuejs-dialog'
 import Global from '@/components/global'
+import PagePart from '@/components/page-part'
+Vue.filter('addZero',function(value){
+  return parseFloat(value).toFixed(2)
+})
 
 Vue.use(ElementUi, {size: 'small', zIndex: 3000})
 Vue.use(VueAxios, Axios)
@@ -21,6 +25,7 @@ Vue.config.productionTip = false
 Vue.prototype.$axios = Axios
 Vue.prototype.$cookies = VueCookies
 Vue.prototype.$global = Global
+Vue.prototype.$part = PagePart
 
 // 添加请求拦截器
 Axios.interceptors.request.use(function (config) {

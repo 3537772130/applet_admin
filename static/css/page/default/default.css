@@ -39,6 +39,8 @@
 .center-menu{
   text-align: center;
   margin: auto;
+  position: relative;
+  top: -80px;
 }
 .center-menu>.center-img{
   width: 620px;
