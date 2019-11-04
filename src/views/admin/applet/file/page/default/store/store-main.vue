@@ -9,7 +9,7 @@
         <el-button type="primary" @click="onSubmit()"><i class="el-icon-folder-checked"></i>&nbsp;保存配置</el-button>
         <el-button type="danger" @click="onSubmit()"><i class="el-icon-folder-delete"></i>&nbsp;取消配置</el-button>
       </div>
-      <div class="left-menu" :style="{height: contentHeight + 'px'}">
+      <div class="left-menu" :style="{height: (contentHeight - 100) + 'px'}">
         <div v-for="(item1, index1) in typeList" :key="index1">
           <el-divider content-position="left">{{item1.name}}</el-divider>
           <div v-for="(item2, index2) in item1.list" :key="index2" class="style-choose">
