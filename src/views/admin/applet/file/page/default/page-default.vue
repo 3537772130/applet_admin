@@ -46,8 +46,8 @@
     },
     data () {
       return {
-        tabsHeight: `${document.documentElement.scrollHeight - 50}`,
-        tabHeight: `${document.documentElement.scrollHeight - 125}`,
+        tabsHeight: `${document.documentElement.scrollHeight + 50}`,
+        tabHeight: `${document.documentElement.scrollHeight - 25}`,
         loading: false,
         showTabs: '',
         fileTypeId: this.$cookies.get('file_type_id'),
