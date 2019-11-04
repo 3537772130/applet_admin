@@ -21,33 +21,21 @@
       </div>
       <div class="center-menu" :style="{height: contentHeight + 'px'}">
         <el-image src="/static/images/timg.jpg" class="center-img"></el-image>
-
         <div class="center-content">
-          <!--          <div class="components">-->
-          <!--            <div class="bscroll imgX-scroll" ref="imgXScroll" @click="openDrawer(item.id)">-->
-          <!--              <div class="bscroll-container" :style="imgXScrollStyle">-->
-          <!--                <el-image class="image" src="/static/images/carousel/carousel-1.png"></el-image>-->
-          <!--                <el-image class="image" src="/static/images/carousel/carousel-2.png"></el-image>-->
-          <!--                <el-image class="image" src="/static/images/carousel/carousel-3.png"></el-image>-->
-          <!--                <el-image class="image" src="/static/images/carousel/carousel-4.png"></el-image>-->
-          <!--                <el-image class="image" src="/static/images/carousel/carousel-5.png"></el-image>-->
-          <!--              </div>-->
-          <!--            </div>-->
-          <!--          </div>-->
-          <div class="components" v-for="(item,partIndex) in partList" :key="partIndex">
-            <div class="goods-search" @click="openDrawer(item.id, item.name)" v-if="item.id === 'goods-search'">
+          <div class="components" v-for="(item,partIndex) in partList" :key="partIndex" :style="{'border': checkIndex === partIndex ? '1px #FF00FF dashed':'none'}">
+            <div class="goods-search" @click="openDrawer(partIndex)" v-if="item.id === 'goods-search'">
               <div class="search-part">
                 <i class="el-icon-search"></i>搜索商品
               </div>
             </div>
-            <div class="img-carousel" @click="openDrawer(item.id, item.name)" v-if="item.id === 'img-carousel'">
+            <div class="img-carousel" @click="openDrawer(partIndex)" v-if="item.id === 'img-carousel'">
               <el-carousel :interval="3000" arrow="never" height="150px">
                 <el-carousel-item v-for="(car,index) in item.list" :key="index">
-                  <el-image class="image" :src="car"></el-image>
+                  <el-image class="image" :src="car.icon"></el-image>
                 </el-carousel-item>
               </el-carousel>
             </div>
-            <div class="notice-bar" @click="openDrawer(item.id, item.name)" v-if="item.id === 'notice-bar'">
+            <div class="notice-bar" @click="openDrawer(partIndex)" v-if="item.id === 'notice-bar'">
               <div class="text-content">{{item.textContent}}</div>
               <div :style="moveCoverStyle">
                 <div class="cover-left" :style="cover_1">
@@ -60,7 +48,7 @@
               </div>
               <el-image class="text-trumpet" src="/static/images/icon/trumpet.png"></el-image>
             </div>
-            <div class="type-frame" @click="openDrawer(item.id, item.name)" v-if="item.id === 'type-frame'">
+            <div class="type-frame" @click="openDrawer(partIndex)" v-if="item.id === 'type-frame'">
               <div class="type-element" v-for="(type,index) in item.list" :key="index">
                 <div>
                   <el-image class="type-icon" :src="type.icon"></el-image>
@@ -68,17 +56,17 @@
                 <span class="type-name">{{type.name}}</span>
               </div>
             </div>
-            <div class="img-text-title" @click="openDrawer(item.id, item.name)" v-if="item.id === 'img-text-title'">
+            <div class="img-text-title" @click="openDrawer(partIndex)" v-if="item.id === 'img-text-title'">
               <el-image :src="item.icon" class="img-text-title-image"></el-image>
               <span class="img-text-title-text">
                 {{item.title}}
-                <span v-if="item.remark != ''"> | <span>{{item.remark}}</span></span>
+                <span v-if="item.describe != ''"> | <span>{{item.describe}}</span></span>
               </span>
             </div>
-            <div class="img-title" @click="openDrawer(item.id, item.name)" v-if="item.id === 'img-title'">
+            <div class="img-title" @click="openDrawer(partIndex)" v-if="item.id === 'img-title'">
               <el-image class="image" :src="item.icon"></el-image>
             </div>
-            <div class="goods-two-row" @click="openDrawer(item.id, item.name)" v-if="item.id === 'goods-two-row'">
+            <div class="goods-two-row" @click="openDrawer(partIndex)" v-if="item.id === 'goods-two-row'">
               <div class="goods-def" v-for="(goods,index) in item.list" :key="index">
                 <div>
                   <el-image class="goods-img" :src="goods.icon"></el-image>
@@ -90,11 +78,11 @@
                 <div class="goods-name">{{goods.name}}</div>
               </div>
             </div>
-            <div class="divider-title" @click="openDrawer(item.id, item.name)" v-if="item.id === 'divider-title'">
+            <div class="divider-title" @click="openDrawer(partIndex)" v-if="item.id === 'divider-title'">
               <div class="divider-line"></div>
-              <span class="c-divider">{{item.title}}</span>
+              <span class="c-divider"><span>{{item.title}}</span></span>
             </div>
-            <div class="goods-three-row" @click="openDrawer(item.id, item.name)" v-if="item.id === 'goods-three-row'">
+            <div class="goods-three-row" @click="openDrawer(partIndex)" v-if="item.id === 'goods-three-row'">
               <div class="goods-def" v-for="(goods, index) in item.list" :key="index">
                 <div>
                   <el-image class="goods-img" :src="goods.icon"></el-image>
@@ -106,19 +94,19 @@
                 <div class="goods-name">{{goods.name}}</div>
               </div>
             </div>
-            <div class="bscroll imgX-scroll" ref="imgXScroll" @click="openDrawer(item.id, item.name)"
+            <div class="bscroll imgX-scroll" ref="imgXScroll" @click="openDrawer(partIndex)"
                  v-if="item.id === 'imgX-scroll'">
               <div class="bscroll-container" :style="imgXScrollStyle">
-                <el-image class="image" v-for="(img, index) in item.list" :key="index" :src="img"></el-image>
+                <el-image class="image" v-for="(img, index) in item.list" :key="index" :src="img.icon"></el-image>
               </div>
             </div>
-            <div class="bscroll imgY-scroll" ref="imgYScroll" @click="openDrawer(item.id, item.name)"
+            <div class="bscroll imgY-scroll" ref="imgYScroll" @click="openDrawer(partIndex)"
                  v-if="item.id === 'imgY-scroll'">
               <div class="bscroll-container" :style="imgYScrollStyle">
-                <el-image class="image" v-for="(img, index) in item.list" :key="index" :src="img"></el-image>
+                <el-image class="image" v-for="(img, index) in item.list" :key="index" :src="img.icon"></el-image>
               </div>
             </div>
-            <div class="bscroll goodsY-scroll" ref="goodsYScroll" @click="openDrawer(item.id, item.name)"
+            <div class="bscroll goodsY-scroll" ref="goodsYScroll" @click="openDrawer(partIndex)"
                  v-if="item.id === 'goodsY-scroll'">
               <div class="bscroll-container" :style="goodsYScrollStyle">
                 <div class="goods-def" v-for="(goods, index) in item.list" :key="index">
@@ -133,22 +121,17 @@
                 </div>
               </div>
             </div>
-            <div class="goods-discount" @click="openDrawer(item.id, item.name)" v-if="item.id === 'goods-discount'">
-              <div class="text-title">
-                <div class="text">{{item.title}}</div>
-                <div class="more">更多&nbsp;>></div>
-              </div>
-              <div class="bscroll goodsX-scroll" ref="goodsXScroll">
-                <div class="bscroll-container" :style="goodsXScrollStyle">
-                  <div class="goods-def" v-for="(goods, index) in item.list" :key="index">
-                    <el-image class="goods-img" :src="goods.icon"></el-image>
-                    <div>
-                      <div class="goods-price">现价：<span>{{goods.newPrice|addZero}}</span></div>
-                      <div class="goods-price">原价：<span
-                        style="font-size: 14px;text-decoration:line-through;">{{goods.oldPrice|addZero}}</span></div>
-                      <div class="goods-name">{{goods.name}}</div>
-                      <div style="width:120px;height: 30px;display: inline-block;"></div>
-                    </div>
+            <div class="bscroll goodsX-scroll" ref="goodsXScroll" @click="openDrawer(partIndex)"
+                 v-if="item.id === 'goodsX-scroll'">
+              <div class="bscroll-container" :style="goodsXScrollStyle">
+                <div class="goods-def" v-for="(goods, index) in item.list" :key="index">
+                  <el-image class="goods-img" :src="goods.icon"></el-image>
+                  <div>
+                    <div class="goods-price">现价：<span>{{goods.newPrice|addZero}}</span></div>
+                    <div class="goods-price">原价：<span
+                      style="font-size: 14px;text-decoration:line-through;">{{goods.oldPrice|addZero}}</span></div>
+                    <div class="goods-name">{{goods.name}}</div>
+                    <div style="width:120px;height: 30px;display: inline-block;"></div>
                   </div>
                 </div>
               </div>
@@ -159,6 +142,7 @@
       <el-drawer
         :title="drawerTitle"
         :visible.sync="drawer"
+        ref="drawerPage"
         direction="rtl"
         :modal="false"
         :before-close="handleClose">
@@ -171,7 +155,6 @@
 </template>
 <script file="text/javascript">
   import {Loading} from 'element-ui'
-  // import BScroll from 'better-scroll'
   import StoreMainPart from '@/views/admin/applet/file/page/default/store/store-main-part.vue'
 
   export default {
@@ -186,6 +169,7 @@
         loading: false,
         typeList: [],
         partList: [],
+        checkIndex: null,
         coverWidth: 0,
         imgXScrollStyle: {},
         imgYScrollStyle: {},
@@ -241,21 +225,7 @@
             if (res.data.code === '1') {
               this.typeList = res.data.data
               this.partList = this.$part.getStoreList()
-              this.$part.setPartList(this.partList)
               this.$part._initStoreScroll(this)
-
-              // let part = this.$part.getStorePart('imgX-scroll')
-              // if (part) {
-              //   let imgXLength = part.list.length
-              //   this.imgXScrollStyle = {
-              //     'width': (240 * imgXLength) + 'px'
-              //   }
-              //   this.aBScroll = new BScroll(this.$refs.imgXScroll, {
-              //     startX: 0,
-              //     scrollX: true,
-              //     click: true
-              //   })
-              // }
             }
             this.$global.exitLoad(this, loading, res.data)
           }).catch(error => {
@@ -272,7 +242,7 @@
           //滑块part只允许添加一次，超出无效
           for (let i = 0; i < list.length; i++) {
             if (part.id === list[i].id) {
-              if ('imgX-scroll,imgY-scroll,goodsY-scroll,goods-discount'.indexOf(part.id) >= 0) {
+              if ('imgX-scroll,imgY-scroll,goodsY-scroll,goodsX-scroll'.indexOf(part.id) >= 0) {
                 limit = false
                 this.$message.warning('相同滑块只能被添加一次哦')
               }
@@ -286,29 +256,31 @@
           this.$message.warning('元素不存在')
         }
       },
-      openDrawer (id, title) {
+      openDrawer (index) {
         // let obj = this.partList.find((item) => {
         //   return item.id === id
         // })
-        for (let i = 0; i < this.partList.length; i++) {
-          if (this.partList[i].id === id) {
-            this.$cookies.set('store_main_part_index', i)
-            this.drawer = true
-            this.drawerTitle = title
-            try{
-              this.$refs.StoreMainPart.loadPart()
-            } catch (e) {
+        this.checkIndex = index
+        let part = this.partList[index]
+        this.$part.setPartList(this.partList)
+        this.$cookies.set('store_main_part_index', index)
+        this.drawer = true
+        this.drawerTitle = part.name
+        try{
+          this.$refs.StoreMainPart.loadPart()
+        } catch (e) {
 
-            }
-            break
-          }
         }
       },
       handleClose (done) {
         done()
+        this.checkIndex = null
+        this.partList = this.$part.getPartList()
       },
-      refreshSet () {
-
+      refreshSet (bool, index) {
+        this.partList = this.$part.getPartList()
+        this.drawer = bool
+        this.checkIndex = index
       }
     }
   }

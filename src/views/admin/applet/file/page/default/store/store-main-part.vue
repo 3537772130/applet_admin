@@ -1,203 +1,317 @@
 <style file="text/css">
-  .store-main-part>.demo-form-inline {
-    margin-bottom: 40px;
-    padding-top: 10px;
-  }
-
-  .store-main-part .part-input {
-    width: 290px;
-  }
-
-  .store-main-part .part-button {
-    width: 80px;
-  }
-
-  .store-main-part .img-carousel-uploader .el-upload {
-    border: 1px dashed #d9d9d9;
-    border-radius: 6px;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .store-main-part .img-carousel-uploader .el-upload:hover {
-    border-color: #409EFF;
-  }
-
-  .store-main-part .img-carousel-uploader-icon {
-    font-size: 28px;
-    color: #8c939d;
-    width: 375px;
-    height: 150px;
-    line-height: 150px;
-    text-align: center;
-  }
-
-  .store-main-part .img-carousel {
-    width: 375px;
-    height: 150px;
-    display: block;
-  }
-
-  .store-main-part .img-carousel-badge .el-badge__content{
-    width: 18px;
-    top: 0px;
-    right: 10px;
-    padding: 0px;
-  }
-
-  .store-main-part .img-carousel-badge .el-badge__content:hover {
-    cursor: pointer;
-  }
-
-  .store-main-part .type-frame-badge .el-badge__content{
-    width: 18px;
-    top: 0px;
-    right: 16px;
-    padding: 0px;
-  }
-
-  .store-main-part .type-frame-badge .el-badge__content:hover{
-    cursor: pointer;
-  }
-
-  .store-main-part .type-element {
-    width: 80px;
-    height: 80px;
-    margin: 0px 5px;
-    text-align: center;
-    display: inline-block;
-    border: 1px #cdcdcd dashed;
-    border-radius: 5px;
-  }
-
-  .store-main-part .type-element:hover {
-    cursor: pointer;
-  }
-
-  .store-main-part .type-element > .type-icon-div {
-    text-align: center;
-    margin-top: 10px;
-  }
-
-  .store-main-part .type-element > .type-name {
-    width: 100%;
-    height: 20px;
-    line-height: 20px;
-    display: inline-block;
-    font-size: 14px;
-    position: relative;
-    top: -15px;
-  }
-
-
+  @import "../../../../../../../../static/css/page/default/store/store-main-part.css";
 </style>
 <template>
   <div>
     <el-main v-loading="loading" element-loading-text="加载中" style="background-color: #FFFFFF; padding: 0px 20px;">
-      <div class="store-main-part" v-for="(item, pIndex) in partList" :key="pIndex">
-        <el-form class="demo-form-inline" v-if="partIndex === pIndex && item.id === 'goods-search'">
-          <el-form-item label=" " style="margin-top: 20px;">
-            <el-button type="primary" class="part-button"><i class="el-icon-caret-top"></i>&nbsp;上移</el-button>
-            <el-button type="primary" class="part-button"><i class="el-icon-caret-bottom"></i>&nbsp;下移</el-button>
-            <el-button type="danger" @click="onSubmit(pIndex)" class="part-button"><i
-              class="el-icon-remove-outline"></i>&nbsp;删除
-            </el-button>
-          </el-form-item>
-        </el-form>
-        <el-form class="demo-form-inline" v-if="partIndex === pIndex && item.id === 'notice-bar'">
-          <el-form-item label="通知内容" prop="elementLogo">
-            <el-input type="textarea" v-model="item.textContent" :show-word-limit="true" maxlength="60"
-                      resize="none" rows="5" placeholder="请输入通知内容" class="part-input"></el-input>
-          </el-form-item>
-          <el-form-item label=" " style="margin-top: 20px;">
-            <el-button type="primary" class="part-button"><i class="el-icon-caret-top"></i>&nbsp;上移</el-button>
-            <el-button type="primary" class="part-button"><i class="el-icon-caret-bottom"></i>&nbsp;下移</el-button>
-            <el-button type="danger" @click="onSubmit()" class="part-button"><i class="el-icon-remove-outline"></i>&nbsp;删除
-            </el-button>
-          </el-form-item>
-        </el-form>
-        <el-form class="demo-form-inline" v-if="partIndex === pIndex && item.id === 'img-carousel'">
-          <el-form-item label=" " style="margin-bottom: 0px;" v-for="(img, index) in item.list" :key="index">
-            <el-badge value="×" class="item img-carousel-badge">
-              <el-image :src="img" style="width: 375px;height: 150px;"></el-image>
-            </el-badge>
-          </el-form-item>
-          <el-form-item label=" " v-if="item.list.length < 5">
-            <el-upload
-              class="img-carousel-uploader"
-              action="https://jsonplaceholder.typicode.com/posts/"
-              :show-file-list="false"
-              :on-success="handleAvatarSuccess"
-              :before-upload="beforeAvatarUpload">
-              <img v-if="imageUrl" :src="imageUrl" class="img-carousel">
-              <i v-else class="el-icon-plus img-carousel-uploader-icon"></i>
-            </el-upload>
-          </el-form-item>
-          <el-form-item label=" " style="margin-top: 20px;">
-            <el-button type="primary" class="part-button"><i class="el-icon-caret-top"></i>&nbsp;上移</el-button>
-            <el-button type="primary" class="part-button"><i class="el-icon-caret-bottom"></i>&nbsp;下移</el-button>
-            <el-button type="danger" @click="onSubmit()" class="part-button"><i class="el-icon-remove-outline"></i>&nbsp;删除
-            </el-button>
-          </el-form-item>
-        </el-form>
-        <el-form class="demo-form-inline" v-if="partIndex === pIndex && item.id === 'type-frame'">
-          <el-form-item label=" " style="margin-bottom: 0px;">
-            <el-badge value="×" class="item type-frame-badge" v-for="(type, index) in item.list" :key="index">
-              <div class="type-element">
-                <div class="type-icon-div">
-                  <el-image :src="type.icon" style="width: 40px;height: 40px;"></el-image>
+      <el-form class="demo-form-inline">
+        <div class="store-main-part" v-for="(item, pIndex) in partList" :key="pIndex">
+          <div v-if="partIndex === pIndex && item.id === 'notice-bar'">
+            <el-form-item label="通知内容" prop="elementLogo">
+              <el-input type="textarea" v-model="item.textContent" :show-word-limit="true" maxlength="60"
+                        resize="none" rows="5" placeholder="请输入通知内容" class="part-input"></el-input>
+            </el-form-item>
+          </div>
+          <div v-if="partIndex === pIndex && item.id === 'img-carousel'">
+            <table>
+              <tr v-for="(car, index) in item.list" :key="index">
+                <td>
+                  <el-form-item label="" style="margin-bottom: 0px;">
+                    <el-badge value="×" class="item img-carousel-badge">
+                      <el-image :src="car.icon" style="width: 244px;height: 95px;"></el-image>
+                    </el-badge>
+                  </el-form-item>
+                </td>
+                <td class="bind-goods">
+                  <el-image class="goods-img" src="/static/images/goods/goods-1.png" v-if="car.goodsId != ''"></el-image>
+                  <div class="add-goods" v-if="car.goodsId === ''">
+                    <el-image class="goods-icon" src="/static/images/icon/add.png"></el-image>
+                    <div class="goods-text">绑定商品</div>
+                  </div>
+                </td>
+              </tr>
+              <tr v-if="item.list.length < 5">
+                <td>
+                  <el-form-item label=" ">
+                    <el-upload
+                      class="img-carousel-uploader"
+                      action="https://jsonplaceholder.typicode.com/posts/"
+                      :show-file-list="false"
+                      :on-success="handleAvatarSuccess"
+                      :before-upload="beforeAvatarUpload">
+                      <img v-if="imageUrl" :src="imageUrl" class="img-carousel">
+                      <i v-else class="el-icon-plus img-carousel-uploader-icon"></i>
+                    </el-upload>
+                  </el-form-item>
+                </td>
+                <td></td>
+              </tr>
+            </table>
+          </div>
+          <div v-if="partIndex === pIndex && item.id === 'type-frame'">
+            <el-form-item label=" " style="margin-bottom: 0px; width: 375px;">
+              <el-badge value="×" class="item type-frame-badge" v-for="(type, index) in item.list" :key="index">
+                <div class="type-element">
+                  <div class="type-icon-div">
+                    <el-image :src="type.icon" style="width: 40px;height: 40px;"></el-image>
+                  </div>
+                  <span class="type-name">{{type.name}}</span>
                 </div>
-                <span class="type-name">{{type.name}}</span>
-              </div>
-            </el-badge>
-            <el-badge value="" class="item">
-              <div class="type-element" v-if="item.list.length < 12">
-                <div class="type-icon-div">
-                  <el-image src="/static/images/icon/add.png" style="width: 40px;height: 40px;"></el-image>
+              </el-badge>
+              <el-badge value="" class="item type-frame-badge">
+                <div class="type-element" v-if="item.list.length < 12">
+                  <div class="type-icon-div">
+                    <el-image src="/static/images/icon/add.png" style="width: 40px;height: 40px;"></el-image>
+                  </div>
+                  <span class="type-name" style="color: #cdcdcd;">添加</span>
                 </div>
-                <span class="type-name" style="color: #cdcdcd;">添加</span>
-              </div>
-            </el-badge>
-          </el-form-item>
-          <el-form-item label=" " style="margin-top: 20px;">
-            <el-button type="primary" class="part-button"><i class="el-icon-caret-top"></i>&nbsp;上移</el-button>
-            <el-button type="primary" class="part-button"><i class="el-icon-caret-bottom"></i>&nbsp;下移</el-button>
-            <el-button type="danger" @click="onSubmit()" class="part-button"><i class="el-icon-remove-outline"></i>&nbsp;删除
-            </el-button>
-          </el-form-item>
-        </el-form>
-      </div>
-      <!--      <el-form :rules="goodsSearchRules" :inline="true" :model="info" ref="info" class="demo-form-inline">-->
-      <!--        <el-form-item label="元素标识" prop="elementLogo">-->
-      <!--          <el-input v-model="info.elementLogo" maxlength="30" placeholder="请输入元素标识"-->
-      <!--                    class="part-button"></el-input>-->
-      <!--        </el-form-item>-->
-      <!--        <el-form-item label="元素名称" prop="elementName">-->
-      <!--          <el-input v-model="info.elementName" maxlength="30" placeholder="请输入元素名称"-->
-      <!--                    class="part-button"></el-input>-->
-      <!--        </el-form-item>-->
-      <!--        <el-form-item label="元素类型" prop="typeId">-->
-      <!--          <el-select v-model="info.typeId" placeholder="请选择元素类型" class="part-button">-->
-      <!--            <el-option label="请选择" value=""></el-option>-->
-      <!--            <el-option v-for="(item, index) in typeList" :key="index" :label="item.typeName"-->
-      <!--                       :value="item.id"></el-option>-->
-      <!--          </el-select>-->
-      <!--        </el-form-item>-->
-      <!--        <el-form-item label="默认内容" prop="elementJson">-->
-      <!--          <el-input type="textarea" v-model="info.elementJson" :show-word-limit="true" maxlength="1000"-->
-      <!--                    resize="none" rows="5" placeholder="请输入默认内容(json格式)" class="part-button"></el-input>-->
-      <!--        </el-form-item>-->
-      <!--        <el-form-item label="元素状态" prop="elementStatus">-->
-      <!--          <el-select v-model="info.elementStatus" placeholder="请选择元素状态" class="part-button">-->
-      <!--            <el-option label="正常" value="1"></el-option>-->
-      <!--            <el-option label="禁用" value="0"></el-option>-->
-      <!--          </el-select>-->
-      <!--        </el-form-item>-->
-      <!--        <el-form-item label=" ">-->
-      <!--          <el-button type="danger" @click="onSubmit()" class="part-button" plain>删除</el-button>-->
-      <!--        </el-form-item>-->
-      <!--      </el-form>-->
+              </el-badge>
+            </el-form-item>
+          </div>
+          <div v-if="partIndex === pIndex && item.id === 'img-text-title'">
+            <el-form-item label="图标">
+              <el-upload
+                class="img-text-title-uploader"
+                action="https://jsonplaceholder.typicode.com/posts/"
+                :show-file-list="false"
+                :on-success="handleAvatarSuccess"
+                :before-upload="beforeAvatarUpload">
+                <img v-if="item.icon" :src="item.icon" class="img-text-title">
+                <i v-else class="el-icon-plus img-text-title-icon"></i>
+              </el-upload>
+            </el-form-item>
+            <el-form-item label="标题" prop="title">
+              <el-input v-model="item.title" maxlength="10" placeholder="请输入图文标题" class="part-input"></el-input>
+            </el-form-item>
+            <el-form-item label="描述" prop="describe">
+              <el-input v-model="item.describe" maxlength="10" placeholder="请输入图文标题" class="part-input"></el-input>
+            </el-form-item>
+          </div>
+          <div v-if="partIndex === pIndex && item.id === 'img-title'">
+            <table>
+              <tr v-if="item.icon != ''">
+                <td>
+                  <el-form-item label="">
+                    <el-badge value="×" class="item img-carousel-badge">
+                      <el-image :src="item.icon" style="width: 244px;height: 95px;"></el-image>
+                    </el-badge>
+                  </el-form-item>
+                </td>
+                <td class="bind-goods">
+                  <el-image class="goods-img" src="/static/images/goods/goods-1.png" v-if="item.goodsId != ''"></el-image>
+                  <div class="add-goods" style="top: -13px" v-if="item.goodsId === ''">
+                    <el-image class="goods-icon" src="/static/images/icon/add.png"></el-image>
+                    <div class="goods-text">绑定商品</div>
+                  </div>
+                </td>
+              </tr>
+              <tr v-if="item.icon === ''">
+                <td>
+                  <el-form-item label=" ">
+                    <el-upload
+                      class="img-title-uploader"
+                      action="https://jsonplaceholder.typicode.com/posts/"
+                      :show-file-list="false"
+                      :on-success="handleAvatarSuccess"
+                      :before-upload="beforeAvatarUpload">
+                      <img v-if="imageUrl" :src="imageUrl" class="img-title">
+                      <i v-else class="el-icon-plus img-title-icon"></i>
+                    </el-upload>
+                  </el-form-item>
+                </td>
+                <td></td>
+              </tr>
+            </table>
+          </div>
+          <div v-if="partIndex === pIndex && item.id === 'divider-title'">
+            <el-form-item label="标题" prop="title">
+              <el-input v-model="item.title" maxlength="12" placeholder="请输入标题" class="part-input"></el-input>
+            </el-form-item>
+          </div>
+          <div v-if="partIndex === pIndex && item.id === 'goods-two-row'">
+            <el-form-item label=" " style="margin-bottom: 0px; width: 375px;">
+              <el-badge value="×" class="item goods-two-badge" v-for="(type, index) in item.list" :key="index">
+                <div class="goods-element">
+                  <div class="goods-icon-div">
+                    <el-image :src="type.icon" style="width: 140px;height: 140px;"></el-image>
+                  </div>
+                  <div class="goods-name">{{type.name}}</div>
+                </div>
+              </el-badge>
+              <el-badge value="" class="item goods-two-badge" style="top: -7px;">
+                <div class="goods-element" v-if="item.list.length < 10">
+                  <div class="goods-icon-div" style="width: 140px;height: 140px;line-height: 140px; margin: auto;">
+                    <el-image src="/static/images/icon/add.png" style="width: 40px;height: 40px;margin: auto;"></el-image>
+                  </div>
+                  <span class="goods-name" style="color: #cdcdcd;text-align: center;">添加商品</span>
+                </div>
+              </el-badge>
+            </el-form-item>
+          </div>
+          <div v-if="partIndex === pIndex && item.id === 'goods-three-row'">
+            <el-form-item label=" " style="margin-bottom: 0px; width: 375px;">
+              <el-badge value="×" class="item goods-three-badge" v-for="(type, index) in item.list" :key="index">
+                <div class="goods-element">
+                  <div class="goods-icon-div">
+                    <el-image :src="type.icon" style="width: 95px;height: 95px;"></el-image>
+                  </div>
+                  <div class="goods-name">{{type.name}}</div>
+                </div>
+              </el-badge>
+              <el-badge value="" class="item goods-three-badge" style="top: -10px;">
+                <div class="goods-element" v-if="item.list.length < 12">
+                  <div class="goods-icon-div" style="width: 95px;height: 95px;line-height: 95px; margin: auto;">
+                    <el-image src="/static/images/icon/add.png" style="width: 40px;height: 40px;margin: auto;"></el-image>
+                  </div>
+                  <span class="goods-name" style="color: #cdcdcd;text-align: center;">添加商品</span>
+                </div>
+              </el-badge>
+            </el-form-item>
+          </div>
+          <div v-if="partIndex === pIndex && item.id === 'imgX-scroll'">
+            <table>
+              <tr v-for="(img, index) in item.list" :key="index">
+                <td>
+                  <el-form-item label="" style="margin-bottom: 0px;">
+                    <el-badge value="×" class="item imgX-scroll-badge">
+                      <el-image :src="img.icon" style="width: 244px;height: 95px;border-radius: 5px;"></el-image>
+                    </el-badge>
+                  </el-form-item>
+                </td>
+                <td class="bind-goods">
+                  <el-image class="goods-img" src="/static/images/goods/goods-1.png" v-if="img.goodsId != ''"></el-image>
+                  <div class="add-goods" v-if="img.goodsId === ''">
+                    <el-image class="goods-icon" src="/static/images/icon/add.png"></el-image>
+                    <div class="goods-text">绑定商品</div>
+                  </div>
+                </td>
+              </tr>
+              <tr v-if="item.list.length < 10">
+                <td>
+                  <el-form-item label=" " style="margin-bottom: 0px;">
+                    <el-upload
+                      class="imgX-scroll-uploader"
+                      action="https://jsonplaceholder.typicode.com/posts/"
+                      :show-file-list="false"
+                      :on-success="handleAvatarSuccess"
+                      :before-upload="beforeAvatarUpload">
+                      <img v-if="imageUrl" :src="imageUrl" class="imgX-scroll">
+                      <i v-else class="el-icon-plus imgX-scroll-uploader-icon"></i>
+                    </el-upload>
+                  </el-form-item>
+                </td>
+                <td></td>
+              </tr>
+            </table>
+          </div>
+          <div v-if="partIndex === pIndex && item.id === 'imgY-scroll'">
+            <table>
+              <tr style="width: 375px;" v-for="(img, index) in item.list" :key="index">
+                <td>
+                  <el-form-item label="" style="margin-bottom: 0px;text-align: center;">
+                    <el-badge value="×" class="item imgY-scroll-badge" style="display: inline-block;">
+                      <el-image :src="img.icon" style="width: 120px;height: 220px;border-radius: 5px;;"></el-image>
+                    </el-badge>
+                  </el-form-item>
+                </td>
+                <td class="bind-goods">
+                  <el-image class="goods-img" src="/static/images/goods/goods-1.png" v-if="img.goodsId != ''"></el-image>
+                  <div class="add-goods" v-if="img.goodsId === ''">
+                    <el-image class="goods-icon" src="/static/images/icon/add.png"></el-image>
+                    <div class="goods-text">绑定商品</div>
+                  </div>
+                </td>
+              </tr>
+              <tr v-if="item.list.length < 10">
+                <td>
+                  <el-form-item label="" style="margin-bottom: 0px;text-align: center;">
+                    <el-upload
+                      class="imgY-scroll-uploader"
+                      action="https://jsonplaceholder.typicode.com/posts/"
+                      :show-file-list="false"
+                      :on-success="handleAvatarSuccess"
+                      :before-upload="beforeAvatarUpload" style="display: inline-block;" v-if="item.list.length < 10">
+                      <img v-if="imageUrl" :src="imageUrl" class="imgY-scroll">
+                      <i v-else class="el-icon-plus imgY-scroll-uploader-icon"></i>
+                    </el-upload>
+                  </el-form-item>
+                </td>
+                <td></td>
+              </tr>
+            </table>
+<!--            <el-form-item label="" style="margin-bottom: 0px; width: 375px;text-align: center;">-->
+<!--              <el-badge value="×" class="item imgY-scroll-badge" style="display: inline-block;" v-for="(img, index) in item.list" :key="index">-->
+<!--                <el-image :src="img" style="width: 120px;height: 220px;border-radius: 5px;;"></el-image>-->
+<!--              </el-badge>-->
+<!--              <el-badge value="" class="item imgY-scroll-badge">-->
+<!--                <el-upload-->
+<!--                  class="imgY-scroll-uploader"-->
+<!--                  action="https://jsonplaceholder.typicode.com/posts/"-->
+<!--                  :show-file-list="false"-->
+<!--                  :on-success="handleAvatarSuccess"-->
+<!--                  :before-upload="beforeAvatarUpload" style="display: inline-block;" v-if="item.list.length < 10">-->
+<!--                  <img v-if="imageUrl" :src="imageUrl" class="imgY-scroll">-->
+<!--                  <i v-else class="el-icon-plus imgY-scroll-uploader-icon"></i>-->
+<!--                </el-upload>-->
+<!--              </el-badge>-->
+<!--            </el-form-item>-->
+          </div>
+          <div v-if="partIndex === pIndex && item.id === 'goodsY-scroll'">
+            <el-form-item label=" " style="margin-bottom: 0px; width: 375px;">
+              <el-badge value="×" class="item goods-two-badge" v-for="(type, index) in item.list" :key="index">
+                <div class="goods-element">
+                  <div class="goods-icon-div">
+                    <el-image :src="type.icon" style="width: 140px;height: 140px;"></el-image>
+                  </div>
+                  <div class="goods-name">{{type.name}}</div>
+                </div>
+              </el-badge>
+              <el-badge value="" class="item goods-two-badge" style="position: relative;top: -7px;">
+                <div class="goods-element" v-if="item.list.length < 10">
+                  <div class="goods-icon-div" style="width: 140px;height: 140px;line-height: 140px; margin: auto;">
+                    <el-image src="/static/images/icon/add.png" style="width: 40px;height: 40px;margin: auto;"></el-image>
+                  </div>
+                  <span class="goods-name" style="color: #cdcdcd;text-align: center;">添加商品</span>
+                </div>
+              </el-badge>
+            </el-form-item>
+          </div>
+          <div v-if="partIndex === pIndex && item.id === 'goodsX-scroll'">
+            <el-form-item label=" " style="margin-bottom: 0px; width: 375px;">
+              <el-badge value="×" class="item goods-two-badge" v-for="(type, index) in item.list" :key="index">
+                <div class="goods-element">
+                  <div class="goods-icon-div">
+                    <el-image :src="type.icon" style="width: 140px;height: 140px;"></el-image>
+                  </div>
+                  <div class="goods-name">{{type.name}}</div>
+                </div>
+              </el-badge>
+              <el-badge value="" class="item goods-two-badge" style="position: relative;top: -7px;">
+                <div class="goods-element" v-if="item.list.length < 10">
+                  <div class="goods-icon-div" style="width: 140px;height: 140px;line-height: 140px; margin: auto;">
+                    <el-image src="/static/images/icon/add.png" style="width: 40px;height: 40px;margin: auto;"></el-image>
+                  </div>
+                  <span class="goods-name" style="color: #cdcdcd;text-align: center;">添加商品</span>
+                </div>
+              </el-badge>
+            </el-form-item>
+          </div>
+        </div>
+        <el-form-item label=" " style="margin-top: 20px;">
+          <div class="part-operation">
+            <el-divider content-position="left">操作元素</el-divider>
+            <el-button type="danger" class="part-button" @click="delElement()">
+              <i class="el-icon-close"></i>&nbsp;删除</el-button>
+          </div>
+          <div class="part-operation">
+            <el-divider content-position="left">移动元素</el-divider>
+            <el-button type="success" class="part-button" @click="moveIndex(-1)">
+              <i class="el-icon-caret-top"></i>&nbsp;上移</el-button>
+            <el-button type="success" class="part-button" @click="moveIndex(1)">
+              <i class="el-icon-caret-bottom"></i>&nbsp;下移</el-button>
+          </div>
+        </el-form-item>
+      </el-form>
     </el-main>
   </div>
 </template>
@@ -266,6 +380,46 @@
             })
           }
         })
+      },
+      delElement(){
+        let list = []
+        for (let i = 0; i < this.partList.length; i++){
+          if (i != this.partIndex){
+            list.push(this.partList[i])
+          }
+        }
+        this.partIndex = null
+        this.useElement(list, false, this.partIndex)
+      },
+      moveIndex(num){
+        if ((num < 0 && this.partIndex > 0) || (num > 0 && this.partIndex < (this.partList.length - 1))){
+          let list = []
+          let part1 = this.partList[this.partIndex]
+          let part2 = this.partList[(num+this.partIndex)]
+          for (let i = 0; i < this.partList.length; i++){
+            let obj = {}
+            if (this.partIndex === i){
+              obj = part2
+            } else if ((num+this.partIndex) === i) {
+              obj = part1
+            } else {
+              obj = this.partList[i]
+            }
+            list.push(obj)
+          }
+          this.partIndex = this.partIndex + num
+          this.useElement(list, true, this.partIndex)
+        } else {
+          this.$message.warning('不能再移动啦')
+        }
+      },
+      useElement(list, bool, index){
+        this.partList = list
+        this.$part.setPartList(this.partList)
+        this.$emit('refreshSet', bool, index)
+      },
+      refreshSet(){
+
       }
     }
   }

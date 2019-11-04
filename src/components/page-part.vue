@@ -9,13 +9,27 @@
   }, {
     'id': 'img-carousel',
     'name': '轮播图',
-    'list': [
-      '/static/images/carousel/carousel-1.png',
-      '/static/images/carousel/carousel-2.png',
-      '/static/images/carousel/carousel-3.png',
-      '/static/images/carousel/carousel-4.png',
-      '/static/images/carousel/carousel-5.png'
-    ]
+    'list': [{
+      'goodsId':'',
+      'goodsIcon':'',
+      'icon':'/static/images/carousel/carousel-1.png'
+    },{
+      'goodsId':'',
+      'goodsIcon':'',
+      'icon':'/static/images/carousel/carousel-2.png'
+    },{
+      'goodsId':'1',
+      'goodsIcon':'/static/images/icon/add.png',
+      'icon':'/static/images/carousel/carousel-3.png'
+    },{
+      'goodsId':'',
+      'goodsIcon':'',
+      'icon':'/static/images/carousel/carousel-4.png'
+    },{
+      'goodsId':'',
+      'goodsIcon':'',
+      'icon':'/static/images/carousel/carousel-5.png'
+    }]
   }, {
     'id': 'notice-bar',
     'name': '通知栏',
@@ -52,16 +66,8 @@
     'id': 'img-text-title',
     'name': '图文标题',
     'title': '拼团更实惠',
-    'remark': '团购促销，多买多降',
+    'describe': '团购促销，多买多降',
     'icon': '/static/images/icon/shopping.png'
-  }, {
-    'id': 'img-title',
-    'name': '图片标题',
-    'icon': '/static/images/carousel/carousel-6.png'
-  }, {
-    'id': 'divider-title',
-    'name': '分隔符标题',
-    'title': '分隔符标题'
   }, {
     'id': 'goods-two-row',
     'name': '推荐商品（双排）',
@@ -89,7 +95,23 @@
       'minPrice': '688.88',
       'maxPrice': '888.88',
       'icon': '/static/images/goods/goods-1.png'
+    }, {
+      'id': '0',
+      'name': 'goods-name5',
+      'minPrice': '1688.88',
+      'maxPrice': '1888.88',
+      'icon': '/static/images/goods/goods-1.png'
     }]
+  }, {
+    'id': 'divider-title',
+    'name': '分隔符标题',
+    'title': '分隔符标题'
+  }, {
+    'id': 'img-title',
+    'name': '图片标题',
+    'goodsId':'',
+    'goodsIcon':'',
+    'icon': '/static/images/carousel/carousel-6.png'
   }, {
     'id': 'goods-three-row',
     'name': '推荐商品（三排）',
@@ -123,33 +145,73 @@
       'minPrice': '18.00',
       'maxPrice': '78.00',
       'icon': '/static/images/goods/goods-1.png'
-    }, {
-      'id': '0',
-      'name': 'goods-name6',
-      'minPrice': '66.30',
-      'maxPrice': '0.00',
-      'icon': '/static/images/goods/goods-1.png'
     }]
+  }, {
+    'id': 'img-text-title',
+    'name': '图文标题',
+    'title': '拼团更实惠',
+    'describe': '团购促销，多买多降',
+    'icon': '/static/images/icon/shopping.png'
   }, {
     'id': 'imgX-scroll',
     'name': '图片滑块（横）',
-    'list': [
-      '/static/images/carousel/carousel-1.png',
-      '/static/images/carousel/carousel-2.png',
-      '/static/images/carousel/carousel-3.png',
-      '/static/images/carousel/carousel-4.png',
-      '/static/images/carousel/carousel-5.png'
-    ]
+    'list': [{
+      'goodsId':'',
+      'goodsIcon':'',
+      'icon':'/static/images/carousel/carousel-1.png'
+    },{
+      'goodsId':'1',
+      'goodsIcon':'/static/images/goods/goods-1.png',
+      'icon':'/static/images/carousel/carousel-2.png'
+    },{
+      'goodsId':'',
+      'goodsIcon':'',
+      'icon':'/static/images/carousel/carousel-3.png'
+    },{
+      'goodsId':'',
+      'goodsIcon':'',
+      'icon':'/static/images/carousel/carousel-4.png'
+    },{
+      'goodsId':'',
+      'goodsIcon':'',
+      'icon':'/static/images/carousel/carousel-5.png'
+    }]
+  }, {
+    'id': 'img-text-title',
+    'name': '图文标题',
+    'title': '拼团更实惠',
+    'describe': '团购促销，多买多降',
+    'icon': '/static/images/icon/shopping.png'
   }, {
     'id': 'imgY-scroll',
     'name': '图片滑块（竖）',
-    'list': [
-      '/static/images/carousel/carousel-1.png',
-      '/static/images/carousel/carousel-2.png',
-      '/static/images/carousel/carousel-3.png',
-      '/static/images/carousel/carousel-4.png',
-      '/static/images/carousel/carousel-5.png'
-    ]
+    'list': [{
+      'goodsId':'',
+      'goodsIcon':'',
+      'icon':'/static/images/carousel/carousel-1.png'
+    },{
+      'goodsId':'1',
+      'goodsIcon':'/static/images/goods/goods-1.png',
+      'icon':'/static/images/carousel/carousel-2.png'
+    },{
+      'goodsId':'',
+      'goodsIcon':'',
+      'icon':'/static/images/carousel/carousel-3.png'
+    },{
+      'goodsId':'',
+      'goodsIcon':'',
+      'icon':'/static/images/carousel/carousel-4.png'
+    },{
+      'goodsId':'',
+      'goodsIcon':'',
+      'icon':'/static/images/carousel/carousel-5.png'
+    }]
+  }, {
+    'id': 'img-text-title',
+    'name': '图文标题',
+    'title': '拼团更实惠',
+    'describe': '团购促销，多买多降',
+    'icon': '/static/images/icon/shopping.png'
   }, {
     'id': 'goodsY-scroll',
     'name': '商品滑块（普通）',
@@ -177,11 +239,22 @@
       'minPrice': '688.88',
       'maxPrice': '888.88',
       'icon': '/static/images/goods/goods-1.png'
+    }, {
+      'id': '0',
+      'name': 'goods-name4',
+      'minPrice': '1688.88',
+      'maxPrice': '1888.88',
+      'icon': '/static/images/goods/goods-1.png'
     }]
   }, {
-    'id': 'goods-discount',
+    'id': 'img-text-title',
+    'name': '图文标题',
+    'title': '拼团更实惠',
+    'describe': '团购促销，多买多降',
+    'icon': '/static/images/icon/shopping.png'
+  }, {
+    'id': 'goodsX-scroll',
     'name': '商品滑块（折扣）',
-    'title': '限时秒杀，过期不候',
     'list': [{
       'id': '0',
       'name': 'goods-name1发送飒飒大师师傅三水电费阿斯顿撒',
@@ -205,6 +278,12 @@
       'name': 'goods-name4',
       'newPrice': '688.88',
       'oldPrice': '888.88',
+      'icon': '/static/images/goods/goods-1.png'
+    }, {
+      'id': '0',
+      'name': 'goods-name5',
+      'newPrice': '1688.88',
+      'oldPrice': '1888.88',
       'icon': '/static/images/goods/goods-1.png'
     }]
   }]
@@ -271,11 +350,11 @@
             click: true
           })
         }
-        part = getStorePart('goods-discount')
+        part = getStorePart('goodsX-scroll')
         if (part) {
           let goodsXLength = part.list.length
           that.goodsXScrollStyle = {
-            'width': (270 * goodsXLength) + 'px'
+            'width': (280 * goodsXLength) + 'px'
           }
           that.aBScroll = new BScroll(that.$refs.goodsXScroll[0], {
             startX: 0,

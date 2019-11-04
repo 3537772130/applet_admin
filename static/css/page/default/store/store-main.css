@@ -9,6 +9,7 @@
   height: 58px;
   text-align: left;
   background-color: #FFFFFF;
+  margin-top: 10px;
 }
 
 .components > .img-text-title:hover {
@@ -151,8 +152,8 @@
 .components > .type-frame {
   background-color: #FFFFFF;
   white-space: normal;
-  padding-bottom: 10px;
-  margin-bottom: 10px;
+  padding-top: 10px;
+  padding-bottom: 20px;
   text-align: left;
 }
 
@@ -187,10 +188,11 @@
 /************************分隔线标题*****************************/
 .components > .divider-title {
   margin: auto;
-  height: 50px;
+  height: 40px;
   background-color: #FFFFFF;
   text-align: center;
   position: relative;
+  margin-top: 10px;
 }
 
 .components > .divider-title:hover {
@@ -208,9 +210,9 @@
 }
 
 .components > .divider-title > .c-divider {
-  height: 48px;
-  line-height: 50px;
-  font-size: 14px;
+  height: 38px;
+  line-height: 40px;
+  font-size: 18px;
   display: inline-block;
   padding: 0px 10px;
   background-color: #FFFFFF;
@@ -218,11 +220,18 @@
   z-index: 1;
 }
 
+.components > .divider-title > .c-divider>span{
+  background-image: -webkit-linear-gradient(top, #FF00FF, red, #fd8403);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 
 /*************************商品列表（双排）******************************/
 .components > .goods-two-row {
   margin: auto;
-  padding: 10px 0px;
+  padding-top: 10px;
+  padding-bottom: 30px;
   background-color: #FFFFFF;
   font-size: 12px;
   white-space: normal;
@@ -279,11 +288,11 @@
 /************************商品列表（三排）***************************/
 .components > .goods-three-row {
   margin: auto;
-  padding: 10px 0px;
+  padding-top: 10px;
+  padding-bottom: 30px;
   background-color: #FFFFFF;
   font-size: 12px;
   white-space: normal;
-  margin-bottom: 10px;
   text-align: left;
 }
 
@@ -378,6 +387,7 @@
 /***************************图片滑块视图X********************************/
 .components > .imgX-scroll {
   height: 120px;
+  padding-bottom: 30px;
 }
 
 .components > .imgX-scroll:hover {
@@ -389,13 +399,14 @@
   width: 220px;
   height: 120px;
   border-radius: 8px;
-  margin-right: 10px;
-  box-shadow: 3px 3px 6px #b2b2b2;
+  margin-right: 15px;
+  box-shadow: 8px 8px 6px #b2b2b2;
 }
 
 /***************************图片滑块视图Y********************************/
 .components > .imgY-scroll {
   height: 220px;
+  padding-bottom: 30px;
 }
 
 .components > .imgY-scroll:hover {
@@ -407,13 +418,14 @@
   width: 120px;
   height: 220px;
   border-radius: 8px;
-  margin-right: 10px;
-  box-shadow: 3px 3px 6px #b2b2b2;
+  margin-right: 15px;
+  box-shadow: 8px 8px 6px #b2b2b2;
 }
 
 /************************商品滑块视图X***************************/
 .components > .goodsY-scroll {
   height: 260px;
+  padding-bottom: 30px;
 }
 
 .components > .goodsY-scroll:hover {
@@ -426,10 +438,12 @@
   height: 250px;
   text-align: center;
   display: inline-block;
+  border-top: 1px #cdcdcd solid;
+  border-left: 1px #cdcdcd solid;
   border-radius: 8px;
-  margin-right: 10px;
   padding: 5px;
-  box-shadow: 3px 3px 6px #b2b2b2;
+  margin-right: 15px;
+  box-shadow: 8px 8px 6px #b2b2b2;
 }
 
 .components > .goodsY-scroll > .bscroll-container > .goods-def > div > .goods-img {
@@ -465,85 +479,40 @@
 
 
 /************************商品滑块视图Y（折扣）***************************/
-
-.components > .goods-discount {
-  height: 220px;
-  background: #FFFFFF;
-  word-wrap: normal;
+.components > .goodsX-scroll {
+  height: 160px;
+  padding-bottom: 40px;
 }
 
-.components > .goods-discount:hover {
+.components > .goodsX-scroll:hover {
   cursor: pointer;
   border: 1px #8c939d dashed;
 }
 
-.components > .goods-discount > .text-title {
-  height: 20px;
-  padding: 15px 10px 0px 10px;
-  background: #FFFFFF;
-}
-
-.components > .goods-discount > .text-title > .text {
-  width: 80%;
-  height: 20px;
-  line-height: 20px;
-  text-align: left;
-  font-size: 18px;
-  display: inline-block;
-  background-image: -webkit-linear-gradient(top, red, #fd8403, #FF00FF);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.components > .goods-discount > .text-title > .more{
-  width: 18%;
-  height: 20px;
-  line-height: 20px;
-  text-align: left;
-  display: inline-block;
-  color: #409EFF;
-  font-size: 14px;
-}
-
-.components > .goods-discount > .bscroll {
-  overflow: hidden;
-  white-space: nowrap;
-  padding: 15px;
-  text-align: left;
-  background-color: #FFFFFF;
-}
-
-.components > .goods-discount > .bscroll > .bscroll-container {
-  padding-left: 15px;
-}
-
-
-.components > .goods-discount > .goodsX-scroll {
-  height: 160px;
-}
-
-.components > .goods-discount > .goodsX-scroll > .bscroll-container > .goods-def {
+.components > .goodsX-scroll > .bscroll-container > .goods-def {
   height: 150px;
   text-align: center;
   display: inline-block;
+  border-top: 1px #cdcdcd solid;
+  border-left: 1px #cdcdcd solid;
   border-radius: 8px;
-  margin-right: 10px;
-  padding: 5px;
-  box-shadow: 3px 3px 6px #b2b2b2;
+  padding: 10px 5px 10px 10px;
+  margin-right: 15px;
+  box-shadow: 8px 8px 6px #b2b2b2;
 }
 
-.components > .goods-discount > .goodsX-scroll > .bscroll-container > .goods-def > .goods-img {
+.components > .goodsX-scroll > .bscroll-container > .goods-def > .goods-img {
   width: 120px;
   height: 140px;
   margin-top: 5px;
   display: inline-block;
 }
 
-.components > .goods-discount > .goodsX-scroll > .bscroll-container > .goods-def > div {
+.components > .goodsX-scroll > .bscroll-container > .goods-def > div {
   display: inline-block;
 }
 
-.components > .goods-discount > .goodsX-scroll > .bscroll-container > .goods-def > div > .goods-price {
+.components > .goodsX-scroll > .bscroll-container > .goods-def > div > .goods-price {
   margin: auto;
   width: 120px;
   height: 20px;
@@ -555,12 +524,12 @@
   font-size: 14px;
 }
 
-.components > .goods-discount > .goodsX-scroll > .bscroll-container > .goods-def > div > .goods-price > span {
+.components > .goodsX-scroll > .bscroll-container > .goods-def > div > .goods-price > span {
   font-size: 16px;
   color: #f76a24;
 }
 
-.components > .goods-discount > .goodsX-scroll > .bscroll-container > .goods-def > div > .goods-name {
+.components > .goodsX-scroll > .bscroll-container > .goods-def > div > .goods-name {
   margin: auto;
   width: 120px;
   height: 50px;

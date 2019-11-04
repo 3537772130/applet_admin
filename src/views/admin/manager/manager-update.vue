@@ -1,6 +1,6 @@
 <style type="text/css">
 
-  .manager-update-form{
+  .manager-update-form {
     text-align: left;
     padding-top: 30px;
     padding-left: 50px;
@@ -76,7 +76,8 @@
           </el-form-item>
           <el-form-item>
             <el-button class="sub-but" type="primary" style="width: 190px;position: absolute;left: 80px;"
-                       @click="onSubmitInfo()">提&nbsp;&nbsp;交</el-button>
+                       @click="onSubmitInfo()">提&nbsp;&nbsp;交
+            </el-button>
           </el-form-item>
         </el-form>
       </el-tab-pane>
@@ -102,7 +103,8 @@
           </el-form-item>
           <el-form-item>
             <el-button class="sub-but" type="primary" style="width: 190px;position: absolute;left: 80px;"
-                       @click="onSubmitPass()">提&nbsp;&nbsp;交</el-button>
+                       @click="onSubmitPass()">提&nbsp;&nbsp;交
+            </el-button>
           </el-form-item>
         </el-form>
       </el-tab-pane>
@@ -132,7 +134,7 @@
 
   export default {
     name: 'user-info',
-    data() {
+    data () {
       return {
         info: {},
         showTabs: 'up-info',
@@ -183,14 +185,14 @@
         }
       }
     },
-    created() {
+    created () {
       this.loadManager()
     },
-    mounted() {
+    mounted () {
 
     },
     methods: {
-      loadManager() {
+      loadManager () {
         this.info = this.$cookies.get('manager_info')
         this.upInfo.nickName = this.info.nickName
         this.upInfo.mobile = this.info.mobile
@@ -199,18 +201,20 @@
         this.upInfo.weChatAccount = this.info.weChatAccount
         this.roleName = this.info.roleName
       },
-      getPassword() {
+      getPassword () {
         return this.passForm.newPass
       },
-      onSubmitInfo() {
+      onSubmitInfo () {
         this.$refs['upInfo'].validate((valid) => {
           if (valid) {
             let loading = Loading.service({fullscreen: true, text: '正在提交'})
             this.$axios({
               url: '/api/manage/manager/updateManagerBase',
               method: 'post',
-              data: {nickName: this.upInfo.nickName,mobile: this.upInfo.mobile,email: this.upInfo.email,
-                qqAccount: this.upInfo.qqAccount,weChatAccount: this.upInfo.weChatAccount}
+              data: {
+                nickName: this.upInfo.nickName, mobile: this.upInfo.mobile, email: this.upInfo.email,
+                qqAccount: this.upInfo.qqAccount, weChatAccount: this.upInfo.weChatAccount
+              }
             }).then(res => {
               console.info('后台返回的数据', res.data)
               if (res.data.code === '1') {
@@ -233,7 +237,7 @@
           }
         })
       },
-      onSubmitPass() {
+      onSubmitPass () {
         this.$refs['passForm'].validate((valid) => {
           if (valid) {
             let loading = Loading.service({fullscreen: true, text: '正在提交'})
@@ -274,10 +278,11 @@
           }
         })
       },
-      handleAvatarSuccess(res, file) {
+      handleAvatarSuccess (res, file) {
         if (res.code === '1') {
           this.info = this.$cookies.get('manager_info')
-          this.info.avatarUrl = URL.createObjectURL(file.raw)
+          // this.info.avatarUrl = URL.createObjectURL(file.raw)
+          this.info.avatarUrl = res.data
           this.$cookies.set('manager_info', this.info)
           this.$message({message: '上传成功', type: 'success'})
           this.$emit('loadManager')
@@ -287,7 +292,7 @@
         let loading = Loading.service({fullscreen: true, text: '正在上传'})
         this.$global.exitLoad(this, loading, {'code': res.data})
       },
-      beforeAvatarUpload(file) {
+      beforeAvatarUpload (file) {
         let loading = Loading.service({fullscreen: true, text: '正在上传'})
         const isJPG = 'image/png,image/jpeg'.indexOf(file.type) >= 0
         const isLt2M = file.size / 1024 / 1024 < 3
