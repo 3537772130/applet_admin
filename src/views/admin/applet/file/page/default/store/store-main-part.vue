@@ -382,14 +382,20 @@
         })
       },
       delElement(){
-        let list = []
-        for (let i = 0; i < this.partList.length; i++){
-          if (i != this.partIndex){
-            list.push(this.partList[i])
+        this.$confirm('确定删除元素吗？', '温馨提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          let list = []
+          for (let i = 0; i < this.partList.length; i++){
+            if (i != this.partIndex){
+              list.push(this.partList[i])
+            }
           }
-        }
-        this.partIndex = null
-        this.useElement(list, false, this.partIndex)
+          this.partIndex = null
+          this.useElement(list, false, this.partIndex)
+        })
       },
       moveIndex(num){
         if ((num < 0 && this.partIndex > 0) || (num > 0 && this.partIndex < (this.partList.length - 1))){
