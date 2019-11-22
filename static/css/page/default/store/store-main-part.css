@@ -1,5 +1,5 @@
-.demo-form-inline {
-  margin-bottom: 40px;
+.store-main-part-form {
+  margin-bottom: 180px;
   padding-top: 10px;
 }
 
@@ -12,7 +12,12 @@
 }
 
 
-.store-main-part .img-carousel-badge .el-badge__content{
+.store-main-part .img-carousel-badge {
+  position: relative;
+  top: -40px;
+}
+
+.store-main-part .img-carousel-badge .el-badge__content {
   width: 18px;
   top: 0px;
   right: 10px;
@@ -30,6 +35,7 @@
   cursor: pointer;
   position: relative;
   overflow: hidden;
+  margin-left: 25px;
 }
 
 .store-main-part .img-carousel-uploader .el-upload:hover {
@@ -52,21 +58,27 @@
 }
 
 
+.store-main-part .type-frame-badge {
+  height: 20px;
+  line-height: 20px;
+  float: right;
+  top: -103px;
+  left: 10px;
+}
 
-
-.store-main-part .type-frame-badge .el-badge__content{
+.store-main-part .type-frame-badge .el-badge__content {
   width: 18px;
   top: 0px;
   right: 16px;
   padding: 0px;
 }
 
-.store-main-part .type-frame-badge .el-badge__content:hover{
+.store-main-part .type-frame-badge .el-badge__content:hover {
   cursor: pointer;
   background-color: #409EFF;
 }
 
-.store-main-part .type-frame-badge .type-element {
+.store-main-part .type-element {
   width: 80px;
   height: 80px;
   margin: 0px 5px;
@@ -76,17 +88,17 @@
   border-radius: 5px;
 }
 
-.store-main-part .type-frame-badge .type-element:hover {
+.store-main-part .type-element:hover {
   cursor: pointer;
   border: 1px #409EFF dashed;
 }
 
-.store-main-part .type-frame-badge .type-element > .type-icon-div {
+.store-main-part .type-element > .type-icon-div {
   text-align: center;
   margin-top: 10px;
 }
 
-.store-main-part .type-frame-badge .type-element > .type-name {
+.store-main-part .type-element > .type-name {
   width: 100%;
   height: 20px;
   line-height: 20px;
@@ -151,14 +163,15 @@
 }
 
 
-
-
-
-.store-main-part .goods-two-badge{
-  position: relative;
+.store-main-part .goods-two-badge {
+  height: 20px;
+  line-height: 20px;
+  float: left;
+  top: -202px;
+  left: 160px;
 }
 
-.store-main-part .goods-two-badge .el-badge__content{
+.store-main-part .goods-two-badge .el-badge__content {
   width: 18px;
   top: 0px;
   right: 16px;
@@ -167,32 +180,33 @@
   margin-bottom: 10px;
 }
 
-.store-main-part .goods-two-badge .el-badge__content:hover{
+.store-main-part .goods-two-badge .el-badge__content:hover {
   cursor: pointer;
   background-color: #409EFF;
 }
 
-.store-main-part .goods-two-badge .goods-element {
+.store-main-part .goods-two-element {
   width: 172px;
   height: 185px;
-  margin: 0px 5px;
+  margin: 10px 5px;
   text-align: center;
   display: inline-block;
   border: 1px #cdcdcd dashed;
   border-radius: 5px;
+  float: left;
 }
 
-.store-main-part .goods-two-badge .goods-element:hover {
+.store-main-part .goods-two-element:hover {
   cursor: pointer;
   border: 1px #409EFF dashed;
 }
 
-.store-main-part .goods-two-badge .goods-element > .goods-icon-div {
+.store-main-part .goods-two-element > .goods-icon-div {
   text-align: center;
   margin-top: 10px;
 }
 
-.store-main-part .goods-two-badge .goods-element > .goods-name {
+.store-main-part .goods-two-element > .goods-name {
   margin: auto;
   width: 140px;
   height: 30px;
@@ -202,19 +216,19 @@
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 1;
   position: relative;
   top: -15px;
 }
 
 
-
-
-.store-main-part .goods-three-badge{
-  position: relative;
+.store-main-part .goods-three-badge {
+  float: left;
+  top: -158px;
+  left: 100px;
 }
 
-.store-main-part .goods-three-badge .el-badge__content{
+.store-main-part .goods-three-badge .el-badge__content {
   width: 18px;
   top: 0px;
   right: 16px;
@@ -223,32 +237,33 @@
   margin-bottom: 10px;
 }
 
-.store-main-part .goods-three-badge .el-badge__content:hover{
+.store-main-part .goods-three-badge .el-badge__content:hover {
   cursor: pointer;
   background-color: #409EFF;
 }
 
-.store-main-part .goods-three-badge .goods-element {
+.store-main-part .goods-three-element {
   width: 110px;
   height: 135px;
-  margin: 0px 5px;
+  margin: 10px 5px;
   text-align: center;
   display: inline-block;
   border: 1px #cdcdcd dashed;
   border-radius: 5px;
+  float: left;
 }
 
-.store-main-part .goods-three-badge .goods-element:hover {
+.store-main-part .goods-three-element:hover {
   cursor: pointer;
   border: 1px #409EFF dashed;
 }
 
-.store-main-part .goods-three-badge .goods-element > .goods-icon-div {
+.store-main-part .goods-three-element > .goods-icon-div {
   text-align: center;
   margin-top: 10px;
 }
 
-.store-main-part .goods-three-badge .goods-element > .goods-name {
+.store-main-part .goods-three-element > .goods-name {
   margin: auto;
   width: 95px;
   height: 30px;
@@ -258,15 +273,18 @@
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 1;
   position: relative;
   top: -15px;
 }
 
 
+.store-main-part .imgX-scroll-badge {
+  position: relative;
+  top: -40px;
+}
 
-
-.store-main-part .imgX-scroll-badge .el-badge__content{
+.store-main-part .imgX-scroll-badge .el-badge__content {
   width: 18px;
   top: 0px;
   right: 10px;
@@ -284,6 +302,7 @@
   cursor: pointer;
   position: relative;
   overflow: hidden;
+  margin-left: 25px;
 }
 
 .store-main-part .imgX-scroll-uploader .el-upload:hover {
@@ -306,14 +325,12 @@
 }
 
 
-
-
-
-.store-main-part .imgY-scroll-badge{
-  margin-right: 20px;
+.store-main-part .imgY-scroll-badge {
+  position: relative;
+  top: -110px;
 }
 
-.store-main-part .imgY-scroll-badge .el-badge__content{
+.store-main-part .imgY-scroll-badge .el-badge__content {
   width: 18px;
   top: 0px;
   right: 10px;
@@ -331,6 +348,7 @@
   cursor: pointer;
   position: relative;
   overflow: hidden;
+  margin-left: 25px;
 }
 
 .store-main-part .imgY-scroll-uploader .el-upload:hover {
@@ -353,36 +371,47 @@
 }
 
 
-
-
-
-.bind-goods>.goods-img{
-  width: 95px;height: 95px;margin-left: 10px;position: relative;top: -4px;
+.bind-goods > .goods-img {
+  width: 95px;
+  height: 95px;
+  margin-left: 10px;
+  position: relative;
+  top: -4px;
 }
 
-.bind-goods>.goods-img:hover{
+.bind-goods > .goods-img:hover {
   cursor: pointer;
 }
 
-.bind-goods>.add-goods{
-  width: 93px;height: 93px;margin-left: 10px; border: 1px #cdcdcd dashed;border-radius: 5px;text-align: center;position: relative;top: -5px;
+.bind-goods > .add-goods {
+  width: 93px;
+  height: 93px;
+  margin-left: 10px;
+  border: 1px #cdcdcd dashed;
+  border-radius: 5px;
+  text-align: center;
+  position: relative;
+  top: -5px;
 }
 
-.bind-goods>.add-goods:hover{
+.bind-goods > .add-goods:hover {
   cursor: pointer;
   border: 1px #409EFF dashed;
 }
 
-.bind-goods>.add-goods > .goods-icon{
-  width: 40px;height: 40px;margin-top: 20px;
+.bind-goods > .add-goods > .goods-icon {
+  width: 40px;
+  height: 40px;
+  margin-top: 20px;
 }
 
-.bind-goods>.add-goods > .goods-text{
-  color: #cdcdcd;font-size: 12px;
+.bind-goods > .add-goods > .goods-text {
+  color: #cdcdcd;
+  font-size: 12px;
 }
 
 
-.part-operation{
+.part-operation {
   width: 170px;
   border: 1px #cdcdcd dashed;
   border-radius: 3px;

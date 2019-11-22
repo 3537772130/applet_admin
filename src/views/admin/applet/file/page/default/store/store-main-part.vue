@@ -4,7 +4,7 @@
 <template>
   <div>
     <el-main v-loading="loading" element-loading-text="加载中" style="background-color: #FFFFFF; padding: 0px 20px;">
-      <el-form class="demo-form-inline">
+      <el-form class="store-main-part-form">
         <div class="store-main-part" v-for="(item, pIndex) in partList" :key="pIndex">
           <div v-if="partIndex === pIndex && item.id === 'notice-bar'">
             <el-form-item label="通知内容" prop="elementLogo">
@@ -13,17 +13,18 @@
             </el-form-item>
           </div>
           <div v-if="partIndex === pIndex && item.id === 'img-carousel'">
-            <table>
+            <table style="width: 400px;">
               <tr v-for="(car, index) in item.list" :key="index">
                 <td>
                   <el-form-item label="" style="margin-bottom: 0px;">
-                    <el-badge value="×" class="item img-carousel-badge">
-                      <el-image :src="car.icon" style="width: 244px;height: 95px;"></el-image>
+                    <el-badge value="×" class="item img-carousel-badge" @click.native="delData(index)">
                     </el-badge>
+                    <el-image :src="car.icon" style="width: 244px;height: 95px;"></el-image>
                   </el-form-item>
                 </td>
                 <td class="bind-goods">
-                  <el-image class="goods-img" src="/static/images/goods/goods-1.png" v-if="car.goodsId != ''"></el-image>
+                  <el-image class="goods-img" src="/static/images/goods/goods-1.png"
+                            v-if="car.goodsId != ''"></el-image>
                   <div class="add-goods" v-if="car.goodsId === ''">
                     <el-image class="goods-icon" src="/static/images/icon/add.png"></el-image>
                     <div class="goods-text">绑定商品</div>
@@ -50,22 +51,19 @@
           </div>
           <div v-if="partIndex === pIndex && item.id === 'type-frame'">
             <el-form-item label=" " style="margin-bottom: 0px; width: 375px;">
-              <el-badge value="×" class="item type-frame-badge" v-for="(type, index) in item.list" :key="index">
-                <div class="type-element">
-                  <div class="type-icon-div">
-                    <el-image :src="type.icon" style="width: 40px;height: 40px;"></el-image>
-                  </div>
-                  <span class="type-name">{{type.name}}</span>
+              <div class="type-element" v-for="(type, index) in item.list" :key="index">
+                <div class="type-icon-div">
+                  <el-image :src="type.icon" style="width: 40px;height: 40px;"></el-image>
                 </div>
-              </el-badge>
-              <el-badge value="" class="item type-frame-badge">
-                <div class="type-element" v-if="item.list.length < 12">
-                  <div class="type-icon-div">
-                    <el-image src="/static/images/icon/add.png" style="width: 40px;height: 40px;"></el-image>
-                  </div>
-                  <span class="type-name" style="color: #cdcdcd;">添加</span>
+                <span class="type-name">{{type.name}}</span>
+                <el-badge value="×" class="item type-frame-badge" @click.native="delData(index)"></el-badge>
+              </div>
+              <div class="type-element" v-if="item.list.length < 12">
+                <div class="type-icon-div">
+                  <el-image src="/static/images/icon/add.png" style="width: 40px;height: 40px;"></el-image>
                 </div>
-              </el-badge>
+                <span class="type-name" style="color: #cdcdcd;">添加</span>
+              </div>
             </el-form-item>
           </div>
           <div v-if="partIndex === pIndex && item.id === 'img-text-title'">
@@ -88,17 +86,18 @@
             </el-form-item>
           </div>
           <div v-if="partIndex === pIndex && item.id === 'img-title'">
-            <table>
+            <table style="width: 400px;">
               <tr v-if="item.icon != ''">
                 <td>
                   <el-form-item label="">
                     <el-badge value="×" class="item img-carousel-badge">
-                      <el-image :src="item.icon" style="width: 244px;height: 95px;"></el-image>
                     </el-badge>
+                    <el-image :src="item.icon" style="width: 244px;height: 95px;"></el-image>
                   </el-form-item>
                 </td>
                 <td class="bind-goods">
-                  <el-image class="goods-img" src="/static/images/goods/goods-1.png" v-if="item.goodsId != ''"></el-image>
+                  <el-image class="goods-img" src="/static/images/goods/goods-1.png"
+                            v-if="item.goodsId != ''"></el-image>
                   <div class="add-goods" style="top: -13px" v-if="item.goodsId === ''">
                     <el-image class="goods-icon" src="/static/images/icon/add.png"></el-image>
                     <div class="goods-text">绑定商品</div>
@@ -130,56 +129,52 @@
           </div>
           <div v-if="partIndex === pIndex && item.id === 'goods-two-row'">
             <el-form-item label=" " style="margin-bottom: 0px; width: 375px;">
-              <el-badge value="×" class="item goods-two-badge" v-for="(type, index) in item.list" :key="index">
-                <div class="goods-element">
-                  <div class="goods-icon-div">
-                    <el-image :src="type.icon" style="width: 140px;height: 140px;"></el-image>
-                  </div>
-                  <div class="goods-name">{{type.name}}</div>
+              <div class="goods-two-element" v-for="(type, index) in item.list" :key="index">
+                <div class="goods-icon-div">
+                  <el-image :src="type.icon" style="width: 140px;height: 140px;"></el-image>
                 </div>
-              </el-badge>
-              <el-badge value="" class="item goods-two-badge" style="top: -7px;">
-                <div class="goods-element" v-if="item.list.length < 10">
-                  <div class="goods-icon-div" style="width: 140px;height: 140px;line-height: 140px; margin: auto;">
-                    <el-image src="/static/images/icon/add.png" style="width: 40px;height: 40px;margin: auto;"></el-image>
-                  </div>
-                  <span class="goods-name" style="color: #cdcdcd;text-align: center;">添加商品</span>
+                <div class="goods-name">{{type.name}}</div>
+                <el-badge value="×" class="item goods-two-badge" @click.native="delData(index)"></el-badge>
+              </div>
+              <div class="goods-two-element" v-if="item.list.length < 10">
+                <div class="goods-icon-div" style="width: 140px;height: 140px;line-height: 140px; margin: auto;">
+                  <el-image src="/static/images/icon/add.png"
+                            style="width: 40px;height: 40px;margin: auto;padding-top: 50px;"></el-image>
                 </div>
-              </el-badge>
+                <span class="goods-name" style="color: #cdcdcd;text-align: center;">添加商品</span>
+              </div>
             </el-form-item>
           </div>
           <div v-if="partIndex === pIndex && item.id === 'goods-three-row'">
             <el-form-item label=" " style="margin-bottom: 0px; width: 375px;">
-              <el-badge value="×" class="item goods-three-badge" v-for="(type, index) in item.list" :key="index">
-                <div class="goods-element">
-                  <div class="goods-icon-div">
-                    <el-image :src="type.icon" style="width: 95px;height: 95px;"></el-image>
-                  </div>
-                  <div class="goods-name">{{type.name}}</div>
+              <div class="goods-three-element" v-for="(type, index) in item.list" :key="index">
+                <div class="goods-icon-div">
+                  <el-image :src="type.icon" style="width: 95px;height: 95px;"></el-image>
                 </div>
-              </el-badge>
-              <el-badge value="" class="item goods-three-badge" style="top: -10px;">
-                <div class="goods-element" v-if="item.list.length < 12">
-                  <div class="goods-icon-div" style="width: 95px;height: 95px;line-height: 95px; margin: auto;">
-                    <el-image src="/static/images/icon/add.png" style="width: 40px;height: 40px;margin: auto;"></el-image>
-                  </div>
-                  <span class="goods-name" style="color: #cdcdcd;text-align: center;">添加商品</span>
+                <div class="goods-name">{{type.name}}</div>
+                <el-badge value="×" class="item goods-three-badge" @click.native="delData(index)"></el-badge>
+              </div>
+              <div class="goods-three-element" v-if="item.list.length < 12">
+                <div class="goods-icon-div" style="width: 95px;height: 95px;line-height: 95px; margin: auto;">
+                  <el-image src="/static/images/icon/add.png"
+                            style="width: 40px;height: 40px;margin: auto;padding-top: 30px;"></el-image>
                 </div>
-              </el-badge>
+                <span class="goods-name" style="color: #cdcdcd;text-align: center;">添加商品</span>
+              </div>
             </el-form-item>
           </div>
           <div v-if="partIndex === pIndex && item.id === 'imgX-scroll'">
-            <table>
+            <table style="width: 400px;">
               <tr v-for="(img, index) in item.list" :key="index">
                 <td>
                   <el-form-item label="" style="margin-bottom: 0px;">
-                    <el-badge value="×" class="item imgX-scroll-badge">
-                      <el-image :src="img.icon" style="width: 244px;height: 95px;border-radius: 5px;"></el-image>
-                    </el-badge>
+                    <el-badge value="×" class="item imgX-scroll-badge" @click.native="delData(index)"></el-badge>
+                    <el-image :src="img.icon" style="width: 244px;height: 95px;border-radius: 5px;"></el-image>
                   </el-form-item>
                 </td>
                 <td class="bind-goods">
-                  <el-image class="goods-img" src="/static/images/goods/goods-1.png" v-if="img.goodsId != ''"></el-image>
+                  <el-image class="goods-img" src="/static/images/goods/goods-1.png"
+                            v-if="img.goodsId != ''"></el-image>
                   <div class="add-goods" v-if="img.goodsId === ''">
                     <el-image class="goods-icon" src="/static/images/icon/add.png"></el-image>
                     <div class="goods-text">绑定商品</div>
@@ -205,17 +200,18 @@
             </table>
           </div>
           <div v-if="partIndex === pIndex && item.id === 'imgY-scroll'">
-            <table>
+            <table style="width: 400px;">
               <tr style="width: 375px;" v-for="(img, index) in item.list" :key="index">
                 <td>
                   <el-form-item label="" style="margin-bottom: 0px;text-align: center;">
-                    <el-badge value="×" class="item imgY-scroll-badge" style="display: inline-block;">
-                      <el-image :src="img.icon" style="width: 120px;height: 220px;border-radius: 5px;;"></el-image>
-                    </el-badge>
+                    <el-badge value="×" class="item imgY-scroll-badge" style="display: inline-block;"
+                              @click.native="delData(index)"></el-badge>
+                    <el-image :src="img.icon" style="width: 120px;height: 220px;border-radius: 5px;;"></el-image>
                   </el-form-item>
                 </td>
                 <td class="bind-goods">
-                  <el-image class="goods-img" src="/static/images/goods/goods-1.png" v-if="img.goodsId != ''"></el-image>
+                  <el-image class="goods-img" src="/static/images/goods/goods-1.png"
+                            v-if="img.goodsId != ''"></el-image>
                   <div class="add-goods" v-if="img.goodsId === ''">
                     <el-image class="goods-icon" src="/static/images/icon/add.png"></el-image>
                     <div class="goods-text">绑定商品</div>
@@ -239,61 +235,56 @@
                 <td></td>
               </tr>
             </table>
-<!--            <el-form-item label="" style="margin-bottom: 0px; width: 375px;text-align: center;">-->
-<!--              <el-badge value="×" class="item imgY-scroll-badge" style="display: inline-block;" v-for="(img, index) in item.list" :key="index">-->
-<!--                <el-image :src="img" style="width: 120px;height: 220px;border-radius: 5px;;"></el-image>-->
-<!--              </el-badge>-->
-<!--              <el-badge value="" class="item imgY-scroll-badge">-->
-<!--                <el-upload-->
-<!--                  class="imgY-scroll-uploader"-->
-<!--                  action="https://jsonplaceholder.typicode.com/posts/"-->
-<!--                  :show-file-list="false"-->
-<!--                  :on-success="handleAvatarSuccess"-->
-<!--                  :before-upload="beforeAvatarUpload" style="display: inline-block;" v-if="item.list.length < 10">-->
-<!--                  <img v-if="imageUrl" :src="imageUrl" class="imgY-scroll">-->
-<!--                  <i v-else class="el-icon-plus imgY-scroll-uploader-icon"></i>-->
-<!--                </el-upload>-->
-<!--              </el-badge>-->
-<!--            </el-form-item>-->
+            <!--            <el-form-item label="" style="margin-bottom: 0px; width: 375px;text-align: center;">-->
+            <!--              <el-badge value="×" class="item imgY-scroll-badge" style="display: inline-block;" v-for="(img, index) in item.list" :key="index">-->
+            <!--                <el-image :src="img" style="width: 120px;height: 220px;border-radius: 5px;;"></el-image>-->
+            <!--              </el-badge>-->
+            <!--              <el-badge value="" class="item imgY-scroll-badge">-->
+            <!--                <el-upload-->
+            <!--                  class="imgY-scroll-uploader"-->
+            <!--                  action="https://jsonplaceholder.typicode.com/posts/"-->
+            <!--                  :show-file-list="false"-->
+            <!--                  :on-success="handleAvatarSuccess"-->
+            <!--                  :before-upload="beforeAvatarUpload" style="display: inline-block;" v-if="item.list.length < 10">-->
+            <!--                  <img v-if="imageUrl" :src="imageUrl" class="imgY-scroll">-->
+            <!--                  <i v-else class="el-icon-plus imgY-scroll-uploader-icon"></i>-->
+            <!--                </el-upload>-->
+            <!--              </el-badge>-->
+            <!--            </el-form-item>-->
           </div>
           <div v-if="partIndex === pIndex && item.id === 'goodsY-scroll'">
             <el-form-item label=" " style="margin-bottom: 0px; width: 375px;">
-              <el-badge value="×" class="item goods-two-badge" v-for="(type, index) in item.list" :key="index">
-                <div class="goods-element">
-                  <div class="goods-icon-div">
-                    <el-image :src="type.icon" style="width: 140px;height: 140px;"></el-image>
-                  </div>
-                  <div class="goods-name">{{type.name}}</div>
+              <div class="goods-two-element" v-for="(type, index) in item.list" :key="index">
+                <div class="goods-icon-div">
+                  <el-image :src="type.icon" style="width: 140px;height: 140px;"></el-image>
                 </div>
-              </el-badge>
-              <el-badge value="" class="item goods-two-badge" style="position: relative;top: -7px;">
-                <div class="goods-element" v-if="item.list.length < 10">
-                  <div class="goods-icon-div" style="width: 140px;height: 140px;line-height: 140px; margin: auto;">
-                    <el-image src="/static/images/icon/add.png" style="width: 40px;height: 40px;margin: auto;"></el-image>
-                  </div>
-                  <span class="goods-name" style="color: #cdcdcd;text-align: center;">添加商品</span>
+                <div class="goods-name">{{type.name}}</div>
+                <el-badge value="×" class="item goods-two-badge" @click.native="delData(index)"></el-badge>
+              </div>
+              <div class="goods-two-element" v-if="item.list.length < 10">
+                <div class="goods-icon-div" style="width: 140px;height: 140px;line-height: 140px; margin: auto;">
+                  <el-image src="/static/images/icon/add.png"
+                            style="width: 40px;height: 40px;margin: auto;padding-top: 50px;"></el-image>
                 </div>
-              </el-badge>
+                <span class="goods-name" style="color: #cdcdcd;text-align: center;">添加商品</span>
+              </div>
             </el-form-item>
           </div>
           <div v-if="partIndex === pIndex && item.id === 'goodsX-scroll'">
             <el-form-item label=" " style="margin-bottom: 0px; width: 375px;">
-              <el-badge value="×" class="item goods-two-badge" v-for="(type, index) in item.list" :key="index">
-                <div class="goods-element">
-                  <div class="goods-icon-div">
-                    <el-image :src="type.icon" style="width: 140px;height: 140px;"></el-image>
-                  </div>
-                  <div class="goods-name">{{type.name}}</div>
+              <div class="goods-two-element" v-for="(type, index) in item.list" :key="index">
+                <div class="goods-icon-div">
+                  <el-image :src="type.icon" style="width: 140px;height: 140px;"></el-image>
                 </div>
-              </el-badge>
-              <el-badge value="" class="item goods-two-badge" style="position: relative;top: -7px;">
-                <div class="goods-element" v-if="item.list.length < 10">
-                  <div class="goods-icon-div" style="width: 140px;height: 140px;line-height: 140px; margin: auto;">
-                    <el-image src="/static/images/icon/add.png" style="width: 40px;height: 40px;margin: auto;"></el-image>
-                  </div>
-                  <span class="goods-name" style="color: #cdcdcd;text-align: center;">添加商品</span>
+                <div class="goods-name">{{type.name}}</div>
+                <el-badge value="×" class="item goods-two-badge" @click.native="delData(index)"></el-badge>
+              </div>
+              <div class="goods-two-element" v-if="item.list.length < 10">
+                <div class="goods-icon-div" style="width: 140px;height: 140px;line-height: 140px; margin: auto;">
+                  <el-image src="/static/images/icon/add.png" style="width: 40px;height: 40px;margin: auto;"></el-image>
                 </div>
-              </el-badge>
+                <span class="goods-name" style="color: #cdcdcd;text-align: center;">添加商品</span>
+              </div>
             </el-form-item>
           </div>
         </div>
@@ -301,14 +292,17 @@
           <div class="part-operation">
             <el-divider content-position="left">操作元素</el-divider>
             <el-button type="danger" class="part-button" @click="delElement()">
-              <i class="el-icon-close"></i>&nbsp;删除</el-button>
+              <i class="el-icon-close"></i>&nbsp;删除
+            </el-button>
           </div>
           <div class="part-operation">
             <el-divider content-position="left">移动元素</el-divider>
             <el-button type="success" class="part-button" @click="moveIndex(-1)">
-              <i class="el-icon-caret-top"></i>&nbsp;上移</el-button>
+              <i class="el-icon-caret-top"></i>&nbsp;上移
+            </el-button>
             <el-button type="success" class="part-button" @click="moveIndex(1)">
-              <i class="el-icon-caret-bottom"></i>&nbsp;下移</el-button>
+              <i class="el-icon-caret-bottom"></i>&nbsp;下移
+            </el-button>
           </div>
         </el-form-item>
       </el-form>
@@ -381,15 +375,39 @@
           }
         })
       },
-      delElement(){
+      delData (index) {
+        this.$confirm('确定删除参数吗？', '温馨提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          let list = []
+          for (let k = 0; k < this.partList.length; k++) {
+            let part = this.partList[k]
+            if (k === this.partIndex) {
+              let list1 = []
+              for (let i = 0; i < part.list.length; i++) {
+                if (i != index) {
+                  list1.push(part.list[i])
+                }
+              }
+              part.list = list1
+            }
+            list.push(part)
+          }
+          this.partList = list
+          this.useElement(list, true, this.partIndex)
+        })
+      },
+      delElement () {
         this.$confirm('确定删除元素吗？', '温馨提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
           let list = []
-          for (let i = 0; i < this.partList.length; i++){
-            if (i != this.partIndex){
+          for (let i = 0; i < this.partList.length; i++) {
+            if (i != this.partIndex) {
               list.push(this.partList[i])
             }
           }
@@ -397,16 +415,16 @@
           this.useElement(list, false, this.partIndex)
         })
       },
-      moveIndex(num){
-        if ((num < 0 && this.partIndex > 0) || (num > 0 && this.partIndex < (this.partList.length - 1))){
+      moveIndex (num) {
+        if ((num < 0 && this.partIndex > 0) || (num > 0 && this.partIndex < (this.partList.length - 1))) {
           let list = []
           let part1 = this.partList[this.partIndex]
-          let part2 = this.partList[(num+this.partIndex)]
-          for (let i = 0; i < this.partList.length; i++){
+          let part2 = this.partList[(num + this.partIndex)]
+          for (let i = 0; i < this.partList.length; i++) {
             let obj = {}
-            if (this.partIndex === i){
+            if (this.partIndex === i) {
               obj = part2
-            } else if ((num+this.partIndex) === i) {
+            } else if ((num + this.partIndex) === i) {
               obj = part1
             } else {
               obj = this.partList[i]
@@ -419,12 +437,12 @@
           this.$message.warning('不能再移动啦')
         }
       },
-      useElement(list, bool, index){
+      useElement (list, bool, index) {
         this.partList = list
         this.$part.setPartList(this.partList)
         this.$emit('refreshSet', bool, index)
       },
-      refreshSet(){
+      refreshSet () {
 
       }
     }

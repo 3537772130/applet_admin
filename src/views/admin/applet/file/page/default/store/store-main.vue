@@ -6,8 +6,8 @@
   <div style="text-align: left;">
     <el-main v-loading="loading" element-loading-text="加载中" style="background-color: #FFFFFF;">
       <div class="config-operation">
-        <el-button type="primary" @click="onSubmit()"><i class="el-icon-folder-checked"></i>&nbsp;保存配置</el-button>
-        <el-button type="danger" @click="onSubmit()"><i class="el-icon-folder-delete"></i>&nbsp;取消配置</el-button>
+        <el-button type="primary" @click="preserveConfig()"><i class="el-icon-folder-checked"></i>&nbsp;保存配置</el-button>
+        <el-button type="danger" @click="cancelConfig()"><i class="el-icon-folder-delete"></i>&nbsp;取消配置</el-button>
       </div>
       <div class="left-menu" :style="{height: (contentHeight - 100) + 'px'}">
         <div v-for="(item1, index1) in typeList" :key="index1">
@@ -21,8 +21,9 @@
       </div>
       <div class="center-menu" :style="{height: contentHeight + 'px'}">
         <el-image src="/static/images/timg.jpg" class="center-img"></el-image>
-        <div class="center-content">
-          <div class="components" v-for="(item,partIndex) in partList" :key="partIndex" :style="{'border': checkIndex === partIndex ? '1px #FF00FF dashed':'none'}">
+        <div class="center-content" ref="centerContent">
+          <div class="components" v-for="(item,partIndex) in partList" :key="partIndex"
+               :style="{'border': checkIndex === partIndex ? '1px #FF00FF dashed':'none'}">
             <div class="goods-search" @click="openDrawer(partIndex)" v-if="item.id === 'goods-search'">
               <div class="search-part">
                 <i class="el-icon-search"></i>搜索商品
@@ -216,16 +217,21 @@
     methods: {
       loadAppletElement (pageId) {
         if (pageId) {
+          this.pageId = pageId
           let loading = Loading.service({fullscreen: true, text: '正在加载'})
           this.$axios({
             url: '/api/manage/applet/page/loadPageElement',
             method: 'post',
             data: {pageId: pageId}
           }).then(res => {
+            this.typeList = res.data.data.typeList
             if (res.data.code === '1') {
-              this.typeList = res.data.data
-              this.partList = this.$part.getStoreList()
+              let json = res.data.data.contentJson
+              this.partList = JSON.parse(json)
+              this.$part.setPartList(this.partList)
               this.$part._initStoreScroll(this)
+            } else {
+              this.partList = this.$part.getStoreList()
             }
             this.$global.exitLoad(this, loading, res.data)
           }).catch(error => {
@@ -233,6 +239,32 @@
             this.$global.exitLoad(this, loading, '')
           })
         }
+      },
+      preserveConfig () {
+        let json = JSON.stringify(this.partList)
+        let loading = Loading.service({fullscreen: true, text: '正在加载'})
+        this.$axios({
+          url: '/api/manage/applet/page/savePageContent',
+          method: 'post',
+          data: {pageId: this.pageId, json: json}
+        }).then(res => {
+          res.data.code === '1' ? this.$message.success({
+            message: res.data.data, duration: 1000
+          }) : this.$message.error(res.data.data)
+          this.$global.exitLoad(this, loading, res.data)
+        }).catch(error => {
+          console.info('错误信息', error)
+          this.$global.exitLoad(this, loading, '')
+        })
+      },
+      cancelConfig () {
+        this.$confirm('确定取消当前修改的配置吗？', '温馨提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          window.close()
+        })
       },
       addPartList (logo) {
         let part = this.$part.getStorePart(logo)
@@ -251,6 +283,15 @@
           }
           if (limit) {
             list.push(part)
+            this.$message.success('添加元素成功')
+            this.$nextTick(() => {
+              let offsetHeight = 0
+              for (let i = 0; i < this.partList.length; i++) {
+                const el = document.querySelector('.' + this.partList[i].id)
+                offsetHeight += el.offsetHeight
+              }
+              this.$refs.centerContent.scrollTop = offsetHeight
+            })
           }
         } else {
           this.$message.warning('元素不存在')
@@ -266,7 +307,7 @@
         this.$cookies.set('store_main_part_index', index)
         this.drawer = true
         this.drawerTitle = part.name
-        try{
+        try {
           this.$refs.StoreMainPart.loadPart()
         } catch (e) {
 

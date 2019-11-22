@@ -13,53 +13,17 @@
       'goodsId':'',
       'goodsIcon':'',
       'icon':'/static/images/carousel/carousel-1.png'
-    },{
-      'goodsId':'',
-      'goodsIcon':'',
-      'icon':'/static/images/carousel/carousel-2.png'
-    },{
-      'goodsId':'1',
-      'goodsIcon':'/static/images/icon/add.png',
-      'icon':'/static/images/carousel/carousel-3.png'
-    },{
-      'goodsId':'',
-      'goodsIcon':'',
-      'icon':'/static/images/carousel/carousel-4.png'
-    },{
-      'goodsId':'',
-      'goodsIcon':'',
-      'icon':'/static/images/carousel/carousel-5.png'
     }]
   }, {
     'id': 'notice-bar',
     'name': '通知栏',
-    'textContent': '轰烈流沙枕上白发,杯中酒比划,年少风雅鲜衣怒马,也不过一刹那,难免疏漏儿时檐下,莫测变化,隔却山海,转身时从容煎茶。嗯哼'
+    'textContent': '恭喜发财'
   }, {
     'id': 'type-frame',
     'name': '分类栏',
     'list': [{
       'id': '0',
-      'name': 'type1',
-      'icon': '/static/images/icon/shopping.png'
-    }, {
-      'id': '0',
-      'name': 'type2',
-      'icon': '/static/images/icon/shopping.png'
-    }, {
-      'id': '0',
-      'name': 'type3',
-      'icon': '/static/images/icon/shopping.png'
-    }, {
-      'id': '0',
-      'name': 'type4',
-      'icon': '/static/images/icon/shopping.png'
-    }, {
-      'id': '0',
-      'name': 'type5',
-      'icon': '/static/images/icon/shopping.png'
-    }, {
-      'id': '0',
-      'name': 'type6',
+      'name': 'type',
       'icon': '/static/images/icon/shopping.png'
     }]
   }, {
@@ -73,115 +37,39 @@
     'name': '推荐商品（双排）',
     'list': [{
       'id': '0',
-      'name': 'goods-name1发送飒飒大师师傅三水电费阿斯顿撒',
-      'minPrice': '88.88',
-      'maxPrice': '166.99',
-      'icon': '/static/images/goods/goods-1.png'
-    }, {
-      'id': '0',
-      'name': 'goods-name2',
-      'minPrice': '9888.88',
-      'maxPrice': '13288.88',
-      'icon': '/static/images/goods/goods-1.png'
-    }, {
-      'id': '0',
-      'name': 'goods-name3',
-      'minPrice': '9888.88',
-      'maxPrice': '13288.88',
-      'icon': '/static/images/goods/goods-1.png'
-    }, {
-      'id': '0',
-      'name': 'goods-name4',
-      'minPrice': '688.88',
-      'maxPrice': '888.88',
-      'icon': '/static/images/goods/goods-1.png'
-    }, {
-      'id': '0',
-      'name': 'goods-name5',
-      'minPrice': '1688.88',
-      'maxPrice': '1888.88',
+      'name': '商品名称',
+      'minPrice': '166.66',
+      'maxPrice': '188.88',
       'icon': '/static/images/goods/goods-1.png'
     }]
   }, {
     'id': 'divider-title',
     'name': '分隔符标题',
-    'title': '分隔符标题'
+    'title': '拼团更实惠'
   }, {
     'id': 'img-title',
     'name': '图片标题',
     'goodsId':'',
     'goodsIcon':'',
-    'icon': '/static/images/carousel/carousel-6.png'
+    'icon': '/static/images/carousel/carousel-1.png'
   }, {
     'id': 'goods-three-row',
     'name': '推荐商品（三排）',
     'list': [{
       'id': '0',
-      'name': 'goods-name1发送飒飒大师师傅三水电费阿斯顿撒',
-      'minPrice': '88.88',
-      'maxPrice': '166.99',
-      'icon': '/static/images/goods/goods-1.png'
-    }, {
-      'id': '0',
-      'name': 'goods-name2',
-      'minPrice': '9888.88',
-      'maxPrice': '13288.88',
-      'icon': '/static/images/goods/goods-1.png'
-    }, {
-      'id': '0',
-      'name': 'goods-name3',
-      'minPrice': '9888.88',
-      'maxPrice': '13288.88',
-      'icon': '/static/images/goods/goods-1.png'
-    }, {
-      'id': '0',
-      'name': 'goods-name4',
-      'minPrice': '688.88',
-      'maxPrice': '888.88',
-      'icon': '/static/images/goods/goods-1.png'
-    }, {
-      'id': '0',
-      'name': 'goods-name5',
-      'minPrice': '18.00',
-      'maxPrice': '78.00',
+      'name': '商品名称',
+      'minPrice': '166.66',
+      'maxPrice': '188.88',
       'icon': '/static/images/goods/goods-1.png'
     }]
-  }, {
-    'id': 'img-text-title',
-    'name': '图文标题',
-    'title': '拼团更实惠',
-    'describe': '团购促销，多买多降',
-    'icon': '/static/images/icon/shopping.png'
-  }, {
+  },{
     'id': 'imgX-scroll',
     'name': '图片滑块（横）',
     'list': [{
       'goodsId':'',
       'goodsIcon':'',
       'icon':'/static/images/carousel/carousel-1.png'
-    },{
-      'goodsId':'1',
-      'goodsIcon':'/static/images/goods/goods-1.png',
-      'icon':'/static/images/carousel/carousel-2.png'
-    },{
-      'goodsId':'',
-      'goodsIcon':'',
-      'icon':'/static/images/carousel/carousel-3.png'
-    },{
-      'goodsId':'',
-      'goodsIcon':'',
-      'icon':'/static/images/carousel/carousel-4.png'
-    },{
-      'goodsId':'',
-      'goodsIcon':'',
-      'icon':'/static/images/carousel/carousel-5.png'
     }]
-  }, {
-    'id': 'img-text-title',
-    'name': '图文标题',
-    'title': '拼团更实惠',
-    'describe': '团购促销，多买多降',
-    'icon': '/static/images/icon/shopping.png'
   }, {
     'id': 'imgY-scroll',
     'name': '图片滑块（竖）',
@@ -189,101 +77,25 @@
       'goodsId':'',
       'goodsIcon':'',
       'icon':'/static/images/carousel/carousel-1.png'
-    },{
-      'goodsId':'1',
-      'goodsIcon':'/static/images/goods/goods-1.png',
-      'icon':'/static/images/carousel/carousel-2.png'
-    },{
-      'goodsId':'',
-      'goodsIcon':'',
-      'icon':'/static/images/carousel/carousel-3.png'
-    },{
-      'goodsId':'',
-      'goodsIcon':'',
-      'icon':'/static/images/carousel/carousel-4.png'
-    },{
-      'goodsId':'',
-      'goodsIcon':'',
-      'icon':'/static/images/carousel/carousel-5.png'
     }]
-  }, {
-    'id': 'img-text-title',
-    'name': '图文标题',
-    'title': '拼团更实惠',
-    'describe': '团购促销，多买多降',
-    'icon': '/static/images/icon/shopping.png'
   }, {
     'id': 'goodsY-scroll',
     'name': '商品滑块（普通）',
     'list': [{
       'id': '0',
-      'name': 'goods-name1发送飒飒大师师傅三水电费阿斯顿撒',
-      'minPrice': '88.88',
-      'maxPrice': '166.99',
-      'icon': '/static/images/goods/goods-1.png'
-    }, {
-      'id': '0',
-      'name': 'goods-name2',
-      'minPrice': '9888.88',
-      'maxPrice': '13288.88',
-      'icon': '/static/images/goods/goods-1.png'
-    }, {
-      'id': '0',
-      'name': 'goods-name3',
-      'minPrice': '9888.88',
-      'maxPrice': '13288.88',
-      'icon': '/static/images/goods/goods-1.png'
-    }, {
-      'id': '0',
-      'name': 'goods-name4',
-      'minPrice': '688.88',
-      'maxPrice': '888.88',
-      'icon': '/static/images/goods/goods-1.png'
-    }, {
-      'id': '0',
-      'name': 'goods-name4',
-      'minPrice': '1688.88',
-      'maxPrice': '1888.88',
+      'name': '商品名称',
+      'minPrice': '166.66',
+      'maxPrice': '188.88',
       'icon': '/static/images/goods/goods-1.png'
     }]
-  }, {
-    'id': 'img-text-title',
-    'name': '图文标题',
-    'title': '拼团更实惠',
-    'describe': '团购促销，多买多降',
-    'icon': '/static/images/icon/shopping.png'
   }, {
     'id': 'goodsX-scroll',
     'name': '商品滑块（折扣）',
     'list': [{
       'id': '0',
-      'name': 'goods-name1发送飒飒大师师傅三水电费阿斯顿撒',
-      'newPrice': '88.88',
-      'oldPrice': '166.99',
-      'icon': '/static/images/goods/goods-1.png'
-    }, {
-      'id': '0',
-      'name': 'goods-name2',
-      'newPrice': '9888.88',
-      'oldPrice': '13288.88',
-      'icon': '/static/images/goods/goods-1.png'
-    }, {
-      'id': '0',
-      'name': 'goods-name3',
-      'newPrice': '9888.88',
-      'oldPrice': '13288.88',
-      'icon': '/static/images/goods/goods-1.png'
-    }, {
-      'id': '0',
-      'name': 'goods-name4',
-      'newPrice': '688.88',
-      'oldPrice': '888.88',
-      'icon': '/static/images/goods/goods-1.png'
-    }, {
-      'id': '0',
-      'name': 'goods-name5',
-      'newPrice': '1688.88',
-      'oldPrice': '1888.88',
+      'name': '商品名称',
+      'newPrice': '166.66',
+      'oldPrice': '188.88',
       'icon': '/static/images/goods/goods-1.png'
     }]
   }]
@@ -294,6 +106,13 @@
 
   let setPartList = function(list){
     partList = list
+  }
+
+  let getPart = function (id) {
+    let obj = partList.find((item) => {
+      return item.id === id
+    })
+    return obj
   }
 
   let getStoreList = function () {
@@ -314,7 +133,7 @@
   let _initStoreScroll = function (that) {
     try{
       that.$nextTick(() => {
-        let part = getStorePart('imgX-scroll')
+        let part = getPart('imgX-scroll')
         if (part) {
           let imgXLength = part.list.length
           that.imgXScrollStyle = {
@@ -326,7 +145,7 @@
             click: true
           })
         }
-        part = getStorePart('imgY-scroll')
+        part = getPart('imgY-scroll')
         if (part) {
           let imgYLength = part.list.length
           that.imgYScrollStyle = {
@@ -338,7 +157,7 @@
             click: true
           })
         }
-        part = getStorePart('goodsY-scroll')
+        part = getPart('goodsY-scroll')
         if (part) {
           let goodsYLength = part.list.length
           that.goodsYScrollStyle = {
@@ -350,7 +169,7 @@
             click: true
           })
         }
-        part = getStorePart('goodsX-scroll')
+        part = getPart('goodsX-scroll')
         if (part) {
           let goodsXLength = part.list.length
           that.goodsXScrollStyle = {

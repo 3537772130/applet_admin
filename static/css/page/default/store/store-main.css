@@ -1,3 +1,6 @@
+.components:hover{
+  cursor: pointer;
+}
 
 .components .c-divider {
   font-weight: bold;
@@ -220,7 +223,7 @@
   z-index: 1;
 }
 
-.components > .divider-title > .c-divider>span{
+.components > .divider-title > .c-divider > span {
   background-image: -webkit-linear-gradient(top, #FF00FF, red, #fd8403);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -328,7 +331,7 @@
 .components > .goods-three-row > .goods-def > .goods-name {
   margin: auto;
   width: 95px;
-  height: 23px;
+  height: 28px;
   font-size: 10px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -532,7 +535,7 @@
 .components > .goodsX-scroll > .bscroll-container > .goods-def > div > .goods-name {
   margin: auto;
   width: 120px;
-  height: 50px;
+  height: 49px;
   font-size: 14px;
   white-space: normal;
   overflow: hidden;

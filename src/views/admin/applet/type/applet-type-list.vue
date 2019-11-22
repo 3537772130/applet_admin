@@ -39,6 +39,7 @@
       <el-table :data="tableData" :height="tableHeight" stripe style="width: 100%">
         <el-table-column align="center" type="index" :index="indexMethod" label="序号" width="80"></el-table-column>
         <el-table-column align="center" prop="typeName" label="类型名称" width="220"></el-table-column>
+        <el-table-column align="center" prop="versionNumber" label="最新版本" width="220"></el-table-column>
         <el-table-column align="center" prop="updateTime" label="更新日期" width="180"></el-table-column>
         <el-table-column align="center" prop="typeStatus" label="类型状态" width="180">
           <template slot-scope="scope">
