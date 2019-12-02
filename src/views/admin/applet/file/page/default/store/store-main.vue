@@ -58,14 +58,14 @@
               </div>
             </div>
             <div class="img-text-title" @click="openDrawer(partIndex)" v-if="item.id === 'img-text-title'">
-              <el-image :src="item.icon" class="img-text-title-image"></el-image>
+              <el-image v-for="(img, index) in item.list" :key="index" :src="img.icon" class="img-text-title-image"></el-image>
               <span class="img-text-title-text">
                 {{item.title}}
                 <span v-if="item.describe != ''"> | <span>{{item.describe}}</span></span>
               </span>
             </div>
             <div class="img-title" @click="openDrawer(partIndex)" v-if="item.id === 'img-title'">
-              <el-image class="image" :src="item.icon"></el-image>
+              <el-image class="image" v-for="(img, index) in item.list" :key="index" :src="img.icon"></el-image>
             </div>
             <div class="goods-two-row" @click="openDrawer(partIndex)" v-if="item.id === 'goods-two-row'">
               <div class="goods-def" v-for="(goods,index) in item.list" :key="index">
@@ -322,6 +322,7 @@
         this.partList = this.$part.getPartList()
         this.drawer = bool
         this.checkIndex = index
+        this.$part._initStoreScroll(this)
       }
     }
   }

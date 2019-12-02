@@ -15,11 +15,22 @@
           <div v-if="partIndex === pIndex && item.id === 'img-carousel'">
             <table style="width: 400px;">
               <tr v-for="(car, index) in item.list" :key="index">
+                <td style="width: 20px;">
+                  <el-badge value="×" class="item img-carousel-badge" @click.native="delData(index, car.icon)">
+                  </el-badge>
+                </td>
                 <td>
                   <el-form-item label="" style="margin-bottom: 0px;">
-                    <el-badge value="×" class="item img-carousel-badge" @click.native="delData(index)">
-                    </el-badge>
-                    <el-image :src="car.icon" style="width: 244px;height: 95px;"></el-image>
+                    <el-upload
+                      class="img-carousel-uploader"
+                      action="/api/manage/applet/page/uploadAppletPageImage"
+                      name="image"
+                      :show-file-list="false"
+                      :on-success="handleAvatarSuccess"
+                      :before-upload="beforeAvatarUpload" :data="{'pIndex': pIndex,'index': index,'icon': car.icon}">
+                      <img v-if="car.icon" :src="car.icon" class="img-carousel" style="width: 244px;height: 95px;">
+                      <i v-else class="el-icon-plus img-carousel-uploader-icon"></i>
+                    </el-upload>
                   </el-form-item>
                 </td>
                 <td class="bind-goods">
@@ -32,16 +43,17 @@
                 </td>
               </tr>
               <tr v-if="item.list.length < 5">
+                <td></td>
                 <td>
                   <el-form-item label=" ">
                     <el-upload
                       class="img-carousel-uploader"
-                      action="https://jsonplaceholder.typicode.com/posts/"
+                      action="/api/manage/applet/page/uploadAppletPageImage"
+                      name="image"
                       :show-file-list="false"
                       :on-success="handleAvatarSuccess"
-                      :before-upload="beforeAvatarUpload">
-                      <img v-if="imageUrl" :src="imageUrl" class="img-carousel">
-                      <i v-else class="el-icon-plus img-carousel-uploader-icon"></i>
+                      :before-upload="beforeAvatarUpload" :data="{'pIndex': pIndex}">
+                      <i class="el-icon-plus img-carousel-uploader-icon"></i>
                     </el-upload>
                   </el-form-item>
                 </td>
@@ -70,11 +82,12 @@
             <el-form-item label="图标">
               <el-upload
                 class="img-text-title-uploader"
-                action="https://jsonplaceholder.typicode.com/posts/"
+                action="/api/manage/applet/page/uploadAppletPageImage"
+                name="image"
                 :show-file-list="false"
                 :on-success="handleAvatarSuccess"
-                :before-upload="beforeAvatarUpload">
-                <img v-if="item.icon" :src="item.icon" class="img-text-title">
+                :before-upload="beforeAvatarUpload" :data="{'pIndex': pIndex,'index': 0,'icon': item.list[0].icon}">
+                <img v-if="item.list[0].icon" :src="item.list[0].icon" class="img-text-title">
                 <i v-else class="el-icon-plus img-text-title-icon"></i>
               </el-upload>
             </el-form-item>
@@ -88,11 +101,22 @@
           <div v-if="partIndex === pIndex && item.id === 'img-title'">
             <table style="width: 400px;">
               <tr v-if="item.icon != ''">
+                <td style="width: 20px;">
+                  <el-badge value="×" class="item img-carousel-badge" @click.native="delData(index)">
+                  </el-badge>
+                </td>
                 <td>
                   <el-form-item label="">
-                    <el-badge value="×" class="item img-carousel-badge">
-                    </el-badge>
-                    <el-image :src="item.icon" style="width: 244px;height: 95px;"></el-image>
+                    <el-upload
+                      class="img-carousel-uploader"
+                      action="/api/manage/applet/page/uploadAppletPageImage"
+                      name="image"
+                      :show-file-list="false"
+                      :on-success="handleAvatarSuccess"
+                      :before-upload="beforeAvatarUpload" :data="{'pIndex': pIndex,'index': 0,'icon': item.list[0].icon}">
+                      <img v-if="item.list[0].icon" :src="item.list[0].icon" class="img-carousel" style="width: 244px;height: 95px;">
+                      <i v-else class="el-icon-plus img-carousel-uploader-icon"></i>
+                    </el-upload>
                   </el-form-item>
                 </td>
                 <td class="bind-goods">
@@ -112,7 +136,7 @@
                       action="https://jsonplaceholder.typicode.com/posts/"
                       :show-file-list="false"
                       :on-success="handleAvatarSuccess"
-                      :before-upload="beforeAvatarUpload">
+                      :before-upload="beforeAvatarUpload" data-id="">
                       <img v-if="imageUrl" :src="imageUrl" class="img-title">
                       <i v-else class="el-icon-plus img-title-icon"></i>
                     </el-upload>
@@ -166,10 +190,22 @@
           <div v-if="partIndex === pIndex && item.id === 'imgX-scroll'">
             <table style="width: 400px;">
               <tr v-for="(img, index) in item.list" :key="index">
+                <td style="width: 20px;">
+                  <el-badge value="×" class="item img-carousel-badge" @click.native="delData(index, img.icon)">
+                  </el-badge>
+                </td>
                 <td>
                   <el-form-item label="" style="margin-bottom: 0px;">
-                    <el-badge value="×" class="item imgX-scroll-badge" @click.native="delData(index)"></el-badge>
-                    <el-image :src="img.icon" style="width: 244px;height: 95px;border-radius: 5px;"></el-image>
+                    <el-upload
+                      class="img-carousel-uploader"
+                      action="/api/manage/applet/page/uploadAppletPageImage"
+                      name="image"
+                      :show-file-list="false"
+                      :on-success="handleAvatarSuccess"
+                      :before-upload="beforeAvatarUpload" :data="{'pIndex': pIndex,'index': index,'icon': img.icon}">
+                      <img v-if="img.icon" :src="img.icon" class="img-carousel" style="width: 244px;height: 95px;border-radius: 5px;">
+                      <i v-else class="el-icon-plus img-carousel-uploader-icon"></i>
+                    </el-upload>
                   </el-form-item>
                 </td>
                 <td class="bind-goods">
@@ -182,16 +218,17 @@
                 </td>
               </tr>
               <tr v-if="item.list.length < 10">
+                <td></td>
                 <td>
                   <el-form-item label=" " style="margin-bottom: 0px;">
                     <el-upload
                       class="imgX-scroll-uploader"
-                      action="https://jsonplaceholder.typicode.com/posts/"
+                      action="/api/manage/applet/page/uploadAppletPageImage"
+                      name="image"
                       :show-file-list="false"
                       :on-success="handleAvatarSuccess"
-                      :before-upload="beforeAvatarUpload">
-                      <img v-if="imageUrl" :src="imageUrl" class="imgX-scroll">
-                      <i v-else class="el-icon-plus imgX-scroll-uploader-icon"></i>
+                      :before-upload="beforeAvatarUpload" :data="{'pIndex': pIndex}">
+                      <i class="el-icon-plus imgX-scroll-uploader-icon"></i>
                     </el-upload>
                   </el-form-item>
                 </td>
@@ -202,11 +239,22 @@
           <div v-if="partIndex === pIndex && item.id === 'imgY-scroll'">
             <table style="width: 400px;">
               <tr style="width: 375px;" v-for="(img, index) in item.list" :key="index">
-                <td>
+                <td style="width: 20px;">
+                  <el-badge value="×" class="item img-carousel-badge" @click.native="delData(index, img.icon)">
+                  </el-badge>
+                </td>
+                <td style="width: 130px;">
                   <el-form-item label="" style="margin-bottom: 0px;text-align: center;">
-                    <el-badge value="×" class="item imgY-scroll-badge" style="display: inline-block;"
-                              @click.native="delData(index)"></el-badge>
-                    <el-image :src="img.icon" style="width: 120px;height: 220px;border-radius: 5px;;"></el-image>
+                    <el-upload
+                      class="img-carousel-uploader"
+                      action="/api/manage/applet/page/uploadAppletPageImage"
+                      name="image"
+                      :show-file-list="false"
+                      :on-success="handleAvatarSuccess"
+                      :before-upload="beforeAvatarUpload" :data="{'pIndex': pIndex,'index': index,'icon': img.icon}">
+                      <img v-if="img.icon" :src="img.icon" class="img-carousel" style="width: 120px;height: 220px;border-radius: 5px;">
+                      <i v-else class="el-icon-plus img-carousel-uploader-icon"></i>
+                    </el-upload>
                   </el-form-item>
                 </td>
                 <td class="bind-goods">
@@ -219,16 +267,17 @@
                 </td>
               </tr>
               <tr v-if="item.list.length < 10">
+                <td></td>
                 <td>
                   <el-form-item label="" style="margin-bottom: 0px;text-align: center;">
                     <el-upload
                       class="imgY-scroll-uploader"
-                      action="https://jsonplaceholder.typicode.com/posts/"
+                      action="/api/manage/applet/page/uploadAppletPageImage"
+                      name="image"
                       :show-file-list="false"
                       :on-success="handleAvatarSuccess"
-                      :before-upload="beforeAvatarUpload" style="display: inline-block;" v-if="item.list.length < 10">
-                      <img v-if="imageUrl" :src="imageUrl" class="imgY-scroll">
-                      <i v-else class="el-icon-plus imgY-scroll-uploader-icon"></i>
+                      :before-upload="beforeAvatarUpload" :data="{'pIndex': pIndex}">
+                      <i class="el-icon-plus imgY-scroll-uploader-icon"></i>
                     </el-upload>
                   </el-form-item>
                 </td>
@@ -338,44 +387,68 @@
         this.partList = this.$part.getPartList()
       },
       handleAvatarSuccess (res, file) {
-        this.imageUrl = URL.createObjectURL(file.raw)
+        if (res.code === '1') {
+          let pIndex = res.data.pIndex
+          let index = res.data.index
+          let icon = res.data.icon
+          let list = this.partList[pIndex].list
+          if (index != null && index >= 0) {
+            list[index].icon = icon
+          } else {
+            let info = {
+              'goodsId': '',
+              'goodsIcon': '',
+              'icon': icon
+            }
+            list.push(info)
+          }
+          this.$emit('refreshSet', true, pIndex)
+        } else {
+          this.$message.error('上传失败')
+        }
+        let loading = Loading.service({fullscreen: true, text: '正在上传'})
+        this.$global.exitLoad(this, loading, {'code': res.data})
       },
       beforeAvatarUpload (file) {
-        const isJPG = file.type === 'image/jpeg'
-        const isLt2M = file.size / 1024 / 1024 < 2
+        let loading = Loading.service({fullscreen: true, text: '正在上传'})
+        const isJPG = 'image/png,image/jpeg'.indexOf(file.type) >= 0
+        const isLt2M = file.size / 1024 / 1024 < 5
 
         if (!isJPG) {
-          this.$message.error('上传头像图片只能是 JPG 格式!')
+          this.$message.error('上传图片只能是 JPG 格式!')
         }
         if (!isLt2M) {
-          this.$message.error('上传头像图片大小不能超过 2MB!')
+          this.$message.error('上传图片大小不能超过 5MB!')
+        }
+        if (!isJPG || !isLt2M) {
+          loading.close()
         }
         return isJPG && isLt2M
       },
-      onSubmit () {
-        this.$refs['info'].validate((valid) => {
-          if (valid) {
-            let loading = Loading.service({fullscreen: true, text: '正在提交'})
-            this.$axios({
-              url: '/api/manage/applet/page/updateAppletPageElement',
-              method: 'post',
-              data: this.info
-            }).then(res => {
-              let that = this
-              res.data.code === '1' ? this.$message.success({
-                message: res.data.data, duration: 1000, onClose: function () {
-                  that.$emit('refreshSet')
-                }
-              }) : this.$message.error(res.data.data)
-              this.$global.exitLoad(this, loading, res.data)
-            }).catch(error => {
-              console.info('错误信息', error)
-              this.$global.exitLoad(this, loading, '')
-            })
-          }
-        })
-      },
-      delData (index) {
+      // onSubmit () {
+      //   this.$refs['info'].validate((valid) => {
+      //     if (valid) {
+      //       let loading = Loading.service({fullscreen: true, text: '正在提交'})
+      //       this.$axios({
+      //         url: '/api/manage/applet/page/updateAppletPageElement',
+      //         method: 'post',
+      //         data: this.info
+      //       }).then(res => {
+      //         let that = this
+      //         res.data.code === '1' ? this.$message.success({
+      //           message: res.data.data, duration: 1000, onClose: function () {
+      //             that.$emit('refreshSet')
+      //           }
+      //         }) : this.$message.error(res.data.data)
+      //         this.$global.exitLoad(this, loading, res.data)
+      //       }).catch(error => {
+      //         console.info('错误信息', error)
+      //         this.$global.exitLoad(this, loading, '')
+      //       })
+      //     }
+      //   })
+      // },
+      delData (index, icon) {
         this.$confirm('确定删除参数吗？', '温馨提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
@@ -397,6 +470,12 @@
           }
           this.partList = list
           this.useElement(list, true, this.partIndex)
+
+          this.$axios({
+            url: '/api/manage/applet/page/deleteAppletPageImage',
+            method: 'post',
+            data: {icon: icon}
+          })
         })
       },
       delElement () {

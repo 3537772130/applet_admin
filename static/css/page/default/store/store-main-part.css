@@ -14,7 +14,7 @@
 
 .store-main-part .img-carousel-badge {
   position: relative;
-  top: -40px;
+  top: -5px;
 }
 
 .store-main-part .img-carousel-badge .el-badge__content {
@@ -35,7 +35,6 @@
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  margin-left: 25px;
 }
 
 .store-main-part .img-carousel-uploader .el-upload:hover {
@@ -302,7 +301,7 @@
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  margin-left: 25px;
+  margin-left: 10px;
 }
 
 .store-main-part .imgX-scroll-uploader .el-upload:hover {
@@ -348,7 +347,7 @@
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  margin-left: 25px;
+  margin-left: 10px;
 }
 
 .store-main-part .imgY-scroll-uploader .el-upload:hover {

@@ -10,13 +10,13 @@
     'id': 'img-carousel',
     'name': '轮播图',
     'list': [{
-      'goodsId':'',
-      'goodsIcon':'',
-      'icon':'/static/images/carousel/carousel-1.png'
+      'goodsId': '',
+      'goodsIcon': '',
+      'icon': '/static/images/carousel/carousel-1.png'
     }]
   }, {
     'id': 'notice-bar',
-    'name': '通知栏',
+    'name': '通告栏',
     'textContent': '恭喜发财'
   }, {
     'id': 'type-frame',
@@ -31,7 +31,11 @@
     'name': '图文标题',
     'title': '拼团更实惠',
     'describe': '团购促销，多买多降',
-    'icon': '/static/images/icon/shopping.png'
+    'list': [{
+      'goodsId': '',
+      'goodsIcon': '',
+      'icon': '/static/images/icon/shopping.png'
+    }]
   }, {
     'id': 'goods-two-row',
     'name': '推荐商品（双排）',
@@ -49,9 +53,13 @@
   }, {
     'id': 'img-title',
     'name': '图片标题',
-    'goodsId':'',
-    'goodsIcon':'',
-    'icon': '/static/images/carousel/carousel-1.png'
+    'goodsId': '',
+    'goodsIcon': '',
+    'list': [{
+      'goodsId': '',
+      'goodsIcon': '',
+      'icon': '/static/images/carousel/carousel-1.png'
+    }]
   }, {
     'id': 'goods-three-row',
     'name': '推荐商品（三排）',
@@ -62,21 +70,21 @@
       'maxPrice': '188.88',
       'icon': '/static/images/goods/goods-1.png'
     }]
-  },{
+  }, {
     'id': 'imgX-scroll',
     'name': '图片滑块（横）',
     'list': [{
-      'goodsId':'',
-      'goodsIcon':'',
-      'icon':'/static/images/carousel/carousel-1.png'
+      'goodsId': '',
+      'goodsIcon': '',
+      'icon': '/static/images/carousel/carousel-1.png'
     }]
   }, {
     'id': 'imgY-scroll',
     'name': '图片滑块（竖）',
     'list': [{
-      'goodsId':'',
-      'goodsIcon':'',
-      'icon':'/static/images/carousel/carousel-1.png'
+      'goodsId': '',
+      'goodsIcon': '',
+      'icon': '/static/images/carousel/carousel-1.png'
     }]
   }, {
     'id': 'goodsY-scroll',
@@ -100,11 +108,11 @@
     }]
   }]
 
-  let getPartList = function(){
+  let getPartList = function () {
     return partList
   }
 
-  let setPartList = function(list){
+  let setPartList = function (list) {
     partList = list
   }
 
@@ -119,7 +127,7 @@
     return storeList
   }
 
-  let setStoreList = function(list){
+  let setStoreList = function (list) {
     storeList = list
   }
 
@@ -131,7 +139,7 @@
   }
 
   let _initStoreScroll = function (that) {
-    try{
+    try {
       that.$nextTick(() => {
         let part = getPart('imgX-scroll')
         if (part) {
@@ -182,7 +190,7 @@
           })
         }
       })
-    }catch (e) {
+    } catch (e) {
       console.info('错误信息：', e)
     }
   }

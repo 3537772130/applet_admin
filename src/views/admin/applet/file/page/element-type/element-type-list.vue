@@ -43,6 +43,12 @@
         <el-table-column align="center" type="index" :index="indexMethod" label="序号" width="80"></el-table-column>
         <el-table-column align="center" prop="typeName" label="类型名称" width="100"
                          :show-overflow-tooltip="true"></el-table-column>
+        <el-table-column align="center" prop="typeStatus" label="类型状态" width="80">
+          <template slot-scope="scope">
+            <el-link type="success" :underline="false" v-if="scope.row.typeStatus">正常</el-link>
+            <el-link type="danger" :underline="false" v-if="!scope.row.typeStatus">禁用</el-link>
+          </template>
+        </el-table-column>
         <el-table-column align="center" prop="typeIndex" label="排序" width="180">
           <template slot-scope="scope">
             <el-tooltip class="item" effect="dark" content="上移" placement="top">
@@ -52,12 +58,6 @@
               <i class="el-icon-caret-bottom sort-direction"
                  @click="shiftSort(scope.row.id, scope.row.pageId, 'bot')"></i>
             </el-tooltip>
-          </template>
-        </el-table-column>
-        <el-table-column align="center" prop="typeStatus" label="类型状态" width="80">
-          <template slot-scope="scope">
-            <el-link type="success" :underline="false" v-if="scope.row.typeStatus">正常</el-link>
-            <el-link type="danger" :underline="false" v-if="!scope.row.typeStatus">禁用</el-link>
           </template>
         </el-table-column>
         <el-table-column align="center" label="操作">

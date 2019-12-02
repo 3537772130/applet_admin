@@ -66,6 +66,16 @@
             <el-link type="danger" :underline="false" v-if="!scope.row.elementStatus">禁用</el-link>
           </template>
         </el-table-column>
+        <el-table-column align="center" prop="elementIndex" label="排序" width="140">
+          <template slot-scope="scope">
+            <el-tooltip class="item" effect="dark" content="上移" placement="top">
+              <i class="el-icon-caret-top sort-direction" @click="shiftSort(scope.row.id, scope.row.pageId, 'top')"></i>
+            </el-tooltip>
+            <el-tooltip class="item" effect="dark" content="下移" placement="top">
+              <i class="el-icon-caret-bottom sort-direction" @click="shiftSort(scope.row.id, scope.row.pageId, 'bot')"></i>
+            </el-tooltip>
+          </template>
+        </el-table-column>
         <el-table-column align="center" label="操作">
           <template slot-scope="scope">
             <el-button type="warning" plain size="mini" @click="updateInfo(scope.row.id)">修改</el-button>
@@ -218,6 +228,24 @@
           loading.close()
         }
         return isJPG && isLt2M
+      },
+      shiftSort (id, pageId, sort) {
+        this.loading = true
+        this.$axios({
+          url: '/api/manage/applet/page/updateElementIndex',
+          method: 'post',
+          data: {elementId: id, pageId: pageId, sort: sort}
+        }).then(res => {
+          if (res.data.code === '1') {
+            this.onSubmit()
+          } else if (res.data.code === '-1') {
+            this.$message.error(res.data.data)
+            this.$global.exitLoad(this, null, res.data)
+          }
+        }).catch(error => {
+          console.info('错误信息', error)
+          this.$global.exitLoad(this, null, '')
+        })
       }
     }
   }
