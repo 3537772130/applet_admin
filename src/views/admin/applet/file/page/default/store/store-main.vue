@@ -58,7 +58,8 @@
               </div>
             </div>
             <div class="img-text-title" @click="openDrawer(partIndex)" v-if="item.id === 'img-text-title'">
-              <el-image v-for="(img, index) in item.list" :key="index" :src="img.icon" class="img-text-title-image"></el-image>
+              <el-image v-for="(img, index) in item.list" :key="index" :src="img.icon"
+                        class="img-text-title-image"></el-image>
               <span class="img-text-title-text">
                 {{item.title}}
                 <span v-if="item.describe != ''"> | <span>{{item.describe}}</span></span>
@@ -112,7 +113,7 @@
               <div class="bscroll-container" :style="goodsYScrollStyle">
                 <div class="goods-def" v-for="(goods, index) in item.list" :key="index">
                   <div>
-                    <el-image class="goods-img" :src="goods.icon"></el-image>
+                    <el-image class="goods-img" :src="goods.icon" style="border-radius: 10px 10px 0px 0px;"></el-image>
                   </div>
                   <div class="goods-price">
                     &yen;{{goods.minPrice|addZero}}
@@ -126,11 +127,11 @@
                  v-if="item.id === 'goodsX-scroll'">
               <div class="bscroll-container" :style="goodsXScrollStyle">
                 <div class="goods-def" v-for="(goods, index) in item.list" :key="index">
-                  <el-image class="goods-img" :src="goods.icon"></el-image>
+                  <el-image class="goods-img" :src="goods.icon" style="border-radius: 5px;"></el-image>
                   <div>
-                    <div class="goods-price">现价：<span>{{goods.newPrice|addZero}}</span></div>
+                    <div class="goods-price">现价：<span>{{goods.minPrice|addZero}}</span></div>
                     <div class="goods-price">原价：<span
-                      style="font-size: 14px;text-decoration:line-through;">{{goods.oldPrice|addZero}}</span></div>
+                      style="font-size: 14px;text-decoration:line-through;">{{goods.maxPrice|addZero}}</span></div>
                     <div class="goods-name">{{goods.name}}</div>
                     <div style="width:120px;height: 30px;display: inline-block;"></div>
                   </div>
@@ -267,7 +268,8 @@
         })
       },
       addPartList (logo) {
-        let part = this.$part.getStorePart(logo)
+        this.$cookies.set('part_info', this.$part.getStorePart(logo))
+        let part = this.$cookies.get('part_info')
         if (part) {
           let list = this.partList
           let limit = true

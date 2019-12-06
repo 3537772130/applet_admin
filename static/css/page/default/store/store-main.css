@@ -94,6 +94,7 @@
   width: 1200px;
   height: 30px;
   line-height: 30px;
+  color: #d81e06;
   white-space: nowrap;
   position: relative;
   animation: mymove 10s linear infinite;
@@ -276,7 +277,7 @@
 .components > .goods-two-row > .goods-def > .goods-name {
   margin: auto;
   width: 140px;
-  height: 28px;
+  height: 32px;
   font-size: 12px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -331,7 +332,7 @@
 .components > .goods-three-row > .goods-def > .goods-name {
   margin: auto;
   width: 95px;
-  height: 28px;
+  height: 32px;
   font-size: 10px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -469,7 +470,7 @@
 .components > .goodsY-scroll > .bscroll-container > .goods-def > .goods-name {
   margin: auto;
   width: 160px;
-  height: 33px;
+  height: 35px;
   font-size: 14px;
   white-space: normal;
   overflow: hidden;

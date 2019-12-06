@@ -1,5 +1,5 @@
 <style type="text/css">
-  applet-file-form {
+  .applet-file-form {
     text-align: left;
   }
 

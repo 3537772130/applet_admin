@@ -92,12 +92,12 @@
   border: 1px #409EFF dashed;
 }
 
-.store-main-part .type-element > .type-icon-div {
+.store-main-part .type-element > div > .type-icon-div {
   text-align: center;
   margin-top: 10px;
 }
 
-.store-main-part .type-element > .type-name {
+.store-main-part .type-element > div > .type-name {
   width: 100%;
   height: 20px;
   line-height: 20px;
@@ -200,12 +200,12 @@
   border: 1px #409EFF dashed;
 }
 
-.store-main-part .goods-two-element > .goods-icon-div {
+.store-main-part .goods-two-element > div > .goods-icon-div {
   text-align: center;
   margin-top: 10px;
 }
 
-.store-main-part .goods-two-element > .goods-name {
+.store-main-part .goods-two-element > div > .goods-name {
   margin: auto;
   width: 140px;
   height: 30px;
@@ -257,12 +257,12 @@
   border: 1px #409EFF dashed;
 }
 
-.store-main-part .goods-three-element > .goods-icon-div {
+.store-main-part .goods-three-element > div > .goods-icon-div {
   text-align: center;
   margin-top: 10px;
 }
 
-.store-main-part .goods-three-element > .goods-name {
+.store-main-part .goods-three-element > div > .goods-name {
   margin: auto;
   width: 95px;
   height: 30px;
@@ -417,4 +417,12 @@
   text-align: center;
   display: inline-block;
   padding-bottom: 20px;
+}
+
+.part-choose-dialog .el-dialog {
+  width: 680px;
+}
+
+.part-choose-dialog .el-dialog > .el-dialog__body {
+  padding: 0px 0px;
 }

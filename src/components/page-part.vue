@@ -53,8 +53,6 @@
   }, {
     'id': 'img-title',
     'name': '图片标题',
-    'goodsId': '',
-    'goodsIcon': '',
     'list': [{
       'goodsId': '',
       'goodsIcon': '',
@@ -102,8 +100,8 @@
     'list': [{
       'id': '0',
       'name': '商品名称',
-      'newPrice': '166.66',
-      'oldPrice': '188.88',
+      'minPrice': '166.66',
+      'maxPrice': '188.88',
       'icon': '/static/images/goods/goods-1.png'
     }]
   }]
