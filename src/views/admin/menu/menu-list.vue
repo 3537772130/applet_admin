@@ -14,7 +14,7 @@
     flex: none;
   }
 
-  .menu-tree-title > table>tr>td {
+  .menu-tree-title > table > tr > td {
     text-align: center;
     background-color: #fafafa;
     padding: 8px 0px;
@@ -24,7 +24,7 @@
     width: 1300px;
   }
 
-  .menu-tree .el-tree-node__content{
+  .menu-tree .el-tree-node__content {
     height: 40px;
   }
 
@@ -85,7 +85,8 @@
               </span>
               <span style="width: 210px; text-align: center;">
                 <el-button type="primary" plain @click="update('0', data.id)" v-if="data.level != 3">添加子级</el-button>
-                <el-button type="warning" plain @click="update(data.id, data.parentId)" v-if="data.level != 0">修改</el-button>
+                <el-button type="warning" plain @click="update(data.id, data.parentId)" v-if="data.level != 0">修改
+                </el-button>
               </span>
             </span>
           </el-tree>
@@ -109,7 +110,7 @@
     components: {
       'menuDetails': menuDetails
     },
-    data() {
+    data () {
       return {
         loading: false,
         showInfo: false,
@@ -117,14 +118,14 @@
         menuData: '',
       }
     },
-    created() {
+    created () {
       this.loadMenuList()
     },
-    mounted() {
+    mounted () {
 
     },
     methods: {
-      loadMenuList() {
+      loadMenuList () {
         this.loading = true
         this.$axios({
           url: '/api/manage/menu/loadMenuList',
@@ -141,21 +142,21 @@
           this.$global.exitLoad(this, null, res.data)
         })
       },
-      update(id, parentId) {
+      update (id, parentId) {
         this.showInfo = true
-        if (id && id != ''){
-          this.showTitle = '修改菜单';
+        if (id && id != '') {
+          this.showTitle = '修改菜单'
         } else {
-          this.showTitle = '添加菜单';
+          this.showTitle = '添加菜单'
         }
         try {
           this.$refs.menuDetails.loadMenuInfo(id, parentId)
-        }catch (e) {
+        } catch (e) {
           this.$cookies.set('menuId', id)
           this.$cookies.set('menuParentId', parentId)
         }
       },
-      loadMenuInfo(){
+      loadMenuInfo () {
         this.showInfo = false
         this.loadMenuList()
       }

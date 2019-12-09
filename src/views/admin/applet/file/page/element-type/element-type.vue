@@ -88,7 +88,9 @@
             }).then(res => {
               let that = this
               res.data.code === '1' ? this.$message.success({
-                message: res.data.data, duration: 1000, onClose: function () {
+                message: res.data.data,
+                duration: 1000,
+                onClose: function () {
                   that.$emit('refreshSet')
                 }
               }) : this.$message.error(res.data.data)

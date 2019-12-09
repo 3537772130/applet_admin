@@ -14,7 +14,7 @@
     flex: none;
   }
 
-  .auth-tree-title > table>tr>td {
+  .auth-tree-title > table > tr > td {
     text-align: center;
     background-color: #fafafa;
     padding: 8px 0px;
@@ -24,7 +24,7 @@
     width: 940px;
   }
 
-  .auth-tree .el-tree-node__content{
+  .auth-tree .el-tree-node__content {
     height: 40px;
   }
 
@@ -77,7 +77,8 @@
         </div>
       </div>
       <div style="height: 40px;line-height: 40px;text-align: center;margin: 20px 0px;">
-        <el-button type="primary" size="mini" style="width: 290px;" @click="onSubmit()">提&nbsp;&nbsp;&nbsp;&nbsp;交</el-button>
+        <el-button type="primary" size="mini" style="width: 290px;" @click="onSubmit()">提&nbsp;&nbsp;&nbsp;&nbsp;交
+        </el-button>
       </div>
     </el-main>
   </el-container>
@@ -87,7 +88,7 @@
 
   export default {
     name: 'menu-list',
-    data() {
+    data () {
       return {
         loading: false,
         showInfo: false,
@@ -97,15 +98,15 @@
         roleId: 0
       }
     },
-    created() {
-      let id = this.$cookies.get("roleAuthId")
+    created () {
+      let id = this.$cookies.get('roleAuthId')
       this.loadMenuList(id)
     },
-    mounted() {
+    mounted () {
     },
     methods: {
-      loadMenuList(id) {
-        if (id){
+      loadMenuList (id) {
+        if (id) {
           this.roleId = id
           this.loading = true
           this.$axios({
@@ -119,7 +120,7 @@
             } else {
               this.$message.error(res.data.data)
             }
-            this.$cookies.remove("roleAuthId")
+            this.$cookies.remove('roleAuthId')
             this.$global.exitLoad(this, null, res.data)
           }).catch(error => {
             console.info('错误信息', error)
@@ -127,7 +128,7 @@
           })
         }
       },
-      onSubmit() {
+      onSubmit () {
         let list = this.$refs.roleAuthTree.getCheckedKeys()
         let loading = Loading.service({fullscreen: true, text: '正在提交'})
         this.$axios({
@@ -136,7 +137,8 @@
           data: {roleId: this.roleId, idJson: JSON.stringify(list)}
         }).then(res => {
           let that = this
-          res.data.code === '1' ? this.$message.success({message: res.data.data,duration: 1000, onClose: function () {
+          res.data.code === '1' ? this.$message.success({
+            message: res.data.data, duration: 1000, onClose: function () {
               that.$emit('loadMenuList')
             }
           }) : this.$message.error(res.data.data)

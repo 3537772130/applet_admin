@@ -26,7 +26,6 @@
           <el-date-picker v-model="info.endDate" placeholder="选择日期"
                           :format="format" :value-format="valueFormat" class="form-info-val">
           </el-date-picker>
-          </el-date-picker>
         </el-form-item>
         <el-form-item label="用户状态" prop="status">
           <el-select v-model="info.status" placeholder="请选择用户状态" class="applet-input">
@@ -96,7 +95,7 @@
       <el-dialog :title="showTitle" :visible.sync="showInfo" class="user-dialog" :modal-append-to-body="false"
                  :close-on-click-modal="false">
         <div style="overflow-x: hidden;overflow-y: auto;">
-<!--          <appletDetails ref="appletDetails" v-on:setAppletId="setAppletId"></appletDetails>-->
+          <!--          <appletDetails ref="appletDetails" v-on:setAppletId="setAppletId"></appletDetails>-->
         </div>
       </el-dialog>
     </el-main>
@@ -110,7 +109,7 @@
     components: {
       'appletDetails': appletDetails
     },
-    data() {
+    data () {
       return {
         loading: true,
         tableHeight: 50,
@@ -132,17 +131,17 @@
         rList: []
       }
     },
-    created() {
+    created () {
       this.onSubmit()
     },
-    mounted() {
+    mounted () {
     },
     methods: {
-      indexMethod(index) {
+      indexMethod (index) {
         let count = (parseInt(this.info.page) - 1) * parseInt(this.info.pageSize)
         return count + (parseInt(index) + 1)
       },
-      onSubmit() {
+      onSubmit () {
         this.loading = true
         this.$axios({
           url: '/api/manage/user/queryUserToPage',
@@ -154,7 +153,7 @@
           if (res.data.code === '1') {
             this.tableData = res.data.data.dataSource
             this.total = res.data.data.totalCount
-          } else if (res.data.code === "-1") {
+          } else if (res.data.code === '-1') {
             this.$message.error(res.data.data)
           }
           this.$global.exitLoad(this, null, res.data)
@@ -163,24 +162,24 @@
           this.$global.exitLoad(this, null, '')
         })
       },
-      selectList() {
+      selectList () {
         this.info.page = 1
         this.showInfo = false
         this.onSubmit()
       },
-      handleCurrentChange(val) {
+      handleCurrentChange (val) {
         this.info.page = val
         this.onSubmit()
       },
-      resetForm() {
+      resetForm () {
         this.info.startDate = ''
         this.info.endDate = ''
         this.$refs['queryUserForm'].resetFields()
       },
-      setStatus(appletId, appletName) {
+      setStatus (appletId, appletName) {
 
       },
-      setAppletId() {
+      setAppletId () {
         this.selectList()
       }
     }

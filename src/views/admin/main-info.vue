@@ -127,7 +127,7 @@
       'headerMenu': headerMenu,
       'tabsContent': tabsContent
     },
-    data() {
+    data () {
       return {
         bodyHeight: `${document.documentElement.clientHeight}` + 'px',
         info: this.$cookies.get('manager_info'),
@@ -136,7 +136,7 @@
         secondList: []
       }
     },
-    created() {
+    created () {
       let loading = Loading.service({fullscreen: true, text: '正在加载'})
       this.$axios({
         url: '/api/manage/checkLogin',
@@ -148,7 +148,7 @@
           this.$refs.headerMenu.loadFirstMenu(res.data.data)
           this.secondList = res.data.data[0].items
         } else {
-          this.$cookies.remove("manager_info")
+          this.$cookies.remove('manager_info')
           this.$router.push({path: '/'})
         }
         this.$global.exitLoad(this, loading, res.data)
@@ -157,14 +157,14 @@
         this.$global.exitLoad(this, loading, '')
       })
     },
-    mounted() {
+    mounted () {
 
     },
     methods: {
-      updateInfo(index) {
+      updateInfo (index) {
         if (index) {
-          if (index === '0'){
-            this.activeIndex = this.activeIndex === '0' ? '':'0';
+          if (index === '0') {
+            this.activeIndex = this.activeIndex === '0' ? '' : '0'
           } else {
             this.activeIndex = index
           }
@@ -172,7 +172,7 @@
           this.$refs.headerMenu.updateInfo()
         }
       },
-      handleSelect(key, keyPath) {
+      handleSelect (key, keyPath) {
         console.log(key, keyPath)
         let keyTitle = ''
         let list = this.secondList
@@ -188,13 +188,13 @@
         }
         this.$refs.tabsContent.addTab(key, keyTitle)
       },
-      handleSOpen(key, keyPath) {
+      handleSOpen (key, keyPath) {
         // console.log("打开：", key, keyPath)
       },
-      handleClose(key, keyPath) {
+      handleClose (key, keyPath) {
         // console.log("关闭：", key, keyPath)
       },
-      upActiveIndex(index) {
+      upActiveIndex (index) {
         this.secondList = this.menuList[index].items
       }
     }

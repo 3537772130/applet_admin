@@ -126,7 +126,7 @@
       'AppletFile': AppletFile,
       'AppletPageList': AppletPageList
     },
-    data() {
+    data () {
       return {
         loading: false,
         tableHeight: 50,
@@ -150,13 +150,13 @@
         }
       }
     },
-    created() {
+    created () {
       this.loadAppletFile()
     },
-    mounted() {
+    mounted () {
     },
     methods: {
-      loadAppletFile() {
+      loadAppletFile () {
         this.loading = true
         this.$axios({
           url: '/api/manage/applet/loadAppletFilePage',
@@ -173,11 +173,11 @@
           this.$global.exitLoad(this, null, '')
         })
       },
-      indexMethod(index) {
+      indexMethod (index) {
         let count = (parseInt(this.info.page) - 1) * parseInt(this.info.pageSize)
         return count + (parseInt(index) + 1)
       },
-      onSubmit() {
+      onSubmit () {
         this.loading = true
         this.$axios({
           url: '/api/manage/applet/queryAppletFilePage',
@@ -189,7 +189,7 @@
           if (res.data.code === '1') {
             this.tableData = res.data.data.dataSource
             this.total = res.data.data.totalCount
-          } else if (res.data.code === "-1") {
+          } else if (res.data.code === '-1') {
             this.$message.error(res.data.data)
           }
           this.$global.exitLoad(this, null, res.data)
@@ -198,15 +198,15 @@
           this.$global.exitLoad(this, null, '')
         })
       },
-      selectList() {
+      selectList () {
         this.info.page = 1
         this.onSubmit()
       },
-      handleCurrentChange(val) {
+      handleCurrentChange (val) {
         this.info.page = val
         this.onSubmit()
       },
-      updateInfo(fileId) {
+      updateInfo (fileId) {
         this.showInfo = true
         if (fileId && fileId != '0') {
           this.showTitle = '修改小程序文件信息'
@@ -219,7 +219,7 @@
         } catch (e) {
         }
       },
-      fileSet(fileId, typeName, versionNumber) {
+      fileSet (fileId, typeName, versionNumber) {
         this.showPage = true
         this.pageTitle = typeName + ' - ' + versionNumber
         this.$cookies.set('applet_file_id', fileId)
@@ -228,18 +228,18 @@
         } catch (e) {
         }
       },
-      handleClose(){
+      handleClose () {
         try {
           this.$refs.AppletPageList.loadAppletPage(null)
         } catch (e) {
         }
         this.showPage = false
       },
-      refreshSet() {
+      refreshSet () {
         this.showInfo = false
         this.selectList()
       },
-      handleFileSuccess(res, file) {
+      handleFileSuccess (res, file) {
         if (res.code === '1') {
           this.$message.success('上传成功')
           this.onSubmit()
@@ -249,7 +249,7 @@
         let loading = Loading.service({fullscreen: true, text: '正在上传'})
         this.$global.exitLoad(this, loading, {'code': res.data})
       },
-      beforeAvatarUpload(file) {
+      beforeAvatarUpload (file) {
         let loading = Loading.service({fullscreen: true, text: '正在上传'})
         const isJPG = 'application/x-zip-compressed,application/x-7z-compressed,application/x-gzip'.indexOf(file.type) >= 0
         const isLt2M = file.size / 1024 / 1024 < 2

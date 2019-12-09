@@ -1,25 +1,30 @@
 <style type="text/css">
-  .menu-input{
+  .menu-input {
     width: 290px;
     text-align: left;
   }
+
   .menu-dialog .el-dialog {
     width: 300px;
   }
-  .m-d-div{
+
+  .m-d-div {
     text-align: left;
     font-size: 16px;
     height: 30px;
     line-height: 30px;
   }
-  .m-d-div:hover{
+
+  .m-d-div:hover {
     cursor: pointer;
     color: #409EFF;
   }
-  .m-d-first{
+
+  .m-d-first {
     text-indent: 1em;
   }
-  .m-d-second{
+
+  .m-d-second {
     text-indent: 2em;
   }
 </style>
@@ -53,7 +58,8 @@
                     resize="none" rows="5" placeholder="请输入菜单路径" class="menu-input"></el-input>
         </el-form-item>
         <el-form-item label="菜单序号" prop="menuIndex">
-          <el-input v-model.number="menuForm.menuIndex" type="number" placeholder="请输入菜单序号" class="menu-input"></el-input>
+          <el-input v-model.number="menuForm.menuIndex" type="number" placeholder="请输入菜单序号"
+                    class="menu-input"></el-input>
         </el-form-item>
         <el-form-item label="菜单状态" prop="status">
           <el-select v-model="menuForm.status" placeholder="请选择菜单状态" class="menu-input">
@@ -63,7 +69,8 @@
         </el-form-item>
         <br>
         <el-form-item label=" ">
-          <el-button type="primary" @click="onSubmit('menuForm')" class="menu-input" style="text-align: center;">提交</el-button>
+          <el-button type="primary" @click="onSubmit('menuForm')" class="menu-input" style="text-align: center;">提交
+          </el-button>
         </el-form-item>
       </el-form>
     </el-main>
@@ -111,8 +118,8 @@
 
     },
     methods: {
-      loadMenuInfo(id, parentId){
-        if (parentId != null && parentId >= 0){
+      loadMenuInfo (id, parentId) {
+        if (parentId != null && parentId >= 0) {
           this.loading = true
           this.$axios({
             url: '/api/manage/menu/loadMenuDetails',
@@ -135,7 +142,7 @@
             this.menuForm.menuLevel = res.data.data.level
             if (res.data.code === '1') {
               this.menuForm = res.data.data.info
-              this.menuForm.status = this.menuForm.status ? '1':'0'
+              this.menuForm.status = this.menuForm.status ? '1' : '0'
               delete this.menuForm.updateTime
             }
             this.$cookies.remove('menuId')
@@ -147,10 +154,10 @@
           })
         }
       },
-      chooseParentId(){
+      chooseParentId () {
         this.showInfo = true
       },
-      setParentId(id, name){
+      setParentId (id, name) {
         this.menuForm.parentId = id
         this.parentName = name
         this.showInfo = false
@@ -166,7 +173,8 @@
             }).then(res => {
               console.info('后台返回的数据', res.data)
               let that = this
-              res.data.code === '1' ? this.$message.success({message: res.data.data,duration: 1000, onClose: function () {
+              res.data.code === '1' ? this.$message.success({
+                message: res.data.data, duration: 1000, onClose: function () {
                   that.$emit('loadMenuInfo')
                 }
               }) : this.$message.error(res.data.data)

@@ -8,7 +8,7 @@
   z-index: 99;
 }
 
-.config-operation button{
+.config-operation button {
   font-size: 16px;
 }
 
@@ -84,6 +84,6 @@
   display: none;
 }
 
-.el-drawer__header{
+.el-drawer__header {
   margin-bottom: 10px;
 }

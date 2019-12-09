@@ -1,4 +1,4 @@
-.components:hover{
+.components:hover {
   cursor: pointer;
 }
 
@@ -154,7 +154,6 @@
 }
 
 
-
 /************************分类模块（三排）***************************/
 .components > .type-frame-three {
   background-color: #FFFFFF;
@@ -190,8 +189,6 @@
   display: inline-block;
   font-size: 14px;
 }
-
-
 
 
 /************************分类模块（四排）***************************/

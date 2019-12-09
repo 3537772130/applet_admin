@@ -75,7 +75,9 @@
             this.showTabs = 'page' + this.pageId
           } else {
             this.$message.error({
-              message: res.data.data, duration: 2000, onClose: function () {
+              message: res.data.data,
+              duration: 2000,
+              onClose: function () {
                 window.close()
               }
             })

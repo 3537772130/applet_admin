@@ -30,7 +30,8 @@
         <el-form-item label="元素类型">
           <el-select v-model="info.typeId" placeholder="选择元素类型">
             <el-option label="全部" value=""></el-option>
-            <el-option v-for="(item, index) in typeList" :key="index" :label="item.typeName" :value="item.id"></el-option>
+            <el-option v-for="(item, index) in typeList" :key="index" :label="item.typeName"
+                       :value="item.id"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="元素状态">
@@ -72,7 +73,8 @@
               <i class="el-icon-caret-top sort-direction" @click="shiftSort(scope.row.id, scope.row.pageId, 'top')"></i>
             </el-tooltip>
             <el-tooltip class="item" effect="dark" content="下移" placement="top">
-              <i class="el-icon-caret-bottom sort-direction" @click="shiftSort(scope.row.id, scope.row.pageId, 'bot')"></i>
+              <i class="el-icon-caret-bottom sort-direction"
+                 @click="shiftSort(scope.row.id, scope.row.pageId, 'bot')"></i>
             </el-tooltip>
           </template>
         </el-table-column>

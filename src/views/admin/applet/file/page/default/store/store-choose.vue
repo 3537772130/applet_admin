@@ -59,8 +59,9 @@
     -webkit-line-clamp: 2;
   }
 
-  .part-list > div > .el-divider--horizontal{
-    margin-top: 24px; margin-bottom: 0px;
+  .part-list > div > .el-divider--horizontal {
+    margin-top: 24px;
+    margin-bottom: 0px;
   }
 </style>
 <template>
@@ -79,7 +80,8 @@
     <div class="part-list" v-if="parseInt(bType) === 1">
       <div v-for="(type, tIndex) in typeList" :key="tIndex">
         <el-divider content-position="left">{{type.name}}</el-divider>
-        <div v-for="(item, index) in goodsList" :key="index" v-if="type.id === item.typeId" style="display: inline-block;">
+        <div v-for="(item, index) in goodsList" :key="index" v-if="type.id === item.typeId"
+             style="display: inline-block;">
           <el-image class="part-info-select" src="/static/images/icon/select-1.png"
                     v-if="index === chooseIndex"></el-image>
           <div style="height: 24px;" v-if="index != chooseIndex"></div>
@@ -112,11 +114,13 @@
     <div class="part-list" v-else-if="parseInt(bType) === 3">
       <div v-for="(type, tIndex) in typeList" :key="tIndex">
         <el-divider content-position="left">{{type.name}}</el-divider>
-        <div v-for="(item, index) in goodsList" :key="index" v-if="type.id === item.typeId" style="display: inline-block;">
+        <div v-for="(item, index) in goodsList" :key="index" v-if="type.id === item.typeId"
+             style="display: inline-block;">
           <el-image class="part-info-select" src="/static/images/icon/select-1.png"
                     v-if="index === chooseIndex"></el-image>
           <div style="height: 24px;" v-if="index != chooseIndex"></div>
-          <div class="part-info" @click="chooseDetails(item.id, item.name, item.icon, item.minPrice, item.maxPrice, index)"
+          <div class="part-info"
+               @click="chooseDetails(item.id, item.name, item.icon, item.minPrice, item.maxPrice, index)"
                :style="index === chooseIndex ? {'border': '1px #67C23A solid'} : ''">
             <div class="part-info-img">
               <el-image :src="item.icon" style="width: 90px;height: 90px;border-radius: 5px;"></el-image>
@@ -132,7 +136,8 @@
           <el-image class="part-info-select" src="/static/images/icon/select-1.png"
                     v-if="index === chooseIndex"></el-image>
           <div style="height: 24px;" v-if="index != chooseIndex"></div>
-          <div class="part-info" @click="chooseDetails(item.id, item.name, item.icon, item.minPrice, item.maxPrice, index)"
+          <div class="part-info"
+               @click="chooseDetails(item.id, item.name, item.icon, item.minPrice, item.maxPrice, index)"
                :style="index === chooseIndex ? {'border': '1px #67C23A solid'} : ''">
             <div class="part-info-img">
               <el-image :src="item.icon" style="width: 90px;height: 90px;border-radius: 5px;"></el-image>

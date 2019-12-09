@@ -45,13 +45,14 @@
         <el-form-item label="元素类型" prop="typeId">
           <el-select v-model="elementForm.typeId" placeholder="请选择元素类型" class="applet-element-input">
             <el-option label="请选择" value=""></el-option>
-            <el-option v-for="(item, index) in typeList" :key="index" :label="item.typeName" :value="item.id"></el-option>
+            <el-option v-for="(item, index) in typeList" :key="index" :label="item.typeName"
+                       :value="item.id"></el-option>
           </el-select>
         </el-form-item>
-<!--        <el-form-item label="默认内容" prop="elementJson">-->
-<!--          <el-input type="textarea" v-model="elementForm.elementJson" :show-word-limit="true" maxlength="1000"-->
-<!--                    resize="none" rows="5" placeholder="请输入默认内容(json格式)" class="applet-element-input"></el-input>-->
-<!--        </el-form-item>-->
+        <!--        <el-form-item label="默认内容" prop="elementJson">-->
+        <!--          <el-input type="textarea" v-model="elementForm.elementJson" :show-word-limit="true" maxlength="1000"-->
+        <!--                    resize="none" rows="5" placeholder="请输入默认内容(json格式)" class="applet-element-input"></el-input>-->
+        <!--        </el-form-item>-->
         <el-form-item label="元素状态" prop="elementStatus">
           <el-select v-model="elementForm.elementStatus" placeholder="请选择元素状态" class="applet-element-input">
             <el-option label="正常" value="1"></el-option>
@@ -142,7 +143,9 @@
             }).then(res => {
               let that = this
               res.data.code === '1' ? this.$message.success({
-                message: res.data.data, duration: 1000, onClose: function () {
+                message: res.data.data,
+                duration: 1000,
+                onClose: function () {
                   that.$emit('refreshSet')
                 }
               }) : this.$message.error(res.data.data)

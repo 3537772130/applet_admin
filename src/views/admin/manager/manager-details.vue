@@ -63,7 +63,8 @@
           <el-button type="primary" @click="toUpdate()" style="width: 190px;">修改资料</el-button>
         </div>
       </el-form>
-      <el-dialog :title="showTitle" :visible.sync="showInfo" class="manager-details-dialog" :modal-append-to-body="false"
+      <el-dialog :title="showTitle" :visible.sync="showInfo" class="manager-details-dialog"
+                 :modal-append-to-body="false"
                  :close-on-click-modal="false" :destroy-on-close="true">
         <managerDetails ref="managerDetails" v-on:loadManager="loadManager"></managerDetails>
       </el-dialog>
@@ -78,7 +79,7 @@
     components: {
       'managerDetails': managerDetails
     },
-    data() {
+    data () {
       return {
         loading: false,
         showInfo: false,
@@ -86,19 +87,19 @@
         managerForm: {}
       }
     },
-    created() {
+    created () {
       this.loadManagerInfo()
     },
-    mounted() {
+    mounted () {
     },
     methods: {
-      loadManagerInfo() {
+      loadManagerInfo () {
         this.managerForm = this.$cookies.get('manager_info')
       },
-      toUpdate() {
+      toUpdate () {
         this.showInfo = true
       },
-      loadManager() {
+      loadManager () {
         this.showInfo = false
         this.loadManagerInfo()
         this.$emit('updateInfo')

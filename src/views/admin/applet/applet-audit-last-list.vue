@@ -124,7 +124,8 @@
         </el-table-column>
         <el-table-column align="center" fixed="right" label="操作">
           <template slot-scope="scope">
-            <el-button type="primary" plain size="mini" @click="loadDetails(scope.row.id, scope.row.appletName, scope.row.auditResult)">
+            <el-button type="primary" plain size="mini"
+                       @click="loadDetails(scope.row.id, scope.row.appletName, scope.row.auditResult)">
               {{scope.row.auditResult == 1 ? '审核':'详情'}}
             </el-button>
           </template>
@@ -140,11 +141,13 @@
         </el-pagination>
       </div>
 
-      <el-dialog :title="showTitle" :visible.sync="showRecord" class="applet-record-dialog" :modal-append-to-body="false"
+      <el-dialog :title="showTitle" :visible.sync="showRecord" class="applet-record-dialog"
+                 :modal-append-to-body="false"
                  :close-on-click-modal="false">
         <appletAuditRecord ref="appletAuditRecord" v-on:setAppletId="setAppletId"></appletAuditRecord>
       </el-dialog>
-      <el-dialog :title="showTitle" :visible.sync="showDetails" class="applet-details-dialog" :modal-append-to-body="false"
+      <el-dialog :title="showTitle" :visible.sync="showDetails" class="applet-details-dialog"
+                 :modal-append-to-body="false"
                  :close-on-click-modal="false">
         <appletDetails ref="appletDetails" v-on:setAppletId="setAppletId"></appletDetails>
       </el-dialog>
@@ -161,7 +164,7 @@
       'appletAuditRecord': appletAuditRecord,
       'appletDetails': appletDetails
     },
-    data() {
+    data () {
       return {
         loading: true,
         tableHeight: 50,
@@ -190,19 +193,19 @@
         tableData: []
       }
     },
-    created() {
+    created () {
       this.$global.selectRegionList(this, '', '1')
       this.onSubmit()
     },
-    mounted() {
+    mounted () {
 
     },
     methods: {
-      indexMethod(index) {
+      indexMethod (index) {
         let count = (parseInt(this.info.page) - 1) * parseInt(this.info.pageSize)
         return count + (parseInt(index) + 1)
       },
-      selectProvince() {
+      selectProvince () {
         let province = this.info.province
         this.info.city = ''
         this.info.county = ''
@@ -210,23 +213,23 @@
         this.countyList = []
         if (province != '') {
           let obj = this.provList.find((item) => {
-            return item.areaName === province;
+            return item.areaName === province
           })
           this.$global.selectRegionList(this, obj.id, '2')
         }
       },
-      selectCity() {
+      selectCity () {
         let city = this.info.city
         this.countyList = []
         this.info.county = ''
         if (city != '') {
           let obj = this.cityList.find((item) => {
-            return item.areaName === city;
+            return item.areaName === city
           })
           this.$global.selectRegionList(this, obj.id, '3')
         }
       },
-      onSubmit() {
+      onSubmit () {
         this.loading = true
         this.$axios({
           url: '/api/manage/applet/queryAppletAuditToLastTrial',
@@ -238,7 +241,7 @@
           if (res.data.code === '1') {
             this.tableData = res.data.data.dataSource
             this.total = res.data.data.totalCount
-          } else if (res.data.code === "-1") {
+          } else if (res.data.code === '-1') {
             this.$message.error(res.data.data)
           }
           this.$global.exitLoad(this, null, res.data)
@@ -247,18 +250,18 @@
           this.$global.exitLoad(this, null, '')
         })
       },
-      selectList() {
+      selectList () {
         this.info.page = 1
         this.onSubmit()
       },
-      handleCurrentChange(val) {
+      handleCurrentChange (val) {
         this.info.page = val
         this.onSubmit()
       },
-      resetForm(formName) {
+      resetForm (formName) {
         this.$refs[formName].resetFields()
       },
-      loadAuditRecord(appletId, appletName) {
+      loadAuditRecord (appletId, appletName) {
         this.showRecord = true
         this.showTitle = appletName + ' - 审核记录'
         try {
@@ -267,11 +270,11 @@
           this.$cookies.set('appletId', appletId)
         }
       },
-      loadDetails(appletId, appletName, auditResult) {
+      loadDetails (appletId, appletName, auditResult) {
         this.showDetails = true
         this.showTitle = appletName + ' - 详情'
         this.$cookies.set('auditResult', 0)
-        if (auditResult == 1){
+        if (auditResult == 1) {
           this.$cookies.set('auditResult', 1)
         }
         try {
@@ -280,7 +283,7 @@
           this.$cookies.set('appletId', appletId)
         }
       },
-      setAppletId(){
+      setAppletId () {
         this.showDetails = false
         this.selectList()
       }

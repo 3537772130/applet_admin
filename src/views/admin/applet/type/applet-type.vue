@@ -30,7 +30,7 @@
 
   export default {
     name: 'applet-type',
-    data() {
+    data () {
       return {
         loading: false,
         typeForm: {
@@ -46,14 +46,14 @@
         }
       }
     },
-    created() {
+    created () {
       let typeId = this.$cookies.get('applet_type_id')
       this.loadAppletType(typeId)
     },
-    mounted() {
+    mounted () {
     },
     methods: {
-      loadAppletType(typeId) {
+      loadAppletType (typeId) {
         if (typeId) {
           this.typeForm.id = typeId
           this.loading = true
@@ -66,7 +66,7 @@
               this.typeForm = res.data.data
               this.typeForm.typeStatus = this.typeForm.typeStatus ? '1' : '0'
               delete this.typeForm.updateTime
-            } else if (res.data.code === "-1") {
+            } else if (res.data.code === '-1') {
               this.$message.error(res.data.data)
             }
             this.$cookies.remove('applet_type_id')
@@ -78,7 +78,7 @@
           })
         }
       },
-      onSubmit() {
+      onSubmit () {
         this.$refs['typeForm'].validate((valid) => {
           if (valid) {
             let loading = Loading.service({fullscreen: true, text: '正在提交'})
@@ -89,7 +89,9 @@
             }).then(res => {
               let that = this
               res.data.code === '1' ? this.$message.success({
-                message: res.data.data, duration: 1000, onClose: function () {
+                message: res.data.data,
+                duration: 1000,
+                onClose: function () {
                   that.$emit('refreshSet')
                 }
               }) : this.$message.error(res.data.data)

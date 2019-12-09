@@ -35,8 +35,9 @@
                 </td>
                 <td class="bind-goods">
                   <el-image class="goods-img" :src="car.goodsIcon"
-                            v-if="car.goodsId != ''" @click="loadPartChoose(pIndex, index, 1)" style="border-radius: 5px;"></el-image>
-                  <div class="add-goods" v-if="car.goodsId === ''"  @click="loadPartChoose(pIndex, index, 1)">
+                            v-if="car.goodsId != ''" @click="loadPartChoose(pIndex, index, 1)"
+                            style="border-radius: 5px;"></el-image>
+                  <div class="add-goods" v-if="car.goodsId === ''" @click="loadPartChoose(pIndex, index, 1)">
                     <el-image class="goods-icon" src="/static/images/icon/add.png"></el-image>
                     <div class="goods-text">绑定商品</div>
                   </div>
@@ -138,16 +139,20 @@
                       name="image"
                       :show-file-list="false"
                       :on-success="handleAvatarSuccess"
-                      :before-upload="beforeAvatarUpload" :data="{'pIndex': pIndex,'index': 0,'icon': item.list[0].icon}">
-                      <img v-if="item.list[0].icon" :src="item.list[0].icon" class="img-carousel" style="width: 244px;height: 95px;">
+                      :before-upload="beforeAvatarUpload"
+                      :data="{'pIndex': pIndex,'index': 0,'icon': item.list[0].icon}">
+                      <img v-if="item.list[0].icon" :src="item.list[0].icon" class="img-carousel"
+                           style="width: 244px;height: 95px;">
                       <i v-else class="el-icon-plus img-carousel-uploader-icon"></i>
                     </el-upload>
                   </el-form-item>
                 </td>
                 <td class="bind-goods">
                   <el-image class="goods-img" :src="item.list[0].goodsIcon"
-                            v-if="item.list[0].goodsId != ''" @click="loadPartChoose(pIndex, 0, 1)" style="position: relative;top: -10px;border-radius: 5px;"></el-image>
-                  <div class="add-goods" style="top: -13px" v-if="item.list[0].goodsId === ''" @click="loadPartChoose(pIndex, 0, 1)">
+                            v-if="item.list[0].goodsId != ''" @click="loadPartChoose(pIndex, 0, 1)"
+                            style="position: relative;top: -10px;border-radius: 5px;"></el-image>
+                  <div class="add-goods" style="top: -13px" v-if="item.list[0].goodsId === ''"
+                       @click="loadPartChoose(pIndex, 0, 1)">
                     <el-image class="goods-icon" src="/static/images/icon/add.png"></el-image>
                     <div class="goods-text">绑定商品</div>
                   </div>
@@ -236,14 +241,16 @@
                       :show-file-list="false"
                       :on-success="handleAvatarSuccess"
                       :before-upload="beforeAvatarUpload" :data="{'pIndex': pIndex,'index': index,'icon': img.icon}">
-                      <img v-if="img.icon" :src="img.icon" class="img-carousel" style="width: 244px;height: 95px;border-radius: 5px;">
+                      <img v-if="img.icon" :src="img.icon" class="img-carousel"
+                           style="width: 244px;height: 95px;border-radius: 5px;">
                       <i v-else class="el-icon-plus img-carousel-uploader-icon"></i>
                     </el-upload>
                   </el-form-item>
                 </td>
                 <td class="bind-goods">
                   <el-image class="goods-img" :src="img.goodsIcon"
-                            v-if="img.goodsId != ''" @click="loadPartChoose(pIndex, index, 1)" style="border-radius: 5px;"></el-image>
+                            v-if="img.goodsId != ''" @click="loadPartChoose(pIndex, index, 1)"
+                            style="border-radius: 5px;"></el-image>
                   <div class="add-goods" v-if="img.goodsId === ''" @click="loadPartChoose(pIndex, index, 1)">
                     <el-image class="goods-icon" src="/static/images/icon/add.png"></el-image>
                     <div class="goods-text">绑定商品</div>
@@ -285,14 +292,16 @@
                       :show-file-list="false"
                       :on-success="handleAvatarSuccess"
                       :before-upload="beforeAvatarUpload" :data="{'pIndex': pIndex,'index': index,'icon': img.icon}">
-                      <img v-if="img.icon" :src="img.icon" class="img-carousel" style="width: 120px;height: 220px;border-radius: 5px;">
+                      <img v-if="img.icon" :src="img.icon" class="img-carousel"
+                           style="width: 120px;height: 220px;border-radius: 5px;">
                       <i v-else class="el-icon-plus img-carousel-uploader-icon"></i>
                     </el-upload>
                   </el-form-item>
                 </td>
                 <td class="bind-goods">
                   <el-image class="goods-img" :src="img.goodsIcon"
-                            v-if="img.goodsId != ''" @click="loadPartChoose(pIndex, index, 1)" style="border-radius: 5px;"></el-image>
+                            v-if="img.goodsId != ''" @click="loadPartChoose(pIndex, index, 1)"
+                            style="border-radius: 5px;"></el-image>
                   <div class="add-goods" v-if="img.goodsId === ''" @click="loadPartChoose(pIndex, index, 1)">
                     <el-image class="goods-icon" src="/static/images/icon/add.png"></el-image>
                     <div class="goods-text">绑定商品</div>
@@ -339,7 +348,8 @@
               <div class="goods-two-element" v-for="(type, index) in item.list" :key="index">
                 <div @click="loadPartChoose(pIndex, index, 3)">
                   <div class="goods-icon-div">
-                    <el-image :src="type.icon" style="width: 140px;height: 140px;border-radius: 10px 10px 0px 0px;"></el-image>
+                    <el-image :src="type.icon"
+                              style="width: 140px;height: 140px;border-radius: 10px 10px 0px 0px;"></el-image>
                   </div>
                   <div class="goods-name">{{type.name}}</div>
                 </div>
@@ -370,7 +380,8 @@
               <div class="goods-two-element" v-if="item.list.length < 10">
                 <div @click="loadPartChoose(pIndex, null, 4)">
                   <div class="goods-icon-div" style="width: 140px;height: 140px;line-height: 140px; margin: auto;">
-                    <el-image src="/static/images/icon/add.png" style="width: 40px;height: 40px;margin: auto;"></el-image>
+                    <el-image src="/static/images/icon/add.png"
+                              style="width: 40px;height: 40px;margin: auto;"></el-image>
                   </div>
                   <span class="goods-name" style="color: #cdcdcd;text-align: center;">添加商品</span>
                 </div>
@@ -550,7 +561,7 @@
         this.$emit('refreshSet', bool, index)
       },
       loadPartChoose (pIndex, index, type) {
-        if (type === 1){
+        if (type === 1) {
           this.listTitle = '商品列表'
         } else {
           this.listTitle = '商品分类列表'
@@ -571,13 +582,13 @@
         let part = this.partList[pIndex]
         let list = part.list
         if (parseInt(type) === 1) {
-          //图片标题、工具绑定商品
+          // 图片标题、工具绑定商品
           list[sIndex].goodsId = id
           list[sIndex].goodsIcon = icon
         } else if (parseInt(type) === 2) {
-          //选择商品分类进行绑定
+          // 选择商品分类进行绑定
           if (sIndex === 'null') {
-            //新增
+            // 新增
             const info = {
               'id': id,
               'name': name,
@@ -585,7 +596,7 @@
             }
             list.push(info)
           } else {
-            //修改
+            // 修改
             list[sIndex] = {
               'id': id,
               'name': name,
@@ -593,9 +604,9 @@
             }
           }
         } else if (parseInt(type) === 3 || parseInt(type) === 4) {
-          //选择商品进行绑定
+          // 选择商品进行绑定
           if (sIndex === 'null') {
-            //新增
+            // 新增
             const info = {
               'id': id,
               'name': name,
@@ -605,7 +616,7 @@
             }
             list.push(info)
           } else {
-            //修改
+            // 修改
             list[sIndex] = {
               'id': id,
               'name': name,

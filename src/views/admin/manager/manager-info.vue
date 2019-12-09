@@ -42,12 +42,14 @@
           <el-input v-model="managerForm.weChatAccount" placeholder="输入微信账号" class="manager-input"></el-input>
         </el-form-item>
         <el-form-item label="所属区域" prop="county">
-          <el-cascader v-model="region" :options="regions" placeholder="请选择所属区域" @change="handleChange" style="width: 475px;"></el-cascader>
+          <el-cascader v-model="region" :options="regions" placeholder="请选择所属区域" @change="handleChange"
+                       style="width: 475px;"></el-cascader>
         </el-form-item>
         <el-form-item label="上级" prop="parentId" v-if="showParent">
           <el-select v-model="managerForm.parentId" placeholder="选择上级" class="manager-input">
             <el-option label="请选择" value=''></el-option>
-            <el-option v-for="(parent, index) in parentList" :key="index" :label="parent.nickName + ' ' + parent.userName" :value="parent.id"></el-option>
+            <el-option v-for="(parent, index) in parentList" :key="index"
+                       :label="parent.nickName + ' ' + parent.userName" :value="parent.id"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="状态" prop="status">
@@ -72,7 +74,7 @@
 
   export default {
     name: 'manager-info',
-    data() {
+    data () {
       return {
         loading: false,
         showUserName: '',
@@ -145,15 +147,15 @@
         }
       }
     },
-    created() {
+    created () {
       let managerId = this.$cookies.get('managerId')
       this.setManagerId(managerId)
     },
-    mounted() {
+    mounted () {
     },
     methods: {
-      setManagerId(managerId) {
-        if (managerId){
+      setManagerId (managerId) {
+        if (managerId) {
           this.loading = true
           this.$axios({
             url: '/api/manage/manager/getManagerInfo',
@@ -181,28 +183,28 @@
           })
         }
       },
-      getManagerId() {
+      getManagerId () {
         return this.managerForm.id
       },
-      getPassword() {
+      getPassword () {
         return this.managerForm.password
       },
-      changeRole() {
+      changeRole () {
         if (this.managerForm.roleId === 4) {
           this.showParent = true
         } else {
           this.showParent = false
         }
       },
-      handleChange(res){
+      handleChange (res) {
         this.managerForm.province = res[0]
         this.managerForm.city = res[1]
         this.managerForm.county = res[2]
       },
-      onSubmit(formName) {
+      onSubmit (formName) {
         if (this.managerForm.roleId != 4) {
           delete this.managerForm.parentId
-          this.$refs[formName].clearValidate("parentId")
+          this.$refs[formName].clearValidate('parentId')
         }
         this.$refs[formName].validate((valid) => {
           if (valid) {
@@ -213,7 +215,7 @@
               data: this.managerForm
             }).then(res => {
               console.info('后台返回的数据', res.data)
-              if ( res.data.code === '1'){
+              if (res.data.code === '1') {
                 this.$emit('setManagerId')
                 this.$message.success(res.data.data)
               } else {

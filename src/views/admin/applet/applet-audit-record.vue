@@ -1,5 +1,5 @@
 <style type="text/css">
-  .applet-audit-timeline{
+  .applet-audit-timeline {
     text-align: left;
   }
 </style>
@@ -36,22 +36,22 @@
 
   export default {
     name: 'applet-audit-record',
-    data() {
+    data () {
       return {
         loading: false,
         recordList: []
       }
     },
-    created() {
+    created () {
       this.onSubmit(this.$cookies.get('appletId'))
     },
-    mounted() {
+    mounted () {
     },
     methods: {
-      setAppletId(appletId) {
+      setAppletId (appletId) {
         this.onSubmit(appletId)
       },
-      onSubmit(id) {
+      onSubmit (id) {
         this.loading = true
         this.$axios({
           url: '/api/manage/applet/queryAppletAuditToList',
@@ -61,7 +61,7 @@
           console.info('后台返回的数据', res.data)
           if (res.data.code === '1') {
             this.recordList = res.data.data
-          } else if (res.data.code === "-1") {
+          } else if (res.data.code === '-1') {
             this.$message.error(res.data.data)
           }
           this.$cookies.remove('appletId')

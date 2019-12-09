@@ -20,12 +20,14 @@
         <el-form-item label="文件版本" prop="fileId">
           <el-select v-model="versionForm.fileId" placeholder="选择文件版本" class="applet-version-input">
             <el-option label="请选择" value=""></el-option>
-            <el-option v-for="(item, index) in fileList" :key="index" :label="item.versionNumber" :value="item.id"></el-option>
+            <el-option v-for="(item, index) in fileList" :key="index" :label="item.versionNumber"
+                       :value="item.id"></el-option>
           </el-select>
         </el-form-item>
         <br>
         <el-form-item label=" ">
-          <el-button type="primary" @click="onSubmit()" class="applet-version-input" style="text-align: center;">提交</el-button>
+          <el-button type="primary" @click="onSubmit()" class="applet-version-input" style="text-align: center;">提交
+          </el-button>
         </el-form-item>
       </el-form>
     </el-main>
@@ -36,7 +38,7 @@
 
   export default {
     name: 'applet-version',
-    data() {
+    data () {
       return {
         loading: false,
         fileList: [],
@@ -52,14 +54,14 @@
         }
       }
     },
-    created() {
+    created () {
       let versionId = this.$cookies.get('applet_version_id')
       this.loadAppletVersion(versionId)
     },
-    mounted() {
+    mounted () {
     },
     methods: {
-      loadAppletVersion(versionId) {
+      loadAppletVersion (versionId) {
         if (versionId) {
           this.loading = true
           this.$axios({
@@ -83,7 +85,7 @@
           })
         }
       },
-      onSubmit() {
+      onSubmit () {
         this.$refs['versionForm'].validate((valid) => {
           if (valid) {
             let loading = Loading.service({fullscreen: true, text: '正在提交'})
@@ -94,7 +96,9 @@
             }).then(res => {
               let that = this
               res.data.code === '1' ? this.$message.success({
-                message: res.data.data, duration: 1000, onClose: function () {
+                message: res.data.data,
+                duration: 1000,
+                onClose: function () {
                   that.$emit('refreshSet')
                 }
               }) : this.$message.error(res.data.data)

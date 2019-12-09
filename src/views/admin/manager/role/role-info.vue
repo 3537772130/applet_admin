@@ -1,5 +1,5 @@
 <style type="text/css">
-  .role-input{
+  .role-input {
     width: 290px;
   }
 </style>
@@ -60,8 +60,8 @@
     mounted () {
     },
     methods: {
-      setRoleId(roleId){
-        if (roleId && roleId != '0'){
+      setRoleId (roleId) {
+        if (roleId && roleId != '0') {
           this.roleForm.id = roleId
           this.loading = true
           this.$axios({
@@ -71,9 +71,9 @@
           }).then(res => {
             if (res.data.code === '1') {
               this.roleForm = res.data.data
-              this.roleForm.status = this.roleForm.status ? '1':'0'
+              this.roleForm.status = this.roleForm.status ? '1' : '0'
               delete this.roleForm.updateDate
-            } else if (res.data.code === "-1") {
+            } else if (res.data.code === '-1') {
               this.$message.error(res.data.data)
             }
             this.$cookies.remove('roleId')
@@ -95,9 +95,10 @@
               data: this.roleForm
             }).then(res => {
               let that = this
-              res.data.code === '1' ? this.$message.success({message: res.data.data,duration: 1000, onClose: function () {
+              res.data.code === '1' ? this.$message.success({
+                message: res.data.data, duration: 1000, onClose: function () {
                   that.$emit('setRoleId')
-              }
+                }
               }) : this.$message.error(res.data.data)
               this.$global.exitLoad(this, loading, res.data)
             }).catch(error => {

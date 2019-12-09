@@ -62,7 +62,9 @@
                         v-model="loginForm.password" show-password></el-input>
             </el-form-item>
             <el-form-item>
-              <el-button type="primary" @click="onSubmit()" @keyup.enter="onSubmit()" style="letter-spacing: 5px;">立即登录</el-button>
+              <el-button type="primary" @click="onSubmit()" @keyup.enter="onSubmit()" style="letter-spacing: 5px;">
+                立即登录
+              </el-button>
             </el-form-item>
           </el-form>
         </div>
@@ -75,7 +77,7 @@
 
   export default {
     name: 'index',
-    data() {
+    data () {
       return {
         contentStyle: {
           'width': '100%',
@@ -99,13 +101,13 @@
         }
       }
     },
-    created() {
+    created () {
     },
-    mounted() {
+    mounted () {
 
     },
     methods: {
-      onSubmit(name) {
+      onSubmit (name) {
         this.$refs['loginForm'].validate((valid) => {
           if (valid) {
             let loading = Loading.service({fullscreen: true, text: '正在登录'})
@@ -117,18 +119,18 @@
               console.info('后台返回的数据', res.data)
               if (res.data.code === '1') {
                 let info = res.data.data
-                if (info.avatarUrl === null || info.avatarUrl === 'null'){
+                if (info.avatarUrl === null || info.avatarUrl === 'null') {
                   info.avatarUrl = '/static/images/default-avatar.jpeg'
                 }
                 this.$cookies.set('manager_info', info, 3600)
                 this.$router.push({path: '/main-info'})
-              } else if (res.data.code === "-1") {
+              } else if (res.data.code === '-1') {
                 this.$message.error(res.data.data)
               }
               this.$global.exitLoad(this, loading, res.data)
             }).catch(error => {
               console.info('错误信息', error)
-              this.$global.exitLoad(this, loading, "")
+              this.$global.exitLoad(this, loading, '')
             })
           } else {
             this.$message({message: '表单校验失败!', type: 'warning'})

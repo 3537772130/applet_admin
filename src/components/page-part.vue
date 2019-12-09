@@ -26,7 +26,7 @@
       'name': 'type',
       'icon': '/static/images/icon/shopping.png'
     }]
-  },{
+  }, {
     'id': 'type-frame-four',
     'name': '分类栏',
     'list': [{

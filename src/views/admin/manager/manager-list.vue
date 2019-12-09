@@ -14,7 +14,8 @@
 <template>
   <el-container>
     <el-main v-loading="loading" element-loading-text="加载中" style="background-color: #FFFFFF;padding-top: 20px;">
-      <el-form id="manager-form" :inline="true" :model="info" ref="queryManagerForm" class="demo-form-inline manager-form">
+      <el-form id="manager-form" :inline="true" :model="info" ref="queryManagerForm"
+               class="demo-form-inline manager-form">
         <el-form-item label="账号" prop="userName">
           <el-input v-model="info.userName" placeholder="请输入账号" class="manager-input"></el-input>
         </el-form-item>
@@ -67,7 +68,8 @@
         <el-form-item label="上级" prop="parentId">
           <el-select v-model="info.parentId" placeholder="选择上级" class="manager-input">
             <el-option label="请选择" value=''></el-option>
-            <el-option v-for="(parent, index) in parentList" :key="index" :label="parent.nickName + ' ' + parent.userName" :value="parent.id"></el-option>
+            <el-option v-for="(parent, index) in parentList" :key="index"
+                       :label="parent.nickName + ' ' + parent.userName" :value="parent.id"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item>
@@ -150,7 +152,7 @@
     components: {
       'managerInfo': managerInfo
     },
-    data() {
+    data () {
       return {
         loading: false,
         tableHeight: 50,
@@ -182,18 +184,18 @@
         tableData: []
       }
     },
-    created() {
+    created () {
       this.loadManagerList()
       this.$global.selectRegionList(this, '', '1')
     },
-    mounted() {
+    mounted () {
     },
     methods: {
-      indexMethod(index) {
+      indexMethod (index) {
         let count = (parseInt(this.info.page) - 1) * parseInt(this.info.pageSize)
         return count + (parseInt(index) + 1)
       },
-      loadManagerList() {
+      loadManagerList () {
         this.loading = true
         this.$axios({
           url: '/api/manage/manager/loadManagerList',
@@ -203,7 +205,7 @@
           if (res.data.code === '1') {
             this.roleList = res.data.data.roleList
             this.parentList = res.data.data.parentList
-          } else if (res.data.code === "-1") {
+          } else if (res.data.code === '-1') {
             this.$message.error(res.data.data)
           }
           this.onSubmit()
@@ -212,7 +214,7 @@
           this.$global.exitLoad(this, null, '')
         })
       },
-      selectProvince() {
+      selectProvince () {
         let province = this.info.province
         this.info.city = ''
         this.info.county = ''
@@ -220,23 +222,23 @@
         this.countyList = []
         if (province != '') {
           let obj = this.provList.find((item) => {
-            return item.areaName === province;
+            return item.areaName === province
           })
           this.$global.selectRegionList(this, obj.id, '2')
         }
       },
-      selectCity() {
+      selectCity () {
         let city = this.info.city
         this.countyList = []
         this.info.county = ''
         if (city != '') {
           let obj = this.cityList.find((item) => {
-            return item.areaName === city;
+            return item.areaName === city
           })
           this.$global.selectRegionList(this, obj.id, '3')
         }
       },
-      onSubmit() {
+      onSubmit () {
         this.loading = true
         this.$axios({
           url: '/api/manage/manager/queryManagerToPage',
@@ -248,7 +250,7 @@
           if (res.data.code === '1') {
             this.tableData = res.data.data.dataSource
             this.total = res.data.data.totalCount
-          } else if (res.data.code === "-1") {
+          } else if (res.data.code === '-1') {
             this.$message.error(res.data.data)
           }
           this.$global.exitLoad(this, null, res.data)
@@ -257,18 +259,18 @@
           this.$global.exitLoad(this, null, '')
         })
       },
-      selectList() {
+      selectList () {
         this.info.page = 1
         this.onSubmit()
       },
-      handleCurrentChange(val) {
+      handleCurrentChange (val) {
         this.info.page = val
         this.onSubmit()
       },
-      resetForm(formName) {
+      resetForm (formName) {
         this.$refs[formName].resetFields()
       },
-      updateInfo(managerId, userName) {
+      updateInfo (managerId, userName) {
         this.showInfo = true
         this.managerId = managerId
         if (userName && userName != '0') {
@@ -279,10 +281,10 @@
         try {
           this.$refs.managerInfo.setManagerId(managerId)
         } catch (e) {
-          this.$cookies.set("managerId", managerId)
+          this.$cookies.set('managerId', managerId)
         }
       },
-      setManagerId() {
+      setManagerId () {
         this.showInfo = false
         this.selectList()
       }

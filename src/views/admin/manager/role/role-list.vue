@@ -53,7 +53,8 @@
         </el-table-column>
         <el-table-column align="center" label="操作" width="180">
           <template slot-scope="scope">
-            <el-button type="primary" plain size="mini" @click="updateAuth(scope.row.id, scope.row.roleName)">设置权限</el-button>
+            <el-button type="primary" plain size="mini" @click="updateAuth(scope.row.id, scope.row.roleName)">设置权限
+            </el-button>
             <el-button type="warning" plain size="mini" @click="updateInfo(scope.row.id)">修改</el-button>
           </template>
         </el-table-column>
@@ -88,7 +89,7 @@
       'roleInfo': roleInfo,
       'roleAuth': roleAuth
     },
-    data() {
+    data () {
       return {
         loading: false,
         tableHeight: 50,
@@ -108,17 +109,17 @@
         tableData: []
       }
     },
-    created() {
+    created () {
       this.onSubmit()
     },
-    mounted() {
+    mounted () {
     },
     methods: {
-      indexMethod(index) {
+      indexMethod (index) {
         let count = (parseInt(this.info.page) - 1) * parseInt(this.info.pageSize)
         return count + (parseInt(index) + 1)
       },
-      onSubmit() {
+      onSubmit () {
         this.loading = true
         this.$axios({
           url: '/api/manage/manager/queryManagerRoleToPage',
@@ -130,7 +131,7 @@
           if (res.data.code === '1') {
             this.tableData = res.data.data.dataSource
             this.total = res.data.data.totalCount
-          } else if (res.data.code === "-1") {
+          } else if (res.data.code === '-1') {
             this.$message.error(res.data.data)
           }
           this.$global.exitLoad(this, null, res.data)
@@ -139,15 +140,15 @@
           this.$global.exitLoad(this, null, '')
         })
       },
-      selectRoleList() {
+      selectRoleList () {
         this.info.page = 1
         this.onSubmit()
       },
-      handleCurrentChange(val) {
+      handleCurrentChange (val) {
         this.info.page = val
         this.onSubmit()
       },
-      updateInfo(roleId) {
+      updateInfo (roleId) {
         this.showInfo = true
         this.roleId = roleId
         if (roleId && roleId != '0') {
@@ -161,7 +162,7 @@
           this.$cookies.set('roleId', roleId)
         }
       },
-      updateAuth(id, name){
+      updateAuth (id, name) {
         try {
           this.$refs.roleAuth.loadMenuList(id)
         } catch (e) {
@@ -170,11 +171,11 @@
         this.showAuth = true
         this.showName = name
       },
-      setRoleId() {
+      setRoleId () {
         this.showInfo = false
         this.selectRoleList()
       },
-      loadMenuList(){
+      loadMenuList () {
         this.showAuth = false
       }
     }

@@ -10,7 +10,8 @@
         <el-form-item label="服务类型" prop="typeId">
           <el-select v-model="fileForm.typeId" placeholder="请选择服务类型" class="applet-file-input">
             <el-option label="请选择" value=""></el-option>
-            <el-option v-for="(item, index) in typeList" :key="index" :label="item.typeName" :value="item.id"></el-option>
+            <el-option v-for="(item, index) in typeList" :key="index" :label="item.typeName"
+                       :value="item.id"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="文件版本" prop="versionNumber">
@@ -98,7 +99,9 @@
             }).then(res => {
               let that = this
               res.data.code === '1' ? this.$message.success({
-                message: res.data.data, duration: 1000, onClose: function () {
+                message: res.data.data,
+                duration: 1000,
+                onClose: function () {
                   that.$emit('refreshSet')
                 }
               }) : this.$message.error(res.data.data)

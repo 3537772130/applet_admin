@@ -14,7 +14,8 @@
 <template>
   <el-container>
     <el-main v-loading="loading" element-loading-text="加载中" style="background-color: #FFFFFF;padding-top: 20px;">
-      <el-form id="applet-type-form" :inline="true" :model="info" class="demo-form-inline applet-type-form" style="text-align: left;">
+      <el-form id="applet-type-form" :inline="true" :model="info" class="demo-form-inline applet-type-form"
+               style="text-align: left;">
         <el-form-item label="类型名称">
           <el-input v-model="info.typeName" placeholder="请输入类型名称"></el-input>
         </el-form-item>
@@ -77,7 +78,7 @@
     components: {
       'AppletType': AppletType
     },
-    data() {
+    data () {
       return {
         loading: false,
         tableHeight: 50,
@@ -94,17 +95,17 @@
         tableData: []
       }
     },
-    created() {
+    created () {
       this.onSubmit()
     },
-    mounted() {
+    mounted () {
     },
     methods: {
-      indexMethod(index) {
+      indexMethod (index) {
         let count = (parseInt(this.info.page) - 1) * parseInt(this.info.pageSize)
         return count + (parseInt(index) + 1)
       },
-      onSubmit() {
+      onSubmit () {
         this.loading = true
         this.$axios({
           url: '/api/manage/applet/queryAppletTypePage',
@@ -116,7 +117,7 @@
           if (res.data.code === '1') {
             this.tableData = res.data.data.dataSource
             this.total = res.data.data.totalCount
-          } else if (res.data.code === "-1") {
+          } else if (res.data.code === '-1') {
             this.$message.error(res.data.data)
           }
           this.$global.exitLoad(this, null, res.data)
@@ -125,15 +126,15 @@
           this.$global.exitLoad(this, null, '')
         })
       },
-      selectList() {
+      selectList () {
         this.info.page = 1
         this.onSubmit()
       },
-      handleCurrentChange(val) {
+      handleCurrentChange (val) {
         this.info.page = val
         this.onSubmit()
       },
-      updateInfo(typeId) {
+      updateInfo (typeId) {
         this.showInfo = true
         if (typeId && typeId != '0') {
           this.showTitle = '修改小程序服务类型信息'
@@ -146,7 +147,7 @@
           this.$cookies.set('applet_type_id', typeId)
         }
       },
-      refreshSet() {
+      refreshSet () {
         this.showInfo = false
         this.selectList()
       }

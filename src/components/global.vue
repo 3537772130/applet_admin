@@ -29,7 +29,7 @@
     if (data === '') {
       that.$message.error('当前访问人数过多，请稍后再试')
     } else if (data.code === '0' || data.code === '-2') {
-      let msg = data.code === '0' ? '登录过期，请重新登录':'没有访问权限！'
+      let msg = data.code === '0' ? '登录过期，请重新登录' : '没有访问权限！'
       that.$message({
         message: msg,
         type: 'error',
@@ -185,7 +185,6 @@
     }
   }
 
-
   /**
    * 查询地域信息 json
    * @param that
@@ -234,7 +233,7 @@
   let baseToGet = function (obj) {
     let str = JSON.stringify(obj)
     let dataStr = ''
-    for (let i = 0;i < str.length;i++){
+    for (let i = 0; i < str.length; i++) {
       switch (str[i]) {
         case '{':
           dataStr += ''

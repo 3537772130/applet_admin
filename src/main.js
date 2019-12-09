@@ -12,7 +12,8 @@ import VueCookies from 'vue-cookies'
 import VueJsDialog from 'vuejs-dialog'
 import Global from '@/components/global'
 import PagePart from '@/components/page-part'
-Vue.filter('addZero',function(value){
+
+Vue.filter('addZero', function (value) {
   return parseFloat(value).toFixed(2)
 })
 
@@ -46,6 +47,6 @@ Axios.interceptors.request.use(function (config) {
 new Vue({
   el: '#app',
   router,
-  components: { App },
+  components: {App},
   template: '<App/>'
 })

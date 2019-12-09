@@ -10,7 +10,8 @@
 <template>
   <el-container>
     <el-main v-loading="loading" element-loading-text="加载中" style="background-color: #FFFFFF;padding-top: 20px;">
-      <el-form id="applet-list-form" :inline="true" :model="info" ref="queryAppletForm" class="demo-form-inline" style="text-align: left;">
+      <el-form id="applet-list-form" :inline="true" :model="info" ref="queryAppletForm" class="demo-form-inline"
+               style="text-align: left;">
         <el-form-item label="编码" prop="appletCode">
           <el-input v-model="info.appletCode" placeholder="请输入小程序编码" class="applet-input"></el-input>
         </el-form-item>
@@ -120,9 +121,11 @@
             <el-button type="primary" plain size="mini" @click="loadDetails(scope.row.id, scope.row.appletName)">详情
             </el-button>
             <el-button type="danger" plain size="mini" @click="updateStatus(scope.row.id, scope.row.appletName, -1)"
-                       v-if="scope.row.status == 1">禁用</el-button>
+                       v-if="scope.row.status == 1">禁用
+            </el-button>
             <el-button type="success" plain size="mini" @click="updateStatus(scope.row.id, scope.row.appletName, 1)"
-                       v-if="scope.row.status == -1">启用</el-button>
+                       v-if="scope.row.status == -1">启用
+            </el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -153,7 +156,7 @@
     components: {
       'appletDetails': appletDetails
     },
-    data() {
+    data () {
       return {
         loading: true,
         tableHeight: 50,
@@ -181,18 +184,18 @@
         tableData: []
       }
     },
-    created() {
+    created () {
       this.$global.selectRegionList(this, '', '1')
       this.onSubmit()
     },
-    mounted() {
+    mounted () {
     },
     methods: {
-      indexMethod(index) {
+      indexMethod (index) {
         let count = (parseInt(this.info.page) - 1) * parseInt(this.info.pageSize)
         return count + (parseInt(index) + 1)
       },
-      selectProvince() {
+      selectProvince () {
         let province = this.info.province
         this.info.city = ''
         this.info.county = ''
@@ -200,23 +203,23 @@
         this.countyList = []
         if (province != '') {
           let obj = this.provList.find((item) => {
-            return item.areaName === province;
+            return item.areaName === province
           })
           this.$global.selectRegionList(this, obj.id, '2')
         }
       },
-      selectCity() {
+      selectCity () {
         let city = this.info.city
         this.countyList = []
         this.info.county = ''
         if (city != '') {
           let obj = this.cityList.find((item) => {
-            return item.areaName === city;
+            return item.areaName === city
           })
           this.$global.selectRegionList(this, obj.id, '3')
         }
       },
-      onSubmit() {
+      onSubmit () {
         this.loading = true
         this.$axios({
           url: '/api/manage/applet/queryAppletManageToPage',
@@ -228,7 +231,7 @@
           if (res.data.code === '1') {
             this.tableData = res.data.data.dataSource
             this.total = res.data.data.totalCount
-          } else if (res.data.code === "-1") {
+          } else if (res.data.code === '-1') {
             this.$message.error(res.data.data)
           }
           this.$global.exitLoad(this, null, res.data)
@@ -237,35 +240,35 @@
           this.$global.exitLoad(this, null, '')
         })
       },
-      selectList() {
+      selectList () {
         this.info.page = 1
         this.showInfo = false
         this.onSubmit()
       },
-      handleCurrentChange(val) {
+      handleCurrentChange (val) {
         this.info.page = val
         this.onSubmit()
       },
-      resetForm(formName) {
+      resetForm (formName) {
         this.$refs[formName].resetFields()
       },
-      loadDetails(appletId, appletName) {
+      loadDetails (appletId, appletName) {
         this.showInfo = true
         this.showTitle = appletName + ' - 详情'
         this.$cookies.set('auditResult', 0)
         try {
           this.$refs.appletInfo.setAppletId(appletId)
         } catch (e) {
-          this.$cookies.set("appletId", appletId)
+          this.$cookies.set('appletId', appletId)
         }
       },
-      setAppletId() {
+      setAppletId () {
         this.selectList()
       },
-      updateStatus(id, name, status){
+      updateStatus (id, name, status) {
         let content = ''
         let lod = ''
-        if (status === 1){
+        if (status === 1) {
           content = '确定启用小程序吗？'
           lod = '启用'
         } else {
@@ -281,7 +284,7 @@
           this.$axios({
             url: '/api/manage/applet/updateAppletStatus',
             method: 'post',
-            data: {id: id,status: status}
+            data: {id: id, status: status}
           }).then(res => {
             if (res.data.code === '1') {
               this.onSubmit()
@@ -293,7 +296,7 @@
           })
         })
       },
-      exportExcel(){
+      exportExcel () {
         window.open('http://localhost:8080/api/manage/excel/exportAppletList?' + this.$global.baseToGet(this.info))
       }
     }

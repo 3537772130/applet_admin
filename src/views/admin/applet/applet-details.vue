@@ -16,7 +16,8 @@
   .applet-details-form .el-form-item {
     margin-bottom: 0px;
   }
-  .applet-details-form .el-form-item .el-form-item__content{
+
+  .applet-details-form .el-form-item .el-form-item__content {
     font-weight: bold;
   }
 
@@ -137,7 +138,7 @@
 
   export default {
     name: 'applet-details',
-    data() {
+    data () {
       return {
         loading: false,
         editableTabsValue: 'basics',
@@ -159,13 +160,13 @@
         }
       }
     },
-    created() {
-      this.setAppletId(this.$cookies.get("appletId"))
+    created () {
+      this.setAppletId(this.$cookies.get('appletId'))
     },
-    mounted() {
+    mounted () {
     },
     methods: {
-      setAppletId(id) {
+      setAppletId (id) {
         this.auditResult = this.$cookies.get('auditResult')
         this.loading = true
         this.$axios({
@@ -179,7 +180,7 @@
             this.imgList.push('api\\' + this.info.appletLogo)
             this.imgList.push('api\\' + this.info.licenseSrc)
             this.auditForm.appletId = this.info.id
-          } else if (res.data.code === "-1") {
+          } else if (res.data.code === '-1') {
             this.$message.error(res.data.data)
           }
           this.$cookies.remove('appletId')
@@ -190,12 +191,12 @@
           this.$global.exitLoad(this, null, '')
         })
       },
-      changeResult() {
+      changeResult () {
         if (this.auditForm.result == 1) {
           this.auditForm.remark = '审核通过，信息确认'
         }
       },
-      onSubmit(formName) {
+      onSubmit (formName) {
         this.$refs[formName].validate((valid) => {
             if (valid) {
               let loading = Loading.service({fullscreen: true, text: '正在提交'})
@@ -206,7 +207,7 @@
               }).then(res => {
                   console.info('后台返回的数据', res.data)
                   if (res.data.code === '1') {
-                    this.$refs[formName].resetFields();
+                    this.$refs[formName].resetFields()
                     this.$message.success(res.data.data)
                     this.$emit('setAppletId')
                   } else {

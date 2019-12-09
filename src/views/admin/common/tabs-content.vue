@@ -108,7 +108,7 @@
       'UserList': UserList,
       'MerchantList': MerchantList
     },
-    data() {
+    data () {
       return {
         tabHeight: `${document.documentElement.clientHeight - 85}`,
         tabPaneHeight: `${document.documentElement.clientHeight - 125}`,
@@ -119,15 +119,15 @@
         parentMenuIndex: ''
       }
     },
-    created() {
-      this.$cookies.set("tabPaneHeight", this.tabPaneHeight)
+    created () {
+      this.$cookies.set('tabPaneHeight', this.tabPaneHeight)
     },
-    method() {
+    method () {
 
     },
     methods: {
       // 添加标签页
-      addTab(menuIndex, title) {
+      addTab (menuIndex, title) {
         this.mainShow = 'none'
         let menuLists = this.editableTabs
         let ifBe = true
@@ -146,13 +146,13 @@
         this.editableTabsValue = menuIndex
       },
       // 选中标签页
-      clickTab(targetName) {
+      clickTab (targetName) {
         // 更新main-info菜单选中目标
         this.parentMenuIndex = targetName.$el.id.replace('pane-', '')
         this.setActiveIndex()
       },
       // 移除标签页
-      removeTab(targetName) {
+      removeTab (targetName) {
         let tabs = this.editableTabs
         let activeName = this.editableTabsValue
         if (activeName === targetName) {
@@ -174,10 +174,10 @@
         this.parentMenuIndex = tabs.length === 1 ? '0' : this.editableTabsValue
         this.setActiveIndex()
       },
-      updateInfo() {
+      updateInfo () {
         this.$emit('updateInfo')
       },
-      setActiveIndex() {
+      setActiveIndex () {
         this.$emit('updateInfo', this.parentMenuIndex)
       }
     }

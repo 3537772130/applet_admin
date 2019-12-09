@@ -146,7 +146,7 @@
         this.selectList()
       },
       downloadZip (versionId) {
-        window.open("/api/manage/applet/downloadAppletVersionFile?id=" + versionId)
+        window.open('/api/manage/applet/downloadAppletVersionFile?id=' + versionId)
       }
     }
   }
