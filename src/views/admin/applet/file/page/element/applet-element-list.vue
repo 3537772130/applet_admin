@@ -53,9 +53,9 @@
       </el-form>
       <el-table :data="tableData" :height="tableHeight" stripe style="width: 100%">
         <el-table-column align="center" type="index" :index="indexMethod" label="序号" width="80"></el-table-column>
-        <el-table-column align="center" prop="elementLogo" label="元素标识" width="100"
+        <el-table-column align="center" prop="elementLogo" label="元素标识" width="140"
                          :show-overflow-tooltip="true"></el-table-column>
-        <el-table-column align="center" prop="elementName" label="元素名称" width="100"
+        <el-table-column align="center" prop="elementName" label="元素名称" width="180"
                          :show-overflow-tooltip="true"></el-table-column>
         <el-table-column align="center" prop="typeName" label="元素类型" width="100"
                          :show-overflow-tooltip="true"></el-table-column>
@@ -66,7 +66,7 @@
             <el-link type="danger" :underline="false" v-if="!scope.row.elementStatus">禁用</el-link>
           </template>
         </el-table-column>
-        <el-table-column align="center" prop="elementIndex" label="排序" width="140">
+        <el-table-column align="center" prop="elementIndex" label="排序" width="100">
           <template slot-scope="scope">
             <el-tooltip class="item" effect="dark" content="上移" placement="top">
               <i class="el-icon-caret-top sort-direction" @click="shiftSort(scope.row.id, scope.row.pageId, 'top')"></i>

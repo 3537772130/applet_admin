@@ -1,9 +1,9 @@
 <script type='text/javascript'>
   import BScroll from 'better-scroll'
 
-  var partList = []
+  let partList = []
 
-  var storeList = [{
+  const storeList = [{
     'id': 'goods-search',
     'name': '搜索栏'
   }, {
@@ -19,7 +19,15 @@
     'name': '通告栏',
     'textContent': '恭喜发财'
   }, {
-    'id': 'type-frame',
+    'id': 'type-frame-three',
+    'name': '分类栏',
+    'list': [{
+      'id': '0',
+      'name': 'type',
+      'icon': '/static/images/icon/shopping.png'
+    }]
+  },{
+    'id': 'type-frame-four',
     'name': '分类栏',
     'list': [{
       'id': '0',
@@ -125,10 +133,6 @@
     return storeList
   }
 
-  let setStoreList = function (list) {
-    storeList = list
-  }
-
   let getStorePart = function (id) {
     let obj = storeList.find((item) => {
       return item.id === id
@@ -197,7 +201,6 @@
     getPartList,
     setPartList,
     getStoreList,
-    setStoreList,
     getStorePart,
     _initStoreScroll
   }

@@ -56,8 +56,58 @@
   display: block;
 }
 
+.store-main-part .type-frame-three-badge {
+  height: 20px;
+  line-height: 20px;
+  float: right;
+  top: -123px;
+  left: 10px;
+}
 
-.store-main-part .type-frame-badge {
+.store-main-part .type-frame-three-badge .el-badge__content {
+  width: 18px;
+  top: 0px;
+  right: 16px;
+  padding: 0px;
+}
+
+.store-main-part .type-frame-three-badge .el-badge__content:hover {
+  cursor: pointer;
+  background-color: #409EFF;
+}
+
+.store-main-part .type-three-element {
+  width: 100px;
+  height: 100px;
+  margin: 0px 5px;
+  text-align: center;
+  display: inline-block;
+  border: 1px #cdcdcd dashed;
+  border-radius: 5px;
+}
+
+.store-main-part .type-three-element:hover {
+  cursor: pointer;
+  border: 1px #409EFF dashed;
+}
+
+.store-main-part .type-three-element > div > .type-icon-div {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.store-main-part .type-three-element > div > .type-name {
+  width: 100%;
+  height: 20px;
+  line-height: 20px;
+  display: inline-block;
+  font-size: 14px;
+  position: relative;
+  top: -15px;
+}
+
+
+.store-main-part .type-frame-four-badge {
   height: 20px;
   line-height: 20px;
   float: right;
@@ -65,19 +115,19 @@
   left: 10px;
 }
 
-.store-main-part .type-frame-badge .el-badge__content {
+.store-main-part .type-frame-four-badge .el-badge__content {
   width: 18px;
   top: 0px;
   right: 16px;
   padding: 0px;
 }
 
-.store-main-part .type-frame-badge .el-badge__content:hover {
+.store-main-part .type-frame-four-badge .el-badge__content:hover {
   cursor: pointer;
   background-color: #409EFF;
 }
 
-.store-main-part .type-element {
+.store-main-part .type-four-element {
   width: 80px;
   height: 80px;
   margin: 0px 5px;
@@ -87,17 +137,17 @@
   border-radius: 5px;
 }
 
-.store-main-part .type-element:hover {
+.store-main-part .type-four-element:hover {
   cursor: pointer;
   border: 1px #409EFF dashed;
 }
 
-.store-main-part .type-element > div > .type-icon-div {
+.store-main-part .type-four-element > div > .type-icon-div {
   text-align: center;
   margin-top: 10px;
 }
 
-.store-main-part .type-element > div > .type-name {
+.store-main-part .type-four-element > div > .type-name {
   width: 100%;
   height: 20px;
   line-height: 20px;

@@ -36,7 +36,6 @@
   </div>
 </template>
 <script file="text/javascript">
-  import {Loading} from 'element-ui'
   import storeMain from '@/views/admin/applet/file/page/default/store/store-main.vue'
 
   export default {

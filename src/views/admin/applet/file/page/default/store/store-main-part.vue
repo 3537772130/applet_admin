@@ -61,18 +61,39 @@
               </tr>
             </table>
           </div>
-          <div v-if="partIndex === pIndex && item.id === 'type-frame'">
+          <div v-if="partIndex === pIndex && item.id === 'type-frame-three'">
             <el-form-item label=" " style="margin-bottom: 0px; width: 375px;">
-              <div class="type-element" v-for="(type, index) in item.list" :key="index">
+              <div class="type-three-element" v-for="(type, index) in item.list" :key="index">
+                <div @click="loadPartChoose(pIndex, index, 2)">
+                  <div class="type-icon-div">
+                    <el-image :src="type.icon" style="width: 60px;height: 60px;"></el-image>
+                  </div>
+                  <span class="type-name">{{type.name}}</span>
+                </div>
+                <el-badge value="×" class="item type-frame-three-badge" @click.native="delData(index)"></el-badge>
+              </div>
+              <div class="type-three-element" v-if="item.list.length < 12" @click="loadPartChoose(pIndex, null, 2)">
+                <div>
+                  <div class="type-icon-div">
+                    <el-image src="/static/images/icon/add.png" style="width: 60px;height: 60px;"></el-image>
+                  </div>
+                  <span class="type-name" style="color: #cdcdcd;">添加</span>
+                </div>
+              </div>
+            </el-form-item>
+          </div>
+          <div v-if="partIndex === pIndex && item.id === 'type-frame-four'">
+            <el-form-item label=" " style="margin-bottom: 0px; width: 375px;">
+              <div class="type-four-element" v-for="(type, index) in item.list" :key="index">
                 <div @click="loadPartChoose(pIndex, index, 2)">
                   <div class="type-icon-div">
                     <el-image :src="type.icon" style="width: 40px;height: 40px;"></el-image>
                   </div>
                   <span class="type-name">{{type.name}}</span>
                 </div>
-                <el-badge value="×" class="item type-frame-badge" @click.native="delData(index)"></el-badge>
+                <el-badge value="×" class="item type-frame-four-badge" @click.native="delData(index)"></el-badge>
               </div>
-              <div class="type-element" v-if="item.list.length < 12" @click="loadPartChoose(pIndex, null, 2)">
+              <div class="type-four-element" v-if="item.list.length < 12" @click="loadPartChoose(pIndex, null, 2)">
                 <div>
                   <div class="type-icon-div">
                     <el-image src="/static/images/icon/add.png" style="width: 40px;height: 40px;"></el-image>

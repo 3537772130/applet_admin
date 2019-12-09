@@ -94,6 +94,8 @@
   width: 1200px;
   height: 30px;
   line-height: 30px;
+  font-family: '幼圆';
+  font-weight: bold;
   color: #d81e06;
   white-space: nowrap;
   position: relative;
@@ -152,8 +154,9 @@
 }
 
 
-/************************分类模块***************************/
-.components > .type-frame {
+
+/************************分类模块（三排）***************************/
+.components > .type-frame-three {
   background-color: #FFFFFF;
   white-space: normal;
   padding-top: 10px;
@@ -161,26 +164,65 @@
   text-align: left;
 }
 
-.components > .type-frame:hover {
+.components > .type-frame-three:hover {
   cursor: pointer;
   border: 1px #8c939d dashed;
 }
 
-.components > .type-frame > .type-element {
+.components > .type-frame-three > .type-element {
+  width: 33.3%;
+  height: 80px;
+  text-align: center;
+  display: inline-block;
+}
+
+.components > .type-frame-three > .type-element > div > .type-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+  margin-top: 10px;
+}
+
+.components > .type-frame-three > .type-element > .type-name {
+  width: 100%;
+  height: 20px;
+  line-height: 20px;
+  display: inline-block;
+  font-size: 14px;
+}
+
+
+
+
+/************************分类模块（四排）***************************/
+.components > .type-frame-four {
+  background-color: #FFFFFF;
+  white-space: normal;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  text-align: left;
+}
+
+.components > .type-frame-four:hover {
+  cursor: pointer;
+  border: 1px #8c939d dashed;
+}
+
+.components > .type-frame-four > .type-element {
   width: 24%;
   height: 80px;
   text-align: center;
   display: inline-block;
 }
 
-.components > .type-frame > .type-element > div > .type-icon {
+.components > .type-frame-four > .type-element > div > .type-icon {
   width: 40px;
   height: 40px;
   border-radius: 25px;
   margin-top: 10px;
 }
 
-.components > .type-frame > .type-element > .type-name {
+.components > .type-frame-four > .type-element > .type-name {
   width: 100%;
   height: 20px;
   line-height: 20px;

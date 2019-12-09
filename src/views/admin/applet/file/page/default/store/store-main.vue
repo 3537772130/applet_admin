@@ -49,7 +49,15 @@
               </div>
               <el-image class="text-trumpet" src="/static/images/icon/trumpet.png"></el-image>
             </div>
-            <div class="type-frame" @click="openDrawer(partIndex)" v-if="item.id === 'type-frame'">
+            <div class="type-frame-three" @click="openDrawer(partIndex)" v-if="item.id === 'type-frame-three'">
+              <div class="type-element" v-for="(type,index) in item.list" :key="index">
+                <div>
+                  <el-image class="type-icon" :src="type.icon"></el-image>
+                </div>
+                <span class="type-name">{{type.name}}</span>
+              </div>
+            </div>
+            <div class="type-frame-four" @click="openDrawer(partIndex)" v-if="item.id === 'type-frame-four'">
               <div class="type-element" v-for="(type,index) in item.list" :key="index">
                 <div>
                   <el-image class="type-icon" :src="type.icon"></el-image>

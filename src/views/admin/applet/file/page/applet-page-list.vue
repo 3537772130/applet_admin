@@ -10,6 +10,7 @@
   .in-dialog .el-dialog {
     width: 500px;
   }
+
   .in-dialog .el-dialog > .el-dialog__body {
     padding: 0px 0px;
   }
@@ -61,11 +62,14 @@
           <template slot-scope="scope">
             <el-button type="warning" plain size="mini" @click="updateAppletPage(scope.row.id)">修改</el-button>
             <el-button type="primary" plain size="mini"
-                       @click="loadPageElementType(scope.row.id, scope.row.pageName)">元素类型</el-button>
+                       @click="loadPageElementType(scope.row.id, scope.row.pageName)">元素类型
+            </el-button>
             <el-button type="primary" plain size="mini"
-                       @click="loadPageElement(scope.row.id, scope.row.pageName)">元素列表</el-button>
+                       @click="loadPageElement(scope.row.id, scope.row.pageName)">元素列表
+            </el-button>
             <el-button type="success" plain size="mini"
-                       @click="loadPageDefault(scope.row.id, )">默认页面</el-button>
+                       @click="loadPageDefault(scope.row.id)">默认页面
+            </el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -123,7 +127,7 @@
       'ElementTypeList': ElementTypeList,
       'AppletElementList': AppletElementList
     },
-    data() {
+    data () {
       return {
         loading: false,
         tableHeight: 50,
@@ -155,14 +159,14 @@
         newWin: {}
       }
     },
-    created() {
+    created () {
       let fileId = this.$cookies.get('applet_file_id')
       this.loadAppletPage(fileId)
     },
-    mounted() {
+    mounted () {
     },
     methods: {
-      loadAppletPage(fileId) {
+      loadAppletPage (fileId) {
         if (fileId) {
           this.$cookies.set('page_file_id', fileId)
           this.info.fileId = this.$cookies.get('page_file_id')
@@ -190,7 +194,7 @@
         } catch (e) {
         }
       },
-      onSubmit() {
+      onSubmit () {
         this.loading = true
         this.$axios({
           url: '/api/manage/applet/page/queryAppletPage',
@@ -202,7 +206,7 @@
           if (res.data.code === '1') {
             this.tableData = res.data.data.dataSource
             this.total = res.data.data.totalCount
-          } else if (res.data.code === "-1") {
+          } else if (res.data.code === '-1') {
             this.$message.error(res.data.data)
           }
           this.$global.exitLoad(this, null, res.data)
@@ -211,18 +215,18 @@
           this.$global.exitLoad(this, null, '')
         })
       },
-      indexMethod(index) {
+      indexMethod (index) {
         return index + 1
       },
-      selectList() {
+      selectList () {
         this.info.page = 1
         this.onSubmit()
       },
-      handleCurrentChange(val) {
+      handleCurrentChange (val) {
         this.info.page = val
         this.onSubmit()
       },
-      updateAppletPage(pageId) {
+      updateAppletPage (pageId) {
         this.infoShow = true
         if (pageId && pageId != '0') {
           this.infoTitle = '修改小程序页面信息'
@@ -236,7 +240,7 @@
         } catch (e) {
         }
       },
-      loadPageElement(pageId, pageName) {
+      loadPageElement (pageId, pageName) {
         this.elementShow = true
         this.elementTitle = pageName + ' - 元素列表'
         this.$cookies.set('applet_page_id', pageId)
@@ -245,7 +249,7 @@
         } catch (e) {
         }
       },
-      loadPageElementType(pageId, pageName) {
+      loadPageElementType (pageId, pageName) {
         this.typeShow = true
         this.typeTitle = '页面：' + pageName + ' - 元素类型列表'
         this.$cookies.set('applet_page_id', pageId)
@@ -254,10 +258,10 @@
         } catch (e) {
         }
       },
-      loadPageDefault(pageId){
+      loadPageDefault (pageId) {
         this.$cookies.set('default_page_id', pageId)
         this.$cookies.set('file_type_id', this.fileTypeId)
-        const { href } = this.$router.resolve({
+        const {href} = this.$router.resolve({
           name: 'page-default'
         })
         try {
@@ -268,15 +272,15 @@
         }
         this.newWin = window.open(href, '_blank')
       },
-      refreshSet() {
+      refreshSet () {
         this.infoShow = false
         this.loadAppletPage(this.$cookies.get('page_file_id'))
       },
-      inDialog(){
+      inDialog () {
         this.inShow = true
         this.inTitle = '继承版本'
       },
-      inFile() {
+      inFile () {
         this.$refs['fileForm'].validate((valid) => {
           if (valid) {
             this.$confirm('确定继承吗？继承成功后，原有的所有记录将会被替换，请谨慎操作！', '温馨提示', {
