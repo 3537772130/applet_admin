@@ -1,10 +1,11 @@
 <style file="text/css">
-  .default-main{
+  .default-main {
     background-color: #FFFFFF;
     width: 100%;
     height: 100%;
   }
-  .default-main .el-tabs--border-card>.el-tabs__content{
+
+  .default-main .el-tabs--border-card > .el-tabs__content {
     padding: 0px;
   }
 </style>
@@ -15,12 +16,13 @@
       <el-tabs v-model="showTabs" type="border-card" v-if="fileTypeId == 1" :style="{height: tabsHeight + 'px'}">
         <el-tab-pane :style="{height: tabHeight + 'px'}" v-for="(item, index) in pageList" :key="index"
                      :label="item.pageName" :name="'page' + item.id">
-          餐饮{{item.pageLogo + '-' + item.pageName}}
+          {{item.pageLogo + '-' + item.pageName}}
         </el-tab-pane>
       </el-tabs>
       <!--百货超市/便利店-->
       <el-tabs v-model="showTabs" type="border-card" v-if="fileTypeId == 2" :style="{height: tabsHeight + 'px'}">
-        <el-tab-pane :style="{height: tabHeight + 'px'}" v-for="(item, index) in pageList" :key="index"
+        <el-tab-pane :style="{height: tabHeight + 'px'}" v-for="(item, index) in pageList"
+                     :key="index"
                      :label="item.pageName" :name="'page' + item.id">
           <storeMain trf="storeMain" v-if="item.pageLogo == 'MAIN'"></storeMain>
         </el-tab-pane>
@@ -29,7 +31,7 @@
       <el-tabs v-model="showTabs" type="border-card" v-if="fileTypeId == 3" :style="{height: tabsHeight + 'px'}">
         <el-tab-pane :style="{height: tabHeight + 'px'}" v-for="(item, index) in pageList" :key="index"
                      :label="item.pageName" :name="'page' + item.id">
-          水果{{item.pageLogo + '-' + item.pageName}}
+          {{item.pageLogo + '-' + item.pageName}}
         </el-tab-pane>
       </el-tabs>
     </el-main>

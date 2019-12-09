@@ -4,7 +4,7 @@
 </style>
 <template>
   <div style="text-align: left;">
-    <el-main v-loading="loading" element-loading-text="加载中" style="background-color: #FFFFFF;">
+    <el-main v-loading="loading" element-loading-text="加载中" style="background-color: #FFFFFF;scrollbar-width: none;">
       <div class="config-operation">
         <el-button type="primary" @click="preserveConfig()"><i class="el-icon-folder-checked"></i>&nbsp;保存配置</el-button>
         <el-button type="danger" @click="cancelConfig()"><i class="el-icon-folder-delete"></i>&nbsp;取消配置</el-button>
@@ -21,7 +21,7 @@
       </div>
       <div class="center-menu" :style="{height: contentHeight + 'px'}">
         <el-image src="/static/images/timg.jpg" class="center-img"></el-image>
-        <div class="center-content" ref="centerContent">
+        <div class="center-content" ref="centerContent" style="scrollbar-width: none;">
           <div class="components" v-for="(item,partIndex) in partList" :key="partIndex"
                :style="{'border': checkIndex === partIndex ? '1px #FF00FF dashed':'none'}">
             <div class="goods-search" @click="openDrawer(partIndex)" v-if="item.id === 'goods-search'">
