@@ -20,7 +20,7 @@
     'textContent': '恭喜发财'
   }, {
     'id': 'type-frame-three',
-    'name': '分类栏',
+    'name': '分类栏（三排）',
     'list': [{
       'id': '0',
       'name': 'type',
@@ -28,7 +28,7 @@
     }]
   }, {
     'id': 'type-frame-four',
-    'name': '分类栏',
+    'name': '分类栏（四排）',
     'list': [{
       'id': '0',
       'name': 'type',

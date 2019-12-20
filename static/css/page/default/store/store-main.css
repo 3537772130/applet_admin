@@ -278,7 +278,6 @@
   background-color: #FFFFFF;
   font-size: 12px;
   white-space: normal;
-  margin-bottom: 10px;
   text-align: left;
 }
 
@@ -407,6 +406,7 @@
   color: #cdcdcd;
   text-align: left;
   padding: 0px 10px;
+  text-align: center;
 }
 
 .components > .goods-search > .search-part > i {

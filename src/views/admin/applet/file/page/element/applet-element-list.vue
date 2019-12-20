@@ -204,7 +204,7 @@
       },
       refreshSet () {
         this.showInfo = false
-        this.selectList()
+        this.onSubmit()
       },
       handleFileSuccess (res, element) {
         if (res.code === '1') {
