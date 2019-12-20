@@ -8,7 +8,7 @@
         <div class="store-main-part" v-for="(item, pIndex) in partList" :key="pIndex">
           <div v-if="partIndex === pIndex && item.id === 'notice-bar'">
             <el-form-item label="通知内容" prop="elementLogo">
-              <el-input type="textarea" v-model="item.textContent" :show-word-limit="true" maxlength="60"
+              <el-input type="textarea" v-model="item.describe" :show-word-limit="true" maxlength="60"
                         resize="none" rows="5" placeholder="请输入通知内容" class="part-input"></el-input>
             </el-form-item>
           </div>
@@ -183,12 +183,12 @@
           </div>
           <div v-if="partIndex === pIndex && item.id === 'goods-two-row'">
             <el-form-item label=" " style="margin-bottom: 0px; width: 375px;">
-              <div class="goods-two-element" v-for="(type, index) in item.list" :key="index">
+              <div class="goods-two-element" v-for="(goods, index) in item.list" :key="index">
                 <div @click="loadPartChoose(pIndex, index, 3)">
                   <div class="goods-icon-div">
-                    <el-image :src="type.icon" style="width: 140px;height: 140px;"></el-image>
+                    <el-image :src="goods.goodsIcon" style="width: 140px;height: 140px;"></el-image>
                   </div>
-                  <div class="goods-name">{{type.name}}</div>
+                  <div class="goods-name">{{goods.name}}</div>
                 </div>
                 <el-badge value="×" class="item goods-two-badge" @click.native="delData(index)"></el-badge>
               </div>
@@ -205,12 +205,12 @@
           </div>
           <div v-if="partIndex === pIndex && item.id === 'goods-three-row'">
             <el-form-item label=" " style="margin-bottom: 0px; width: 375px;">
-              <div class="goods-three-element" v-for="(type, index) in item.list" :key="index">
+              <div class="goods-three-element" v-for="(goods, index) in item.list" :key="index">
                 <div @click="loadPartChoose(pIndex, index, 3)">
                   <div class="goods-icon-div">
-                    <el-image :src="type.icon" style="width: 95px;height: 95px;"></el-image>
+                    <el-image :src="goods.goodsIcon" style="width: 95px;height: 95px;"></el-image>
                   </div>
-                  <div class="goods-name">{{type.name}}</div>
+                  <div class="goods-name">{{goods.name}}</div>
                 </div>
                 <el-badge value="×" class="item goods-three-badge" @click.native="delData(index)"></el-badge>
               </div>
@@ -345,13 +345,13 @@
           </div>
           <div v-if="partIndex === pIndex && item.id === 'goodsY-scroll'">
             <el-form-item label=" " style="margin-bottom: 0px; width: 375px;">
-              <div class="goods-two-element" v-for="(type, index) in item.list" :key="index">
+              <div class="goods-two-element" v-for="(goods, index) in item.list" :key="index">
                 <div @click="loadPartChoose(pIndex, index, 3)">
                   <div class="goods-icon-div">
-                    <el-image :src="type.icon"
+                    <el-image :src="goods.goodsIcon"
                               style="width: 140px;height: 140px;border-radius: 10px 10px 0px 0px;"></el-image>
                   </div>
-                  <div class="goods-name">{{type.name}}</div>
+                  <div class="goods-name">{{goods.name}}</div>
                 </div>
                 <el-badge value="×" class="item goods-two-badge" @click.native="delData(index)"></el-badge>
               </div>
@@ -368,12 +368,12 @@
           </div>
           <div v-if="partIndex === pIndex && item.id === 'goodsX-scroll'">
             <el-form-item label=" " style="margin-bottom: 0px; width: 375px;">
-              <div class="goods-two-element" v-for="(type, index) in item.list" :key="index">
+              <div class="goods-two-element" v-for="(goods, index) in item.list" :key="index">
                 <div @click="loadPartChoose(pIndex, index, 4)">
                   <div class="goods-icon-div">
-                    <el-image :src="type.icon" style="width: 140px;height: 140px;border-radius: 5px;"></el-image>
+                    <el-image :src="goods.goodsIcon" style="width: 140px;height: 140px;border-radius: 5px;"></el-image>
                   </div>
-                  <div class="goods-name">{{type.name}}</div>
+                  <div class="goods-name">{{goods.name}}</div>
                 </div>
                 <el-badge value="×" class="item goods-two-badge" @click.native="delData(index)"></el-badge>
               </div>
@@ -582,7 +582,7 @@
         let part = this.partList[pIndex]
         let list = part.list
         if (parseInt(type) === 1) {
-          // 图片标题、工具绑定商品
+          // 轮播图、图片标题、工具绑定商品
           list[sIndex].goodsId = id
           list[sIndex].goodsIcon = icon
         } else if (parseInt(type) === 2) {
@@ -590,7 +590,7 @@
           if (sIndex === 'null') {
             // 新增
             const info = {
-              'id': id,
+              'typeId': id,
               'name': name,
               'icon': icon
             }
@@ -598,7 +598,7 @@
           } else {
             // 修改
             list[sIndex] = {
-              'id': id,
+              'typeId': id,
               'name': name,
               'icon': icon
             }
@@ -608,21 +608,21 @@
           if (sIndex === 'null') {
             // 新增
             const info = {
-              'id': id,
+              'goodsId': id,
               'name': name,
               'minPrice': minPrice,
               'maxPrice': maxPrice,
-              'icon': icon
+              'goodsIcon': icon
             }
             list.push(info)
           } else {
             // 修改
             list[sIndex] = {
-              'id': id,
+              'goodsId': id,
               'name': name,
               'minPrice': minPrice,
               'maxPrice': maxPrice,
-              'icon': icon
+              'goodsIcon': icon
             }
           }
         }
