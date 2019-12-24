@@ -14,7 +14,11 @@ import Global from '@/components/global'
 import PagePart from '@/components/page-part'
 
 Vue.filter('addZero', function (value) {
-  return parseFloat(value).toFixed(2)
+  try {
+    return parseFloat(value).toFixed(2)
+  } catch (e) {
+    return 0.00
+  }
 })
 
 Vue.use(ElementUi, {size: 'small', zIndex: 3000})

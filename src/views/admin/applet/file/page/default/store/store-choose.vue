@@ -168,7 +168,7 @@
         minPrice: 0.00,
         maxPrice: 0.00,
         chooseIndex: null,
-        goodslist: [],
+        goodsList: [],
         typeList: [],
         bType: null,
         dataName: ''
@@ -183,7 +183,7 @@
       loadList (type) {
         this.bType = type
         this.chooseIndex = null
-        this.goodslist = []
+        this.goodsList = []
         this.typeList = []
         if (type != null) {
           this.loadInfoList(type, '')

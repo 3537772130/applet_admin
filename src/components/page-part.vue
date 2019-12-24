@@ -13,8 +13,8 @@
     //     'typeId': '',
     //     'goodsId': '',
     //     'name': '',
-    //     'minPrice': '',
-    //     'maxPrice': '',
+    //     'minPrice': 0.00,
+    //     'maxPrice': 0.00,
     //     'goodsIcon': '',
     //     'icon': ''
     //   }]
@@ -65,8 +65,8 @@
       'list': [{
         'goodsId': '0',
         'name': '商品名称',
-        'minPrice': '166.66',
-        'maxPrice': '188.88',
+        'minPrice': 166.66,
+        'maxPrice': 188.88,
         'goodsIcon': '/static/images/goods/goods-1.png'
       }]
     }, {
@@ -87,8 +87,8 @@
       'list': [{
         'goodsId': '0',
         'name': '商品名称',
-        'minPrice': '166.66',
-        'maxPrice': '188.88',
+        'minPrice': 166.66,
+        'maxPrice': 188.88,
         'goodsIcon': '/static/images/goods/goods-1.png'
       }]
     }, {
@@ -113,8 +113,8 @@
       'list': [{
         'goodsId': '0',
         'name': '商品名称',
-        'minPrice': '166.66',
-        'maxPrice': '188.88',
+        'minPrice': 166.66,
+        'maxPrice': 188.88,
         'goodsIcon': '/static/images/goods/goods-1.png'
       }]
     }, {
@@ -123,8 +123,8 @@
       'list': [{
         'goodsId': '0',
         'name': '商品名称',
-        'minPrice': '166.66',
-        'maxPrice': '188.88',
+        'minPrice': 166.66,
+        'maxPrice': 188.88,
         'goodsIcon': '/static/images/goods/goods-1.png'
       }]
     }
