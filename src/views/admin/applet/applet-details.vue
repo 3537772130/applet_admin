@@ -70,7 +70,7 @@
             </el-form-item>
           </el-form>
           <div class="demo-image__preview applet-details-logo">
-            <el-image :src="'api\\' + info.appletLogo" :preview-src-list="imgList"></el-image>
+            <el-image :src="info.appletLogo" :preview-src-list="imgList"></el-image>
             <div style="color: #D9D9D9;font-size: 14px;">点击图片查看大图</div>
           </div>
         </el-tab-pane>
@@ -87,7 +87,7 @@
             </el-form-item>
           </el-form>
           <div class="demo-image__preview applet-details-logo">
-            <el-image :src="'api\\' + info.licenseSrc" :preview-src-list="imgList"></el-image>
+            <el-image :src="info.licenseSrc" :preview-src-list="imgList"></el-image>
             <div style="color: #D9D9D9;font-size: 14px;">点击图片查看大图</div>
           </div>
         </el-tab-pane>
@@ -108,7 +108,8 @@
           </el-form>
         </el-tab-pane>
       </el-tabs>
-      <div v-if="auditResult == 1">
+
+      <div v-if="(roleId == 1 && (auditResult == 0 || auditResult == 1)) || (roleId == 5 && auditResult == 0) || (roleId == 6 && auditResult == 1)">
         <el-form :model="auditForm" ref="auditForm" :rules="auditRules" :inline="true"
                  style="text-align: left; padding-top: 30px;" class="applet-audit-form">
           <el-form-item label="审核结果" prop="result">
@@ -141,10 +142,11 @@
     data () {
       return {
         loading: false,
+        roleId: this.$cookies.get('manager_info').roleId,
         editableTabsValue: 'basics',
         info: {},
         imgList: [],
-        auditResult: this.$cookies.get('auditResult'),
+        auditResult: null,
         auditForm: {
           appletId: '',
           result: '',
@@ -169,6 +171,7 @@
       setAppletId (id) {
         this.auditResult = this.$cookies.get('auditResult')
         this.loading = true
+        this.imgList = []
         this.$axios({
           url: '/api/manage/applet/loadAppletAuditDetails',
           method: 'post',
@@ -177,8 +180,8 @@
           console.info('后台返回的数据', res.data)
           if (res.data.code === '1') {
             this.info = res.data.data
-            this.imgList.push('api\\' + this.info.appletLogo)
-            this.imgList.push('api\\' + this.info.licenseSrc)
+            this.imgList.push(this.info.appletLogo)
+            this.imgList.push(this.info.licenseSrc)
             this.auditForm.appletId = this.info.id
           } else if (res.data.code === '-1') {
             this.$message.error(res.data.data)

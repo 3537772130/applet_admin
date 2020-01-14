@@ -81,7 +81,7 @@
         <el-table-column align="center" fixed="right" label="操作">
           <template slot-scope="scope">
             <el-button type="primary" plain size="mini"
-                       @click="loadDetails(scope.row.id, scope.row.appletName, scope.row.status)">审核
+                       @click="loadDetails(scope.row.id, scope.row.appletName, scope.row.auditResult)" v-if="scope.row.auditResult === 0">审核
             </el-button>
           </template>
         </el-table-column>
@@ -225,10 +225,10 @@
           this.$cookies.set('appletId', appletId)
         }
       },
-      loadDetails (appletId, appletName) {
+      loadDetails (appletId, appletName, auditResult) {
         this.showDetails = true
         this.showTitle = appletName + ' - 详情'
-        this.$cookies.set('auditResult', 1)
+        this.$cookies.set('auditResult', auditResult)
         try {
           this.$refs.appletDetails.setAppletId(appletId)
         } catch (e) {
