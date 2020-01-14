@@ -273,10 +273,7 @@
       loadDetails (appletId, appletName, auditResult) {
         this.showDetails = true
         this.showTitle = appletName + ' - 详情'
-        this.$cookies.set('auditResult', 0)
-        if (auditResult == 1) {
-          this.$cookies.set('auditResult', 1)
-        }
+        this.$cookies.set('auditResult', auditResult)
         try {
           this.$refs.appletDetails.setAppletId(appletId)
         } catch (e) {
