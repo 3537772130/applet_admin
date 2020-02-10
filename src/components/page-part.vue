@@ -67,6 +67,7 @@
         'name': '商品名称',
         'minPrice': 166.66,
         'maxPrice': 188.88,
+        'discount': 100,
         'goodsIcon': '/static/images/goods/goods-1.png'
       }]
     }, {
@@ -89,6 +90,7 @@
         'name': '商品名称',
         'minPrice': 166.66,
         'maxPrice': 188.88,
+        'discount': 100,
         'goodsIcon': '/static/images/goods/goods-1.png'
       }]
     }, {
@@ -115,6 +117,7 @@
         'name': '商品名称',
         'minPrice': 166.66,
         'maxPrice': 188.88,
+        'discount': 100,
         'goodsIcon': '/static/images/goods/goods-1.png'
       }]
     }, {
@@ -125,6 +128,7 @@
         'name': '商品名称',
         'minPrice': 166.66,
         'maxPrice': 188.88,
+        'discount': 100,
         'goodsIcon': '/static/images/goods/goods-1.png'
       }]
     }

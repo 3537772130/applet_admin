@@ -575,7 +575,7 @@
         } catch (e) {
         }
       },
-      refreshSet (id, name, icon, minPrice, maxPrice, type) {
+      refreshSet (id, name, icon, minPrice, maxPrice, discount, type) {
         this.listShow = false
         let pIndex = this.$cookies.get('pIndex')
         let sIndex = this.$cookies.get('sIndex')
@@ -612,6 +612,7 @@
               'name': name,
               'minPrice': minPrice,
               'maxPrice': maxPrice,
+              'discount': discount,
               'goodsIcon': icon
             }
             list.push(info)
@@ -622,6 +623,7 @@
               'name': name,
               'minPrice': minPrice,
               'maxPrice': maxPrice,
+              'discount': discount,
               'goodsIcon': icon
             }
           }
