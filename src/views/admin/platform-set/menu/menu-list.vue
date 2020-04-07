@@ -102,8 +102,7 @@
   </el-container>
 </template>
 <script type="text/javascript">
-  import {Loading} from 'element-ui'
-  import menuDetails from '@/views/admin/menu/menu-details.vue'
+  import menuDetails from '@/views/admin/platform-set/menu/menu-details.vue'
 
   export default {
     name: 'menu-list',

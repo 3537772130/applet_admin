@@ -37,7 +37,7 @@
       <el-form id="applet-page-form" ref="info" :rules="fileRules" :inline="true" :model="info"
                class="demo-form-inline applet-page-form" style="text-align: left;">
         <el-form-item label="页面名称">
-          <el-input v-model="info.pageName" placeholder="输入页面名称"></el-input>
+          <el-input v-model="info.pageName" placeholder="输入页面名称" :clearable="true"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="selectList()">查询</el-button>

@@ -21,7 +21,7 @@
       <el-form id="element-type-form" :inline="true" :model="info" ref="elementTypeForm" class="element-type-form"
                style="text-align: left;">
         <el-form-item label="类型名称">
-          <el-input v-model="info.typeName" placeholder="请输入类型名称"></el-input>
+          <el-input v-model="info.typeName" placeholder="请输入类型名称" :clearable="true"></el-input>
         </el-form-item>
         <el-form-item label="类型状态">
           <el-select v-model="info.typeStatus" placeholder="选择类型状态">

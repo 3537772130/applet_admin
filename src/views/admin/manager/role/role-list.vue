@@ -20,7 +20,7 @@
     <el-main v-loading="loading" element-loading-text="加载中" style="background-color: #FFFFFF;padding-top: 20px;">
       <el-form id="role-form" :inline="true" :model="info" class="demo-form-inline role-form" style="text-align: left;">
         <el-form-item label="角色名称">
-          <el-input v-model="info.roleName" placeholder="请输入角色名称"></el-input>
+          <el-input v-model="info.roleName" placeholder="请输入角色名称" :clearable="true"></el-input>
         </el-form-item>
         <el-form-item label="角色状态">
           <el-select v-model="info.status" placeholder="选择状态" style="width: 200px;">

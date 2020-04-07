@@ -23,7 +23,7 @@
     border: 1px #DCDFE6 solid;
     border-radius: 5px;
     padding-top: 50px;
-    box-shadow: 10px 10px 5px #DCDFE6;
+    box-shadow: 5px 5px 5px #DCDFE6;
   }
 
   .login-div > .form-div > form {
@@ -34,7 +34,6 @@
   .login-div > .form-div > form button {
     width: 189px;
     position: relative;
-    left: -80px;
   }
 
   .input-div {
@@ -43,8 +42,8 @@
     left: -80px;
   }
 
-  .login-form .el-form-item__error {
-    left: -80px;
+  .login-form .el-input {
+    left: 0px;
   }
 </style>
 <template>
@@ -52,7 +51,7 @@
     <el-main :style="contentStyle">
       <div class="login-div">
         <div class="form-div">
-          <el-form :model="loginForm" :rules="rules" ref="loginForm" label-width="80px" class="login-form">
+          <el-form :model="loginForm" :rules="rules" ref="loginForm" class="login-form">
             <el-form-item prop="userName">
               <el-input class="input-div" placeholder="请输入账户名" prefix-icon="el-icon-user"
                         v-model="loginForm.userName"></el-input>
@@ -84,11 +83,11 @@
           'height': `${document.documentElement.clientHeight}` + 'px',
           'background-image': 'url(\'/static/images/index-bj.jpg\')',
           'background-repeat': 'no-repeat',
-          'background-size': 'cover',
+          'background-size': 'cover'
         },
         loginForm: {
-          userName: 'admin',
-          password: '123456'
+          userName: '',
+          password: ''
         },
         rules: {
           userName: [

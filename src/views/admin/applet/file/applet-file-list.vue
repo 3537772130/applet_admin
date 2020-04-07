@@ -33,7 +33,7 @@
       <el-form id="applet-file-form" :inline="true" :model="info" class="demo-form-inline applet-file-form"
                style="text-align: left;">
         <el-form-item label="文件版本">
-          <el-input v-model="info.versionNumber" placeholder="请输入文件版本"></el-input>
+          <el-input v-model="info.versionNumber" placeholder="请输入文件版本" :clearable="true"></el-input>
         </el-form-item>
         <el-form-item label="服务类型">
           <el-select v-model="info.typeId" placeholder="选择服务类型" style="width: 200px;">

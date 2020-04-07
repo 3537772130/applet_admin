@@ -13,13 +13,13 @@
       <el-form id="applet-list-form" :inline="true" :model="info" ref="queryAppletForm" class="demo-form-inline"
                style="text-align: left;">
         <el-form-item label="编码" prop="appletCode">
-          <el-input v-model="info.appletCode" placeholder="请输入小程序编码" class="applet-input"></el-input>
+          <el-input v-model="info.appletCode" placeholder="请输入小程序编码" :clearable="true" class="applet-input"></el-input>
         </el-form-item>
         <el-form-item label="名称" prop="appletName">
-          <el-input v-model="info.appletName" placeholder="请输入小程序名称" class="applet-input"></el-input>
+          <el-input v-model="info.appletName" placeholder="请输入小程序名称" :clearable="true" class="applet-input"></el-input>
         </el-form-item>
         <el-form-item label="用户手机" prop="mobile">
-          <el-input type="number" v-model="info.mobile" placeholder="请输入用户手机号码" class="applet-input"></el-input>
+          <el-input type="number" v-model="info.mobile" placeholder="请输入用户手机号码" :clearable="true" class="applet-input"></el-input>
         </el-form-item>
         <el-form-item label="营业类型" prop="ifRetail">
           <el-select v-model="info.ifRetail" placeholder="请选择营业类型" class="applet-input">

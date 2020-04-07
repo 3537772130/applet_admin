@@ -17,7 +17,7 @@
       <el-form id="applet-version-form" :inline="true" :model="info" class="demo-form-inline applet-version-form"
                style="text-align: left;">
         <el-form-item label="类型名称">
-          <el-input v-model="info.versionName" placeholder="请输入类型名称"></el-input>
+          <el-input v-model="info.versionName" placeholder="请输入类型名称" :clearable="true"></el-input>
         </el-form-item>
         <el-form-item label="类型状态">
           <el-select v-model="info.versionStatus" placeholder="选择类型状态" style="width: 200px;">

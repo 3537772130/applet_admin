@@ -13,10 +13,10 @@
       <el-form id="user-list-form" :inline="true" :model="info" ref="queryUserForm" class="demo-form-inline"
                style="text-align: left;">
         <el-form-item label="用户手机" prop="mobile">
-          <el-input type="number" v-model="info.mobile" placeholder="输入用户手机号码" class="applet-input"></el-input>
+          <el-input type="number" v-model="info.mobile" placeholder="输入用户手机号码" :clearable="true" class="applet-input"></el-input>
         </el-form-item>
         <el-form-item label="用户昵称" prop="nickName">
-          <el-input v-model="info.nickName" placeholder="请输入用户昵称" class="applet-input"></el-input>
+          <el-input v-model="info.nickName" placeholder="请输入用户昵称" :clearable="true" class="applet-input"></el-input>
         </el-form-item>
         <el-form-item label="注册日期" prop="ifRetail">
           <el-date-picker v-model="info.startDate" placeholder="选择日期"
@@ -132,7 +132,7 @@
       }
     },
     created () {
-      this.onSubmit()
+      this.onLoad()
     },
     mounted () {
     },
@@ -141,7 +141,7 @@
         let count = (parseInt(this.info.page) - 1) * parseInt(this.info.pageSize)
         return count + (parseInt(index) + 1)
       },
-      onSubmit () {
+      onLoad () {
         this.loading = true
         this.$axios({
           url: '/api/manage/user/queryUserToPage',
@@ -165,11 +165,11 @@
       selectList () {
         this.info.page = 1
         this.showInfo = false
-        this.onSubmit()
+        this.onLoad()
       },
       handleCurrentChange (val) {
         this.info.page = val
-        this.onSubmit()
+        this.onLoad()
       },
       resetForm () {
         this.info.startDate = ''

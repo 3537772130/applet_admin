@@ -25,13 +25,13 @@
       <el-form id="audit-form-last" :inline="true" :model="info" ref="appletAuditLastForm" class="demo-form-inline"
                style="text-align: left;">
         <el-form-item label="编码" prop="appletCode">
-          <el-input v-model="info.appletCode" placeholder="请输入小程序编码" class="applet-audit-input"></el-input>
+          <el-input v-model="info.appletCode" placeholder="请输入小程序编码" :clearable="true" class="applet-audit-input"></el-input>
         </el-form-item>
         <el-form-item label="名称" prop="appletName">
-          <el-input v-model="info.appletName" placeholder="输入小程序名称" class="applet-audit-input"></el-input>
+          <el-input v-model="info.appletName" placeholder="输入小程序名称" :clearable="true" class="applet-audit-input"></el-input>
         </el-form-item>
         <el-form-item label="用户手机" prop="mobile">
-          <el-input type="number" v-model="info.mobile" placeholder="输入用户手机号码" class="applet-audit-input"></el-input>
+          <el-input type="number" v-model="info.mobile" placeholder="输入用户手机号码" :clearable="true" class="applet-audit-input"></el-input>
         </el-form-item>
         <el-form-item label="营业类型" prop="ifRetail">
           <el-select v-model="info.ifRetail" placeholder="选择营业类型" class="applet-audit-input">

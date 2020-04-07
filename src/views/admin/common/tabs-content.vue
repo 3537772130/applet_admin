@@ -67,6 +67,9 @@
       <div v-if="item.name === 'loadMenuList'" class="tab-div-content-page">
         <MenuList></MenuList>
       </div>
+      <div v-if="item.name === 'loadSystemNoticeByPage'" class="tab-div-content-page">
+        <NoticeList></NoticeList>
+      </div>
       <div v-if="item.name === 'queryUserToPage'" class="tab-div-content-page">
         <UserList></UserList>
       </div>
@@ -87,7 +90,8 @@
   import AppletTypeList from '@/views/admin/applet/type/applet-type-list.vue'
   import AppletFileList from '@/views/admin/applet/file/applet-file-list.vue'
   import AppletVersionList from '@/views/admin/applet/version/applet-version-list.vue'
-  import MenuList from '@/views/admin/menu/menu-list.vue'
+  import MenuList from '@/views/admin/platform-set/menu/menu-list.vue'
+  import NoticeList from '@/views/admin/platform-set/notice/notice-list.vue'
   import UserList from '@/views/admin/user/user-list.vue'
   import MerchantList from '@/views/admin/user/merchant-list.vue'
 
@@ -105,13 +109,14 @@
       'AppletFileList': AppletFileList,
       'AppletVersionList': AppletVersionList,
       'MenuList': MenuList,
+      'NoticeList': NoticeList,
       'UserList': UserList,
       'MerchantList': MerchantList
     },
     data () {
       return {
         tabHeight: `${document.documentElement.clientHeight - 85}`,
-        tabPaneHeight: `${document.documentElement.clientHeight - 125}`,
+        tabPaneHeight: `${document.documentElement.clientHeight - 135}`,
         // mainShow: 'block',
         editableTabsValue: '2',
         editableTabs: [],

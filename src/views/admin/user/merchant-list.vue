@@ -13,10 +13,10 @@
       <el-form id="merchant-list-form" :inline="true" :model="info" ref="queryMerchantForm" class="demo-form-inline"
                style="text-align: left;">
         <el-form-item label="用户手机" prop="mobile">
-          <el-input type="number" v-model="info.mobile" placeholder="输入用户手机号码" class="merchant-list-input"></el-input>
+          <el-input type="number" v-model="info.mobile" placeholder="输入用户手机号码" :clearable="true" class="merchant-list-input"></el-input>
         </el-form-item>
         <el-form-item label="用户昵称" prop="nickName">
-          <el-input v-model="info.nickName" placeholder="请输入用户昵称" class="merchant-list-input"></el-input>
+          <el-input v-model="info.nickName" placeholder="请输入用户昵称" :clearable="true" class="merchant-list-input"></el-input>
         </el-form-item>
         <el-form-item label="推荐码" prop="extensionCode">
           <el-select v-model="info.extensionCode" placeholder="请选择推荐码" class="merchant-list-input" @change="selectCity">
@@ -32,7 +32,6 @@
           &nbsp;-&nbsp;
           <el-date-picker v-model="info.endDate" placeholder="选择日期"
                           :format="format" :value-format="valueFormat" class="merchant-list-input">
-          </el-date-picker>
           </el-date-picker>
         </el-form-item>
         <el-form-item label="用户状态" prop="status">

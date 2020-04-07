@@ -16,26 +16,26 @@
     <el-main v-loading="loading" element-loading-text="加载中" style="background-color: #FFFFFF;padding-top: 20px;">
       <el-form id="manager-form" :inline="true" :model="info" ref="queryManagerForm"
                class="demo-form-inline manager-form">
-        <el-form-item label="账号" prop="userName">
-          <el-input v-model="info.userName" placeholder="请输入账号" class="manager-input"></el-input>
+        <el-form-item label="登录账号" prop="userName">
+          <el-input v-model="info.userName" placeholder="请输入账号" :clearable="true" class="manager-input"></el-input>
         </el-form-item>
-        <el-form-item label="角色" prop="roleId">
+        <el-form-item label="Email邮箱" prop="email">
+          <el-input v-model="info.email" placeholder="输入邮箱" :clearable="true" class="manager-input"></el-input>
+        </el-form-item>
+        <el-form-item label="手机号码" prop="mobile">
+          <el-input type="number" v-model="info.mobile" placeholder="输入手机号码" :clearable="true" class="manager-input"></el-input>
+        </el-form-item>
+        <el-form-item label="QQ账号" prop="qqAccount">
+          <el-input type="number" v-model="info.qqAccount" placeholder="输入QQ账号" :clearable="true" class="manager-input"></el-input>
+        </el-form-item>
+        <el-form-item label="微信账号" prop="weChatAccount">
+          <el-input v-model="info.weChatAccount" placeholder="输入微信账号" :clearable="true" class="manager-input"></el-input>
+        </el-form-item>
+        <el-form-item label="账号角色" prop="roleId">
           <el-select v-model="info.roleId" placeholder="选择角色" class="manager-input">
             <el-option label="全部" value=''></el-option>
             <el-option v-for="(role, index) in roleList" :key="index" :label="role.name" :value="role.id"></el-option>
           </el-select>
-        </el-form-item>
-        <el-form-item label="邮箱" prop="email">
-          <el-input v-model="info.email" placeholder="输入邮箱" class="manager-input"></el-input>
-        </el-form-item>
-        <el-form-item label="手机号码" prop="mobile">
-          <el-input type="number" v-model="info.mobile" placeholder="输入手机号码" class="manager-input"></el-input>
-        </el-form-item>
-        <el-form-item label="QQ账号" prop="qqAccount">
-          <el-input type="number" v-model="info.qqAccount" placeholder="输入QQ账号" class="manager-input"></el-input>
-        </el-form-item>
-        <el-form-item label="微信账号" prop="weChatAccount">
-          <el-input v-model="info.weChatAccount" placeholder="输入微信账号" class="manager-input"></el-input>
         </el-form-item>
         <el-form-item label="省份" prop="province">
           <el-select v-model="info.province" placeholder="选择省份" class="manager-input" @change="selectProvince">
@@ -58,14 +58,14 @@
                        :value="county.areaName"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="状态" prop="status">
+        <el-form-item label="账号状态" prop="status">
           <el-select v-model="info.status" placeholder="选择状态" class="manager-input">
             <el-option label="全部" value=''></el-option>
             <el-option label="正常" value="1"></el-option>
             <el-option label="禁用" value="0"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="上级" prop="parentId">
+        <el-form-item label="所属上级" prop="parentId">
           <el-select v-model="info.parentId" placeholder="选择上级" class="manager-input">
             <el-option label="请选择" value=''></el-option>
             <el-option v-for="(parent, index) in parentList" :key="index"

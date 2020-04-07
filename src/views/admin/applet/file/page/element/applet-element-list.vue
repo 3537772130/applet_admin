@@ -21,10 +21,10 @@
       <el-form id="applet-element-form" :inline="true" :model="info" class="demo-form-inline applet-element-form"
                style="text-align: left;">
         <el-form-item label="元素标识">
-          <el-input v-model="info.elementLogo" placeholder="请输入元素标识"></el-input>
+          <el-input v-model="info.elementLogo" placeholder="请输入元素标识" :clearable="true"></el-input>
         </el-form-item>
         <el-form-item label="元素名称">
-          <el-input v-model="info.elementName" placeholder="请输入元素名称"></el-input>
+          <el-input v-model="info.elementName" placeholder="请输入元素名称" :clearable="true"></el-input>
         </el-form-item>
         <br>
         <el-form-item label="元素类型">
