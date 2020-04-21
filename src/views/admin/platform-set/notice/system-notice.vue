@@ -1,14 +1,14 @@
 <style type="text/css">
-  .remark{
+  .notice-update-form {
+    text-align: left;
+    padding-left: 50px;
+  }
+
+  .notice-update-form > .remark{
     color: red;
     height: 30px;
     line-height: 30px;
     margin-left: 80px;
-  }
-
-  .notice-update-form {
-    text-align: left;
-    padding-left: 50px;
   }
 
   .notice-update-input {
@@ -49,7 +49,7 @@
                   class="notice-update-input" :readonly="info.id ? true : false"></el-input>
       </el-form-item>
       <div class="notice-describe">系统公告：仅保留一条有效消息。</div>
-      <div class="notice-describe">新用户推送：新用户绑定小程序，将收到此类推送，可以存在多条。</div>
+      <div class="notice-describe">新用户推送：新用户绑定小程序，将收到此类推送，可以同时存在多条。</div>
       <div class="notice-describe">普通推送：系统将向全平台用户推送一条通知消息。</div>
       <el-form-item label="通知类型" prop="noticeType">
         <el-select v-model="info.noticeType" placeholder="请选择通知类型" class="notice-update-input" :disabled="info.id ? true : false">

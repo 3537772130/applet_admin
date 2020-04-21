@@ -70,11 +70,17 @@
       <div v-if="item.name === 'loadSystemNoticeByPage'" class="tab-div-content-page">
         <NoticeList></NoticeList>
       </div>
+      <div v-if="item.name === 'loadAppletAdvertRelationByPage'" class="tab-div-content-page">
+        <AdvertList></AdvertList>
+      </div>
       <div v-if="item.name === 'queryUserToPage'" class="tab-div-content-page">
         <UserList></UserList>
       </div>
       <div v-if="item.name === 'queryMerchantToPage'" class="tab-div-content-page">
         <MerchantList></MerchantList>
+      </div>
+      <div v-if="item.name === 'queryOrderInfoByPage'" class="tab-div-content-page">
+        <OrderList></OrderList>
       </div>
     </el-tab-pane>
   </el-tabs>
@@ -92,8 +98,10 @@
   import AppletVersionList from '@/views/admin/applet/version/applet-version-list.vue'
   import MenuList from '@/views/admin/platform-set/menu/menu-list.vue'
   import NoticeList from '@/views/admin/platform-set/notice/notice-list.vue'
+  import AdvertList from '@/views/admin/platform-set/advert/advert-list.vue'
   import UserList from '@/views/admin/user/user-list.vue'
   import MerchantList from '@/views/admin/user/merchant-list.vue'
+  import OrderList from '@/views/admin/order/order-list.vue'
 
   export default {
     name: 'tabs-content',
@@ -110,8 +118,10 @@
       'AppletVersionList': AppletVersionList,
       'MenuList': MenuList,
       'NoticeList': NoticeList,
+      'AdvertList': AdvertList,
       'UserList': UserList,
-      'MerchantList': MerchantList
+      'MerchantList': MerchantList,
+      'OrderList': OrderList
     },
     data () {
       return {

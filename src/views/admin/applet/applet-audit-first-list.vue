@@ -72,8 +72,20 @@
         <el-table-column align="center" prop="auditResult" label="审核状态" width="100" :show-overflow-tooltip="true">
           <template slot-scope="scope">
             <el-tooltip class="item" effect="dark" content="点击查看审核记录" placement="top">
-              <el-link type="warning" :underline="false" @click="loadAuditRecord(scope.row.id, scope.row.appletName)">
-                待审核
+<!--              <el-link type="warning" :underline="false" @click="loadAuditRecord(scope.row.id, scope.row.appletName)">-->
+<!--                待审核-->
+<!--              </el-link>-->
+              <el-link type="danger" :underline="false" @click="loadAuditRecord(scope.row.id, scope.row.appletName)"
+                       v-if="scope.row.auditResult == -1">审核驳回
+              </el-link>
+              <el-link type="warning" :underline="false" @click="loadAuditRecord(scope.row.id, scope.row.appletName)"
+                       v-if="scope.row.auditResult == 0">待审核
+              </el-link>
+              <el-link type="primary" :underline="false" @click="loadAuditRecord(scope.row.id, scope.row.appletName)"
+                       v-if="scope.row.auditResult == 1">初审通过
+              </el-link>
+              <el-link type="success" :underline="false" @click="loadAuditRecord(scope.row.id, scope.row.appletName)"
+                       v-if="scope.row.auditResult == 2">终审通过
               </el-link>
             </el-tooltip>
           </template>

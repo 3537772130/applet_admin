@@ -109,7 +109,8 @@
         </el-tab-pane>
       </el-tabs>
 
-      <div v-if="(roleId == 1 && (auditResult == 0 || auditResult == 1)) || (roleId == 5 && auditResult == 0) || (roleId == 6 && auditResult == 1)">
+      <div
+        v-if="(roleId == 1 && (auditResult == 0 || auditResult == 1)) || (roleId == 5 && auditResult == 0) || (roleId == 6 && auditResult == 1)">
         <el-form :model="auditForm" ref="auditForm" :rules="auditRules" :inline="true"
                  style="text-align: left; padding-top: 30px;" class="applet-audit-form">
           <el-form-item label="审核结果" prop="result">
@@ -128,6 +129,7 @@
           <br/>
           <el-form-item label=" ">
             <el-button type="primary" @click="onSubmit('auditForm')" class="applet-details-input">提交</el-button>
+            <div style="text-align: center;color: red;font-size: 14px;">{{tips}}</div>
           </el-form-item>
         </el-form>
       </div>
@@ -144,6 +146,7 @@
         loading: false,
         roleId: this.$cookies.get('manager_info').roleId,
         editableTabsValue: 'basics',
+        tips: '',
         info: {},
         imgList: [],
         auditResult: null,
@@ -197,30 +200,39 @@
       changeResult () {
         if (this.auditForm.result == 1) {
           this.auditForm.remark = '审核通过，信息确认'
+          this.tips = '请先将小程序对应版本信息更新，并上传小程序代码'
+        } else {
+          this.tips = ''
         }
       },
       onSubmit (formName) {
         this.$refs[formName].validate((valid) => {
             if (valid) {
-              let loading = Loading.service({fullscreen: true, text: '正在提交'})
-              this.$axios({
-                url: '/api/manage/applet/saveAppletAuditInfo',
-                method: 'post',
-                data: this.auditForm
-              }).then(res => {
-                  console.info('后台返回的数据', res.data)
-                  if (res.data.code === '1') {
-                    this.$refs[formName].resetFields()
-                    this.$message.success(res.data.data)
-                    this.$emit('setAppletId')
-                  } else {
-                    this.$message.error(res.data.data)
+              this.$confirm('确定已将小程序对应版本信息更新，并上传了小程序代码？', '温馨提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+              }).then(() => {
+                let loading = Loading.service({fullscreen: true, text: '正在提交'})
+                this.$axios({
+                  url: '/api/manage/applet/saveAppletAuditInfo',
+                  method: 'post',
+                  data: this.auditForm
+                }).then(res => {
+                    console.info('后台返回的数据', res.data)
+                    if (res.data.code === '1') {
+                      this.$refs[formName].resetFields()
+                      this.$message.success(res.data.data)
+                      this.$emit('setAppletId')
+                    } else {
+                      this.$message.error(res.data.data)
+                    }
+                    this.$global.exitLoad(this, loading, res.data)
                   }
-                  this.$global.exitLoad(this, loading, res.data)
-                }
-              ).catch(error => {
-                console.info('错误信息', error)
-                this.$global.exitLoad(this, loading, '')
+                ).catch(error => {
+                  console.info('错误信息', error)
+                  this.$global.exitLoad(this, loading, '')
+                })
               })
             }
           }
