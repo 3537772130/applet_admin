@@ -51,7 +51,7 @@
     <el-main :style="contentStyle">
       <div class="login-div">
         <div class="form-div">
-          <el-form :model="loginForm" :rules="rules" ref="loginForm" class="login-form">
+          <el-form :model="loginForm" :rules="rulesForm" ref="loginForm" class="login-form">
             <el-form-item prop="userName">
               <el-input class="input-div" placeholder="请输入账户名" prefix-icon="el-icon-user"
                         v-model="loginForm.userName"></el-input>
@@ -61,7 +61,7 @@
                         v-model="loginForm.password" show-password></el-input>
             </el-form-item>
             <el-form-item>
-              <el-button type="primary" @click="onSubmit()" @keyup.enter="onSubmit()" style="letter-spacing: 5px;">
+              <el-button type="primary" @click="onSubmit()" style="letter-spacing: 5px;">
                 立即登录
               </el-button>
             </el-form-item>
@@ -89,7 +89,7 @@
           userName: '',
           password: ''
         },
-        rules: {
+        rulesForm: {
           userName: [
             {required: true, message: '请输入账户名', trigger: 'blur'}
           ],
@@ -101,12 +101,21 @@
       }
     },
     created () {
+      let that = this
+      document.onkeydown = function (e) {
+        e = window.event || e
+        // 验证在登录界面和按得键是回车键enter
+        if (that.$route.path === '/' && (e.code === 'Enter' || e.code === 'NumpadEnter')) {
+          // 登录函数 （handleSubmit2('ruleForm2')-登录按钮的点击事件）
+          that.onSubmit()
+        }
+      }
     },
     mounted () {
 
     },
     methods: {
-      onSubmit (name) {
+      onSubmit () {
         this.$refs['loginForm'].validate((valid) => {
           if (valid) {
             let loading = Loading.service({fullscreen: true, text: '正在登录'})
@@ -131,8 +140,6 @@
               console.info('错误信息', error)
               this.$global.exitLoad(this, loading, '')
             })
-          } else {
-            this.$message({message: '表单校验失败!', type: 'warning'})
           }
         })
       }
