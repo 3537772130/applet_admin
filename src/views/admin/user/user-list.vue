@@ -20,11 +20,11 @@
         </el-form-item>
         <el-form-item label="注册日期" prop="ifRetail">
           <el-date-picker v-model="info.startDate" placeholder="选择日期"
-                          :format="format" :value-format="valueFormat" class="form-info-val">
+                          :format="format" :value-format="valueFormat" style="width: 190px;">
           </el-date-picker>
           &nbsp;-&nbsp;
           <el-date-picker v-model="info.endDate" placeholder="选择日期"
-                          :format="format" :value-format="valueFormat" class="form-info-val">
+                          :format="format" :value-format="valueFormat" style="width: 190px;">
           </el-date-picker>
         </el-form-item>
         <el-form-item label="用户状态" prop="status">

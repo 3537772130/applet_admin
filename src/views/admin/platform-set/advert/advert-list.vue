@@ -3,7 +3,7 @@
     width: 100px;
   }
 
-  .advert-input {
+  .advert-form-inline .el-input {
     width: 190px;
   }
 
@@ -28,34 +28,34 @@
       <el-form id="advert-list-form" :inline="true" :model="info" ref="queryadvertForm" class="advert-form-inline"
                style="text-align: left;">
         <el-form-item label="小程序类型" prop="appletTypeId">
-          <el-select v-model="info.appletTypeId" placeholder="选择小程序类型" class="advert-input">
+          <el-select v-model="info.appletTypeId" placeholder="选择小程序类型">
             <el-option label="全部" value=""></el-option>
             <el-option v-for="(item, index) in typeList" :key="index" :label="item.typeName"
                        :value="item.id"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="页面类型" prop="pageLogo">
-          <el-select v-model="info.pageLogo" placeholder="选择页面类型" class="advert-input">
+          <el-select v-model="info.pageLogo" placeholder="选择页面类型">
             <el-option label="全部" value=''></el-option>
             <el-option label="load封面" value="LOAD"></el-option>
             <el-option label="主页" value="MAIN"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="推广类型" prop="relationType">
-          <el-select v-model="info.relationType" placeholder="选择推广类型" class="advert-input">
+          <el-select v-model="info.relationType" placeholder="选择推广类型">
             <el-option label="全部" value=''></el-option>
             <el-option label="内部推广" value="1"></el-option>
             <el-option label="外部推广" value="2"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="关联网址" prop="relationWebsite">
-          <el-input v-model="info.relationWebsite" placeholder="输入关联网址" :clearable="true" class="advert-input"></el-input>
+          <el-input v-model="info.relationWebsite" placeholder="输入关联网址" :clearable="true"></el-input>
         </el-form-item>
         <el-form-item label="推广对象" prop="relationName">
-          <el-input v-model="info.relationName" placeholder="输入推广对象" :clearable="true" class="advert-input"></el-input>
+          <el-input v-model="info.relationName" placeholder="输入推广对象" :clearable="true"></el-input>
         </el-form-item>
         <el-form-item label="推广状态" prop="relationStatus">
-          <el-select v-model="info.relationStatus" placeholder="请选择推广状态" class="advert-input">
+          <el-select v-model="info.relationStatus" placeholder="请选择推广状态">
             <el-option label="全部" value=''></el-option>
             <el-option label="正常" value="1"></el-option>
             <el-option label="失效" value="0"></el-option>
@@ -84,8 +84,8 @@
         <el-table-column align="center" prop="appletTypeName" label="小程序类型" width="120"></el-table-column>
         <el-table-column align="center" prop="pageLoad" label="页面类型" width="120">
           <template slot-scope="scope">
-            <el-link type="success" :underline="false" v-if="scope.row.pageLoad === 'LOAD'">load加载</el-link>
-            <el-link type="danger" :underline="false" v-if="!scope.row.pageLoad === 'MAIN'">主页</el-link>
+            <label v-if="scope.row.pageLogo === 'LOAD'">load加载</label>
+            <label v-if="!scope.row.pageLogo === 'MAIN'">主页</label>
           </template>
         </el-table-column>
         <el-table-column align="center" prop="relationWebsite" label="关联网址" width="160">

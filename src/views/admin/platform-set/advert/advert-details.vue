@@ -52,20 +52,20 @@
     width: 100px;
   }
 
-  .advert-input {
-    width: 220px;
+  .advert-form .el-input {
+    width: 240px;
+  }
+
+  .advert-form .el-textarea {
+    width: 240px;
+  }
+
+  .advert-form .el-button {
+    width: 240px;
   }
 
   .advert-form .el-form-item__error {
     left: 100px;
-  }
-
-  .notice-describe {
-    height: 20px;
-    line-height: 20px;
-    color: #cdcdcd;
-    font-size: 12px;
-    margin-left: 80px;
   }
 
   .sub-div {
@@ -98,7 +98,7 @@
     </div>
     <el-form :model="info" :rules="infoRules" ref="info" class="advert-form">
       <el-form-item label="小程序类型" prop="appletTypeId">
-        <el-select v-model="info.appletTypeId" placeholder="请选择小程序类型" class="advert-input"
+        <el-select v-model="info.appletTypeId" placeholder="请选择小程序类型"
                    @change="clearDate(1)">
           <el-option label="请选择" value=""></el-option>
           <el-option v-for="(item, index) in typeList" :key="index" :label="item.typeName"
@@ -106,7 +106,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="页面类型" prop="pageLogo">
-        <el-select v-model="info.pageLogo" placeholder="请选择页面类型" class="advert-input"
+        <el-select v-model="info.pageLogo" placeholder="请选择页面类型"
                    @change="clearDate(2)">
           <el-option label="请选择" value=''></el-option>
           <el-option label="load封面" value="LOAD"></el-option>
@@ -114,30 +114,27 @@
         </el-select>
       </el-form-item>
       <el-form-item label="推广类型" prop="relationType">
-        <el-select v-model="info.relationType" placeholder="请选择推广类型" class="advert-input"
+        <el-select v-model="info.relationType" placeholder="请选择推广类型"
                    @change="typeChange">
           <el-option label="内部推广" value="1"></el-option>
           <el-option label="外部推广" value="2"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="关联网址" prop="relationWebsite">
-        <el-input type="textarea" v-model="info.relationWebsite" placeholder="请输入关联网址" class="advert-input"
+        <el-input type="textarea" v-model="info.relationWebsite" placeholder="请输入关联网址"
                   maxlength="150" resize="none" rows="3"></el-input>
       </el-form-item>
       <el-form-item label="推广对象" prop="relationName">
-        <el-input v-model="info.relationName" placeholder="企业、店铺名称" class="advert-input"
-                  maxlength="100"></el-input>
+        <el-input v-model="info.relationName" placeholder="企业、店铺名称" maxlength="100"></el-input>
       </el-form-item>
       <el-form-item label="开始日期" prop="startTime" v-if="!info.isDefault">
         <el-date-picker v-model="info.startTime" placeholder="请选择日期" :format="format"
-                        :value-format="valueFormat" :picker-options="pickerOptionsStart"
-                        class="advert-input">
+                        :value-format="valueFormat" :picker-options="pickerOptionsStart">
         </el-date-picker>
       </el-form-item>
       <el-form-item label="截止日期" prop="expireTime" v-if="!info.isDefault">
         <el-date-picker v-model="info.expireTime" placeholder="请选择日期" :format="format"
-                        :value-format="valueFormat" :picker-options="pickerOptionsStart"
-                        class="advert-input">
+                        :value-format="valueFormat" :picker-options="pickerOptionsStart">
         </el-date-picker>
       </el-form-item>
       <el-form-item label="是否默认" prop="isDefault" v-if="info.relationType === '1'">
@@ -149,7 +146,7 @@
                    inactive-color="#303133" @change="statusChange"></el-switch>
       </el-form-item>
       <el-form-item class="sub-div">
-        <el-button class="sub-but" type="primary" style="width: 190px;position: absolute;left: 80px;"
+        <el-button class="sub-but" type="primary" style="position: absolute;left: 100px;"
                    @click="onSubmitInfo()">提&nbsp;&nbsp;交
         </el-button>
       </el-form-item>
@@ -198,8 +195,7 @@
             {required: true, message: '请选择页面类型', trigger: 'blur'}
           ],
           relationWebsite: [
-            {required: true, message: '请输入关联网址', trigger: 'blur'},
-            {min: 1, max: 100, message: '关联网址长度过长', trigger: 'blur'}
+            {min: 0, max: 100, message: '关联网址长度过长', trigger: 'blur'}
           ],
           relationName: [
             {required: true, message: '请输入关联对象', trigger: 'blur'},
@@ -236,13 +232,14 @@
             console.info('后台返回的数据', res.data)
             if (res.data.code === '1') {
               this.info = res.data.data
-              this.info.appletTypeId = this.info.appletTypeId.toString()
               this.info.pageLogo = this.info.pageLogo.toString()
               this.info.relationType = this.info.relationType.toString()
-              if (this.info.relationType === '1'){
+              if (this.info.relationType === '1') {
                 this.info.startTime = this.systemDate
                 this.info.expireTime = this.systemDate
               }
+              this.statusChange()
+              this.defaultChange()
               delete this.info.updateTime
             } else {
               this.$message.error(res.data.data)
@@ -274,7 +271,7 @@
         if (type === 2) {
           this.info.relationImage = ''
         }
-        if (this.info.appletTypeId != '' && this.info.pageLogo != ''){
+        if (this.info.appletTypeId != '' && this.info.pageLogo != '') {
           this.$axios({
             url: '/api/manage/platformSet/queryAppletAdvertRelationByLastExpireTime',
             method: 'post',
@@ -301,7 +298,7 @@
         } else {
           this.info.relationName = '平台推广'
         }
-        console.info("结果：" + this.info.id ? (this.info.relationType != '1') : false)
+        console.info('结果：' + this.info.id ? (this.info.relationType != '1') : false)
       },
       defaultChange () {
         if (this.info.isDefault) {
@@ -368,8 +365,8 @@
           }
         })
       },
-      addDate() {
-        const nowDate = new Date();
+      addDate () {
+        const nowDate = new Date()
         let date = {
           year: nowDate.getFullYear(),
           month: nowDate.getMonth() + 1,
@@ -378,7 +375,7 @@
         let systemDate = date.year
         systemDate += '/' + (date.month > 9 ? date.month : '0' + date.month)
         systemDate += '/' + (date.date > 9 ? date.date : '0' + date.date)
-        console.log(systemDate);
+        console.log(systemDate)
         this.systemDate = systemDate
         return systemDate
       }
