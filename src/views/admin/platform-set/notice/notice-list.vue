@@ -1,5 +1,9 @@
 <style type="text/css">
-  .notice-input {
+  .notice-list-form .el-input {
+    width: 190px;
+  }
+
+  .notice-list-form .el-select {
     width: 190px;
   }
 
@@ -11,13 +15,13 @@
 <template>
   <el-container>
     <el-main v-loading="loading" element-loading-text="加载中" style="background-color: #FFFFFF;padding-top: 20px;">
-      <el-form id="notice-list-form" :inline="true" :model="info" ref="querynoticeForm" class="demo-form-inline"
+      <el-form id="notice-list-form" :inline="true" :model="info" ref="querynoticeForm" class="notice-list-form"
                style="text-align: left;">
         <el-form-item label="通知标题" prop="noticeTitle">
-          <el-input v-model="info.noticeTitle" placeholder="输入通知标题" :clearable="true" class="notice-input"></el-input>
+          <el-input v-model="info.noticeTitle" placeholder="输入通知标题" :clearable="true"></el-input>
         </el-form-item>
         <el-form-item label="通知类型" prop="noticeType">
-          <el-select v-model="info.noticeType" placeholder="请选择通知类型" class="notice-input">
+          <el-select v-model="info.noticeType" placeholder="请选择通知类型">
             <el-option label="全部" value=''></el-option>
             <el-option label="系统公告" value="1"></el-option>
             <el-option label="新用户推送" value="2"></el-option>
@@ -25,7 +29,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="通知状态" prop="noticeStatus">
-          <el-select v-model="info.noticeStatus" placeholder="请选择通知状态" class="notice-input">
+          <el-select v-model="info.noticeStatus" placeholder="请选择通知状态">
             <el-option label="全部" value=''></el-option>
             <el-option label="正常" value="1"></el-option>
             <el-option label="禁用" value="0"></el-option>

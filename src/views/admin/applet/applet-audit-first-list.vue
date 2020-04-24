@@ -1,5 +1,9 @@
 <style type="text/css">
-  .applet-audit-input {
+  .audit-first-form .el-input {
+    width: 190px;
+  }
+
+  .audit-first-form .el-select {
     width: 190px;
   }
 
@@ -22,16 +26,16 @@
 <template>
   <el-container>
     <el-main v-loading="loading" element-loading-text="加载中" style="background-color: #FFFFFF;padding-top: 20px;">
-      <el-form id="audit-form-first" :inline="true" :model="info" ref="appletAuditFirstForm" class="demo-form-inline"
+      <el-form id="audit-first-form" :inline="true" :model="info" ref="appletAuditFirstForm" class="demo-form-inline"
                style="text-align: left;">
         <el-form-item label="编码" prop="appletCode">
-          <el-input v-model="info.appletCode" placeholder="请输入小程序编码" :clearable="true" class="applet-audit-input"></el-input>
+          <el-input v-model="info.appletCode" placeholder="请输入小程序编码" :clearable="true"></el-input>
         </el-form-item>
         <el-form-item label="名称" prop="appletName">
-          <el-input v-model="info.appletName" placeholder="输入小程序名称" :clearable="true" class="applet-audit-input"></el-input>
+          <el-input v-model="info.appletName" placeholder="输入小程序名称" :clearable="true"></el-input>
         </el-form-item>
         <el-form-item label="用户手机" prop="mobile">
-          <el-input type="number" v-model="info.mobile" placeholder="输入用户手机号码" :clearable="true" class="applet-audit-input"></el-input>
+          <el-input type="number" v-model="info.mobile" placeholder="输入用户手机号码" :clearable="true"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="selectList">查询</el-button>
@@ -204,7 +208,7 @@
           data: this.info
         }).then(res => {
           console.info('后台返回的数据', res.data)
-          this.$global.setTableHeight(this, 'audit-form-first')
+          this.$global.setTableHeight(this, 'audit-first-form')
           if (res.data.code === '1') {
             this.tableData = res.data.data.dataSource
             this.total = res.data.data.totalCount

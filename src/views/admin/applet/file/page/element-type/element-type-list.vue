@@ -3,6 +3,10 @@
     text-align: left;
   }
 
+  .element-type-form .el-input {
+    width: 190px;
+  }
+
   .element-type-form .el-select {
     width: 190px;
   }

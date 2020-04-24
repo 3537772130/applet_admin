@@ -3,6 +3,10 @@
     text-align: left;
   }
 
+  .role-form .el-input {
+    width: 190px;
+  }
+
   .role-form .el-select {
     width: 190px;
   }
@@ -18,12 +22,12 @@
 <template>
   <el-container>
     <el-main v-loading="loading" element-loading-text="加载中" style="background-color: #FFFFFF;padding-top: 20px;">
-      <el-form id="role-form" :inline="true" :model="info" class="demo-form-inline role-form" style="text-align: left;">
+      <el-form id="role-form" :inline="true" :model="info" class="role-form" style="text-align: left;">
         <el-form-item label="角色名称">
           <el-input v-model="info.roleName" placeholder="请输入角色名称" :clearable="true"></el-input>
         </el-form-item>
         <el-form-item label="角色状态">
-          <el-select v-model="info.status" placeholder="选择状态" style="width: 200px;">
+          <el-select v-model="info.status" placeholder="选择状态">
             <el-option label="全部" value=''></el-option>
             <el-option label="正常" value="1"></el-option>
             <el-option label="禁用" value="0"></el-option>

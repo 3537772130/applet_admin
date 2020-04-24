@@ -1,5 +1,5 @@
 <style type="text/css">
-  .merchant-list-input {
+  .merchant-list-form .el-input {
     width: 190px;
   }
 
@@ -13,13 +13,13 @@
       <el-form id="merchant-list-form" :inline="true" :model="info" ref="queryMerchantForm" class="demo-form-inline"
                style="text-align: left;">
         <el-form-item label="用户手机" prop="mobile">
-          <el-input type="number" v-model="info.mobile" placeholder="输入用户手机号码" :clearable="true" class="merchant-list-input"></el-input>
+          <el-input type="number" v-model="info.mobile" placeholder="输入用户手机号码" :clearable="true"></el-input>
         </el-form-item>
         <el-form-item label="用户昵称" prop="nickName">
-          <el-input v-model="info.nickName" placeholder="请输入用户昵称" :clearable="true" class="merchant-list-input"></el-input>
+          <el-input v-model="info.nickName" placeholder="请输入用户昵称" :clearable="true"></el-input>
         </el-form-item>
         <el-form-item label="推荐码" prop="extensionCode">
-          <el-select v-model="info.extensionCode" placeholder="请选择推荐码" class="merchant-list-input" @change="selectCity">
+          <el-select v-model="info.extensionCode" placeholder="请选择推荐码" @change="selectCity">
             <el-option label="全部" value=''></el-option>
             <el-option v-for="(item, index) in rList" :key="index" :label="item.code + ' - ' + item.name"
                        :value="item.code"></el-option>
@@ -35,7 +35,7 @@
           </el-date-picker>
         </el-form-item>
         <el-form-item label="用户状态" prop="status">
-          <el-select v-model="info.status" placeholder="请选择用户状态" class="merchant-list-input">
+          <el-select v-model="info.status" placeholder="请选择用户状态">
             <el-option label="全部" value=''></el-option>
             <el-option label="正常" value="1"></el-option>
             <el-option label="禁用" value="0"></el-option>

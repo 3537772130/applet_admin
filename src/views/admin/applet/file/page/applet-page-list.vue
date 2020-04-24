@@ -3,7 +3,7 @@
     text-align: left;
   }
 
-  .applet-page-form .el-select {
+  .applet-page-form .el-input {
     width: 190px;
   }
 

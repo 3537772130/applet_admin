@@ -1,5 +1,9 @@
 <style type="text/css">
-  .applet-input {
+  .applet-list-form .el-input{
+    width: 190px;
+  }
+
+  .applet-list-form .el-select {
     width: 190px;
   }
 
@@ -10,54 +14,54 @@
 <template>
   <el-container>
     <el-main v-loading="loading" element-loading-text="加载中" style="background-color: #FFFFFF;padding-top: 20px;">
-      <el-form id="applet-list-form" :inline="true" :model="info" ref="queryAppletForm" class="demo-form-inline"
+      <el-form id="applet-list-form" :inline="true" :model="info" ref="queryAppletForm" class="applet-list-form"
                style="text-align: left;">
         <el-form-item label="编码" prop="appletCode">
-          <el-input v-model="info.appletCode" placeholder="请输入小程序编码" :clearable="true" class="applet-input"></el-input>
+          <el-input v-model="info.appletCode" placeholder="请输入小程序编码" :clearable="true"></el-input>
         </el-form-item>
         <el-form-item label="名称" prop="appletName">
-          <el-input v-model="info.appletName" placeholder="请输入小程序名称" :clearable="true" class="applet-input"></el-input>
+          <el-input v-model="info.appletName" placeholder="请输入小程序名称" :clearable="true"></el-input>
         </el-form-item>
         <el-form-item label="用户手机" prop="mobile">
-          <el-input type="number" v-model="info.mobile" placeholder="请输入用户手机号码" :clearable="true" class="applet-input"></el-input>
+          <el-input type="number" v-model="info.mobile" placeholder="请输入用户手机号码" :clearable="true"></el-input>
         </el-form-item>
         <el-form-item label="营业类型" prop="ifRetail">
-          <el-select v-model="info.ifRetail" placeholder="请选择营业类型" class="applet-input">
+          <el-select v-model="info.ifRetail" placeholder="请选择营业类型">
             <el-option label="全部" value=''></el-option>
             <el-option label="批发" value="1"></el-option>
             <el-option label="零售" value="0"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="营业状态" prop="ifSelling">
-          <el-select v-model="info.ifSelling" placeholder="请选择营业状态" class="applet-input">
+          <el-select v-model="info.ifSelling" placeholder="请选择营业状态">
             <el-option label="全部" value=''></el-option>
             <el-option label="正在营业" value="1"></el-option>
             <el-option label="暂停营业" value="0"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="管理状态" prop="ifSelling">
-          <el-select v-model="info.status" placeholder="请选择管理状态" class="applet-input">
+          <el-select v-model="info.status" placeholder="请选择管理状态">
             <el-option label="全部" value=''></el-option>
             <el-option label="正常" value="1"></el-option>
             <el-option label="禁用" value="-1"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="省份" prop="province">
-          <el-select v-model="info.province" placeholder="请选择省份" class="applet-input" @change="selectProvince">
+          <el-select v-model="info.province" placeholder="请选择省份" @change="selectProvince">
             <el-option label="全部" value=''></el-option>
             <el-option v-for="(prov, index) in provList" :key="index" :label="prov.areaName"
                        :value="prov.areaName"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="城市" prop="city">
-          <el-select v-model="info.city" placeholder="请选择城市" class="applet-input" @change="selectCity">
+          <el-select v-model="info.city" placeholder="请选择城市" @change="selectCity">
             <el-option label="全部" value=''></el-option>
             <el-option v-for="(city, index) in cityList" :key="index" :label="city.areaName"
                        :value="city.areaName"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="区/县" prop="county">
-          <el-select v-model="info.county" placeholder="请选择区/县" class="applet-input">
+          <el-select v-model="info.county" placeholder="请选择区/县">
             <el-option label="全部" value=''></el-option>
             <el-option v-for="(county, index) in countyList" :key="index" :label="county.areaName"
                        :value="county.areaName"></el-option>

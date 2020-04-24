@@ -3,6 +3,10 @@
     text-align: left;
   }
 
+  .applet-type-form .el-input {
+    width: 190px;
+  }
+
   .applet-type-form .el-select {
     width: 190px;
   }
@@ -14,13 +18,13 @@
 <template>
   <el-container>
     <el-main v-loading="loading" element-loading-text="加载中" style="background-color: #FFFFFF;padding-top: 20px;">
-      <el-form id="applet-type-form" :inline="true" :model="info" class="demo-form-inline applet-type-form"
+      <el-form id="applet-type-form" :inline="true" :model="info" class="applet-type-form"
                style="text-align: left;">
         <el-form-item label="类型名称">
           <el-input v-model="info.typeName" placeholder="请输入类型名称" :clearable="true"></el-input>
         </el-form-item>
         <el-form-item label="类型状态">
-          <el-select v-model="info.typeStatus" placeholder="选择类型状态" style="width: 200px;">
+          <el-select v-model="info.typeStatus" placeholder="选择类型状态">
             <el-option label="全部" value=''></el-option>
             <el-option label="正常" value="1"></el-option>
             <el-option label="禁用" value="0"></el-option>

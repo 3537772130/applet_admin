@@ -1,9 +1,13 @@
 <style type="text/css">
-  .advert-form-inline .el-form-item__label{
+  .advert-list-form .el-form-item__label{
     width: 100px;
   }
 
-  .advert-form-inline .el-input {
+  .advert-list-form .el-input {
+    width: 190px;
+  }
+
+  .advert-list-form .el-select {
     width: 190px;
   }
 
@@ -25,7 +29,7 @@
 <template>
   <el-container>
     <el-main v-loading="loading" element-loading-text="加载中" style="background-color: #FFFFFF;padding-top: 20px;">
-      <el-form id="advert-list-form" :inline="true" :model="info" ref="queryadvertForm" class="advert-form-inline"
+      <el-form id="advert-list-form" :inline="true" :model="info" ref="queryadvertForm" class="advert-list-form"
                style="text-align: left;">
         <el-form-item label="小程序类型" prop="appletTypeId">
           <el-select v-model="info.appletTypeId" placeholder="选择小程序类型">

@@ -42,6 +42,7 @@ Axios.interceptors.request.use(function (config) {
   }
   // params.append("tokenStr", getTimes())
   config.data = params
+  config.headers['ipAddress'] = VueCookies.get('ip_address')
   return config
 }, function (error) {
   return Promise.reject(error)

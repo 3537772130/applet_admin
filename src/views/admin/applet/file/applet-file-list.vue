@@ -3,6 +3,10 @@
     text-align: left;
   }
 
+  .applet-file-form .el-input {
+    width: 190px;
+  }
+
   .applet-file-form .el-select {
     width: 190px;
   }
@@ -30,20 +34,20 @@
 <template>
   <el-container>
     <el-main v-loading="loading" element-loading-text="加载中" style="background-color: #FFFFFF;padding-top: 20px;">
-      <el-form id="applet-file-form" :inline="true" :model="info" class="demo-form-inline applet-file-form"
+      <el-form id="applet-file-form" :inline="true" :model="info" class="applet-file-form"
                style="text-align: left;">
         <el-form-item label="文件版本">
           <el-input v-model="info.versionNumber" placeholder="请输入文件版本" :clearable="true"></el-input>
         </el-form-item>
         <el-form-item label="服务类型">
-          <el-select v-model="info.typeId" placeholder="选择服务类型" style="width: 200px;">
+          <el-select v-model="info.typeId" placeholder="选择服务类型">
             <el-option label="全部" value=""></el-option>
             <el-option v-for="(item, index) in typeList" :key="index" :label="item.typeName"
                        :value="item.id"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="文件状态">
-          <el-select v-model="info.fileStatus" placeholder="选择文件状态" style="width: 200px;">
+          <el-select v-model="info.fileStatus" placeholder="选择文件状态">
             <el-option label="全部" value=""></el-option>
             <el-option label="正常" value="1"></el-option>
             <el-option label="禁用" value="0"></el-option>

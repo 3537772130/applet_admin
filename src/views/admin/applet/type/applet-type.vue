@@ -1,25 +1,25 @@
 <style type="text/css">
-  .applet-type-input {
-    width: 290px;
+  .applet-type-list-form .el-input {
+    width: 190px;
   }
 </style>
 <template>
   <div>
     <el-main v-loading="loading" element-loading-text="加载中" style="background-color: #FFFFFF;">
-      <el-form :rules="typeRules" :inline="true" :model="typeForm" ref="typeForm" class="demo-form-inline">
+      <el-form :rules="typeRules" :inline="true" :model="typeForm" ref="typeForm" class="applet-type-list-form">
         <el-form-item label="类型名称" prop="typeName">
           <el-input v-model="typeForm.typeName" maxlength="15" placeholder="请输入类型名称"
-                    class="applet-type-input"></el-input>
+                   ></el-input>
         </el-form-item>
         <el-form-item label="类型状态" prop="typeStatus">
-          <el-select v-model="typeForm.typeStatus" placeholder="请选择类型状态" class="applet-type-input">
+          <el-select v-model="typeForm.typeStatus" placeholder="请选择类型状态">
             <el-option label="正常" value="1"></el-option>
             <el-option label="禁用" value="0"></el-option>
           </el-select>
         </el-form-item>
         <br>
         <el-form-item label=" ">
-          <el-button type="primary" @click="onSubmit()" class="applet-type-input">提交</el-button>
+          <el-button type="primary" @click="onSubmit()">提交</el-button>
         </el-form-item>
       </el-form>
     </el-main>

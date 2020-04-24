@@ -1,5 +1,9 @@
 <style type="text/css">
-  .applet-input {
+  .user-list-form .el-input {
+    width: 190px;
+  }
+
+  .user-list-form .el-select {
     width: 190px;
   }
 
@@ -10,13 +14,13 @@
 <template>
   <el-container>
     <el-main v-loading="loading" element-loading-text="加载中" style="background-color: #FFFFFF;padding-top: 20px;">
-      <el-form id="user-list-form" :inline="true" :model="info" ref="queryUserForm" class="demo-form-inline"
+      <el-form id="user-list-form" :inline="true" :model="info" ref="queryUserForm" class="user-list-form"
                style="text-align: left;">
         <el-form-item label="用户手机" prop="mobile">
-          <el-input type="number" v-model="info.mobile" placeholder="输入用户手机号码" :clearable="true" class="applet-input"></el-input>
+          <el-input type="number" v-model="info.mobile" placeholder="输入用户手机号码" :clearable="true"></el-input>
         </el-form-item>
         <el-form-item label="用户昵称" prop="nickName">
-          <el-input v-model="info.nickName" placeholder="请输入用户昵称" :clearable="true" class="applet-input"></el-input>
+          <el-input v-model="info.nickName" placeholder="请输入用户昵称" :clearable="true"></el-input>
         </el-form-item>
         <el-form-item label="注册日期" prop="ifRetail">
           <el-date-picker v-model="info.startDate" placeholder="选择日期"
@@ -28,7 +32,7 @@
           </el-date-picker>
         </el-form-item>
         <el-form-item label="用户状态" prop="status">
-          <el-select v-model="info.status" placeholder="请选择用户状态" class="applet-input">
+          <el-select v-model="info.status" placeholder="请选择用户状态">
             <el-option label="全部" value=''></el-option>
             <el-option label="正常" value="1"></el-option>
             <el-option label="禁用" value="0"></el-option>

@@ -6,7 +6,12 @@
 
 <script>
   export default {
-    name: 'App'
+    name: 'App',
+    created () {
+      let ip = returnCitySN['cip']
+      this.$cookies.set('ip_address', ip)
+      console.info('当前客户端外网IP：' + ip)
+    }
   }
 </script>
 
