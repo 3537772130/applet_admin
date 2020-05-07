@@ -27,7 +27,6 @@
     color: #8c939d;
     width: 178px;
     height: 267px;
-    line-height: 267px;
     text-align: center;
   }
 
@@ -91,7 +90,7 @@
           <img v-if="info.relationImage" :src="info.relationImage" class="advert-img"
                :style="info.pageLogo == 2 ? typeStyle : ''">
           <i v-else class="el-icon-plus advert-img-uploader-icon"
-             :style="info.pageLogo == 2 ? typeIconStyle : ''"></i>
+             :style="info.pageLogo == 2 ? typeIconStyle : 'line-height: 267px;'"></i>
         </el-upload>
       </div>
       <div class="text-div">上传推广图片</div>
@@ -213,8 +212,8 @@
       let id = this.$cookies.get('advert_relation_id')
       this.loadInfo(id)
       this.loadAppletFile()
-      this.info.startTime = this.addDate()
-      this.info.expireTime = this.info.startTime
+      // this.info.startTime = this.addDate()
+      // this.info.expireTime = this.info.startTime
     },
     mounted () {
 
@@ -267,7 +266,7 @@
       },
       clearDate (type) {
         this.info.startTime = this.addDate()
-        this.info.expireTime = this.addDate()
+        this.info.expireTime = this.info.startTime
         if (type === 2) {
           this.info.relationImage = ''
         }
@@ -280,6 +279,7 @@
             if (res.data.code === '1') {
               let data = res.data.data
               this.info.startTime = data.startDate
+              this.info.expireTime = data.expireTime
               this.pickerOptionsStart = {
                 disabledDate (time) {
                   return time.getTime() < new Date(data.lastDate)
@@ -344,6 +344,7 @@
         this.$refs['info'].validate((valid) => {
           if (valid) {
             let loading = Loading.service({fullscreen: true, text: '正在提交'})
+            alert(this.info.startTime)
             this.$axios({
               url: '/api/manage/platformSet/updateAppletAdvertRelation',
               method: 'POST',

@@ -8,8 +8,10 @@
   export default {
     name: 'App',
     created () {
-      let ip = returnCitySN['cip']
-      this.$cookies.set('ip_address', ip)
+      let cip = returnCitySN['cip']
+      let cid = returnCitySN['cid']
+      this.$cookies.set('ip_address', cip)
+      this.$cookies.set('city_code', cid)
       console.info('当前客户端外网IP：' + ip)
     }
   }
