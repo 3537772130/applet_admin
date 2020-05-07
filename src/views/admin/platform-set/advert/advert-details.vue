@@ -170,8 +170,8 @@
           relationType: '1',
           relationWebsite: '',
           relationName: '平台推广',
-          startTime: null,
-          expireTime: null,
+          startTime: '2020/05/07',
+          expireTime: '',
           isDefault: false,
           relationStatus: false
         },
@@ -182,7 +182,6 @@
         relationStatusText: '禁用',
         typeStyle: 'width: 275px;height: 80px;',
         typeIconStyle: 'width: 275px;height: 80px;line-height: 80px;',
-        systemDate: '',
         infoRules: {
           relationImage: [
             {required: true, message: '请上传推广图片', trigger: 'blur'}
@@ -231,12 +230,7 @@
             console.info('后台返回的数据', res.data)
             if (res.data.code === '1') {
               this.info = res.data.data
-              this.info.pageLogo = this.info.pageLogo.toString()
               this.info.relationType = this.info.relationType.toString()
-              if (this.info.relationType === '1') {
-                this.info.startTime = this.systemDate
-                this.info.expireTime = this.systemDate
-              }
               this.statusChange()
               this.defaultChange()
               delete this.info.updateTime
@@ -344,7 +338,6 @@
         this.$refs['info'].validate((valid) => {
           if (valid) {
             let loading = Loading.service({fullscreen: true, text: '正在提交'})
-            alert(this.info.startTime)
             this.$axios({
               url: '/api/manage/platformSet/updateAppletAdvertRelation',
               method: 'POST',
@@ -377,7 +370,6 @@
         systemDate += '/' + (date.month > 9 ? date.month : '0' + date.month)
         systemDate += '/' + (date.date > 9 ? date.date : '0' + date.date)
         console.log(systemDate)
-        this.systemDate = systemDate
         return systemDate
       }
     }
