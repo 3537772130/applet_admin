@@ -3,7 +3,8 @@
 </style>
 <template>
   <div>
-    <el-main v-loading="loading" element-loading-text="加载中" style="background-color: #FFFFFF; padding: 0px 20px;">
+    <el-main v-loading="loading" element-loading-text="加载中"
+             :style="'height: ' + contentHeight + 'px; background-color: #FFFFFF; padding: 0px 20px;'">
       <el-form class="store-main-part-form">
         <div class="store-main-part" v-for="(item, pIndex) in partList" :key="pIndex">
           <div v-if="partIndex === pIndex && item.id === 'notice-bar'">
@@ -326,22 +327,6 @@
                 <td></td>
               </tr>
             </table>
-            <!--            <el-form-item label="" style="margin-bottom: 0px; width: 375px;text-align: center;">-->
-            <!--              <el-badge value="×" class="item imgY-scroll-badge" style="display: inline-block;" v-for="(img, index) in item.list" :key="index">-->
-            <!--                <el-image :src="img" style="width: 120px;height: 220px;border-radius: 5px;;"></el-image>-->
-            <!--              </el-badge>-->
-            <!--              <el-badge value="" class="item imgY-scroll-badge">-->
-            <!--                <el-upload-->
-            <!--                  class="imgY-scroll-uploader"-->
-            <!--                  action="https://jsonplaceholder.typicode.com/posts/"-->
-            <!--                  :show-file-list="false"-->
-            <!--                  :on-success="handleAvatarSuccess"-->
-            <!--                  :before-upload="beforeAvatarUpload" style="display: inline-block;" v-if="item.list.length < 10">-->
-            <!--                  <img v-if="imageUrl" :src="imageUrl" class="imgY-scroll">-->
-            <!--                  <i v-else class="el-icon-plus imgY-scroll-uploader-icon"></i>-->
-            <!--                </el-upload>-->
-            <!--              </el-badge>-->
-            <!--            </el-form-item>-->
           </div>
           <div v-if="partIndex === pIndex && item.id === 'goodsY-scroll'">
             <el-form-item label=" " style="margin-bottom: 0px; width: 375px;">
@@ -425,6 +410,7 @@
     },
     data () {
       return {
+        contentHeight: `${document.documentElement.scrollHeight}`,
         loading: false,
         partIndex: 0,
         partList: [],
