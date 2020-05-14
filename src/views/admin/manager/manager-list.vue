@@ -12,7 +12,7 @@
   }
 
   .manager-dialog .el-dialog {
-    width: 750px;
+    width: 770px;
   }
 </style>
 <template>

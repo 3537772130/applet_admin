@@ -12,7 +12,7 @@
   }
 
   .applet-element-dialog .el-dialog {
-    width: 450px;
+    width: 470px;
   }
 
   .applet-element-dialog .el-dialog > .el-dialog__body {

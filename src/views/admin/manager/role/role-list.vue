@@ -12,11 +12,11 @@
   }
 
   .role-dialog .el-dialog {
-    width: 450px;
+    width: 470px;
   }
 
   .role-auth-dialog .el-dialog {
-    width: 1000px;
+    width: 1020px;
   }
 </style>
 <template>

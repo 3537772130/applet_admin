@@ -8,7 +8,7 @@
   }
 
   .applet-dialog .el-dialog {
-    width: 650px;
+    width: 670px;
   }
 </style>
 <template>

@@ -8,7 +8,7 @@
   }
 
   .notice-dialog .el-dialog {
-    width: 650px;
+    width: 670px;
     height: 650px;
   }
 </style>

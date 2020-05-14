@@ -8,7 +8,7 @@
   }
 
   .applet-record-dialog .el-dialog {
-    width: 450px;
+    width: 470px;
   }
 
   .applet-record-dialog .el-dialog > .el-dialog__body {
@@ -16,7 +16,7 @@
   }
 
   .applet-details-dialog .el-dialog {
-    width: 650px;
+    width: 670px;
   }
 
   .applet-details-dialog .el-dialog > .el-dialog__body {

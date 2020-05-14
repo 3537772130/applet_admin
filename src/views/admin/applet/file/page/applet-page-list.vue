@@ -8,7 +8,7 @@
   }
 
   .in-dialog .el-dialog {
-    width: 500px;
+    width: 520px;
   }
 
   .in-dialog .el-dialog > .el-dialog__body {
@@ -16,7 +16,7 @@
   }
 
   .applet-page-dialog .el-dialog {
-    width: 450px;
+    width: 470px;
   }
 
   .applet-page-dialog .el-dialog > .el-dialog__body {
@@ -24,7 +24,7 @@
   }
 
   .applet-page-element-dialog .el-dialog {
-    width: 980px;
+    width: 1000px;
   }
 
   .applet-page-element-dialog .el-dialog > .el-dialog__body {

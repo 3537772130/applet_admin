@@ -1,5 +1,5 @@
 <style type="text/css">
-  .applet-type-list-form .el-input {
+  .applet-type-list-form .applet-type-input {
     width: 190px;
   }
 </style>
@@ -8,18 +8,17 @@
     <el-main v-loading="loading" element-loading-text="加载中" style="background-color: #FFFFFF;">
       <el-form :rules="typeRules" :inline="true" :model="typeForm" ref="typeForm" class="applet-type-list-form">
         <el-form-item label="类型名称" prop="typeName">
-          <el-input v-model="typeForm.typeName" maxlength="15" placeholder="请输入类型名称"
-                   ></el-input>
+          <el-input v-model="typeForm.typeName" maxlength="15" placeholder="请输入类型名称" class="applet-type-input"></el-input>
         </el-form-item>
         <el-form-item label="类型状态" prop="typeStatus">
-          <el-select v-model="typeForm.typeStatus" placeholder="请选择类型状态">
+          <el-select v-model="typeForm.typeStatus" placeholder="请选择类型状态" class="applet-type-input">
             <el-option label="正常" value="1"></el-option>
             <el-option label="禁用" value="0"></el-option>
           </el-select>
         </el-form-item>
         <br>
         <el-form-item label=" ">
-          <el-button type="primary" @click="onSubmit()">提交</el-button>
+          <el-button class="applet-type-input" type="primary" @click="onSubmit()">提交</el-button>
         </el-form-item>
       </el-form>
     </el-main>
@@ -54,7 +53,7 @@
     },
     methods: {
       loadAppletType (typeId) {
-        if (typeId) {
+        if (typeId && typeId !== '0') {
           this.typeForm.id = typeId
           this.loading = true
           this.$axios({

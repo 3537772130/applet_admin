@@ -12,7 +12,7 @@
   }
 
   .element-type-dialog .el-dialog {
-    width: 450px;
+    width: 4t0px;
   }
 
   .element-type-dialog .el-dialog > .el-dialog__body {

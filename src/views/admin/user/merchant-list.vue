@@ -4,7 +4,7 @@
   }
 
   .merchant-dialog .el-dialog {
-    width: 650px;
+    width: 670px;
   }
 </style>
 <template>
@@ -72,7 +72,7 @@
         <el-table-column align="center" prop="managerUserName" label="推荐人(账号/昵称)" width="220"
                          :show-overflow-tooltip="true">
           <template slot-scope="scope">
-            <span>{{scope.row.managerUserName + '&nbsp;/&nbsp;' + scope.row.managerNickName}}</span>
+            <span v-if="scope.row.extensionCode">{{scope.row.managerUserName + '&nbsp;/&nbsp;' + scope.row.managerNickName}}</span>
           </template>
         </el-table-column>
         <el-table-column align="center" prop="status" label="状态" width="100">
@@ -81,7 +81,7 @@
             <el-link type="warning" :underline="false" v-if="!scope.row.status">禁用</el-link>
           </template>
         </el-table-column>
-        <el-table-column align="center" prop="createDate" label="更新日期" width="100"></el-table-column>
+        <el-table-column align="center" prop="createDate" label="注册时间" width="140"></el-table-column>
         <el-table-column align="center" fixed="right" label="操作">
           <template slot-scope="scope">
             <el-button type="primary" plain size="mini" @click="setStatus(scope.row.id)" v-if="scope.row.status">禁用

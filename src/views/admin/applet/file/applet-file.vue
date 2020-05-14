@@ -1,12 +1,10 @@
 <style file="text/css">
-  .applet-file-input {
-    width: 290px;
-  }
 </style>
 <template>
   <div>
-    <el-main v-loading="loading" element-loading-text="加载中" style="background-color: #FFFFFF;">
-      <el-form :rules="fileRules" :inline="true" :model="fileForm" ref="fileForm" class="demo-form-inline">
+    <el-main v-loading="loading" element-loading-text="加载中" style="background-color: #FFFFFF;text-align: center;">
+      <el-form :rules="fileRules" :inline="true" :model="fileForm" ref="fileForm" class="applet-file-form"
+               style="display: inline-table;width: 300px;">
         <el-form-item label="服务类型" prop="typeId">
           <el-select v-model="fileForm.typeId" placeholder="请选择服务类型" class="applet-file-input">
             <el-option label="请选择" value=""></el-option>

@@ -5,7 +5,7 @@
   }
 
   .menu-dialog .el-dialog {
-    width: 300px;
+    width: 320px;
   }
 
   .m-d-div {

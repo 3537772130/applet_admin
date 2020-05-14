@@ -12,7 +12,7 @@
   }
 
   .advert-dialog .el-dialog {
-    width: 750px;
+    width: 770px;
     height: 650px;
   }
 

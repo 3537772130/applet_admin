@@ -1,18 +1,21 @@
 <style type="text/css">
+  .manager-info-form .manager-input{
+    width: 190px;
+  }
 </style>
 <template>
   <div>
     <el-main v-loading="loading" element-loading-text="加载中" style="background-color: #FFFFFF;">
-      <el-form :rules="managerRules" :inline="true" :model="managerForm" ref="managerForm" class="demo-form-inline">
+      <el-form :rules="managerRules" :inline="true" :model="managerForm" ref="managerForm" class="manager-info-form">
         <el-form-item label="用户账号" prop="userName" v-if="showUserName === ''">
           <el-input v-model="managerForm.userName" placeholder="请输入账号" class="manager-input"></el-input>
         </el-form-item>
         <el-form-item label="用户账号" v-if="showUserName != ''">
           <div class="manager-input" style="text-align: left;">{{showUserName}}</div>
         </el-form-item>
-        <el-form-item label=" " prop="">
-          <div class="manager-input"></div>
-        </el-form-item>
+<!--        <el-form-item label=" " prop="">-->
+<!--          <div class="manager-input"></div>-->
+<!--        </el-form-item>-->
         <el-form-item label="用户昵称" prop="nickName">
           <el-input v-model="managerForm.nickName" placeholder="请输入昵称" class="manager-input"></el-input>
         </el-form-item>
@@ -43,7 +46,7 @@
         </el-form-item>
         <el-form-item label="所属区域" prop="county">
           <el-cascader v-model="region" :options="regions" placeholder="请选择所属区域" @change="handleChange"
-                       style="width: 475px;"></el-cascader>
+                       class="manager-input"></el-cascader>
         </el-form-item>
         <el-form-item label="上级" prop="parentId" v-if="showParent">
           <el-select v-model="managerForm.parentId" placeholder="选择上级" class="manager-input">

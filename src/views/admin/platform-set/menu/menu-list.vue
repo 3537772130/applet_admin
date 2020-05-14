@@ -38,7 +38,7 @@
   }
 
   .menu-list-dialog .el-dialog {
-    width: 450px;
+    width: 470px;
   }
 </style>
 <template>
